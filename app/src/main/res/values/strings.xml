@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Hands Up</string>
+    <string name="title_activity_audience_tutorial">AudienceTutorial</string>
 </resources>
