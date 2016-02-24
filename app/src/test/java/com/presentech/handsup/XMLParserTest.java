@@ -1,7 +1,16 @@
 package com.presentech.handsup;
 
+import android.content.Context;
+
 import org.junit.Before;
 import org.junit.Test;
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
@@ -15,15 +24,36 @@ public class XMLParserTest {
     private PresentationFile presentationFile;
     private DocumentInfo documentInfo;
 
+
+
     @Before
-    public void setUp(){
+    public void setUp() throws IOException, XmlPullParserException {
         parser = new XMLParser();
-        presentationFile = parser.getPresentation("testPresentation.xml");
+
+        //File inputFile = new File("test.xml");
+       // FileInputStream stream = new FileInputStream(inputFile);
+        InputStream in = this.getClass().getClassLoader().getResourceAsStream("test.xml");
+        presentationFile = parser.getPresentation(in);
+    }
+
+    private static File getFileFromPath(Object obj, String fileName) {
+        ClassLoader classLoader = obj.getClass().getClassLoader();
+        URL resource = classLoader.getResource(fileName);
+        return new File(resource.getPath());
+    }
+
+    @Test
+    public void fileObjectShouldNotBeNull() throws Exception {
+        File file = getFileFromPath(this, "test.xml");
+        assertNotNull(file);
     }
 
     @Test
     public void createPresentationObject() {
+        URL url = this.getClass().getClassLoader().getResource("test.xml");
+        System.out.println(url.getPath());
         assertNotNull(presentationFile);
+
     };
 
     @Test
