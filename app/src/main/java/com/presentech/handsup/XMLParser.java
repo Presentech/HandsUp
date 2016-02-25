@@ -1,89 +1,42 @@
 package com.presentech.handsup;
 
-import android.content.Context;
-import android.os.Environment;
-import android.renderscript.ScriptGroup;
+import android.util.Log;
 import android.util.Xml;
 
-import org.xml.sax.InputSource;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringReader;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+public class XMLParser
+{
 
-/**
- * Created by Alex on 18/02/2016.
- */
-public class XMLParser {
-    PresentationFile presentationFile;
-
-    String curText = "";
-
-   // private XmlPullParserFactory xmlFactoryObject = XmlPullParserFactory.newInstance();
-    //private XmlPullParser myparser = xmlFactoryObject.newPullParser();
-
-    public PresentationFile getPresentation(InputStream in) throws XmlPullParserException, IOException {
-        //presentationFile = new PresentationFile();
+    public static void getPresentation ()
+            throws XmlPullParserException, IOException {
         try {
-            //XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-            //XmlPullParser parser = factory.newPullParser();
-            XmlPullParser parser = Xml.newPullParser();
+            XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+            XmlPullParser xpp = factory.newPullParser();
 
-            //File inputFile = new File(filename);
-
-            //FileInputStream stream = new FileInputStream(inputFile);
-
-            parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
-
-            //InputStream in = this.getClass().getClassLoader().getResourceAsStream("/src/main/res/raw/test.xml");
-
-            parser.setInput(in, null);
-
-            int eventType = parser.getEventType();
-
+            xpp.setInput(new StringReader("<foo>Hello World!</foo>"));
+            int eventType = xpp.getEventType();
             while (eventType != XmlPullParser.END_DOCUMENT) {
-                String tagname = parser.getName();
-
-                switch(eventType) {
-                    case XmlPullParser.START_TAG:
-                        if (tagname.equalsIgnoreCase("presentation")) {
-                            presentationFile = new PresentationFile();
-                        }
-                        break;
-                    case XmlPullParser.TEXT:
-                        curText = parser.getText();
-                        break;
-                    case XmlPullParser.END_TAG:
-                        if (tagname.equals("Title")) {
-                            presentationFile.setTitle(curText);
-                        }
-                        if (tagname.equals("Author")){
-                            presentationFile.setAuthor(curText);
-                        }
-                        if (tagname.equals("Version")){
-                            presentationFile.setVersion(curText);
-                        }
-                        if (tagname.equals("Comment")){
-                            presentationFile.setComment(curText);
-                        }
-                        break;
-                    default:
-                        break;
+                if (eventType == XmlPullParser.START_DOCUMENT) {
+                    System.out.println("Start document");
+                } else if (eventType == XmlPullParser.START_TAG) {
+                    System.out.println("Start tag " + xpp.getName());
+                } else if (eventType == XmlPullParser.END_TAG) {
+                    System.out.println("End tag " + xpp.getName());
+                } else if (eventType == XmlPullParser.TEXT) {
+                    System.out.println("Text " + xpp.getText());
                 }
-                eventType = parser.next();
-
+                eventType = xpp.next();
             }
-
-
-        } catch (Exception e){
-
+            System.out.println("End document");
+        } catch (Exception e) {
+            Log.wtf("PullParser", e);
         }
-
-        return presentationFile;
     }
 }
