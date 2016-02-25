@@ -32,10 +32,21 @@ public class XMLParserTest {
 
         //File inputFile = new File("test.xml");
        // FileInputStream stream = new FileInputStream(inputFile);
-       // InputStream in = this.getClass().getClassLoader().getResourceAsStream("test.xml");
+        InputStream in = this.getClass().getClassLoader().getResourceAsStream("test.xml");
         parser.getPresentation();
     }
 
+    private static File getFileFromPath(Object obj, String fileName) {
+        ClassLoader classLoader = obj.getClass().getClassLoader();
+        URL resource = classLoader.getResource(fileName);
+        return new File(resource.getPath());
+    }
+
+    @Test
+    public void fileObjectShouldNotBeNull() throws Exception {
+        File file = getFileFromPath(this, "test.xml");
+        assertNotNull(file);
+    }
 
     @Test
     public void createPresentationObject() {

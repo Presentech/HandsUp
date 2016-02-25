@@ -1,6 +1,8 @@
 package com.presentech.handsup;
 
 
+import java.util.List;
+
 /**
  * Created by Alex on 22/02/2016.
  */
@@ -20,6 +22,7 @@ public class PresentationFile {
     String defFillColour;
 
     Slide slide;
+    List<Slide> slides;
 
     public String getAuthor() {
         return author;

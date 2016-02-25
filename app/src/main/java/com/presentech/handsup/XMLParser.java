@@ -6,6 +6,8 @@ import android.util.Xml;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -13,30 +15,125 @@ import org.xmlpull.v1.XmlPullParserFactory;
 
 public class XMLParser
 {
+    PresentationFile presentationFile;
+    Slide slide;
 
-    public static void getPresentation ()
-            throws XmlPullParserException, IOException {
+    String curText = "";
+
+    public PresentationFile getPresentation (InputStream in) throws XmlPullParserException, IOException {
         try {
             XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-            XmlPullParser xpp = factory.newPullParser();
+            XmlPullParser parser = factory.newPullParser();
 
-            xpp.setInput(new StringReader("<foo>Hello World!</foo>"));
-            int eventType = xpp.getEventType();
+            parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+            parser.setInput(in, null);
+
+            int eventType = parser.getEventType();
+
             while (eventType != XmlPullParser.END_DOCUMENT) {
-                if (eventType == XmlPullParser.START_DOCUMENT) {
-                    System.out.println("Start document");
-                } else if (eventType == XmlPullParser.START_TAG) {
-                    System.out.println("Start tag " + xpp.getName());
-                } else if (eventType == XmlPullParser.END_TAG) {
-                    System.out.println("End tag " + xpp.getName());
-                } else if (eventType == XmlPullParser.TEXT) {
-                    System.out.println("Text " + xpp.getText());
+                String tagname = parser.getName();
+
+                switch (eventType) {
+                    case XmlPullParser.START_TAG:
+                        if (tagname.equalsIgnoreCase("Presentation")) {
+                            presentationFile = new PresentationFile();
+                            presentationFile.slides = new ArrayList<Slide>();
+                        }
+                        if (tagname.equalsIgnoreCase("slide")) {
+                            slide = new Slide();
+                            String attr;
+                            int val;
+                            for (int i=0; i < parser.getAttributeCount(); i++) {
+                                attr = parser.getAttributeName(i);
+                                val = Integer.parseInt(parser.getAttributeValue(i));
+                                if (attr.equals("slideID")) {
+                                    slide.setSlideID(val);
+                                }
+                                if (attr.equals("nextSlide")) {
+                                    slide.setNextSlide(val);
+                                }
+                                if (attr.equals("duration")) {
+                                    slide.setDuration(val);
+                                }
+                            }
+                        }
+                        if (tagname.equals("text")) {
+                            Text text = new Text();
+                            slide.setText(text);
+                        }
+                        if (tagname.equals("shape")) {
+                            Shape shape = new Shape();
+                            slide.setShape(shape);
+                        }
+                        if (tagname.equals("polygon")) {
+                            Polygon polygon = new Polygon();
+                            slide.setPolygon(polygon);
+                        }
+                        if (tagname.equals("image")) {
+                            Image image = new Image();
+                            slide.setImage(image);
+                        }
+                        if (tagname.equals("video")) {
+                            Video video = new Video();
+                            slide.setVideo(video);
+                        }
+                        if (tagname.equals("audio")) {
+                            Audio audio = new Audio();
+                            slide.setAudio(audio);
+                        }
+                        if (tagname.equals("interactable")) {
+                            Interactable interactable = new Interactable();
+                            slide.setInteractable(interactable);
+                        }
+                        break;
+                    case XmlPullParser.TEXT:
+                        curText = parser.getText();
+                        break;
+                    case XmlPullParser.END_TAG:
+                        if (tagname.equals("Title")) {
+                            presentationFile.setTitle(curText);
+                        }
+                        if (tagname.equals("Author")) {
+                            presentationFile.setAuthor(curText);
+                        }
+                        if (tagname.equals("Version")) {
+                            presentationFile.setVersion(curText);
+                        }
+                        if (tagname.equals("Comment")) {
+                            presentationFile.setComment(curText);
+                        }
+                        if (tagname.equalsIgnoreCase("backgroundColour")) {
+                            presentationFile.setDefBackgroundColour(curText);
+                        }
+                        if (tagname.equalsIgnoreCase("font")) {
+                            presentationFile.setDefFont(curText);
+                        }
+                        if (tagname.equalsIgnoreCase("fontsize")) {
+                            presentationFile.setDefFontSize(Integer.parseInt(curText));
+                        }
+                        if (tagname.equalsIgnoreCase("fontColour")) {
+                            presentationFile.setDefFontColour(curText);
+                        }
+                        if (tagname.equalsIgnoreCase("lineColour")) {
+                            presentationFile.setDefLineColour(curText);
+                        }
+                        if (tagname.equalsIgnoreCase("fillColour")) {
+                            presentationFile.setDefFillColour(curText);
+                        }
+                        if (tagname.equalsIgnoreCase("slide")) {
+                            presentationFile.slides.add(slide);
+                        }
+
+                        break;
+                    default:
+                        break;
                 }
-                eventType = xpp.next();
+                eventType = parser.next();
+
             }
-            System.out.println("End document");
         } catch (Exception e) {
-            Log.wtf("PullParser", e);
+            e.printStackTrace();
         }
+        return presentationFile;
     }
 }
