@@ -7,9 +7,16 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-    <style name="drawerTheme" parent="@android:style/Widget.ListView">
+
+    <style name="DrawerTheme" parent="@android:style/Widget.ListView">
         <!--Drawer Theme used to change text colour to white. ListView has no textColor attribute -->
         <item name="android:textColor">#FFFFFF</item>
+    </style>
+    <style name="AppThemeNoActionBar" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <!-- THEME USED FOR contsel ACTIVITY ONLY -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
 </resources>

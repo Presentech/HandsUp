@@ -7,6 +7,7 @@
     <string name="appLogo">Hands Up Logo</string>
     <string name="companyLogo">Presentech Logo</string>
     <string name="background">App Background</string>
+
     <string-array name="leftDrawerOptions">
         <item>Home</item>
         <item>Notifications</item>
@@ -14,6 +15,15 @@
         <item>Settings</item>
         <item>About</item>
     </string-array>
+
+    <string-array name="leftDrawerIcons">
+        <item>@drawable/setting_logo0</item>
+        <item>@drawable/setting_logo1</item>
+        <item>@drawable/setting_logo2</item>
+        <item>@drawable/ic_drawer</item>
+        <item>@drawable/audience_button</item>
+    </string-array>
+
     <string name="drawer_open">Open Drawer</string>
     <string name="drawer_close">Close_Drawer</string>
     <string name="aboutDescription">Text about HandsUp app</string>
