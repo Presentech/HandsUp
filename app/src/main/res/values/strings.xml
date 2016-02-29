@@ -10,9 +10,8 @@
 
     <string-array name="leftDrawerOptions">
         <item>Home</item>
-        <item>Notifications</item>
-        <item>Points</item>
-        <item>Settings</item>
+        <item>Help</item>
+        <item>Session</item>
         <item>About</item>
     </string-array>
 
@@ -21,7 +20,6 @@
         <item>@drawable/setting_logo1</item>
         <item>@drawable/setting_logo2</item>
         <item>@drawable/ic_drawer</item>
-        <item>@drawable/audience_button</item>
     </string-array>
 
     <string name="drawer_open">Open Drawer</string>
