@@ -15,6 +15,42 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".LoginScreenActivity"
+            android:label="@string/title_activity_login_screen"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.presentech.handsup.MainActivity" />
+        </activity>
+        <activity
+            android:name=".RegistrationActivity"
+            android:label="@string/title_activity_registration"
+            android:parentActivityName=".LoginScreenActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.presentech.handsup.LoginScreenActivity" />
+        </activity>
+        <activity
+            android:name=".LoginSuccessActivity"
+            android:label="@string/title_activity_login_success"
+            android:parentActivityName=".LoginScreenActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.presentech.handsup.LoginScreenActivity" />
+        </activity>
+        <activity
+            android:name=".LoginFailedActivity"
+            android:label="@string/title_activity_login_failed"
+            android:parentActivityName=".LoginScreenActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.presentech.handsup.LoginScreenActivity" />
+        </activity>
     </application>
 
 </manifest>
