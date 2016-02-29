@@ -1,7 +1,7 @@
 package com.presentech.handsup;
 
 
-
+import java.util.List;
 
 /**
  * Created by Alex on 22/02/2016.
@@ -13,6 +13,18 @@ public class Slide {
     int slideID;
     int nextSlide = NULL_ATTR;
     int duration = NULL_ATTR;
+
+    Text text;
+    Shape shape;
+    Polygon polygon;
+    Image image;
+    Video video;
+    Audio audio;
+    Interactable interactable;
+
+
+
+    List<MediaObjects> mediaObjects;
 
     public Text getText() {
         return text;
@@ -70,14 +82,6 @@ public class Slide {
         this.interactable = interactable;
     }
 
-    Text text;
-    Shape shape;
-    Polygon polygon;
-    Image image;
-    Video video;
-    Audio audio;
-    Interactable interactable;
-
     public int getSlideID() {
         return slideID;
     }
@@ -103,6 +107,13 @@ public class Slide {
     }
 
 
+    public List<MediaObjects> getMediaObjects() {
+        return mediaObjects;
+    }
+
+    public void setMediaObjects(List<MediaObjects> mediaObjects) {
+        this.mediaObjects = mediaObjects;
+    }
 
 
 }

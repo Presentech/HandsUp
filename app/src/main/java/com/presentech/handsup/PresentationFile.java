@@ -21,8 +21,16 @@ public class PresentationFile {
     String defLineColour;
     String defFillColour;
 
-    Slide slide;
+
     List<Slide> slides;
+
+    public List<Slide> getSlides() {
+        return slides;
+    }
+
+    public void setSlides(List<Slide> slides) {
+        this.slides = slides;
+    }
 
     public String getAuthor() {
         return author;
@@ -94,14 +102,6 @@ public class PresentationFile {
 
     public void setDefFillColour(String defFillColour) {
         this.defFillColour = defFillColour;
-    }
-
-    public Slide getSlide() {
-        return slide;
-    }
-
-    public void setSlide(Slide slide) {
-        this.slide = slide;
     }
 
     public void setTitle(String title) {

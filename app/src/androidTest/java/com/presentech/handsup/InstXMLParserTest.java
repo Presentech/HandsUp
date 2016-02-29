@@ -90,7 +90,7 @@ public class InstXMLParserTest {
 
     @Test
     public void presentationContainsListOfSlides() {
-        assertTrue(presentationFile.slides instanceof List);
+        assertTrue(presentationFile.getSlides() instanceof List);
     }
 
     @Test
@@ -117,24 +117,43 @@ public class InstXMLParserTest {
     }
 
     @Test
-    public void slideContainsCorrectElements () {
+    public void slideContainsListOfMediaObjects() {
         Slide slide = presentationFile.slides.get(0);
-        assertNotNull(slide.text);
-        assertNotNull(slide.interactable);
-
-        slide = presentationFile.slides.get(1);
-        assertNotNull(slide.video);
-
-        slide = presentationFile.slides.get(3);
-        assertNotNull(slide.audio);
-
-//        assertNotNull(slide.shape);
-//        assertNotNull(slide.polygon);
-//        assertNotNull(slide.image);
-
-
-
+        assertTrue(slide.getMediaObjects() instanceof List);
     }
+
+//    @Test
+//    public void slideContainsListsforObjects () {
+//        Slide slide = presentationFile.slides.get(0);
+//        assertTrue(slide.text instanceof List);
+//        assertTrue(slide.shape instanceof List);
+//        assertTrue(slide.polygon instanceof List);
+//        assertTrue(slide.image instanceof List);
+//        assertTrue(slide.video instanceof List);
+//        assertTrue(slide.audio instanceof List);
+//        assertTrue(slide.interactable instanceof List);
+//
+//    }
+//
+//    @Test
+//    public void slideContainsCorrectElements () {
+//        Slide slide = presentationFile.slides.get(0);
+//        assertNotNull(slide.text);
+//        assertNotNull(slide.interactable);
+//
+//        slide = presentationFile.slides.get(1);
+//        assertNotNull(slide.video);
+//
+//        slide = presentationFile.slides.get(3);
+//        assertNotNull(slide.audio);
+//
+////        assertNotNull(slide.shape);
+////        assertNotNull(slide.polygon);
+////        assertNotNull(slide.image);
+//
+//
+//
+//    }
 
 
 
