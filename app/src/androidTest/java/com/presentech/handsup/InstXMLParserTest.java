@@ -95,22 +95,22 @@ public class InstXMLParserTest {
 
     @Test
     public void presentationContainsCorrectNumberOfSlides(){
-        assertEquals(5, presentationFile.slides.size());
+        assertEquals(5, presentationFile.getSlides().size());
     }
 
     @Test
     public void slideContainsCorrectAttributes() {
-        Slide slide = presentationFile.slides.get(0);
+        Slide slide = presentationFile.getSlides().get(0);
         assertEquals(0, slide.getSlideID());
         assertEquals(5, slide.getDuration());
         assertEquals(2, slide.getNextSlide());
 
-        slide = presentationFile.slides.get(1);
+        slide = presentationFile.getSlides().get(1);
         assertEquals(1, slide.getSlideID());
         assertEquals(slide.NULL_ATTR, slide.getDuration());
         assertEquals(slide.NULL_ATTR, slide.getNextSlide());
 
-        slide = presentationFile.slides.get(3);
+        slide = presentationFile.getSlides().get(3);
         assertEquals(3, slide.getSlideID());
         assertEquals(8, slide.getDuration());
         assertEquals(-1, slide.getNextSlide());
@@ -118,42 +118,15 @@ public class InstXMLParserTest {
 
     @Test
     public void slideContainsListOfMediaObjects() {
-        Slide slide = presentationFile.slides.get(0);
+        Slide slide = presentationFile.getSlides().get(0);
         assertTrue(slide.getMediaObjects() instanceof List);
     }
 
-//    @Test
-//    public void slideContainsListsforObjects () {
-//        Slide slide = presentationFile.slides.get(0);
-//        assertTrue(slide.text instanceof List);
-//        assertTrue(slide.shape instanceof List);
-//        assertTrue(slide.polygon instanceof List);
-//        assertTrue(slide.image instanceof List);
-//        assertTrue(slide.video instanceof List);
-//        assertTrue(slide.audio instanceof List);
-//        assertTrue(slide.interactable instanceof List);
-//
-//    }
-//
-//    @Test
-//    public void slideContainsCorrectElements () {
-//        Slide slide = presentationFile.slides.get(0);
-//        assertNotNull(slide.text);
-//        assertNotNull(slide.interactable);
-//
-//        slide = presentationFile.slides.get(1);
-//        assertNotNull(slide.video);
-//
-//        slide = presentationFile.slides.get(3);
-//        assertNotNull(slide.audio);
-//
-////        assertNotNull(slide.shape);
-////        assertNotNull(slide.polygon);
-////        assertNotNull(slide.image);
-//
-//
-//
-//    }
+    @Test
+    public void textContainsCorrectAttributes() {
+        Slide slide = presentationFile.getSlides().get(0);
+        Text text = slide.getText().get(0);
+    }
 
 
 

@@ -14,104 +14,80 @@ public class Slide {
     int nextSlide = NULL_ATTR;
     int duration = NULL_ATTR;
 
-    Text text;
-    Shape shape;
-    Polygon polygon;
-    Image image;
-    Video video;
-    Audio audio;
-    Interactable interactable;
+
+    List<Text>  text;
+    List<Shape> shape;
+    List<Polygon> polygon;
+    List<Image> image;
+    List<Video> video;
+    List<Audio> audio;
+    List<Interactable> interactable;
 
 
 
-    List<MediaObjects> mediaObjects;
+    List<MediaObject> mediaObjects;
 
-    public Text getText() {
+    public List<Text> getText() {
         return text;
     }
 
-    public void setText(Text text) {
+    public void setText(List<Text> text) {
         this.text = text;
     }
 
-    public Shape getShape() {
+    public List<Shape> getShape() {
         return shape;
     }
 
-    public void setShape(Shape shape) {
+    public void setShape(List<Shape> shape) {
         this.shape = shape;
     }
 
-    public Polygon getPolygon() {
+    public List<Polygon> getPolygon() {
         return polygon;
     }
 
-    public void setPolygon(Polygon polygon) {
+    public void setPolygon(List<Polygon> polygon) {
         this.polygon = polygon;
     }
 
-    public Image getImage() {
+    public List<Image> getImage() {
         return image;
     }
 
-    public void setImage(Image image) {
+    public void setImage(List<Image> image) {
         this.image = image;
     }
 
-    public Video getVideo() {
+    public List<Video> getVideo() {
         return video;
     }
 
-    public void setVideo(Video video) {
+    public void setVideo(List<Video> video) {
         this.video = video;
     }
 
-    public Audio getAudio() {
+    public List<Audio> getAudio() {
         return audio;
     }
 
-    public void setAudio(Audio audio) {
+    public void setAudio(List<Audio> audio) {
         this.audio = audio;
     }
 
-    public Interactable getInteractable() {
+    public List<Interactable> getInteractable() {
         return interactable;
     }
 
-    public void setInteractable(Interactable interactable) {
+    public void setInteractable(List<Interactable> interactable) {
         this.interactable = interactable;
     }
 
-    public int getSlideID() {
-        return slideID;
-    }
-
-    public void setSlideID(int slideID) {
-        this.slideID = slideID;
-    }
-
-    public int getNextSlide() {
-        return nextSlide;
-    }
-
-    public void setNextSlide(int nextSlide) {
-        this.nextSlide = nextSlide;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
-
-
-    public List<MediaObjects> getMediaObjects() {
+    public List<MediaObject> getMediaObjects() {
         return mediaObjects;
     }
 
-    public void setMediaObjects(List<MediaObjects> mediaObjects) {
+    public void setMediaObjects(List<MediaObject> mediaObjects) {
         this.mediaObjects = mediaObjects;
     }
 
