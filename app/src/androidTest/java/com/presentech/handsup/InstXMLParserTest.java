@@ -62,30 +62,31 @@ public class InstXMLParserTest {
 
     @Test
     public void documentInfoContainedinPresentation() {
-        assertNotNull(presentationFile.getTitle());
-        assertNotNull(presentationFile.getAuthor());
-        assertNotNull(presentationFile.getVersion());
-        assertNotNull(presentationFile.getComment());
+        DocumentInfo documentInfo = presentationFile.getDocumentInfo();
+        assertNotNull(documentInfo.getTitle());
+        assertNotNull(documentInfo.getAuthor());
+        assertNotNull(documentInfo.getVersion());
+        assertNotNull(documentInfo.getComment());
     }
 
     @Test
     public void presentationContainsCorrectData() {
-        assertEquals("Example File", presentationFile.getTitle());
-        assertEquals("Lexxy", presentationFile.getAuthor());
-        assertEquals("1.0", presentationFile.getVersion());
-        assertEquals("" +
-                "An example file used to demonstrate the appearance of this format" +
-                "", presentationFile.getComment());
+        DocumentInfo documentInfo = presentationFile.getDocumentInfo();
+        assertEquals("Example File", documentInfo.getTitle());
+        assertEquals("Lexxy", documentInfo.getAuthor());
+        assertEquals("1.0", documentInfo.getVersion());
+        assertEquals("An example file used to demonstrate the appearance of this format", documentInfo.getComment());
     }
 
     @Test
     public void presentationContainsCorrectDefaults() {
-        assertEquals("FFFFFF", presentationFile.getDefBackgroundColour());
-        assertEquals("Helvetica", presentationFile.getDefFont());
-        assertEquals(12, presentationFile.getDefFontSize());
-        assertEquals("000000", presentationFile.getDefFontColour());
-        assertEquals("0000CC", presentationFile.getDefLineColour());
-        assertEquals("2222AA", presentationFile.getDefFillColour());
+        Defaults defaults = presentationFile.getDefaults();
+        assertEquals("FFFFFF", defaults.getBackgroundColour());
+        assertEquals("Helvetica", defaults.getFont());
+        assertEquals(12, defaults.getFontSize());
+        assertEquals("000000", defaults.getFontColour());
+        assertEquals("0000CC", defaults.getLineColour());
+        assertEquals("2222AA", defaults.getFillColour());
     }
 
     @Test
@@ -107,8 +108,8 @@ public class InstXMLParserTest {
 
         slide = presentationFile.getSlides().get(1);
         assertEquals(1, slide.getSlideID());
-        assertEquals(slide.NULL_ATTR, slide.getDuration());
-        assertEquals(slide.NULL_ATTR, slide.getNextSlide());
+        assertEquals(slide.NULL_INT_ATTR, slide.getDuration());
+        assertEquals(slide.NULL_INT_ATTR, slide.getNextSlide());
 
         slide = presentationFile.getSlides().get(3);
         assertEquals(3, slide.getSlideID());
@@ -117,15 +118,38 @@ public class InstXMLParserTest {
     }
 
     @Test
-    public void slideContainsListOfMediaObjects() {
+    public void slideContainsCorrectNumberOfTextElements() {
         Slide slide = presentationFile.getSlides().get(0);
-        assertTrue(slide.getMediaObjects() instanceof List);
+        assertEquals(2, slide.getText().size());
     }
 
     @Test
     public void textContainsCorrectAttributes() {
         Slide slide = presentationFile.getSlides().get(0);
         Text text = slide.getText().get(0);
+
+        assertEquals(0, text.getStartTime());
+        assertEquals(-1, text.getDuration());
+        assertEquals(0.1f, text.getxStart(), 0.0);
+        assertEquals(1.0f, text.getyStart(), 0.0);
+        assertEquals("Impact", text.getFont());
+        assertEquals(30, text.getFontSize());
+        assertNull(text.getFontColour());
+        assertNull(text.getSourceFile());
+    }
+
+    @Test
+    public void textContainsCorrectStringContents() {
+        Slide slide = presentationFile.getSlides().get(0);
+        Text text = slide.getText().get(0);
+        assertEquals("An <b>Exciting</b> piece of text.", text.getText());
+
+        text = slide.getText().get(1);
+
+        assertEquals("View the <i>video</i> ?", text.getText());
+
+
+
     }
 
 

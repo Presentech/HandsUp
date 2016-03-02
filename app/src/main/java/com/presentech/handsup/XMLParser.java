@@ -1,11 +1,8 @@
 package com.presentech.handsup;
 
-import android.util.Log;
-import android.util.Xml;
-
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.StringReader;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,15 +12,6 @@ import org.xmlpull.v1.XmlPullParserFactory;
 
 public class XMLParser
 {
-    PresentationFile presentationFile;
-    List<Slide> slides;
-    List<MediaObject> mediaObjects;
-    Slide slide;
-    Text text;
-
-    String tagname;
-    int eventType;
-    String curText = "";
     String ns = null;
 
     public PresentationFile getPresentation (InputStream in) throws XmlPullParserException, IOException {
@@ -36,17 +24,18 @@ public class XMLParser
 
             parser.nextTag();
 
-            readPresentation(parser);
-
-        } catch (Exception e) {
-            e.printStackTrace();
+            return readPresentation(parser);
+        } finally {
+            in.close();
         }
-        return presentationFile;
+        //return presentationFile;
     }
 
-    private void readPresentation (XmlPullParser parser) throws IOException, XmlPullParserException {
-        presentationFile = new PresentationFile();
-        slides = new ArrayList<Slide>();
+    private PresentationFile readPresentation (XmlPullParser parser) throws IOException, XmlPullParserException {
+        PresentationFile presentationFile;
+        DocumentInfo documentInfo = null;
+        Defaults defaults = null;
+        List<Slide> slides = new ArrayList<Slide>();
 
         parser.require(XmlPullParser.START_TAG, ns, "presentation");
 
@@ -57,20 +46,25 @@ public class XMLParser
             String name = parser.getName();
 
             if (name.equals("documentInfo")) {
-                readDocumentInfo(parser);
+                documentInfo = readDocumentInfo(parser);
             } else if (name.equals("defaults")) {
-                readDefaults(parser);
+                defaults = readDefaults(parser);
             } else if (name.equals("slide")) {
-                readSlide(parser);
+                slides.add(readSlide(parser));
             } else {
                 skip(parser);
             }
         }
-        presentationFile.setSlides(slides);
+        return new PresentationFile(documentInfo, defaults, slides);
     }
 
-    private void readDocumentInfo(XmlPullParser parser) throws IOException, XmlPullParserException {
+    private DocumentInfo readDocumentInfo(XmlPullParser parser) throws IOException, XmlPullParserException {
         parser.require(XmlPullParser.START_TAG, ns, "documentInfo");
+
+        String title = null;
+        String author = null;
+        String version = null;
+        String comment = null;
 
         while(parser.next() != XmlPullParser.END_TAG) {
             if (parser.getEventType() != XmlPullParser.START_TAG) {
@@ -78,21 +72,29 @@ public class XMLParser
             }
             String name = parser.getName();
             if (name.equals("Title")) {
-                presentationFile.setTitle(readContentText(parser));
+                title = readContentText(parser);
             } else if (name.equals("Author")) {
-                presentationFile.setAuthor(readContentText(parser));
+                author = readContentText(parser);
             } else if (name.equals("Version")) {
-                presentationFile.setVersion(readContentText(parser));
+                version = readContentText(parser);
             } else if (name.equals("Comment")) {
-                presentationFile.setComment(readContentText(parser));
+                comment = readContentText(parser);
             } else {
                 skip(parser);
             }
         }
+        return new DocumentInfo(title, author, version, comment);
     }
 
-    private void readDefaults(XmlPullParser parser) throws IOException, XmlPullParserException {
+    private Defaults readDefaults(XmlPullParser parser) throws IOException, XmlPullParserException {
         parser.require(XmlPullParser.START_TAG, ns, "defaults");
+
+        String backgroundColour = null;
+        String font =  null;
+        int fontSize = 0;
+        String fontColour = null;
+        String lineColour = null;
+        String fillColour = null;
 
         while(parser.next() != XmlPullParser.END_TAG) {
             if (parser.getEventType() != XmlPullParser.START_TAG) {
@@ -100,50 +102,51 @@ public class XMLParser
             }
             String name = parser.getName();
             if (name.equalsIgnoreCase("backgroundColour")) {
-                presentationFile.setDefBackgroundColour(readContentText(parser));
+               backgroundColour = readContentText(parser);
             } else if (name.equalsIgnoreCase("font")) {
-                presentationFile.setDefFont(readContentText(parser));
+                font = readContentText(parser);
             } else if (name.equalsIgnoreCase("fontsize")) {
-                presentationFile.setDefFontSize(Integer.parseInt(readContentText(parser)));
+                fontSize = Integer.parseInt(readContentText(parser));
             } else if (name.equalsIgnoreCase("fontColour")) {
-                presentationFile.setDefFontColour(readContentText(parser));
+                fontColour = readContentText(parser);
             } else if (name.equalsIgnoreCase("lineColour")) {
-                presentationFile.setDefLineColour(readContentText(parser));
+               lineColour = readContentText(parser);
             } else if (name.equalsIgnoreCase("fillColour")) {
-                presentationFile.setDefFillColour(readContentText(parser));
+                fillColour = readContentText(parser);
             } else {
                 skip(parser);
             }
         }
+        return new Defaults(backgroundColour, font, fontSize, fontColour, lineColour, fillColour);
 
     }
 
-    private void readSlide(XmlPullParser parser) throws IOException, XmlPullParserException {
-        slide = new Slide();
-        mediaObjects = new ArrayList<MediaObject>();
-
-        String attr;
-
-        Text text;
-        Shape shape;
-        Polygon polygon;
-        Image image;
-        Video video;
-        Audio audio;
-        Interactable interactable;
-
+    private Slide readSlide(XmlPullParser parser) throws IOException, XmlPullParserException {
         parser.require(XmlPullParser.START_TAG, ns, "slide");
 
+        int slideID = Slide.NULL_INT_ATTR;
+        int nextSlide = Slide.NULL_INT_ATTR;
+        int duration = Slide.NULL_INT_ATTR;
+
+        List<Text> text =  new ArrayList<Text>();
+        List<Shape> shape = new ArrayList<Shape>();
+        List<Polygon> polygon = new ArrayList<Polygon>();
+        List<Image> image = new ArrayList<Image>();
+        List<Video> video = new ArrayList<Video>();
+        List<Audio> audio = new ArrayList<Audio>();
+        List<Interactable> interactable = new ArrayList<Interactable>();
+
+        String attr;
         int val;
         for (int i=0; i < parser.getAttributeCount(); i++) {
             attr = parser.getAttributeName(i);
             val = Integer.parseInt(parser.getAttributeValue(i));
             if (attr.equals("slideID")) {
-                slide.setSlideID(val);
+                slideID= val;
             } else if (attr.equals("nextSlide")) {
-                slide.setNextSlide(val);
+                nextSlide = val;
             } else if (attr.equals("duration")) {
-                slide.setDuration(val);
+                duration = val;
             }
         }
 
@@ -152,41 +155,94 @@ public class XMLParser
                 continue;
             }
             String name = parser.getName();
-//            if (name.equals("text")) {
-//                text = new Text();
-//                mediaObjects.add(text);
-//                parser.nextTag();
-//            } else if (name.equals("shape")) {
-//                shape = new Shape();
-//                mediaObjects.add(shape);
-//                parser.nextTag();
-//            } else if (name.equals("polygon")) {
-//                polygon = new Polygon();
-//                mediaObjects.add(polygon);
-//                parser.nextTag();
-//            } else if (name.equals("image")) {
-//                image = new Image();
-//                mediaObjects.add(image);
-//                parser.nextTag();
-//            } else if (name.equals("video")) {
-//                video = new Video();
-//                mediaObjects.add(video);
-//                parser.nextTag();
-//            } else if (name.equals("audio")) {
-//                audio = new Audio();
-//                mediaObjects.add(audio);
-//                parser.nextTag();
-//            } else if (name.equals("interactable")) {
-//                interactable = new Interactable();
-//                readInteractable(parser);
-//                mediaObjects.add(interactable);
-//                parser.nextTag();
-//
-//            } else {
+            if (name.equals("text")) {
+                text.add(readText(parser));
+            } else
                 skip(parser);
         }
-        slide.setMediaObjects(mediaObjects);
-        slides.add(slide);
+        return new Slide(slideID, nextSlide, duration, text, shape, polygon, image, video, audio,
+                interactable);
+    }
+
+    private Text readText(XmlPullParser parser) throws IOException, XmlPullParserException {
+        parser.require(XmlPullParser.START_TAG, ns, "text");
+
+        int startTime = Slide.NULL_INT_ATTR;
+        int duration = Slide.NULL_INT_ATTR;
+        float xStart = Slide.NULL_FLOAT_ATTR;
+        float yStart = Slide.NULL_FLOAT_ATTR;
+        String font = null;
+        int fontSize = Slide.NULL_INT_ATTR;
+        String fontColour = null;
+        String sourceFile = null;
+
+        String text = "";
+
+        String attr;
+        String val;
+        DecimalFormat df = new DecimalFormat("#.###");
+        for (int i=0; i < parser.getAttributeCount(); i++) {
+            attr = parser.getAttributeName(i);
+            val = parser.getAttributeValue(i);
+            if (attr.equals("starttime")) {
+                startTime = Integer.parseInt(val);
+            } else if (attr.equals("duration")) {
+                duration = Integer.parseInt(val);
+            } else if (attr.equals("xstart")) {
+                xStart = Float.parseFloat(val);
+            } else if (attr.equals("ystart")) {
+                yStart = Float.parseFloat(val);
+            } else if (attr.equals("font")) {
+                font = val;
+            } else if (attr.equals("fontsize")) {
+                fontSize = Integer.parseInt(val);
+            } else if (attr.equals("fontcolour")) {
+                fontColour = val;
+            } else if (attr.equals("sourceFile")) {
+                sourceFile = val;
+            }
+        }
+
+        text = readInnerText(parser);
+
+        return new Text(startTime, duration, xStart, yStart, font, fontSize, fontColour, sourceFile, text);
+    }
+
+    private String readInnerText(XmlPullParser parser) throws IOException, XmlPullParserException {
+        String text = "";
+        int depth = 1;
+
+        while (depth != 0) {
+            switch (parser.next()) {
+                case XmlPullParser.END_TAG:
+                    depth--;
+                    String temp = parser.getName();
+                    if (parser.getName().equals("b")) {
+                        text = text + "</b>";
+                    }
+                    else if (parser.getName().equals("i")) {
+                        text = text + "</i>";
+                    }
+                    break;
+                case XmlPullParser.START_TAG:
+                    depth++;
+                    String temp1 = parser.getName();
+                    if (parser.getName().equals("b")) {
+                        text = text + "<b>";
+                    }
+                    else if (parser.getName().equals("i")) {
+                        text = text + "<i>";
+                    }
+                    break;
+                case XmlPullParser.TEXT:
+                    text = text + parser.getText();
+                    break;
+                default:
+                    break;
+            }
+        }
+        return text;
+
     }
 
     private void readInteractable(XmlPullParser parser) throws IOException, XmlPullParserException {

@@ -8,12 +8,12 @@ import java.util.List;
  */
 public class Slide {
 
-    final static int NULL_ATTR = -2;
+    final static int NULL_INT_ATTR = -2;
+    final static float NULL_FLOAT_ATTR = 2;
 
     int slideID;
-    int nextSlide = NULL_ATTR;
-    int duration = NULL_ATTR;
-
+    int nextSlide;
+    int duration;
 
     List<Text>  text;
     List<Shape> shape;
@@ -23,73 +23,64 @@ public class Slide {
     List<Audio> audio;
     List<Interactable> interactable;
 
+    public Slide(int slideID, int nextSlide, int duration, List<Text> text, List<Shape> shape,
+                 List<Polygon> polygon, List<Image> image, List<Video> video, List<Audio> audio,
+                 List<Interactable> interactable) {
+        this.slideID = slideID;
+        this.nextSlide = nextSlide;
+        this.duration = duration;
+        this.text = text;
+        this.shape = shape;
+        this.polygon = polygon;
+        this.image = image;
+        this.video = video;
+        this.audio = audio;
+        this.interactable = interactable;
+    }
 
+    public int getSlideID() {
+        return slideID;
+    }
 
-    List<MediaObject> mediaObjects;
+    public int getNextSlide() {
+        return nextSlide;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
 
     public List<Text> getText() {
         return text;
-    }
-
-    public void setText(List<Text> text) {
-        this.text = text;
     }
 
     public List<Shape> getShape() {
         return shape;
     }
 
-    public void setShape(List<Shape> shape) {
-        this.shape = shape;
-    }
-
     public List<Polygon> getPolygon() {
         return polygon;
-    }
-
-    public void setPolygon(List<Polygon> polygon) {
-        this.polygon = polygon;
     }
 
     public List<Image> getImage() {
         return image;
     }
 
-    public void setImage(List<Image> image) {
-        this.image = image;
-    }
-
     public List<Video> getVideo() {
         return video;
-    }
-
-    public void setVideo(List<Video> video) {
-        this.video = video;
     }
 
     public List<Audio> getAudio() {
         return audio;
     }
 
-    public void setAudio(List<Audio> audio) {
-        this.audio = audio;
-    }
-
     public List<Interactable> getInteractable() {
         return interactable;
     }
 
-    public void setInteractable(List<Interactable> interactable) {
-        this.interactable = interactable;
-    }
 
-    public List<MediaObject> getMediaObjects() {
-        return mediaObjects;
-    }
 
-    public void setMediaObjects(List<MediaObject> mediaObjects) {
-        this.mediaObjects = mediaObjects;
-    }
+
 
 
 }

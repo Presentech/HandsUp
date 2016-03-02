@@ -3,7 +3,7 @@ package com.presentech.handsup;
 /**
  * Created by Alex on 25/02/2016.
  */
-public class Video extends VisualMediaElement {
+public class Video {
     String sourceFile;
     boolean loop;
 

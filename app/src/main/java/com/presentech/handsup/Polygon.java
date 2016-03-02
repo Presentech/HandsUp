@@ -3,7 +3,7 @@ package com.presentech.handsup;
 /**
  * Created by Alex on 25/02/2016.
  */
-public class Polygon extends MediaElement {
+public class Polygon {
     String lineColour;
     String fillColour;
 
