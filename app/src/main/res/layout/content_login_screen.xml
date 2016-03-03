@@ -36,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/sign_in_button"
-        android:onClick="login"
+        android:onClick="loginAttempt"
         android:layout_below="@+id/passwordET"
         android:layout_centerHorizontal="true"/>
 
