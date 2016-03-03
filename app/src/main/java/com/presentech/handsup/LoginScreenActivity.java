@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -30,13 +29,11 @@ public class LoginScreenActivity extends AppCompatActivity {
     public EditText emailAddress;
     public EditText password;
     public Button button_sign_in;
-    public Button button_register;
     public String storedEmail;
     public String storedPassword;
     public int loginAttempts = 0;
     public int loginAttemptsRemaining = 5;
     public boolean loginEnabled = true;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +42,8 @@ public class LoginScreenActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         loginSetup();
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     /*Called when the user clicks the Send button*/
@@ -61,17 +60,8 @@ public class LoginScreenActivity extends AppCompatActivity {
                 //Clear text field after sending text
                 emailAddress.getText().clear();
                 password.getText().clear();
-            } else {
-            /*
-            Intent submitLoginDetails = new Intent(this, LoginFailedActivity.class);
-            emailAddress = (EditText) findViewById(R.id.email_addressET);
-            String loginMessage = "Login Failed";
-            submitLoginDetails.putExtra(LOGIN_MESSAGE, loginMessage);
-            startActivity(submitLoginDetails);
-            //Clear text field after sending text
-            emailAddress.getText().clear();
-            password.getText().clear();
-            */
+            }
+            else {
                 if (loginAttempts < maxloginAttempts) {
                     Toast.makeText(getBaseContext(), "Login Failed", Toast.LENGTH_LONG).show();
                     loginAttempts++;
@@ -79,41 +69,22 @@ public class LoginScreenActivity extends AppCompatActivity {
                     Toast.makeText(getBaseContext(), "Attempts Remaining: " +
                             Integer.toString(loginAttemptsRemaining), Toast.LENGTH_LONG).show();
                 }
-
                 if (loginAttemptsRemaining == 0) {
                     loginEnabled = false;
                     Toast.makeText(getBaseContext(), "Login Unavailable", Toast.LENGTH_LONG).show();
                 }
-
             }
         }
 
         else    {
             Toast.makeText(getBaseContext(), "Login Unavailable", Toast.LENGTH_LONG).show();
         }
-
-    }
-
-    public void registration(View view) {
-        /*EditText editText = (EditText) findViewById(R.id.passwordET);
-        String messageRegistration = "Registration is currently unavailable";
-        Intent intentPresentation = new Intent(this, RegistrationActivity.class);
-
-        intentPresentation.putExtra(REGISTRATION_MESSAGE, messageRegistration);
-        startActivity(intentPresentation);
-        //Clear text field after sending text
-        editText.getText().clear();
-        password.getText().clear();
-        */
-
-        Toast.makeText(getBaseContext(),"Registration is currently unavailable", Toast.LENGTH_LONG).show();
     }
 
     public void loginSetup() {
         emailAddress = (EditText) findViewById(R.id.email_addressET);
         password = (EditText) findViewById(R.id.passwordET);
         button_sign_in = (Button) findViewById(R.id.button_sign_in);
-        button_register = (Button) findViewById(R.id.button_register);
 
         //reading text from file
         storedEmail = "";
@@ -147,30 +118,9 @@ public class LoginScreenActivity extends AppCompatActivity {
             Log.e("login activity", "User Database File not found: " + e.toString());
         }
 
-        catch(IOException e){
+        catch (IOException e) {
             Log.e("login activity", "Can not read User Database file: " + e.toString());
         }
     }
 
-    public void writeToFile()   {
-        try {
-            FileOutputStream fileout=openFileOutput("userDB.txt", MODE_PRIVATE);
-            Toast.makeText(getBaseContext(), LoginScreenActivity.this.getFilesDir().getAbsolutePath(),
-                    Toast.LENGTH_SHORT).show();
-            OutputStreamWriter outputWriter = new OutputStreamWriter(fileout);
-            outputWriter.write("Email:" + emailAddress.getText().toString());
-            outputWriter.write("\n");
-            outputWriter.write("Password:" + password.getText().toString());
-            outputWriter.write("\n");
-            outputWriter.close();
-            emailAddress.getText().clear();
-            password.getText().clear();
-
-            //display file saved message
-            Toast.makeText(getBaseContext(), "File saved successfully!", Toast.LENGTH_SHORT).show();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }
