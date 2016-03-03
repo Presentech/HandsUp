@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Hands Up</string>
+    <string name="title_activity_presentation_mode_tutorial">PresentationModeTutorial</string>
+    <string name="skip_button">Skip</string>
+    <string name="ptutorial_title">Presentation Mode Tutorial</string>
+    <string name="ptutorial_load_title">How to Load a Presentation</string>
+    <string name="ptutorial_load_content">LOAD \nCONTENT \nINSERT\n</string>
+    <string name="ptutorial_access_title">How to Access a Presentation</string>
+    <string name="ptutorial_access_content">ACCESS \nCONTENT \nINSERT\n</string>
+    <string name="ptutorial_control_title">How to Control a Presentation</string>
+    <string name="ptutorial_control_content">CONTROL \nCONTENT \nINSERT\n</string>
+    <string name="ptutorial_configure_title">How to Configure a Presentation</string>
+    <string name="ptutorial_configure_content">CONFIGURE \nCONTENT \nINSERT\n</string>
+    <string name="ptutorial_exit_title">How to Exit a Presentation</string>
+    <string name="ptutorial_exit_content">EXIT \nCONTENT \nINSERT\n</string>
+    <string name="ptutorial_export_title">How to Export a Presentation</string>
+    <string name="ptutorial_export_content">EXPORT \nCONTENT \nINSERT\n</string>
 </resources>
