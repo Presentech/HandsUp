@@ -16,30 +16,24 @@ public class AudienceTutorial extends AppCompatActivity {
 
     }
 
+    //this is called when 'Skip' is clicked, returns to specified activity
     public void skipClicked(View view){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
+    //this is called when 'Next' is clicked, loads layout 2 (to be changed to a fragment)
     public void nextClicked(View view) {
-        TextView tutorialText = (TextView) findViewById(R.id.audienceText);
-        Button nextButton = (Button) findViewById(R.id.nextButton);
-        Button skipButton = (Button) findViewById(R.id.skipButton);
-        Button doneButton = (Button) findViewById(R.id.doneButton);
-        Button backButton = (Button) findViewById(R.id.backButton);
-
-        tutorialText.setText("The button has done a thing");
-        nextButton.setVisibility(View.GONE);
-        skipButton.setVisibility(View.GONE);
-        doneButton.setVisibility(View.VISIBLE);
-        backButton.setVisibility(View.VISIBLE);
+        setContentView(R.layout.activity_audience_tutorial2);
     }
 
+    //this is called when the 'Done' button is clicked, returns to specified activity
     public void doneClicked(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
+    //this is called when the 'Back' button is clicked, returns to layout 1
     public void backClicked(View view) {
         setContentView(R.layout.activity_audience_tutorial);
     }

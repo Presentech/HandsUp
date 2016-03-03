@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Hands Up</string>
-    <string name="title_activity_audience_tutorial">AudienceTutorial</string>
+    <string name="title_activity_audience_tutorial">Help!</string>
+    <string name="screen1">Audience Tutorial thingsssssssssss! 1st page..</string>
+    <string name="screen2">Change of thingsssssssssss! 2nd page..</string>
+    <string name="button1">Skip</string>
+    <string name="button2">Next</string>
+    <string name="button3">Back</string>
+    <string name="button4">Done</string>
 </resources>

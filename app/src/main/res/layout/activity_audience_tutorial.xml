@@ -7,6 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/backgroundgrey"
     tools:context="com.presentech.handsup.AudienceTutorial"
     android:id="@+id/content"
     >
@@ -15,14 +16,16 @@
         android:id="@+id/audienceText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Audience Tutorial thingsssssssssss! 1st page.." />
+        android:textColor="@color/white"
+        android:text="@string/screen1" />
 
     <Button
         android:id="@+id/skipButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="Skip"
+        android:textColor="@color/white"
+        android:text="@string/button1"
         android:onClick="skipClicked"/>
 
     <Button
@@ -31,27 +34,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:text="Next"
+        android:textColor="@color/white"
+        android:text="@string/button2"
         android:onClick="nextClicked" />
-
-    <Button
-        android:id="@+id/doneButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:text="Done"
-        android:onClick="doneClicked"
-        android:visibility="gone"/>
-
-    <Button
-        android:id="@+id/backButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:text="Back"
-        android:onClick="backClicked"
-        android:visibility="gone"/>
 
 </RelativeLayout>

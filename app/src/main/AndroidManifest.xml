@@ -18,7 +18,7 @@
         <activity
             android:name=".AudienceTutorial"
             android:label="@string/title_activity_audience_tutorial"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
