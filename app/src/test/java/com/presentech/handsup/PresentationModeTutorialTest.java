@@ -61,6 +61,7 @@ public class PresentationModeTutorialTest {
         /*Simulate pressing title to close content*/
         activity.findViewById(R.id.load_title).performClick();
 
+
         /*Assert content is not visible*/
         assertEquals(activity.findViewById(R.id.load_content).GONE, activity.findViewById(R.id.load_content).getVisibility());
     }
