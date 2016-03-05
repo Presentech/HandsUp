@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.xmlpull.v1.XmlPullParserException;
@@ -96,7 +97,7 @@ public class InstXMLParserTest {
 
     @Test
     public void presentationContainsCorrectNumberOfSlides(){
-        assertEquals(5, presentationFile.getSlides().size());
+        assertEquals(6, presentationFile.getSlides().size());
     }
 
     @Test
@@ -130,8 +131,8 @@ public class InstXMLParserTest {
 
         assertEquals(0, text.getStartTime());
         assertEquals(-1, text.getDuration());
-        assertEquals(0.1f, text.getxStart(), 0.0);
-        assertEquals(1.0f, text.getyStart(), 0.0);
+        assertEquals(0.1f, text.getxStart());
+        assertEquals(1.0f, text.getyStart());
         assertEquals("Impact", text.getFont());
         assertEquals(30, text.getFontSize());
         assertNull(text.getFontColour());
@@ -147,9 +148,113 @@ public class InstXMLParserTest {
         text = slide.getText().get(1);
 
         assertEquals("View the <i>video</i> ?", text.getText());
+    }
 
+    @Test
+    public void shapeContainsCorrectAttributes() {
+        Slide slide = presentationFile.getSlides().get(5);
+        Shape shape = slide.getShape().get(0);
 
+        assertEquals(0, shape.getStartTime());
+        assertEquals(-1, shape.getDuration());
+        assertEquals(0.5f, shape.getxStart());
+        assertEquals(0.44f, shape.getyStart());
+        assertEquals("rectangle", shape.getType());
+        assertEquals(0.2f, shape.getWidth());
+        assertEquals(0.2f, shape.getHeight());
+        assertEquals("FFFFFF", shape.getLineColour());
+        assertEquals("1F6DBD", shape.getFillColour());
+    }
 
+    @Test
+    public void shapeContainsCorrectShading() {
+        Slide slide = presentationFile.getSlides().get(5);
+        Shape shape = slide.getShape().get(1);
+        Shading shading = shape.getShading();
+
+        assertEquals(0.60f, shading.getX1());
+        assertEquals(0.80f, shading.getX2());
+        assertEquals(0.90f, shading.getY1());
+        assertEquals(0.65f, shading.getY2());
+        assertEquals("00FF00", shading.getColour1());
+        assertEquals("FF0000", shading.getColour2());
+    }
+
+    @Test
+    public void polygonContainsCorrectAttributes(){
+        Slide slide = presentationFile.getSlides().get(5);
+        Polygon polygon = slide.getPolygon().get(0);
+
+        assertEquals(6, polygon.getStartTime());
+        assertEquals(300, polygon.getDuration());
+        assertEquals("FFFFFE", polygon.getLineColour());
+        assertEquals("1C57A8", polygon.getFillColour());
+        assertEquals("carrot.csv", polygon.getSourceFile());
+    }
+
+    @Test
+    public void polygonContainsCorrectShading() {
+        Slide slide = presentationFile.getSlides().get(5);
+        Polygon polygon = slide.getPolygon().get(1);
+        Shading shading = polygon.getShading();
+
+        assertEquals(0.50f, shading.getX1());
+        assertEquals(0.70f, shading.getX2());
+        assertEquals(0.85f, shading.getY1());
+        assertEquals(0.99f, shading.getY2());
+        assertEquals("EEEFFF", shading.getColour1());
+        assertEquals("ABCDEF", shading.getColour2());
+    }
+
+    @Test
+    public void imageContainsCorrectAttributes() {
+        Slide slide = presentationFile.getSlides().get(5);
+        Image image = slide.getImage().get(0);
+
+        assertEquals("images\\optionA.jpg", image.getSourceFile());
+        assertEquals(0, image.getStartTime());
+        assertEquals(-1, image.getDuration());
+        assertEquals(0.2f, image.getxStart());
+        assertEquals(0.3f, image.getyStart());
+        assertEquals(0.6f, image.getWidth());
+        assertEquals(0.6f, image.getHeight());
+    }
+
+    @Test
+    public void videoContainsCorrectAttributes() {
+        Slide slide = presentationFile.getSlides().get(1);
+        Video video = slide.getVideo().get(0);
+
+        assertEquals("video\\Film.mp4", video.getSourceFile());
+        assertEquals(0, video.getStartTime());
+        assertEquals(-1, video.getDuration());
+        assertEquals(0.3f, video.getxStart());
+        assertEquals(0.2f, video.getyStart());
+        assertEquals(true, video.isLoop());
+    }
+
+    @Test
+    public void audioContainsCorrectAttributes() {
+        Slide slide = presentationFile.getSlides().get(3);
+        Audio audio = slide.getAudio().get(0);
+
+        assertEquals("ping.wav", audio.getSourceFile());
+        assertEquals(2, audio.getStartTime());
+        assertEquals(6, audio.getDuration());
+        assertEquals(false, audio.isLoop());
+    }
+
+    @Test
+    public void correctMediaAssociatedWithInteractable() {
+        Slide slide = presentationFile.getSlides().get(2);
+        Interactable interactable = slide.getInteractable().get(1);
+
+        assertEquals(4, interactable.getTargetSlideID());
+        assertNotNull(interactable.getPolygon());
+        assertNull(interactable.getText());
+        assertNull(interactable.getShape());
+        assertNull(interactable.getVideo());
+        assertNull(interactable.getImage());
     }
 
 

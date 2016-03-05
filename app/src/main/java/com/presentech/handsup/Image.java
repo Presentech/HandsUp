@@ -4,34 +4,49 @@ package com.presentech.handsup;
  * Created by Alex on 25/02/2016.
  */
 public class Image {
-
     String sourceFile;
+    int startTime;
+    int duration;
+    float xStart;
+    float yStart;
+    float width;
+    float height;
 
-    int width;
-    int height;
+    public Image(String sourceFile, int startTime, int duration, float xStart, float yStart, float width, float height) {
+        this.sourceFile = sourceFile;
+        this.startTime = startTime;
+        this.duration = duration;
+        this.xStart = xStart;
+        this.yStart = yStart;
+        this.width = width;
+        this.height = height;
+    }
 
     public String getSourceFile() {
         return sourceFile;
     }
 
-    public void setSourceFile(String sourceFile) {
-        this.sourceFile = sourceFile;
+    public int getStartTime() {
+        return startTime;
     }
 
-    public int getWidth() {
+    public int getDuration() {
+        return duration;
+    }
+
+    public float getxStart() {
+        return xStart;
+    }
+
+    public float getyStart() {
+        return yStart;
+    }
+
+    public float getWidth() {
         return width;
     }
 
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    public int getHeight() {
+    public float getHeight() {
         return height;
     }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
 }

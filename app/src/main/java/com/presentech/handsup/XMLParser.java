@@ -157,11 +157,279 @@ public class XMLParser
             String name = parser.getName();
             if (name.equals("text")) {
                 text.add(readText(parser));
+            } else if (name.equals("shape")){
+                shape.add(readShape(parser));
+            } else if (name.equals("polygon")){
+                polygon.add(readPolygon(parser));
+            } else if (name.equals("image")){
+                image.add(readImage(parser));
+            } else if (name.equals("video")){
+                video.add(readVideo(parser));
+            } else if (name.equals("audio")){
+                audio.add(readAudio(parser));
+            } else if (name.equals("interactable")){
+                interactable.add(readInteractable(parser));
             } else
                 skip(parser);
         }
         return new Slide(slideID, nextSlide, duration, text, shape, polygon, image, video, audio,
                 interactable);
+    }
+
+    private Interactable readInteractable(XmlPullParser parser) throws IOException, XmlPullParserException {
+        parser.require(XmlPullParser.START_TAG, ns, "interactable");
+        int targetSlideID = Slide.NULL_INT_ATTR;
+        Text text = null;
+        Shape shape = null;
+        Polygon polygon = null;
+        Image image = null;
+        Video video = null;
+
+
+        targetSlideID = Integer.parseInt(parser.getAttributeValue(null, "targetSlide"));
+
+        while((parser.next() != XmlPullParser.END_TAG)) {
+            if (parser.getEventType() != XmlPullParser.START_TAG) {
+                continue;
+            }
+            String name = parser.getName();
+            if (name.equals("text")) {
+                text = readText(parser);
+            } else if (name.equals("shape")){
+                shape = readShape(parser);
+            } else if (name.equals("polygon")){
+                polygon= readPolygon(parser);
+            } else if (name.equals("image")){
+                image = readImage(parser);
+            } else if (name.equals("video")) {
+                video = readVideo(parser);
+            } else
+                skip(parser);
+        }
+        return new Interactable(targetSlideID, text, shape, polygon, image, video);
+    }
+
+    private Audio readAudio(XmlPullParser parser) throws IOException, XmlPullParserException {
+        int startTime = Slide.NULL_INT_ATTR;
+        int duration = Slide.NULL_INT_ATTR;
+        String sourceFile = null;
+        boolean loop = false;
+
+        String attr;
+        String val;
+        for (int i=0; i < parser.getAttributeCount(); i++) {
+            attr = parser.getAttributeName(i);
+            val = parser.getAttributeValue(i);
+            if (attr.equals("starttime")) {
+                startTime = Integer.parseInt(val);
+            } else if (attr.equals("duration")) {
+                duration = Integer.parseInt(val);
+            } else if (attr.equals("sourceFile")) {
+                sourceFile = val;
+            } else if (attr.equals("loop")) {
+                loop = Boolean.parseBoolean(val);
+            }
+        }
+
+        parser.nextTag();
+        return new Audio(sourceFile, startTime, duration, loop);
+    }
+
+    private Video readVideo(XmlPullParser parser) throws IOException, XmlPullParserException {
+        int startTime = Slide.NULL_INT_ATTR;
+        int duration = Slide.NULL_INT_ATTR;
+        float xStart = Slide.NULL_FLOAT_ATTR;
+        float yStart = Slide.NULL_FLOAT_ATTR;
+        String sourceFile = null;
+        boolean loop = false;
+
+        String attr;
+        String val;
+        for (int i=0; i < parser.getAttributeCount(); i++) {
+            attr = parser.getAttributeName(i);
+            val = parser.getAttributeValue(i);
+            if (attr.equals("starttime")) {
+                startTime = Integer.parseInt(val);
+            } else if (attr.equals("duration")) {
+                duration = Integer.parseInt(val);
+            } else if (attr.equals("xstart")) {
+                xStart = Float.parseFloat(val);
+            } else if (attr.equals("ystart")) {
+                yStart = Float.parseFloat(val);
+            } else if (attr.equals("sourceFile")) {
+                sourceFile = val;
+            } else if (attr.equals("loop")) {
+                loop = Boolean.parseBoolean(val);
+            }
+        }
+
+        parser.nextTag();
+        return new Video(sourceFile, startTime, duration, xStart, yStart, loop);
+
+    }
+
+    private Image readImage(XmlPullParser parser) throws IOException, XmlPullParserException {
+        int startTime = Slide.NULL_INT_ATTR;
+        int duration = Slide.NULL_INT_ATTR;
+        float xStart = Slide.NULL_FLOAT_ATTR;
+        float yStart = Slide.NULL_FLOAT_ATTR;
+        float width = Slide.NULL_FLOAT_ATTR;
+        float height = Slide.NULL_FLOAT_ATTR;
+        String sourceFile = null;
+
+        String attr;
+        String val;
+        for (int i=0; i < parser.getAttributeCount(); i++) {
+            attr = parser.getAttributeName(i);
+            val = parser.getAttributeValue(i);
+            if (attr.equals("starttime")) {
+                startTime = Integer.parseInt(val);
+            } else if (attr.equals("duration")) {
+                duration = Integer.parseInt(val);
+            } else if (attr.equals("xstart")) {
+                xStart = Float.parseFloat(val);
+            } else if (attr.equals("ystart")) {
+                yStart = Float.parseFloat(val);
+            } else if (attr.equals("width")) {
+                width = Float.parseFloat(val);
+            } else if (attr.equals("height")) {
+                height = Float.parseFloat(val);
+            } else if (attr.equals("sourceFile")) {
+                sourceFile = val;
+            }
+        }
+
+        parser.nextTag();
+        return new Image(sourceFile, startTime, duration, xStart, yStart, width, height);
+    }
+
+    private Polygon readPolygon(XmlPullParser parser) throws IOException, XmlPullParserException {
+        int startTime = Slide.NULL_INT_ATTR;
+        int duration =  Slide.NULL_INT_ATTR;
+        String lineColour = null;
+        String fillColour = null;
+        Shading shading = null;
+        String sourceFile = null;
+
+        String attr;
+        String val;
+        for (int i=0; i < parser.getAttributeCount(); i++) {
+            attr = parser.getAttributeName(i);
+            val = parser.getAttributeValue(i);
+            if (attr.equals("starttime")) {
+                startTime = Integer.parseInt(val);
+            } else if (attr.equals("duration")) {
+                duration = Integer.parseInt(val);
+            } else if (attr.equals("lineColour")) {
+                lineColour = val;
+            } else if (attr.equals("fillColour")) {
+                fillColour = val;
+            } else if (attr.equals("sourceFile")) {
+                sourceFile = val;
+            }
+        }
+
+        while(parser.next() != XmlPullParser.END_TAG) {
+            if (parser.getEventType() != XmlPullParser.START_TAG) {
+                continue;
+            }
+            String name = parser.getName();
+            if (name.equals("shading")) {
+                shading = readShading(parser);
+            } else
+                skip(parser);
+        }
+
+        return new Polygon(startTime, duration, lineColour ,fillColour ,shading, sourceFile);
+    }
+
+    private Shape readShape(XmlPullParser parser) throws IOException, XmlPullParserException {
+        parser.require(XmlPullParser.START_TAG, ns, "shape");
+        int startTime = Slide.NULL_INT_ATTR;
+        int duration = Slide.NULL_INT_ATTR;
+        float xStart = Slide.NULL_FLOAT_ATTR;
+        float yStart = Slide.NULL_FLOAT_ATTR;
+
+        String type = null;
+
+        float width = Slide.NULL_FLOAT_ATTR;
+        float height = Slide.NULL_FLOAT_ATTR;
+        String lineColour =  null;
+        String fillColour = null;
+
+        Shading shading = null;
+
+        String attr;
+        String val;
+        for (int i=0; i < parser.getAttributeCount(); i++) {
+            attr = parser.getAttributeName(i);
+            val = parser.getAttributeValue(i);
+            if (attr.equals("starttime")) {
+                startTime = Integer.parseInt(val);
+            } else if (attr.equals("duration")) {
+                duration = Integer.parseInt(val);
+            } else if (attr.equals("xstart")) {
+                xStart = Float.parseFloat(val);
+            } else if (attr.equals("ystart")) {
+                yStart = Float.parseFloat(val);
+            } else if (attr.equals("type")) {
+                type = val;
+            } else if (attr.equals("width")) {
+                width = Float.parseFloat(val);
+            } else if (attr.equals("height")) {
+                height = Float.parseFloat(val);
+            } else if (attr.equals("lineColour")) {
+                lineColour = val;
+            } else if (attr.equals("fillColour")) {
+                fillColour = val;
+            }
+        }
+
+        while(parser.next() != XmlPullParser.END_TAG) {
+            if (parser.getEventType() != XmlPullParser.START_TAG) {
+                continue;
+            }
+            String name = parser.getName();
+            if (name.equals("shading")) {
+                shading = readShading(parser);
+            } else
+                skip(parser);
+        }
+
+        return new Shape(startTime, duration, xStart, yStart, type, width, height, lineColour,
+                fillColour, shading);
+    }
+
+    private Shading readShading(XmlPullParser parser) throws IOException, XmlPullParserException {
+        float x1 = Slide.NULL_FLOAT_ATTR;
+        float x2 = Slide.NULL_FLOAT_ATTR;
+        float y1 = Slide.NULL_FLOAT_ATTR;
+        float y2 = Slide.NULL_FLOAT_ATTR;
+        String colour1 =  null;
+        String colour2 = null;
+
+        String attr;
+        String val;
+        for (int i=0; i < parser.getAttributeCount(); i++) {
+            attr = parser.getAttributeName(i);
+            val = parser.getAttributeValue(i);
+            if (attr.equals("x1")) {
+                x1 = Float.parseFloat(val);
+            } else if (attr.equals("x2")) {
+                x2 = Float.parseFloat(val);
+            } else if (attr.equals("y1")) {
+                y1 = Float.parseFloat(val);
+            } else if (attr.equals("y2")) {
+                y2 = Float.parseFloat(val);
+            } else if (attr.equals("colour1")) {
+                colour1 = val;
+            } else if (attr.equals("colour2")) {
+                colour2 = val;
+            }
+        }
+
+        parser.nextTag();
+        return new Shading(x1, x2, y1, y2, colour1, colour2);
     }
 
     private Text readText(XmlPullParser parser) throws IOException, XmlPullParserException {
@@ -180,7 +448,6 @@ public class XMLParser
 
         String attr;
         String val;
-        DecimalFormat df = new DecimalFormat("#.###");
         for (int i=0; i < parser.getAttributeCount(); i++) {
             attr = parser.getAttributeName(i);
             val = parser.getAttributeValue(i);
@@ -242,19 +509,6 @@ public class XMLParser
             }
         }
         return text;
-
-    }
-
-    private void readInteractable(XmlPullParser parser) throws IOException, XmlPullParserException {
-        parser.require(XmlPullParser.START_TAG, ns, "interactable");
-
-        while(parser.next() != XmlPullParser.END_TAG) {
-            if (parser.getEventType() != XmlPullParser.START_TAG) {
-                continue;
-            }
-            String name = parser.getName();
-            skip(parser);
-        }
 
     }
 
