@@ -8,14 +8,27 @@
     <string name="companyLogo">Presentech Logo</string>
     <string name="background">App Background</string>
 
-    <string-array name="leftDrawerOptions">
+    <string-array name="presenterDrawerOptions">
         <item>Home</item>
         <item>Help</item>
-        <item>Session</item>
+        <item>Select New Session</item>
         <item>About</item>
     </string-array>
 
-    <string-array name="leftDrawerIcons">
+    <string-array name="presenterDrawerIcons">
+        <item>@drawable/setting_logo0</item>
+        <item>@drawable/setting_logo1</item>
+        <item>@drawable/setting_logo2</item>
+        <item>@drawable/ic_drawer</item>
+    </string-array>
+    <string-array name="audienceDrawerOptions">
+        <item>Home</item>
+        <item>Create New Session</item>
+        <item>Help</item>
+        <item>About</item>
+    </string-array>
+
+    <string-array name="audienceDrawerIcons">
         <item>@drawable/setting_logo0</item>
         <item>@drawable/setting_logo1</item>
         <item>@drawable/setting_logo2</item>
@@ -39,6 +52,8 @@
     <string name="aboutTeamMember7">Luke Richardson</string>
     <string name="aboutTeamMember8">Noor Mansur</string>
     <string name="aboutTeamMember9">Steve Clarke</string>
-    <string name="aboutThanks">Special Thanks to Martin Robinson</string>
+    <string name="title_hint">Session Name</string>
+    <string name="password_hint">Session Password</string>
+    <string name="hosting_wizard_title">Create Session</string>
 
 </resources>
