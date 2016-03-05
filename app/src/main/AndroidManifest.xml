@@ -15,7 +15,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ModeSelectActivity"/>
+        <activity android:name=".ModeSelectActivity" />
     </application>
 
 </manifest>
