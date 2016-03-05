@@ -8,7 +8,7 @@
     <string name="companyLogo">Presentech Logo</string>
     <string name="background">App Background</string>
 
-    <string-array name="presenterDrawerOptions">
+    <string-array name="audienceDrawerOptions">
         <item>Home</item>
         <item>Help</item>
         <item>Select New Session</item>
@@ -21,7 +21,7 @@
         <item>@drawable/setting_logo2</item>
         <item>@drawable/ic_drawer</item>
     </string-array>
-    <string-array name="audienceDrawerOptions">
+    <string-array name="presenterDrawerOptions">
         <item>Home</item>
         <item>Create New Session</item>
         <item>Help</item>
