@@ -3,11 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.presentech.handsup.ModeSelectActivity">
+    tools:context="com.presentech.handsup.ModeSelectActivity"
+    android:theme="@style/DrawerTheme">
 
     <ImageView
         android:id="@+id/ModeSelectBackground"
@@ -16,22 +13,34 @@
         android:adjustViewBounds="true"/>
     <ImageView
         android:id="@+id/ModeSelectAppLogo"
-        android:layout_width="wrap_content"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:adjustViewBounds="true"/>
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/ModeSelectAppName"/>
 
     <ImageView
         android:id="@+id/ModeSelectAppName"
-        android:layout_width="wrap_content"
+        android:layout_width="240dp"
         android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"/>
+
     <ImageView
-        android:id="@+id/ModeSelectCompanyLogo"
-        android:layout_alignParentTop="true"
-        android:layout_width="wrap_content"
+        android:id="@+id/AudienceSelect"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:adjustViewBounds="true" />
+        android:layout_above="@+id/PresenterSelect"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:onClick="goToAudienceMode"/>
+
+    <ImageView
+        android:id="@+id/PresenterSelect"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="80dp"
+        android:onClick="goToPresenterMode"/>
 
 </RelativeLayout>
