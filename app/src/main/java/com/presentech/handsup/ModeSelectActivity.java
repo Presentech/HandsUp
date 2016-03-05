@@ -50,9 +50,9 @@ package com.presentech.handsup;
 
 
                 ImageView backgroundView = (ImageView) findViewById(R.id.ModeSelectBackground);
-                ImageView appLogoView = (ImageView) findViewById(R.id.SessionSelectBackground);
-                ImageView appNameView = (ImageView) findViewById(R.id.SessionSelectBackground);
-                ImageView companyLogoView = (ImageView) findViewById(R.id.SessionSelectBackground);
+                ImageView appLogoView = (ImageView) findViewById(R.id.ModeSelectAppLogo);
+                ImageView appNameView = (ImageView) findViewById(R.id.ModeSelectAppName);
+                ImageView companyLogoView = (ImageView) findViewById(R.id.ModeSelectCompanyLogo);
 
                 backgroundView.setImageBitmap(background);
                 appLogoView.setImageBitmap(appLogo);
