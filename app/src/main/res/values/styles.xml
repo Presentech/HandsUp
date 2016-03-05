@@ -16,8 +16,8 @@
     <style name="AppThemeNoActionBar" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <!-- THEME USED FOR contsel ACTIVITY ONLY -->
         <item name="colorPrimary">@color/presentechBlue</item>
-        <item name="colorPrimaryDark">@color/backgroundgrey</item>
-        <item name="colorAccent">@color/darkgrey</item>
+        <item name="colorPrimaryDark">@color/darkgrey</item>
+        <item name="colorAccent">@color/lightgrey</item>
     </style>
 
     <style name="EditTextTheme" parent="@android:style/Widget.EditText">

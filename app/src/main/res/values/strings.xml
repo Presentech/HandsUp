@@ -52,8 +52,14 @@
     <string name="aboutTeamMember7">Luke Richardson</string>
     <string name="aboutTeamMember8">Noor Mansur</string>
     <string name="aboutTeamMember9">Steve Clarke</string>
+
     <string name="title_hint">Session Name</string>
     <string name="password_hint">Session Password</string>
     <string name="hosting_wizard_title">Create Session</string>
-
+    <string name="choosePresentationTV">Choose Presentation:</string>
+    <string name="choosePresentationFromDevice">Select From Device</string>
+    <string name="choosePresentationFromServer">Select From Server</string>
+    <string name="sessionName">Name:</string>
+    <string name="sessionPassword">Password:</string>
+    <string name="CreateSession">Create Session</string>
 </resources>
