@@ -17,4 +17,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ModeSelectActivity.class) ;
         startActivity(intent);
     }
+
+    public void loginLaunch(View view) {
+        Intent intent = new Intent(this, LoginScreenActivity.class);
+        startActivity(intent);
+    }
 }
