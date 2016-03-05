@@ -18,6 +18,7 @@ public class DrawerItem {
     public String getString(){
         return this.itemString;
     }
+    //Create Getters and Setters
     public int getImageResourceID(){
         return imageResourceID;
     }

@@ -39,7 +39,7 @@ public class DrawerAdapter extends BaseAdapter{
         return convertView;
     }
 
-    //BASE ADAPTER NEEDS THESE 3 METHODS
+    //Override Getters
     @Override
     public int getCount() {
         return DrawerItems.size();
