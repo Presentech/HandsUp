@@ -3,9 +3,9 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/presentechBlue</item>
+        <item name="colorPrimaryDark">@color/backgroundgrey</item>
+        <item name="colorAccent">@color/colourOfText</item>
     </style>
 
     <style name="DrawerTheme" parent="@android:style/Widget.ListView">
@@ -15,9 +15,9 @@
 
     <style name="AppThemeNoActionBar" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <!-- THEME USED FOR contsel ACTIVITY ONLY -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/presentechBlue</item>
+        <item name="colorPrimaryDark">@color/backgroundgrey</item>
+        <item name="colorAccent">@color/darkgrey</item>
     </style>
 
     <style name="EditTextTheme" parent="@android:style/Widget.EditText">
