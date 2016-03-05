@@ -11,7 +11,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.presentech.handsup.LoginScreenActivity"
     tools:showIn="@layout/activity_login_screen"
-    android:background="@color/backgroundGrey">
+    android:background="@color/backgroundgrey">
 
     <EditText
         android:id="@+id/email_addressET"
@@ -20,7 +20,7 @@
         android:inputType="textEmailAddress"
         android:ems="10"
         android:hint="E-mail Address"
-        android:textColor="@color/white"/>
+        android:textColor="@color/textColour"/>
 
     <EditText
         android:id="@+id/passwordET"
@@ -29,7 +29,7 @@
         android:inputType="textPassword"
         android:hint="Password"
         android:layout_below="@+id/email_addressET"
-        android:textColor="@color/white"/>
+        android:textColor="@color/textColour"/>
 
     <Button
         android:id="@+id/button_sign_in"

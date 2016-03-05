@@ -10,22 +10,13 @@
     tools:context="com.presentech.handsup.MainActivity">
 
     <TextView
-        android:id="@+id/textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!" />
     <Button
+        android:id="@+id/ModeSelectButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="GOTOMODESELECT"
         android:onClick="goToModeSelect"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Login"
-        android:onClick="loginLaunch"
-        android:layout_below="@+id/textview"
-        android:layout_centerHorizontal="true" />
-
 </RelativeLayout>
