@@ -8,6 +8,7 @@ public class DrawerItem {
     private int imageResourceID;
     private String itemString;
 
+
     public DrawerItem(){}
 
     public DrawerItem(int imageResourceID, String itemString){

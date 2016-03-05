@@ -17,6 +17,7 @@ import java.util.ArrayList;
  */
 public class DrawerAdapter extends BaseAdapter{
 
+
     private Context context;
     private ArrayList<DrawerItem> DrawerItems;
 
