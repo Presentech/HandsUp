@@ -76,6 +76,13 @@ public class HostingWizardActivity extends AppCompatActivity {
         return super.onPrepareOptionsMenu(menu);
     }
 
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        drawer.mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+
     //This handles action bar events
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
