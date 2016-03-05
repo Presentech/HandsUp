@@ -117,8 +117,8 @@ public class navDrawer {
         mDrawerList.setItemChecked(position, true);
         switch(position) {
             case 0:
-                Intent mainActivityIntent = new Intent(activity, ModeSelectActivity.class);
-                activity.startActivity(mainActivityIntent);
+                //Intent mainActivityIntent = new Intent(activity, ModeSelectActivity.class);
+                //activity.startActivity(mainActivityIntent);
                 break;
             //case 4:
             //    Intent aboutActivityIntent = new Intent(AudienceMainActivity.this, aboutAppActivity.class);

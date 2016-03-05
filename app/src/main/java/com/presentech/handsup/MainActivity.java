@@ -28,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goToModeSelect(View view) {
-        Intent modeIntent = new Intent(this, ModeSelectActivity.class);
-        startActivity(modeIntent);
+        //Intent modeIntent = new Intent(this, ModeSelectActivity.class);
+        //startActivity(modeIntent);
     }
 
     public void goToHostingWizard(View view) {

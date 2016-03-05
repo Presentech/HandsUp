@@ -17,25 +17,32 @@
                 android:adjustViewBounds="true"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
-
-            <EditText
-                android:id="@+id/SessionTitle"
+            <GridLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/title_hint"
-                android:inputType="text"
-                android:background="@color/transparant_lightgrey"
-                android:textColor="@color/textColour"/>
+                android:layout_height="match_parent"
+                android:columnCount="2">
+                <EditText
+                    android:id="@+id/SessionTitle"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/title_hint"
+                    android:inputType="text"
+                    android:background="@color/transparant_darkgrey"
+                    android:textColor="@color/textColour"
+                    android:layout_column="0"
+                    android:layout_row="0"
+                    android:layout_columnSpan="1"/>
 
-            <EditText
-                android:id="@+id/SessionPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/SessionTitle"
-                android:hint="@string/password_hint"
-                android:inputType="textVisiblePassword"
-                android:background="@color/transparant_darkgrey"
-                android:textColor="@color/textColour"/>
+                <EditText
+                    android:id="@+id/SessionPassword"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/password_hint"
+                    android:inputType="textVisiblePassword"
+                    android:background="@color/transparant_darkgrey"
+                    android:textColor="@color/textColour"
+                    android:layout_column="0"
+                    android:layout_row="1"
+                    android:layout_columnSpan="1"/>
+            </GridLayout>
         </RelativeLayout>
     </FrameLayout>
 
