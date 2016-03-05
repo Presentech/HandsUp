@@ -62,8 +62,8 @@ public class navDrawer {
         navDrawerItems = new ArrayList<>();
         //Add items to drawer
         //NavMenuIcons is a typed Array use (.getResourceId(i,j) to convert - i is position, j is value to return if icon not there)
-        for(int i=0; i<= navMenuIcons.length(); i++){
-            navDrawerItems.add(new DrawerItem(navMenuIcons.getResourceId(i, -1), navMenuTitles[0]));
+        for(int i=0; i< navMenuIcons.length(); i++){
+            navDrawerItems.add(new DrawerItem(navMenuIcons.getResourceId(i, -1), navMenuTitles[i]));
         }
         //Recycle Typed Array
         navMenuIcons.recycle();
