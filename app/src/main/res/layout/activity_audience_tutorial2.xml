@@ -12,10 +12,30 @@
     android:id="@+id/content"
     >
 
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/white"
+        android:text="@string/button3"
+        android:onClick="backClicked"/>
+
+    <Button
+        android:id="@+id/doneButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:textColor="@color/white"
+        android:text="@string/button4"
+        android:onClick="doneClicked"/>
+
     <RelativeLayout
         android:id="@+id/tutorialContent"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="fill_parent">
 
         <TextView
             android:id="@+id/audienceText"
@@ -75,20 +95,13 @@
             android:layout_toRightOf="@id/feedbackCross"
             android:layout_below="@id/feedbackQuestionExplanation"/>
 
-    </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/divider"
-        android:src="@drawable/divider"
-        android:layout_width="wrap_content"
-        android:layout_height="5dp"
-        android:layout_below ="@id/tutorialContent"/>
-
-    <RelativeLayout
-        android:id="@+id/tutorialContent2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/divider">
+        <ImageView
+            android:id="@+id/divider"
+            android:src="@drawable/divider"
+            android:layout_width="wrap_content"
+            android:layout_height="5dp"
+            android:layout_below ="@id/feedbackCross"/>
 
         <ImageView
             android:id="@+id/feedbackA"
@@ -143,24 +156,6 @@
 
     </RelativeLayout>
 
-    <Button
-        android:id="@+id/backButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:textColor="@color/white"
-        android:text="@string/button3"
-        android:onClick="backClicked"/>
 
-    <Button
-        android:id="@+id/doneButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:textColor="@color/white"
-        android:text="@string/button4"
-        android:onClick="doneClicked"/>
 
 </RelativeLayout>
