@@ -28,12 +28,23 @@ package com.presentech.handsup;
         private Bitmap background, appName, appLogo, companyLogo, presenterButton, audienceButton;
 
         @Override
+        protected void onDestroy(){
+            super.onDestroy();
+            background.recycle();
+            appLogo.recycle();
+            appName.recycle();
+            companyLogo.recycle();
+            presenterButton.recycle();
+            audienceButton.recycle();
+        }
+        @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_mode_select);
             if (getSupportActionBar() != null){
                 getSupportActionBar().hide();
             }
+
 
             //INPUT BITMAPS
             //get width and height of screen for background
