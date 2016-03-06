@@ -18,7 +18,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -43,12 +45,15 @@ public class HostingWizardActivity extends AppCompatActivity {
         int width = size.x;
         int height = size.y;
 
+        changeViewWidths(width);
+
+
         //Map smaller images to views - DO NOT REMOVE APP WILL CRASH
-        background = decodeSampledBitmapFromResource(getResources(), R.drawable.background,width, height);
-        ImageView backgroundView = (ImageView) findViewById(R.id.SessionSelectBackground);
-        backgroundView.setImageBitmap(background);
+        //background = decodeSampledBitmapFromResource(getResources(), R.drawable.background,width, height);
+        //ImageView backgroundView = (ImageView) findViewById(R.id.SessionSelectBackground);
+        //backgroundView.setImageBitmap(background);
         //Stretch background view to fill screen
-        backgroundView.setScaleType(ImageView.ScaleType.FIT_XY);
+        //backgroundView.setScaleType(ImageView.ScaleType.FIT_XY);
 
         //NAVIGATION DRAWER
         //Create new presenter drawer object
@@ -64,6 +69,16 @@ public class HostingWizardActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+    }
+    public void changeViewWidths(int width){
+
+        double columnWidthDouble = (width/2);
+        int columnWidth = (int) columnWidthDouble;
+
+        LinearLayout inputColumn = (LinearLayout) findViewById(R.id.inputGrid);
+        LinearLayout optionsColumn = (LinearLayout) findViewById(R.id.optionsGrid);
+        inputColumn.getLayoutParams().width = columnWidth;
+        optionsColumn.getLayoutParams().width = columnWidth;
     }
 
     /* Called whenever we call invalidateOptionsMenu() */
