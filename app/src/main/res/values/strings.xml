@@ -8,20 +8,13 @@
     <string name="companyLogo">Presentech Logo</string>
     <string name="background">App Background</string>
 
-    <string-array name="presenterDrawerOptions">
+    <string-array name="audienceDrawerOptions">
         <item>Home</item>
         <item>Help</item>
         <item>Select New Session</item>
         <item>About</item>
     </string-array>
-
-    <string-array name="presenterDrawerIcons">
-        <item>@drawable/setting_logo0</item>
-        <item>@drawable/setting_logo1</item>
-        <item>@drawable/setting_logo2</item>
-        <item>@drawable/ic_drawer</item>
-    </string-array>
-    <string-array name="audienceDrawerOptions">
+    <string-array name="presenterDrawerOptions">
         <item>Home</item>
         <item>Create New Session</item>
         <item>Help</item>
@@ -29,10 +22,17 @@
     </string-array>
 
     <string-array name="audienceDrawerIcons">
-        <item>@drawable/setting_logo0</item>
-        <item>@drawable/setting_logo1</item>
-        <item>@drawable/setting_logo2</item>
-        <item>@drawable/ic_drawer</item>
+        <item>@drawable/home_icon</item>
+        <item>@drawable/question_icon</item>
+        <item>@drawable/wifi_icon</item>
+        <item>@drawable/info_icon</item>
+    </string-array>
+
+    <string-array name="presenterDrawerIcons">
+        <item>@drawable/home_icon</item>
+        <item>@drawable/create_icon</item>
+        <item>@drawable/question_icon</item>
+        <item>@drawable/info_icon</item>
     </string-array>
 
     <string name="drawer_open">Open Drawer</string>
