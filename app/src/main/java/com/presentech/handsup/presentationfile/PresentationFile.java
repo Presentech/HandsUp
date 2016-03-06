@@ -1,10 +1,10 @@
-package com.presentech.handsup;
+package com.presentech.handsup.presentationfile;
 
 
 import java.util.List;
 
 /**
- * Created by Alex on 22/02/2016.
+ * Created by Alex Butcher on 22/02/2016.
  */
 public class PresentationFile {
     /* Document Info */

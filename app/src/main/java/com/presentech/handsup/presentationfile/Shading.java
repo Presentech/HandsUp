@@ -1,7 +1,7 @@
-package com.presentech.handsup;
+package com.presentech.handsup.presentationfile;
 
 /**
- * Created by Alex on 03/03/2016.
+ * Created by Alex Butcher on 03/03/2016.
  */
 public class Shading {
     float x1;

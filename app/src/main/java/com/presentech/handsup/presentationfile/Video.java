@@ -1,18 +1,22 @@
-package com.presentech.handsup;
+package com.presentech.handsup.presentationfile;
 
 /**
- * Created by Alex on 25/02/2016.
+ * Created by Alex  Butcher on 25/02/2016.
  */
-public class Audio {
+public class Video {
     String sourceFile;
     int startTime;
     int duration;
+    float xStart;
+    float yStart;
     boolean loop;
 
-    public Audio(String sourceFile, int startTime, int duration, boolean loop) {
+    public Video(String sourceFile, int startTime, int duration, float xStart, float yStart, boolean loop) {
         this.sourceFile = sourceFile;
         this.startTime = startTime;
         this.duration = duration;
+        this.xStart = xStart;
+        this.yStart = yStart;
         this.loop = loop;
     }
 
@@ -26,6 +30,14 @@ public class Audio {
 
     public int getDuration() {
         return duration;
+    }
+
+    public float getxStart() {
+        return xStart;
+    }
+
+    public float getyStart() {
+        return yStart;
     }
 
     public boolean isLoop() {

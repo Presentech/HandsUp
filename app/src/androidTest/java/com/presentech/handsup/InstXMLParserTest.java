@@ -1,19 +1,27 @@
 package com.presentech.handsup;
 
-import android.content.Context;
 import android.support.test.runner.AndroidJUnit4;
 
+import com.presentech.handsup.presentationfile.Audio;
+import com.presentech.handsup.presentationfile.Defaults;
+import com.presentech.handsup.presentationfile.DocumentInfo;
+import com.presentech.handsup.presentationfile.Image;
+import com.presentech.handsup.presentationfile.Interactable;
+import com.presentech.handsup.presentationfile.Polygon;
+import com.presentech.handsup.presentationfile.PresentationFile;
+import com.presentech.handsup.presentationfile.Shading;
+import com.presentech.handsup.presentationfile.Shape;
+import com.presentech.handsup.presentationfile.Slide;
+import com.presentech.handsup.presentationfile.Text;
+import com.presentech.handsup.presentationfile.Video;
+
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.xmlpull.v1.XmlPullParserException;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.util.List;
 
 import static junit.framework.Assert.assertEquals;
@@ -22,8 +30,9 @@ import static junit.framework.Assert.assertNull;
 import static junit.framework.Assert.assertTrue;
 
 /**
- * Created by Alex on 18/02/2016.
+ * Created by Alex Butcher on 18/02/2016.
  */
+
 @RunWith(AndroidJUnit4.class)
 public class InstXMLParserTest {
     private XMLParser parser;
@@ -33,35 +42,23 @@ public class InstXMLParserTest {
 
 
     @Before
+    //Setup method Instantiates a new parser and retrieves a PresentationFile from it.
+    //It provides the parser with a test xml file from a resources folder
     public void setUp() throws IOException, XmlPullParserException {
         parser = new XMLParser();
-
-        //File inputFile = new File("test.xml");
-       // FileInputStream stream = new FileInputStream(inputFile);
         InputStream in = this.getClass().getClassLoader().getResourceAsStream("test.xml");
         presentationFile = parser.getPresentation(in);
     }
 
-    private static File getFileFromPath(Object obj, String fileName) {
-        ClassLoader classLoader = obj.getClass().getClassLoader();
-        URL resource = classLoader.getResource(fileName);
-        return new File(resource.getPath());
-    }
-
     @Test
-    public void fileObjectShouldNotBeNull() throws Exception {
-        File file = getFileFromPath(this, "test.xml");
-        assertNotNull(file);
-    }
-
-
-    @Test
+    //Check parser creates a Presentation File
     public void createPresentationObject() {
         assertNotNull(presentationFile);
 
     };
 
     @Test
+    //Check presentation file contains document info
     public void documentInfoContainedinPresentation() {
         DocumentInfo documentInfo = presentationFile.getDocumentInfo();
         assertNotNull(documentInfo.getTitle());
@@ -71,6 +68,7 @@ public class InstXMLParserTest {
     }
 
     @Test
+    //Check presentation file contains the correct document info.
     public void presentationContainsCorrectData() {
         DocumentInfo documentInfo = presentationFile.getDocumentInfo();
         assertEquals("Example File", documentInfo.getTitle());
@@ -80,6 +78,7 @@ public class InstXMLParserTest {
     }
 
     @Test
+    //Check presentation file contains correct Defaults
     public void presentationContainsCorrectDefaults() {
         Defaults defaults = presentationFile.getDefaults();
         assertEquals("FFFFFF", defaults.getBackgroundColour());
@@ -91,16 +90,19 @@ public class InstXMLParserTest {
     }
 
     @Test
+    //Check presentation file contains a list of slides
     public void presentationContainsListOfSlides() {
         assertTrue(presentationFile.getSlides() instanceof List);
     }
 
     @Test
+    //Check that the list of slides contains the correct number of slides
     public void presentationContainsCorrectNumberOfSlides(){
         assertEquals(6, presentationFile.getSlides().size());
     }
 
     @Test
+    //Check that the slides contain the correct attributes
     public void slideContainsCorrectAttributes() {
         Slide slide = presentationFile.getSlides().get(0);
         assertEquals(0, slide.getSlideID());
@@ -119,12 +121,14 @@ public class InstXMLParserTest {
     }
 
     @Test
+    //Check that a slide contains the correct number of text elements
     public void slideContainsCorrectNumberOfTextElements() {
         Slide slide = presentationFile.getSlides().get(0);
         assertEquals(2, slide.getText().size());
     }
 
     @Test
+    //Check that a text element contains the correct attributes
     public void textContainsCorrectAttributes() {
         Slide slide = presentationFile.getSlides().get(0);
         Text text = slide.getText().get(0);
@@ -140,6 +144,7 @@ public class InstXMLParserTest {
     }
 
     @Test
+    //Check that a text element contains the correct string contents
     public void textContainsCorrectStringContents() {
         Slide slide = presentationFile.getSlides().get(0);
         Text text = slide.getText().get(0);
@@ -151,6 +156,7 @@ public class InstXMLParserTest {
     }
 
     @Test
+    //Check that a shape element contains the correct attributes
     public void shapeContainsCorrectAttributes() {
         Slide slide = presentationFile.getSlides().get(5);
         Shape shape = slide.getShape().get(0);
@@ -167,6 +173,7 @@ public class InstXMLParserTest {
     }
 
     @Test
+    //Check that a shape element with shading contains the correct shading attributes
     public void shapeContainsCorrectShading() {
         Slide slide = presentationFile.getSlides().get(5);
         Shape shape = slide.getShape().get(1);
@@ -181,6 +188,7 @@ public class InstXMLParserTest {
     }
 
     @Test
+    //Check that a polygon element contains the correct attributes
     public void polygonContainsCorrectAttributes(){
         Slide slide = presentationFile.getSlides().get(5);
         Polygon polygon = slide.getPolygon().get(0);
@@ -193,6 +201,7 @@ public class InstXMLParserTest {
     }
 
     @Test
+    //Check that a polygon element with shading contains the correct shading attributes
     public void polygonContainsCorrectShading() {
         Slide slide = presentationFile.getSlides().get(5);
         Polygon polygon = slide.getPolygon().get(1);
@@ -207,6 +216,7 @@ public class InstXMLParserTest {
     }
 
     @Test
+    //Check that an image element contains the correct attributes
     public void imageContainsCorrectAttributes() {
         Slide slide = presentationFile.getSlides().get(5);
         Image image = slide.getImage().get(0);
@@ -221,6 +231,7 @@ public class InstXMLParserTest {
     }
 
     @Test
+    //Check that a video element contains the correct attributes
     public void videoContainsCorrectAttributes() {
         Slide slide = presentationFile.getSlides().get(1);
         Video video = slide.getVideo().get(0);
@@ -234,6 +245,7 @@ public class InstXMLParserTest {
     }
 
     @Test
+    //Check that an audio element contains the correct attributes
     public void audioContainsCorrectAttributes() {
         Slide slide = presentationFile.getSlides().get(3);
         Audio audio = slide.getAudio().get(0);
@@ -245,6 +257,7 @@ public class InstXMLParserTest {
     }
 
     @Test
+    //Check that an interactable element contains the correct media element
     public void correctMediaAssociatedWithInteractable() {
         Slide slide = presentationFile.getSlides().get(2);
         Interactable interactable = slide.getInteractable().get(1);

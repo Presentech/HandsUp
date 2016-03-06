@@ -1,15 +1,15 @@
-package com.presentech.handsup;
+package com.presentech.handsup.presentationfile;
 
 
 import java.util.List;
 
 /**
- * Created by Alex on 22/02/2016.
+ * Created by Alex Butcher on 22/02/2016.
  */
 public class Slide {
 
-    final static int NULL_INT_ATTR = -2;
-    final static float NULL_FLOAT_ATTR = 2;
+    public final static int NULL_INT_ATTR = -2;
+    public final static float NULL_FLOAT_ATTR = 2;
 
     int slideID;
     int nextSlide;
