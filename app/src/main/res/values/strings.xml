@@ -9,7 +9,7 @@
 
     /*Login Screen Strings*/
     <string name="title_activity_login_screen">Hands Up Account Login</string>
-    <string name="title_activity_registration">Hands Up registration</string>
+    <string name="title_activity_registration">Hands Up Registration</string>
     <string name="title_activity_login_success">Login Successful</string>
     <string name="title_activity_login_failed">Login Failed</string>
     <string name="action_settings">Settings</string>
