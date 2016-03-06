@@ -54,16 +54,6 @@
     <string name="aboutTeamMember9">Steve Clarke</string>
     <string name="aboutThanks">Special Thanks to Martin Robinson</string>
 
-    <string name="title_hint">Session Name</string>
-    <string name="password_hint">Session Password</string>
-    <string name="hosting_wizard_title">Create Session</string>
-    <string name="choosePresentationTV">Choose Presentation:</string>
-    <string name="choosePresentationFromDevice">Select From Device</string>
-    <string name="choosePresentationFromServer">Select From Server</string>
-    <string name="sessionName">Name:</string>
-    <string name="sessionPassword">Password:</string>
-    <string name="CreateSession">Create Session</string>
-
     /*Strings for colours*/
     <string name="presentechblue">#60ccbf</string>
     <string name="backgroundgrey">#292929</string>
@@ -81,4 +71,20 @@
     <string name="login_success_confirmation">Login Attempt Successful</string>
     <string name="login_failed_confirmation">Login Attempt Failed</string>
     <string name="title_activity_login">LoginActivity</string>
+
+    <!-- Hosting Wizard Strings -->
+    <string name="hosting_wizard_title">Create New Session</string>
+    <string name="selectPresentation">Source File</string>
+    <string name="sessionName">Name:</string>
+    <string name="sessionPassword">Password:</string>
+    <string name="title_hint">Session Name</string>
+    <string name="password_hint">Session Password</string>
+    <string name="location_hint">Session Location</string>
+    <string name="FeedbackOptionsTitle">Feedback Options</string>
+    <string name="UnderstandingIconsSelect">Understanding Icons</string>
+    <string name="MessagingSelect">Multiple-Choice Icons</string>
+    <string name="MultipleChoiceIconsSelect">Messaging</string>
+    <string name="FeedbackPerSlideSelect">Feedback per Slide</string>
+    <string name="HideFeedbackSelect">Hide feedback during presentation</string>
+    <string name="createSession">Create Session</string>
 </resources>
