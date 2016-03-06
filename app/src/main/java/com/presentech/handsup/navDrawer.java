@@ -30,6 +30,7 @@ import java.util.ArrayList;
 public class navDrawer {
 
     private Activity activity;
+    private String navDrawerMode;
     public DrawerLayout mDrawerLayout;
     public ListView mDrawerList;
     public ActionBarDrawerToggle mDrawerToggle;
@@ -43,6 +44,7 @@ public class navDrawer {
     public void createDrawer(Activity activity, String mode ){
         //Set Activity to local variable
         this.activity = activity;
+        navDrawerMode = mode;
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
         //Set Title
@@ -115,16 +117,31 @@ public class navDrawer {
     //Switch case method to determine action based on click position in drawer
     public void selectItem(int position) {
         mDrawerList.setItemChecked(position, true);
-        switch(position) {
-            case 0:
-                //Intent mainActivityIntent = new Intent(activity, ModeSelectActivity.class);
-                //activity.startActivity(mainActivityIntent);
-                break;
-            //case 4:
-            //    Intent aboutActivityIntent = new Intent(AudienceMainActivity.this, aboutAppActivity.class);
-            //    startActivity(aboutActivityIntent);
-            default:
+        if (navDrawerMode.equals("AUDIENCE")){
+            switch(position) {
+                case 0:
+                    //Intent mainActivityIntent = new Intent(activity, ModeSelectActivity.class);
+                    //activity.startActivity(mainActivityIntent);
+                    break;
+                //case 4:
+                //    Intent aboutActivityIntent = new Intent(AudienceMainActivity.this, aboutAppActivity.class);
+                //    startActivity(aboutActivityIntent);
+                default:
+            }
         }
+        else if (navDrawerMode.equals("PRESENTER")){
+            switch(position) {
+                case 0:
+                    Intent mainActivityIntent = new Intent(activity, ModeSelectActivity.class);
+                    activity.startActivity(mainActivityIntent);
+                    break;
+                //case 4:
+                //    Intent aboutActivityIntent = new Intent(AudienceMainActivity.this, aboutAppActivity.class);
+                //    startActivity(aboutActivityIntent);
+                default:
+            }
+        }
+
     }
 
 

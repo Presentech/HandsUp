@@ -49,8 +49,8 @@ package com.presentech.handsup;
             appLogo = decodeSampledBitmapFromResource(getResources(),R.drawable.app_logo,130,130);
             appName = decodeSampledBitmapFromResource(getResources(),R.drawable.app_name,150,50);
             companyLogo = decodeSampledBitmapFromResource(getResources(),R.drawable.company_logo,70,70);
-            presenterButton = decodeSampledBitmapFromResource(getResources(),R.drawable.presenter_button,150,25);
-            audienceButton = decodeSampledBitmapFromResource(getResources(),R.drawable.audience_button,150,25);
+            presenterButton = decodeSampledBitmapFromResource(getResources(),R.drawable.presenter_button,250,50);
+            audienceButton = decodeSampledBitmapFromResource(getResources(),R.drawable.audience_button,250,50);
 
 
 
@@ -74,8 +74,8 @@ package com.presentech.handsup;
             //Intent AudienceIntent = new Intent(this, SessionSelectActivity.this);
         }
         public void goToPresenterMode(View view){
-            //Intent PresenterIntent = new Intent(this, ModeSelectActivity.this);
-            //startActivity(intent);
+            Intent PresenterIntent = new Intent(this, LoginScreenActivity.class);
+            startActivity(PresenterIntent);
         }
         public static Bitmap decodeSampledBitmapFromResource(Resources res,int id, int reqWidth, int reqHeight){
             // Reset sample Size to 0 every time

@@ -28,17 +28,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goToModeSelect(View view) {
-        //Intent modeIntent = new Intent(this, ModeSelectActivity.class);
-        //startActivity(modeIntent);
-    }
-
-    public void goToHostingWizard(View view) {
-        Intent hostingIntent = new Intent(this, HostingWizardActivity.class);
-        startActivity(hostingIntent);
-    }
-
-    public void loginLaunch(View view) {
-        Intent intent = new Intent(this, LoginScreenActivity.class);
-        startActivity(intent);
+        Intent modeIntent = new Intent(this, ModeSelectActivity.class);
+        startActivity(modeIntent);
     }
 }

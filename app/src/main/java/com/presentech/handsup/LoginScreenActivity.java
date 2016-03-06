@@ -48,14 +48,15 @@ public class LoginScreenActivity extends AppCompatActivity {
 
     /*Called when the user clicks the Send button*/
     public void loginAttempt(View view) {
-        if (loginEnabled == true) {
+        if (loginEnabled) {
             if ((emailAddress.getText().toString().equals(storedEmail) &&
                     (password.getText().toString().equals(storedPassword)))) {
 
-                Intent submitLoginDetails = new Intent(this, LoginSuccessActivity.class);
+                Intent submitLoginDetails = new Intent(this, HostingWizardActivity.class);
                 emailAddress = (EditText) findViewById(R.id.email_addressET);
                 String loginMessage = "Login Successful";
-                submitLoginDetails.putExtra(LOGIN_MESSAGE, loginMessage);
+                //submitLoginDetails.putExtra(LOGIN_MESSAGE, loginMessage);
+                Toast.makeText(getBaseContext(), loginMessage, Toast.LENGTH_LONG).show();
                 startActivity(submitLoginDetails);
                 //Clear text field after sending text
                 emailAddress.getText().clear();

@@ -67,9 +67,6 @@
 
 
 
-
-
-
             </GridLayout>
             <GridLayout
                 android:id="@+id/buttonGrid"
