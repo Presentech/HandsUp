@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/backgroundgrey"
+    tools:context="com.presentech.handsup.AudienceTutorial"
+    android:id="@+id/content"
+    >
+
+    <RelativeLayout
+        android:id="@+id/tutorialContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/audienceText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="@string/screen2" />
+
+        <ImageView
+            android:id="@+id/feedbackTick"
+            android:src="@drawable/ic_tick"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_below="@id/audienceText" />
+
+        <ImageView
+            android:id="@+id/feedbackQuestion"
+            android:src="@drawable/ic_question"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_below="@id/feedbackTick"/>
+
+        <ImageView
+            android:id="@+id/feedbackCross"
+            android:src="@drawable/ic_cross"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_below="@id/feedbackQuestion" />
+
+        <TextView
+            android:id="@+id/feedbackTickExplanation"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/white"
+            android:text="@string/tickExplanation"
+            android:layout_toRightOf="@id/feedbackTick"
+            android:layout_below="@id/audienceText" />
+
+        <TextView
+            android:id="@+id/feedbackQuestionExplanation"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/white"
+            android:text="@string/questionExplanation"
+            android:layout_toRightOf="@id/feedbackQuestion"
+            android:layout_below="@id/feedbackTickExplanation"/>
+
+        <TextView
+            android:id="@+id/feedbackCrossExplanation"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/white"
+            android:text="@string/crossExplanation"
+            android:layout_toRightOf="@id/feedbackCross"
+            android:layout_below="@id/feedbackQuestionExplanation"/>
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/divider"
+        android:src="@drawable/divider"
+        android:layout_width="wrap_content"
+        android:layout_height="5dp"
+        android:layout_below ="@id/tutorialContent"/>
+
+    <RelativeLayout
+        android:id="@+id/tutorialContent2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/divider">
+
+        <ImageView
+            android:id="@+id/feedbackA"
+            android:src="@drawable/ic_tick"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_below="@id/divider" />
+
+        <ImageView
+            android:id="@+id/feedbackB"
+            android:src="@drawable/ic_question"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_below="@id/feedbackA"/>
+
+        <ImageView
+            android:id="@+id/feedbackC"
+            android:src="@drawable/ic_cross"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_below="@id/feedbackB" />
+
+        <TextView
+            android:id="@+id/feedbackAExplanation"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/white"
+            android:text="@string/tickExplanation"
+            android:layout_toRightOf="@id/feedbackA"
+            android:layout_below="@id/divider" />
+
+        <TextView
+            android:id="@+id/feedbackBExplanation"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/white"
+            android:text="@string/questionExplanation"
+            android:layout_toRightOf="@id/feedbackB"
+            android:layout_below="@id/feedbackAExplanation"/>
+
+        <TextView
+            android:id="@+id/feedbackCExplanation"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/white"
+            android:text="@string/crossExplanation"
+            android:layout_toRightOf="@id/feedbackC"
+            android:layout_below="@id/feedbackBExplanation"/>
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/white"
+        android:text="@string/button3"
+        android:onClick="backClicked"/>
+
+    <Button
+        android:id="@+id/doneButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:textColor="@color/white"
+        android:text="@string/button4"
+        android:onClick="doneClicked"/>
+
+</RelativeLayout>

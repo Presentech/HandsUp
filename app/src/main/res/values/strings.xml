@@ -7,4 +7,7 @@
     <string name="button2">Next</string>
     <string name="button3">Back</string>
     <string name="button4">Done</string>
+    <string name="tickExplanation">This text explains what the tick icon means</string>
+    <string name="crossExplanation">This text explains what the cross icon means</string>
+    <string name="questionExplanation">This text explains the question mark</string>
 </resources>
