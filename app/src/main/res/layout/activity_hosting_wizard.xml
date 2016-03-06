@@ -2,7 +2,8 @@
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/hostingWizard_drawerFrame"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/backgroundgrey">
 
     <!-- Main Content -->
     <FrameLayout
@@ -11,106 +12,152 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <ImageView
-                android:id="@+id/SessionSelectBackground"
-                android:contentDescription="@string/background"
-                android:adjustViewBounds="true"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-            <GridLayout
+            <LinearLayout
                 android:id="@+id/inputGrid"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:columnCount="2"
-                android:padding="16dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_row="0"
-                    android:layout_column="0"
-                    android:text="@string/sessionName"
-                    android:textColor="@color/textColour"/>
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="16dp">
 
                 <EditText
                     android:id="@+id/SessionTitle"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_column="1"
-                    android:layout_row="0"
                     android:layout_gravity="fill_horizontal"
                     android:layout_marginBottom="16dp"
+                    android:paddingTop="5dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingBottom="5dp"
                     android:inputType="text"
                     android:hint="@string/title_hint"
-                    android:textColorHint="@color/lightgrey"
-                    android:textColor="@color/textColour"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_row="1"
-                    android:layout_column="0"
-                    android:text="@string/sessionPassword"
-                    android:textColor="@color/textColour"/>
+                    android:textColorHint="@color/textColour"
+                    android:textColor="@color/textColour"
+                    android:background="@color/darkgrey"/>
 
                 <EditText
                     android:id="@+id/SessionPassword"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_column="1"
-                    android:layout_row="1"
                     android:layout_gravity="fill_horizontal"
+                    android:layout_marginBottom="16dp"
+                    android:paddingTop="5dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingBottom="5dp"
                     android:inputType="textVisiblePassword"
                     android:hint="@string/password_hint"
-                    android:textColorHint="@color/lightgrey"
-                    android:textColor="@color/textColour"/>
-
-
-
-            </GridLayout>
-            <GridLayout
-                android:id="@+id/buttonGrid"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:columnCount="2"
-                android:padding="16dp"
-                android:layout_below="@+id/inputGrid"
-                android:layout_alignParentStart="true">
-                <TextView
-                    android:id="@+id/choosePresentationTV"
-                    android:layout_height="30dp"
-                    android:layout_column="0"
-                    android:layout_columnSpan="2"
-                    android:layout_row="0"
-                    android:layout_gravity="fill_horizontal"
-                    android:text="@string/choosePresentationTV"
-                    android:textColor="@color/textColour"/>
-                <Button
-                    android:layout_height="70dp"
-                    android:layout_width="wrap_content"
-                    android:id="@+id/choosePresentationFromDevice"
-                    android:text="@string/choosePresentationFromDevice"
-                    android:layout_row="1"
-                    android:layout_column="0" />
-                <Button
-                    android:layout_height="70dp"
-                    android:layout_width="wrap_content"
-                    android:id="@+id/choosePresentationFromServer"
-                    android:text="@string/choosePresentationFromServer"
-                    android:layout_row="1"
-                    android:layout_column="1" />
-
-                <Button
-                    android:id="@+id/CreatePresentation"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:layout_column="0"
-                    android:layout_columnSpan="2"
-                    android:layout_row="2"
-                    android:text="@string/CreateSession"
+                    android:textColorHint="@color/textColour"
                     android:textColor="@color/textColour"
-                    android:layout_gravity="center_horizontal" />
-            </GridLayout>
+                    android:background="@color/darkgrey"/>
+
+                <EditText
+                    android:id="@+id/SessionLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="fill_horizontal"
+                    android:layout_marginBottom="16dp"
+                    android:paddingTop="5dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingBottom="5dp"
+                    android:inputType="textVisiblePassword"
+                    android:hint="@string/location_hint"
+                    android:textColorHint="@color/textColour"
+                    android:textColor="@color/textColour"
+                    android:background="@color/darkgrey"/>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/chooseSourceFile"
+                    android:text="@string/selectPresentation"
+                    android:background="@color/darkgrey"
+                    android:textColor="@color/textColour"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/optionsGrid"
+                android:orientation="vertical"
+                android:layout_toEndOf="@+id/inputGrid"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/FeedbackOptionsTitle"
+                    android:text="@string/FeedbackOptionsTitle"
+                    android:textColor="@color/textColour"
+                    android:background="@color/darkgrey"
+                    android:paddingTop="5dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingBottom="5dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/UnderstandingIcons"
+                    android:text="@string/UnderstandingIconsSelect"
+                    android:textColor="@color/textColour"
+                    android:background="@color/lightgrey"
+                    android:paddingTop="5dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingBottom="5dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/MultipleChoiceIcons"
+                    android:text="@string/MultipleChoiceIconsSelect"
+                    android:textColor="@color/textColour"
+                    android:background="@color/darkgrey"
+                    android:paddingTop="5dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingBottom="5dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/Messaging"
+                    android:text="@string/MessagingSelect"
+                    android:textColor="@color/textColour"
+                    android:background="@color/lightgrey"
+                    android:paddingTop="5dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingBottom="5dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/FeedbackPerSlide"
+                    android:text="@string/FeedbackPerSlideSelect"
+                    android:textColor="@color/textColour"
+                    android:background="@color/darkgrey"
+                    android:paddingTop="5dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingBottom="5dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/HideFeedbackDuringPresentation"
+                    android:text="@string/HideFeedbackSelect"
+                    android:textColor="@color/textColour"
+                    android:background="@color/lightgrey"
+                    android:paddingTop="5dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingBottom="5dp"/>
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/CreateSession"
+                    android:text="@string/createSession"
+                    android:background="@color/darkgrey"
+                    android:textColor="@color/textColour"
+                    android:layout_marginTop="16dp"/>
+            </LinearLayout>
         </RelativeLayout>
     </FrameLayout>
 
