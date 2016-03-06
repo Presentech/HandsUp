@@ -33,7 +33,9 @@ public class LoginScreenActivity extends AppCompatActivity {
     public String storedPassword;
     public int loginAttempts = 0;
     public int loginAttemptsRemaining = 5;
-    public boolean loginEnabled = true;
+    public static boolean loginEnabled = true;
+    public static boolean loginCompleted = false;
+    public Intent submitLoginDetails;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,43 +44,49 @@ public class LoginScreenActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         loginSetup();
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (loginCompleted) {
+            setContentView(R.layout.activity_hosting_wizard);
+            startActivity(submitLoginDetails);
+        }
     }
 
-    /*Called when the user clicks the Send button*/
+    /*Called when the user clicks the Login button*/
     public void loginAttempt(View view) {
-        if (loginEnabled) {
-            if ((emailAddress.getText().toString().equals(storedEmail) &&
-                    (password.getText().toString().equals(storedPassword)))) {
+        if (!loginCompleted) {
+            if (loginEnabled) {
+                if ((emailAddress.getText().toString().equals(storedEmail) &&
+                        (password.getText().toString().equals(storedPassword)))) {
 
-                Intent submitLoginDetails = new Intent(this, HostingWizardActivity.class);
-                emailAddress = (EditText) findViewById(R.id.email_addressET);
-                String loginMessage = "Login Successful";
-                //submitLoginDetails.putExtra(LOGIN_MESSAGE, loginMessage);
-                Toast.makeText(getBaseContext(), loginMessage, Toast.LENGTH_LONG).show();
-                startActivity(submitLoginDetails);
-                //Clear text field after sending text
-                emailAddress.getText().clear();
-                password.getText().clear();
-            }
-            else {
-                if (loginAttempts < maxloginAttempts) {
-                    Toast.makeText(getBaseContext(), "Login Failed", Toast.LENGTH_LONG).show();
-                    loginAttempts++;
-                    loginAttemptsRemaining = maxloginAttempts - loginAttempts;
-                    Toast.makeText(getBaseContext(), "Attempts Remaining: " +
-                            Integer.toString(loginAttemptsRemaining), Toast.LENGTH_LONG).show();
+                    emailAddress = (EditText) findViewById(R.id.email_addressET);
+                    String loginMessage = "Login Successful";
+                    //Clear text field after sending text
+                    emailAddress.getText().clear();
+                    password.getText().clear();
+                    loginCompleted = true;
+                    Toast.makeText(getBaseContext(), loginMessage, Toast.LENGTH_SHORT).show();
+                    startActivity(submitLoginDetails);
+
+                } else {
+                    if (loginAttempts < maxloginAttempts) {
+                        Toast.makeText(getBaseContext(), "Login Failed", Toast.LENGTH_SHORT).show();
+                        loginAttempts++;
+                        loginAttemptsRemaining = maxloginAttempts - loginAttempts;
+                        Toast.makeText(getBaseContext(), "Attempts Remaining: " +
+                                Integer.toString(loginAttemptsRemaining), Toast.LENGTH_SHORT).show();
+                    }
+                    if (loginAttemptsRemaining == 0) {
+                        loginEnabled = false;
+                        Toast.makeText(getBaseContext(), "Login Unavailable", Toast.LENGTH_SHORT).show();
+                    }
                 }
-                if (loginAttemptsRemaining == 0) {
-                    loginEnabled = false;
-                    Toast.makeText(getBaseContext(), "Login Unavailable", Toast.LENGTH_LONG).show();
-                }
+            } else {
+                Toast.makeText(getBaseContext(), "Login Unavailable", Toast.LENGTH_SHORT).show();
             }
         }
 
-        else    {
-            Toast.makeText(getBaseContext(), "Login Unavailable", Toast.LENGTH_LONG).show();
+        else {
+            startActivity(submitLoginDetails);
         }
     }
 
@@ -86,8 +94,9 @@ public class LoginScreenActivity extends AppCompatActivity {
         emailAddress = (EditText) findViewById(R.id.email_addressET);
         password = (EditText) findViewById(R.id.passwordET);
         button_sign_in = (Button) findViewById(R.id.button_sign_in);
+        submitLoginDetails = new Intent(this, HostingWizardActivity.class);
 
-        //reading text from file
+        //Read stored usernames and passwords from userDB text file
         storedEmail = "";
         storedPassword = "";
 
