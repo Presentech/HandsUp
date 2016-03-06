@@ -16,10 +16,10 @@
     </string-array>
 
     <string-array name="presenterDrawerIcons">
-        <item>@drawable/setting_logo0</item>
-        <item>@drawable/setting_logo1</item>
-        <item>@drawable/setting_logo2</item>
-        <item>@drawable/ic_drawer</item>
+        <item>@drawable/home_icon</item>
+        <item>@drawable/create_icon</item>
+        <item>@drawable/question_icon</item>
+        <item>@drawable/info_icon</item>
     </string-array>
     <string-array name="presenterDrawerOptions">
         <item>Home</item>
@@ -29,10 +29,10 @@
     </string-array>
 
     <string-array name="audienceDrawerIcons">
-        <item>@drawable/setting_logo0</item>
-        <item>@drawable/setting_logo1</item>
-        <item>@drawable/setting_logo2</item>
-        <item>@drawable/ic_drawer</item>
+        <item>@drawable/home_icon</item>
+        <item>@drawable/question_icon</item>
+        <item>@drawable/wifi_icon</item>
+        <item>@drawable/info_icon</item>
     </string-array>
 
     <string name="drawer_open">Open Drawer</string>
@@ -55,11 +55,19 @@
 
     <string name="title_hint">Session Name</string>
     <string name="password_hint">Session Password</string>
-    <string name="hosting_wizard_title">Create Session</string>
-    <string name="choosePresentationTV">Choose Presentation:</string>
-    <string name="choosePresentationFromDevice">Select From Device</string>
-    <string name="choosePresentationFromServer">Select From Server</string>
+    <string name="location_hint">Session Location</string>
+
+    <!-- Hosting Wizard Strings -->
+    <string name="hosting_wizard_title">Create New Session</string>
+    <string name="selectPresentation">Source File</string>
     <string name="sessionName">Name:</string>
     <string name="sessionPassword">Password:</string>
-    <string name="CreateSession">Create Session</string>
+    <string name="FeedbackOptionsTitle">Feedback Options</string>
+    <string name="UnderstandingIconsSelect">Understanding Icons</string>
+    <string name="MessagingSelect">Multiple-Choice Icons</string>
+    <string name="MultipleChoiceIconsSelect">Messaging</string>
+    <string name="FeedbackPerSlideSelect">Feedback per Slide</string>
+    <string name="HideFeedbackSelect">Hide feedback during presentation</string>
+    <string name="createSession">Create Session</string>
+
 </resources>
