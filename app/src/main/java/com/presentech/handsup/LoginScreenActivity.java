@@ -20,18 +20,27 @@ public class LoginScreenActivity extends AppCompatActivity {
     public final static String LOGIN_MESSAGE = "com.presentech.handsup.LOGIN_MESSAGE";
     public final static String REGISTRATION_MESSAGE = "com.presentech.handsup.REGISTRATION_MESSAGE";
     public final static int maxloginAttempts = 5;
+    private static boolean loginEnabled = true;
+    private static boolean loginCompleted = false;
+    private static boolean saveLoginDetails = false;
     public EditText emailAddress;
     public EditText password;
     public Button button_sign_in;
     public CheckBox saveCredentials;
     public String storedEmail;
     public String storedPassword;
+    public Intent submitLoginDetails;
     private int loginAttempts = 0;
     private int loginAttemptsRemaining = 5;
-    private static boolean loginEnabled = true;
-    private static boolean loginCompleted = false;
-    private static boolean saveLoginDetails = false;
-    public Intent submitLoginDetails;
+    Toast currentToast;
+
+    void currentToast(String text){
+        if(currentToast != null){
+            currentToast .cancel();
+        }
+        currentToast = Toast.makeText(getBaseContext(), text, Toast.LENGTH_SHORT);
+        currentToast.show();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,35 +104,40 @@ public class LoginScreenActivity extends AppCompatActivity {
     public void loginAttempt(View view) {
         if (!loginCompleted) {
             if (loginEnabled) {
-                if ((emailAddress.getText().toString().equals(storedEmail) &&
-                        (password.getText().toString().equals(storedPassword)))) {
+                if((emailAddress.getText().toString().equals("") ||(password.getText().toString().equals(""))))
+                {
+                    currentToast("Details not entered");
+                }
+                else{
+                    if ((emailAddress.getText().toString().equals(storedEmail) &&
+                            (password.getText().toString().equals(storedPassword)))) {
 
-                    emailAddress = (EditText) findViewById(R.id.email_addressET);
-                    String loginMessage = "Login Successful";
-                    //Clear text field after sending text
-                    emailAddress.getText().clear();
-                    password.getText().clear();
-                    if (saveLoginDetails)   {
-                        loginCompleted = true;
-                    }
-                    Toast.makeText(getBaseContext(), loginMessage, Toast.LENGTH_SHORT).show();
-                    startActivity(submitLoginDetails);
+                        emailAddress = (EditText) findViewById(R.id.email_addressET);
+                        String loginMessage = "Login Successful";
+                        //Clear text field after sending text
+                        emailAddress.getText().clear();
+                        password.getText().clear();
+                        if (saveLoginDetails) {
+                            loginCompleted = true;
+                        }
+                        currentToast(loginMessage);
+                        startActivity(submitLoginDetails);
 
-                } else {
-                    if (loginAttempts < maxloginAttempts) {
-                        Toast.makeText(getBaseContext(), "Login Failed", Toast.LENGTH_SHORT).show();
-                        loginAttempts++;
-                        loginAttemptsRemaining = maxloginAttempts - loginAttempts;
-                        Toast.makeText(getBaseContext(), "Attempts Remaining: " +
-                                Integer.toString(loginAttemptsRemaining), Toast.LENGTH_SHORT).show();
-                    }
-                    if (loginAttemptsRemaining == 0) {
-                        loginEnabled = false;
-                        Toast.makeText(getBaseContext(), "Login Unavailable", Toast.LENGTH_SHORT).show();
+                    } else {
+                        if (loginAttempts < maxloginAttempts) {
+                            Toast.makeText(getBaseContext(), "Incorrect Details" , Toast.LENGTH_SHORT).show();
+                            loginAttempts++;
+                            loginAttemptsRemaining = maxloginAttempts - loginAttempts;
+                            Toast.makeText(getBaseContext(), "Attempts Remaining: " +Integer.toString(loginAttemptsRemaining), Toast.LENGTH_SHORT).show();
+                        }
+                        if (loginAttemptsRemaining == 0) {
+                            loginEnabled = false;
+                            currentToast("Login Unavailable");
+                        }
                     }
                 }
             } else {
-                Toast.makeText(getBaseContext(), "Login Unavailable", Toast.LENGTH_SHORT).show();
+                currentToast("Login Unavailable");
             }
         }
 
@@ -135,5 +149,7 @@ public class LoginScreenActivity extends AppCompatActivity {
     public void saveLoginDetails(View view)   {
         saveLoginDetails = !saveLoginDetails;
     }
+
+
 
 }

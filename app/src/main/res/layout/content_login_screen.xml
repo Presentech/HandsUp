@@ -38,7 +38,8 @@
         android:text="@string/sign_in_button"
         android:onClick="loginAttempt"
         android:layout_below="@+id/saveLoginDetails"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:background="@color/presentechBlue"/>
 
     <CheckBox
         android:id="@+id/saveLoginDetails"
