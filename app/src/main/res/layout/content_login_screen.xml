@@ -37,7 +37,18 @@
         android:layout_height="wrap_content"
         android:text="@string/sign_in_button"
         android:onClick="loginAttempt"
-        android:layout_below="@+id/passwordET"
+        android:layout_below="@+id/saveLoginDetails"
         android:layout_centerHorizontal="true"/>
+
+    <CheckBox
+        android:id="@+id/saveLoginDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save Login Details"
+        android:layout_below="@+id/passwordET"
+        android:layout_centerHorizontal="true"
+        android:clickable="true"
+        android:onClick="saveLoginDetails"
+        android:hint="Check to save login details for current session" />
 
 </RelativeLayout>
