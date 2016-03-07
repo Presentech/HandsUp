@@ -1,13 +1,16 @@
 <resources>
     <string name="app_name">Hands Up</string>
     <string name="title_activity_audience_tutorial">Help!</string>
-    <string name="screen1">Audience Tutorial thingsssssssssss! 1st page..</string>
-    <string name="screen2">Change of thingsssssssssss! 2nd page..</string>
+    <string name="welcome">Welcome to Hands Up - tagline!</string>
+    <string name="aboutApp">What hands up does</string>
+    <string name="title2">Feedback options available are:</string>
     <string name="button1">Skip</string>
     <string name="button2">Next</string>
     <string name="button3">Back</string>
     <string name="button4">Done</string>
-    <string name="tickExplanation">This text explains what the tick icon means</string>
-    <string name="crossExplanation">This text explains what the cross icon means</string>
-    <string name="questionExplanation">This text explains the question mark</string>
+    <string name="tickExplanation">Select to show understanding of the topic</string>
+    <string name="crossExplanation">Select to show you need the topic to be repeated</string>
+    <string name="questionExplanation">Select to show you need some extra help on the topic</string>
+    <string name="iconsExplanation">These icons can be used to indicate understanding on a topic.</string>
+    <string name="lettersExplanation">Letters can be used to respond to multiple choice questions.</string>
 </resources>
