@@ -74,11 +74,25 @@ public class HostingWizardActivity extends AppCompatActivity {
 
         double columnWidthDouble = (width/2);
         int columnWidth = (int) columnWidthDouble;
+        int checkBoxWidth;
 
         LinearLayout inputColumn = (LinearLayout) findViewById(R.id.inputGrid);
         LinearLayout optionsColumn = (LinearLayout) findViewById(R.id.optionsGrid);
         inputColumn.getLayoutParams().width = columnWidth;
         optionsColumn.getLayoutParams().width = columnWidth;
+
+        //Align all checkboxes without using GridLayout
+        TextView widestText = (TextView) findViewById(R.id.HideFeedbackDuringPresentation);
+        checkBoxWidth = widestText.getLayoutParams().width;
+        TextView otherTV1 = (TextView) findViewById(R.id.UnderstandingIcons);
+        TextView otherTV2 = (TextView) findViewById(R.id.MultipleChoiceIcons);
+        TextView otherTV3 = (TextView) findViewById(R.id.Messaging);
+        TextView otherTV4 = (TextView) findViewById(R.id.FeedbackPerSlide);
+        otherTV1.getLayoutParams().width = checkBoxWidth;
+        otherTV2.getLayoutParams().width = checkBoxWidth;
+        otherTV3.getLayoutParams().width = checkBoxWidth;
+        otherTV4.getLayoutParams().width = checkBoxWidth;
+
     }
 
     /* Called whenever we call invalidateOptionsMenu() */

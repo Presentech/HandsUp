@@ -64,8 +64,8 @@
     <string name="sessionPassword">Password:</string>
     <string name="FeedbackOptionsTitle">Feedback Options</string>
     <string name="UnderstandingIconsSelect">Understanding Icons</string>
-    <string name="MessagingSelect">Multiple-Choice Icons</string>
-    <string name="MultipleChoiceIconsSelect">Messaging</string>
+    <string name="MessagingSelect">Messaging</string>
+    <string name="MultipleChoiceIconsSelect">Multiple-Choice Icons</string>
     <string name="FeedbackPerSlideSelect">Feedback per Slide</string>
     <string name="HideFeedbackSelect">Hide feedback during presentation</string>
     <string name="createSession">Create Session</string>
