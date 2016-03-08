@@ -40,13 +40,14 @@
         android:textColor="@color/white"
         android:text="@string/ptutorial_title" />
 
-    <TextView android:id="@+id/load_title"
+    <Button android:id="@+id/load_title"
         style="@style/tutorialTitle"
         android:layout_below="@+id/title"
         android:layout_marginTop="20dp"
         android:clickable="true"
         android:onClick="expandTextLoad"
         android:text="@string/ptutorial_load_title"/>
+
 
     <TextView android:id="@+id/load_content"
         style="@style/tutorialContent"
@@ -55,7 +56,7 @@
         android:onClick="expandTextLoad"
         android:text="@string/ptutorial_load_content"/>
 
-    <TextView android:id="@+id/access_title"
+    <Button android:id="@+id/access_title"
         style="@style/tutorialTitle"
         android:layout_below="@+id/load_content"
         android:layout_marginTop="10dp"
@@ -70,7 +71,7 @@
         android:onClick="expandTextAccess"
         android:text="@string/ptutorial_access_content"/>
 
-    <TextView android:id="@+id/control_title"
+    <Button android:id="@+id/control_title"
         style="@style/tutorialTitle"
         android:layout_below="@+id/access_content"
         android:layout_marginTop="10dp"
@@ -85,7 +86,7 @@
         android:onClick="expandTextControl"
         android:text="@string/ptutorial_control_content"/>
 
-    <TextView android:id="@+id/configure_title"
+    <Button android:id="@+id/configure_title"
         style="@style/tutorialTitle"
         android:layout_below="@+id/control_content"
         android:layout_marginTop="10dp"
@@ -100,7 +101,7 @@
         android:onClick="expandTextConfigure"
         android:text="@string/ptutorial_configure_content"/>
 
-    <TextView android:id="@+id/exit_title"
+    <Button android:id="@+id/exit_title"
         style="@style/tutorialTitle"
         android:layout_below="@+id/configure_content"
         android:layout_marginTop="10dp"
@@ -115,7 +116,7 @@
         android:onClick="expandTextExit"
         android:text="@string/ptutorial_exit_content"/>
 
-    <TextView android:id="@+id/export_title"
+    <Button android:id="@+id/export_title"
         style="@style/tutorialTitle"
         android:layout_below="@+id/exit_content"
         android:layout_marginTop="10dp"
@@ -129,7 +130,6 @@
         android:clickable="true"
         android:onClick="expandTextExport"
         android:text="@string/ptutorial_export_content"/>
-
 
 </RelativeLayout>
 </ScrollView>
