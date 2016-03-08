@@ -73,7 +73,8 @@
                     android:id="@+id/chooseSourceFile"
                     android:text="@string/selectPresentation"
                     android:background="@color/darkgrey"
-                    android:textColor="@color/colourOfText"/>
+                    android:textColor="@color/colourOfText"
+                    android:onClick="selectFile"/>
 
             </LinearLayout>
             <LinearLayout
@@ -116,7 +117,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
-                        android:id="@+id/HWcheckbox1" />
+                        android:id="@+id/HWcheckbox1"
+                        android:onClick="onCheckboxClicked" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -140,7 +142,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
-                        android:id="@+id/HWcheckbox2" />
+                        android:id="@+id/HWcheckbox2"
+                        android:onClick="onCheckboxClicked" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -164,7 +167,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
-                        android:id="@+id/HWcheckbox3" />
+                        android:id="@+id/HWcheckbox3"
+                        android:onClick="onCheckboxClicked" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -188,7 +192,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
-                        android:id="@+id/HWcheckbox4" />
+                        android:id="@+id/HWcheckbox4"
+                        android:onClick="onCheckboxClicked" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -212,7 +217,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
-                        android:id="@+id/HWcheckbox5" />
+                        android:id="@+id/HWcheckbox5"
+                        android:onClick="onCheckboxClicked" />
                 </LinearLayout>
 
                 <Button
@@ -222,7 +228,8 @@
                     android:text="@string/createSession"
                     android:background="@color/darkgrey"
                     android:textColor="@color/colourOfText"
-                    android:layout_marginTop="16dp"/>
+                    android:layout_marginTop="16dp"
+                    android:onClick="createSession"/>
             </LinearLayout>
         </RelativeLayout>
     </FrameLayout>

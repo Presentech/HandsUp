@@ -17,17 +17,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class HostingWizardActivity extends AppCompatActivity {
 
     private Bitmap background;
     private navDrawer drawer;
+    private boolean understanding, multiChoice, messaging, hideFeedback, feedbackPerSlide;
     String mode = "PRESENTER";
     //String mode = "AUDIENCE";
 
@@ -70,6 +74,51 @@ public class HostingWizardActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
+
+    public void createSession(View view){
+
+    }
+
+    public void selectFile(View view){
+        Intent intent = new Intent
+        //Create ListView
+        ListView lv;
+        //Get files from storage (Check SD Card First!)
+        ArrayList<String> FilesInFolder = GetFiles("/sdcard/PRESENTATIONS");
+
+        if (FilesInFolder.isEmpty()){
+            FilesInFolder = GetFiles("/InternalStorage/PRESENTATIONS");
+        }
+        lv = (ListView)findViewById(R.id.filelist);
+        lv.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, FilesInFolder));
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                // Clicking on items
+            }
+        });
+    }
+
+    public ArrayList<String> GetFiles(String DirectoryPath) {
+        //Create a list to store file names in
+        ArrayList<String> MyFiles = new ArrayList<String>();
+        //Create file of all names at directory path
+        File f = new File(DirectoryPath);
+
+        //Add all files to an arryList
+        f.mkdirs();
+        File[] files = f.listFiles();
+        if (files.length == 0)
+            //No Files found at this location
+            return null;
+        else {
+            for (int i=0; i<files.length; i++)
+                MyFiles.add(files[i].getName());
+        }
+
+        return MyFiles;
+    }
+
     public void changeViewWidths(int width){
 
         double columnWidthDouble = (width/2);
@@ -93,6 +142,45 @@ public class HostingWizardActivity extends AppCompatActivity {
         otherTV3.getLayoutParams().width = checkBoxWidth;
         otherTV4.getLayoutParams().width = checkBoxWidth;
 
+    }
+
+    public void onCheckboxClicked(View view){
+        //Check if checkBox is checked! Check check check
+        boolean checked = ((CheckBox) view).isChecked();
+        // Check which checkbox was clicked
+        // Update presentation object to
+        switch(view.getId()) {
+            case R.id.HWcheckbox1:
+                if (checked)
+                    understanding = true;
+                else
+                    understanding = false;
+                break;
+            case R.id.HWcheckbox2:
+                if (checked)
+                    multiChoice = true;
+                else
+                    multiChoice = false;
+                break;
+            case R.id.HWcheckbox3:
+                if (checked)
+                    messaging = true;
+                else
+                    messaging = false;
+                break;
+            case R.id.HWcheckbox4:
+                if (checked)
+                    feedbackPerSlide = true;
+                else
+                    feedbackPerSlide = false;
+                break;
+            case R.id.HWcheckbox5:
+                if (checked)
+                    hideFeedback = true;
+                else
+                    hideFeedback = false;
+                break;
+        }
     }
 
     /* Called whenever we call invalidateOptionsMenu() */
