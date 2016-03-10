@@ -32,4 +32,10 @@
     <string name="drawer_close">Close_Drawer</string>
     <string name="title_activity_about">aboutActivity</string>
 
+    <string-array name="about">
+        <item>Presentech, York</item>
+        <item>Created by: Edward Prentice, Alex Butcher, Amit Ramjali, Connor Stoner, Jack Bardsley, Jay Doshi, Lewis Tate, Noor Mansur, Steve Clarke, and Luke Richardson</item>
+        <item>Special Thanks to UoY Electronics and Martin Robinson</item>
+    </string-array>
+
 </resources>
