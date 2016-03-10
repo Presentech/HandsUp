@@ -1,4 +1,4 @@
-package com.presentech.handsup.presentationfile;
+package com.presentech.handsup;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;

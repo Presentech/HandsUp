@@ -25,7 +25,7 @@
                 android:value="com.presentech.handsup.MainActivity" />
         </activity>
         <activity
-            android:name=".presentationfile.AudienceSessionSelect"
+            android:name=".AudienceSessionSelect"
             android:label="@string/title_activity_audience_session_select"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
