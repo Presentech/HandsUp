@@ -9,14 +9,10 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.presentech.handsup.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
     <Button
-        android:id="@+id/ModeSelectButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="GOTOMODESELECT"
-        android:onClick="goToModeSelect"/>
+        android:text="Presentation Tutorial"
+        android:onClick="loadTutorial"/>
+
 </RelativeLayout>

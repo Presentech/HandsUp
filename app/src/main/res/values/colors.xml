@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
+    <color name="presentechblue">#60ccbf</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="textColour">#FFFFFF</color>
-    <color name="presentechBlue">#60CCBF</color>
     <color name="backgroundgrey">#292929</color>
-    <color name="darkgrey">#6c6c6c</color>
-    <color name="lightgrey">#b9b3b3</color>
-    <color name="transparant_lightgrey">#66b9b3b3</color>
-    <color name="transparant_darkgrey">#666c6c6c</color>
-    <color name="drawerBackground">#66000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="darkgrey">#6C6C6C</color>
+    <color name="lightgrey">#B9B3B3</color>
+
 </resources>
