@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.presentech.handsup">
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.WRITE_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_STORAGE"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -62,8 +65,19 @@
         <activity android:name=".PresentationFileListActivity">
         <activity android:name=".ModeSelectActivity"/>
         <activity android:name=".SessionSelectActivity"/>
-
+        <activity
+            android:name=".PresentationModeTutorial"
+            android:label="@string/title_activity_presentation_mode_tutorial"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.presentech.handsup.MainActivity" />
         </activity>
+        <activity
+            android:name=".AudienceSessionSelect"
+            android:label="@string/title_activity_audience_session_select"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

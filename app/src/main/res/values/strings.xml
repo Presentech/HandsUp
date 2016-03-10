@@ -52,30 +52,14 @@
     <string name="aboutTeamMember7">Luke Richardson</string>
     <string name="aboutTeamMember8">Noor Mansur</string>
     <string name="aboutTeamMember9">Steve Clarke</string>
-
-    <string name="title_hint">Session Name</string>
-    <string name="password_hint">Session Password</string>
-    <string name="location_hint">Session Location</string>
-
-    <!-- Hosting Wizard Strings -->
-    <string name="hosting_wizard_title">Create New Session</string>
-    <string name="selectPresentation">Source File</string>
-    <string name="sessionName">Name:</string>
-    <string name="sessionPassword">Password:</string>
-    <string name="FeedbackOptionsTitle">Feedback Options</string>
-    <string name="UnderstandingIconsSelect">Understanding Icons</string>
-    <string name="MessagingSelect">Messaging</string>
-    <string name="MultipleChoiceIconsSelect">Multiple-Choice Icons</string>
-    <string name="FeedbackPerSlideSelect">Feedback per Slide</string>
-    <string name="HideFeedbackSelect">Hide feedback during presentation</string>
-    <string name="createSession">Create Session</string>
+    <string name="aboutThanks">Special Thanks to Martin Robinson</string>
 
     /*Strings for colours*/
     <string name="presentechblue">#60ccbf</string>
     <string name="backgroundgrey">#292929</string>
     <string name="darkgrey">#6c6c6c</string>
     <string name="lightgrey">#b9b3b3</string>
-
+    
     /*Login Screen Strings*/
     <string name="title_activity_login_screen">Hands Up Account Login</string>
     <string name="title_activity_registration">Hands Up registration</string>
@@ -88,6 +72,41 @@
     <string name="login_failed_confirmation">Login Attempt Failed</string>
     <string name="title_activity_login">LoginActivity</string>
 
+    <!-- Hosting Wizard Strings -->
+    <string name="hosting_wizard_title">Create New Session</string>
+    <string name="selectPresentation">Source File</string>
+    <string name="sessionName">Name:</string>
+    <string name="sessionPassword">Password:</string>
+    <string name="title_hint">Session Name</string>
+    <string name="password_hint">Session Password</string>
+    <string name="location_hint">Session Location</string>
+    <string name="FeedbackOptionsTitle">Feedback Options</string>
+    <string name="UnderstandingIconsSelect">Understanding Icons</string>
+    <string name="MessagingSelect">Multiple-Choice Icons</string>
+    <string name="MultipleChoiceIconsSelect">Messaging</string>
+    <string name="FeedbackPerSlideSelect">Feedback per Slide</string>
+    <string name="HideFeedbackSelect">Hide feedback during presentation</string>
+    <string name="createSession">Create Session</string>
+    
+    <!--Session Select Strings -->
+    <string name="app_name">Hands Up</string>
+    <string name="title_activity_presentation_mode_tutorial">PresentationModeTutorial</string>
+    <string name="skip_button">Skip</string>
+    <string name="ptutorial_title">Presentation Mode Tutorial</string>
+    <string name="ptutorial_load_title">How to Load a Presentation</string>
+    <string name="ptutorial_load_content">LOAD \nCONTENT \nINSERT\n</string>
+    <string name="ptutorial_access_title">How to Access a Presentation</string>
+    <string name="ptutorial_access_content">ACCESS \nCONTENT \nINSERT\n</string>
+    <string name="ptutorial_control_title">How to Control a Presentation</string>
+    <string name="ptutorial_control_content">CONTROL \nCONTENT \nINSERT\n</string>
+    <string name="ptutorial_configure_title">How to Configure a Presentation</string>
+    <string name="ptutorial_configure_content">CONFIGURE \nCONTENT \nINSERT\n</string>
+    <string name="ptutorial_exit_title">How to Exit a Presentation</string>
+    <string name="ptutorial_exit_content">EXIT \nCONTENT \nINSERT\n</string>
+    <string name="ptutorial_export_title">How to Export a Presentation</string>
+    <string name="ptutorial_export_content">EXPORT \nCONTENT \nINSERT\n</string>
+    <string name="title_activity_audience_session_select">AudienceSessionSelect</string>
+    
     <!-- Hosting Wizard Strings -->
     <string name="hosting_wizard_title">Create New Session</string>
     <string name="selectPresentation">Source File</string>
