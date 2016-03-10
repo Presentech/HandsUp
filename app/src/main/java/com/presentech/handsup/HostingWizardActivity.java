@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -93,12 +94,22 @@ public class HostingWizardActivity extends AppCompatActivity {
         //Intent.putExtra(PresentationActivity.BOOLEAN_NAME3, messaging);
         //Intent.putExtra(PresentationActivity.BOOLEAN_NAME4, hideFeedback);
         //Intent.putExtra(PresentationActivity.BOOLEAN_NAME5, feedbackPerSlide);
+        EditText session_name_view = (EditText) findViewById(R.id.SessionTitle);
+        EditText session_password_view = (EditText) findViewById(R.id.SessionPassword);
+        EditText session_location_view = (EditText) findViewById(R.id.SessionLocation);
+
+        String session_name = session_name_view.getText().toString();
+        String session_password = session_name_view.getText().toString();
+        String session_location = session_name_view.getText().toString();
+        //Intent.putExtra(PresentationActivity.SESSION_NAME, session_name);
+        //Intent.putExtra(PresentationActivity.SESSION_PASSWORD, session_password);
+        //Intent.putExtra(PresentationActivity.SESSION_LOCATION, session_location);
 
 
         //b.putParcelable(SyncStateContract.Constants.CUSTOM_LISTING, presentationFile);
         //Intent.putExtras(b);
 
-        startActivity(Intent);
+        //startActivity(Intent);
     }
     public PresentationFile getPresentation(String pathName) throws IOException, XmlPullParserException {
         XMLParser parser = new XMLParser();
