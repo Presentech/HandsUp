@@ -35,4 +35,9 @@
         <item name = "android:padding">10dp</item>
     </style>
 
+    <style name="DrawerTheme" parent="@android:style/Widget.ListView">
+        <!--Drawer Theme used to change text colour to white. ListView has no textColor attribute -->
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
 </resources>

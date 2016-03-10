@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Hands Up</string>
+
+    /*presentation mode tutorial resources*/
     <string name="title_activity_presentation_mode_tutorial">PresentationModeTutorial</string>
     <string name="skip_button">Skip</string>
     <string name="ptutorial_title">Presentation Mode Tutorial</string>
@@ -16,6 +18,25 @@
     <string name="ptutorial_export_title">How to Export a Presentation</string>
     <string name="ptutorial_export_content">EXPORT \nCONTENT \nINSERT\n</string>
 
+    /*hosting wizard resources*/
+    <string name="about"> , Developed by Presentech based in York, England</string>
+    <string name="aboutVersion">v1.0.0</string>
+    <string name="aboutCompany">Developed by Presentech, York</string>
+    <string name="aboutTeam">Team</string>
+    <string name="aboutTeamMember0">Edward Prentice </string>
+    <string name="aboutTeamMember1">Alex Butcher </string>
+    <string name="aboutTeamMember2">Amit Ramjali</string>
+    <string name="aboutTeamMember3">Connor Stoner </string>
+    <string name="aboutTeamMember4">Jack Bardsley</string>
+    <string name="aboutTeamMember5">Jay Doshi</string>
+    <string name="aboutTeamMember6">Lewis Tate</string>
+    <string name="aboutTeamMember7">Luke Richardson</string>
+    <string name="aboutTeamMember8">Noor Mansur</string>
+    <string name="aboutTeamMember9">Steve Clarke</string>
+
+    <string name="title_hint">Session Name</string>
+    <string name="password_hint">Session Password</string>
+    <string name="location_hint">Session Location</string>
     <string name="hosting_wizard_title">Create New Session</string>
     <string name="selectPresentation">Source File</string>
     <string name="sessionName">Name:</string>
@@ -27,4 +48,84 @@
     <string name="FeedbackPerSlideSelect">Feedback per Slide</string>
     <string name="HideFeedbackSelect">Hide feedback during presentation</string>
     <string name="createSession">Create Session</string>
+
+    /*audience mode tutorial resources*/
+    <string name="title_activity_audience_tutorial">Help!</string>
+    <string name="welcome">Welcome to Hands Up - tagline!</string>
+    <string name="aboutApp">What hands up does</string>
+    <string name="title2">Feedback options available are:</string>
+    <string name="button1">Skip</string>
+    <string name="button2">Next</string>
+    <string name="button3">Back</string>
+    <string name="button4">Done</string>
+    <string name="tickExplanation">Select to show understanding of the topic</string>
+    <string name="crossExplanation">Select to show you need the topic to be repeated</string>
+    <string name="questionExplanation">Select to show you need some extra help on the topic</string>
+    <string name="iconsExplanation">These icons can be used to indicate understanding on a topic.</string>
+    <string name="lettersExplanation">Letters can be used to respond to multiple choice questions.</string>
+
+    /*Mode select resources*/
+    <string name="presenterSelect">Presenter</string>
+    <string name="audienceSelect">Audience</string>
+    <string name="appName">Hands Up</string>
+    <string name="appLogo">Hands Up Logo</string>
+    <string name="companyLogo">Presentech Logo</string>
+    <string name="background">App Background</string>
+
+    <string-array name="presenterDrawerOptions">
+        <item>Home</item>
+        <item>Help</item>
+        <item>Select New Session</item>
+        <item>About</item>
+    </string-array>
+
+    <string-array name="presenterDrawerIcons">
+        <item>@drawable/home_icon</item>
+        <item>@drawable/create_icon</item>
+        <item>@drawable/question_icon</item>
+        <item>@drawable/info_icon</item>
+    </string-array>
+    <string-array name="audienceDrawerOptions">
+        <item>Home</item>
+        <item>Create New Session</item>
+        <item>Help</item>
+        <item>About</item>
+    </string-array>
+
+    <string-array name="audienceDrawerIcons">
+        <item>@drawable/home_icon</item>
+        <item>@drawable/question_icon</item>
+        <item>@drawable/wifi_icon</item>
+        <item>@drawable/info_icon</item>
+    </string-array>
+
+    <string name="drawer_open">Open Drawer</string>
+    <string name="drawer_close">Close_Drawer</string>
+    <string name="aboutDescription">Text about HandsUp app</string>
+
+    /*Strings for colours*/
+    <string name="presentechblue">#60ccbf</string>
+    <string name="backgroundgrey">#292929</string>
+    <string name="darkgrey">#6c6c6c</string>
+    <string name="lightgrey">#b9b3b3</string>
+
+    /*Login Screen Strings*/
+    <string name="title_activity_login_screen">Hands Up Account Login</string>
+    <string name="title_activity_registration">Hands Up registration</string>
+    <string name="title_activity_login_success">Login Successful</string>
+    <string name="title_activity_login_failed">Login Failed</string>
+    <string name="action_settings">Settings</string>
+    <string name="sign_in_button">Login</string>
+    <string name="register_button">Register</string>
+    <string name="login_success_confirmation">Login Attempt Successful</string>
+    <string name="login_failed_confirmation">Login Attempt Failed</string>
+    <string name="title_activity_login">LoginActivity</string>
+
+    /*About activity*/
+    <string name="title_activity_about">aboutActivity</string>
+    <string-array name="about">
+        <item>Presentech, York</item>
+        <item>Created by: Edward Prentice, Alex Butcher, Amit Ramjali, Connor Stoner, Jack Bardsley, Jay Doshi, Lewis Tate, Noor Mansur, Steve Clarke, and Luke Richardson</item>
+        <item>Special Thanks to UoY Electronics and Martin Robinson</item>
+    </string-array>
 </resources>
