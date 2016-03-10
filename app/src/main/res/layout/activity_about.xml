@@ -9,9 +9,10 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.presentech.handsup.aboutActivity">
     <ImageView
+        android:id="@+id/aboutBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillBounds="true"/>
+        android:adjustViewBounds="true"/>
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

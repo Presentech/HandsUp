@@ -23,7 +23,7 @@ public class aboutActivity extends AppCompatActivity {
         int height = size.y;
 
         Bitmap background=decodeSampledBitmapFromResource(getResources(),R.drawable.background,width,height);
-        ImageView backgroundView = (ImageView) findViewById(R.id.ModeSelectBackground);
+        ImageView backgroundView = (ImageView) findViewById(R.id.aboutBackground);
         backgroundView.setImageBitmap(background);
 
     }

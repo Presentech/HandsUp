@@ -128,8 +128,8 @@ public class navDrawer {
                     activity.startActivity(hostingActivityIntent);
                     break;
                 case 2:
-                    Intent unknownActivityIntent = new Intent(activity, UNKNOWN.class);
-                    activity.startActivity(aboutActivityIntent);
+                    Intent presenterTutorialIntent = new Intent(activity, PresentationModeTutorial.class);
+                    activity.startActivity(presenterTutorialIntent);
                     break;
                 case 3:
                     Intent aboutActivityIntent = new Intent(activity, aboutActivity.class);
@@ -145,8 +145,12 @@ public class navDrawer {
                     activity.startActivity(mainActivityIntent);
                     break;
                 case 1:
-                    Intent tutorialActivityIntent = new Intent(activity, audienceTutorialActivity.class);
-                    activity.startActivity(tutorialActivityIntent);
+                    Intent audienceTutorialActivityIntent = new Intent(activity, audienceTutorial.class);
+                    activity.startActivity(audienceTutorialActivityIntent);
+                    break;
+                case 2:
+                    Intent sessionSelectActivityIntent = new Intent(activity, sessionSelectActivity.class);
+                    activity.startActivity(sessionSelectActivityIntent);
                     break;
                 case 3:
                     Intent aboutActivityIntent = new Intent(activity, aboutActivity.class);
