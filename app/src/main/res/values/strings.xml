@@ -38,21 +38,7 @@
     <string name="drawer_open">Open Drawer</string>
     <string name="drawer_close">Close_Drawer</string>
     <string name="aboutDescription">Text about HandsUp app</string>
-    <string name="about"> , Developed by Presentech based in York, England</string>
-    <string name="aboutVersion">v1.0.0</string>
-    <string name="aboutCompany">Developed by Presentech, York</string>
-    <string name="aboutTeam">Team</string>
-    <string name="aboutTeamMember0">Edward Prentice </string>
-    <string name="aboutTeamMember1">Alex Butcher </string>
-    <string name="aboutTeamMember2">Amit Ramjali</string>
-    <string name="aboutTeamMember3">Connor Stoner </string>
-    <string name="aboutTeamMember4">Jack Bardsley</string>
-    <string name="aboutTeamMember5">Jay Doshi</string>
-    <string name="aboutTeamMember6">Lewis Tate</string>
-    <string name="aboutTeamMember7">Luke Richardson</string>
-    <string name="aboutTeamMember8">Noor Mansur</string>
-    <string name="aboutTeamMember9">Steve Clarke</string>
-    <string name="aboutThanks">Special Thanks to Martin Robinson</string>
+
 
 
     /*Strings for colours*/
