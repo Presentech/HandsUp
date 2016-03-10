@@ -98,7 +98,7 @@ public class HostingWizardActivity extends AppCompatActivity {
         //b.putParcelable(SyncStateContract.Constants.CUSTOM_LISTING, presentationFile);
         //Intent.putExtras(b);
 
-        //startActivity(Intent);
+        startActivity(Intent);
     }
     public PresentationFile getPresentation(String pathName) throws IOException, XmlPullParserException {
         XMLParser parser = new XMLParser();
