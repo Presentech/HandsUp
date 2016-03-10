@@ -80,44 +80,12 @@ public class HostingWizardActivity extends AppCompatActivity {
     }
 
     public void selectFile(View view){
-        Intent intent = new Intent
-        //Create ListView
-        ListView lv;
-        //Get files from storage (Check SD Card First!)
-        ArrayList<String> FilesInFolder = GetFiles("/sdcard/PRESENTATIONS");
+        Intent Intent = new Intent(this, PresentationFileListActivity.class);
+        startActivity(Intent);
 
-        if (FilesInFolder.isEmpty()){
-            FilesInFolder = GetFiles("/InternalStorage/PRESENTATIONS");
-        }
-        lv = (ListView)findViewById(R.id.filelist);
-        lv.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, FilesInFolder));
-
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                // Clicking on items
-            }
-        });
     }
 
-    public ArrayList<String> GetFiles(String DirectoryPath) {
-        //Create a list to store file names in
-        ArrayList<String> MyFiles = new ArrayList<String>();
-        //Create file of all names at directory path
-        File f = new File(DirectoryPath);
 
-        //Add all files to an arryList
-        f.mkdirs();
-        File[] files = f.listFiles();
-        if (files.length == 0)
-            //No Files found at this location
-            return null;
-        else {
-            for (int i=0; i<files.length; i++)
-                MyFiles.add(files[i].getName());
-        }
-
-        return MyFiles;
-    }
 
     public void changeViewWidths(int width){
 

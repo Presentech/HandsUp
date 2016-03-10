@@ -15,12 +15,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HostingWizardActivity"
-            android:screenOrientation="landscape"/>
-        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
-        <meta-data
-            android:name="com.google.android.gms.version"/>
+        <activity
+            android:name=".HostingWizardActivity"
+            android:screenOrientation="landscape" />
+        <!--
+             ATTENTION: This was auto-generated to add Google Play services to your project for
+             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
+        <meta-data android:name="com.google.android.gms.version" />
+
+        <activity android:name=".PresentationFileListActivity"></activity>
     </application>
 
 </manifest>
