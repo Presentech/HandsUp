@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/action_settings">
+
+        <PreferenceScreen
+            android:key="accessibility_key"
+            android:title="@string/accessibility_title" />
+
+        <PreferenceScreen
+            android:key="account_key"
+            android:title="@string/account_title" />
+
+        <PreferenceScreen
+            android:key="presentation_key"
+            android:title="@string/presentation_feedback_title" />
+
+        <PreferenceScreen
+            android:key="file_storage_key"
+            android:title="@string/file_storage_title" />
+
+        <PreferenceScreen
+            android:key="default_setting_key"
+            android:title="@string/default_setting_title" />
+
+
+    </PreferenceCategory>
+</PreferenceScreen>

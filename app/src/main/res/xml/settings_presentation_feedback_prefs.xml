@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="Presentation &amp; Feedback Preferences">
+
+        <SwitchPreference
+            android:checked="false"
+            android:key="display_feedback_key"
+            android:title="Display Feedback" />
+
+        <SwitchPreference
+            android:checked="false"
+            android:key="notification_key"
+            android:title="Notifications" />
+
+        <PreferenceScreen
+            android:key="feedback_mode_key"
+            android:summary="(Modes available to Audience)"
+            android:title="Feedback Modes" />
+
+
+        <PreferenceScreen
+            android:key="media_transition_setting_key"
+            android:title="Media Transition Settings" />
+
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

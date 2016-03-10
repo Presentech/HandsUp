@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundgrey"
+    tools:context=".SettingsActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/activity_settings_toolbar" />
+
+    <TextView
+        android:id="@+id/settingHeader"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/action_settings"
+        android:textColor="@color/colorAccent"
+        android:layout_below="@+id/toolbar"
+        android:layout_margin="10dp"
+        android:paddingLeft="10dp"
+        android:textSize="14sp" />
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/settingHeader"
+        android:divider="@color/white"
+        android:dividerHeight="0.15dp"
+        android:entries="@array/setting_entries"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp" />
+
+
+</RelativeLayout>

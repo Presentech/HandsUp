@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="Default Settings">
+
+        <PreferenceScreen
+            android:key="reset_setting_key"
+            android:summary="Reset to default application settings"
+            android:title="Reset" />
+
+    </PreferenceCategory>
+
+
+</PreferenceScreen>
