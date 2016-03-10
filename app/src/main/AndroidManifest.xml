@@ -18,15 +18,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HostingWizardActivity"/>
-        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
-        <meta-data
-            android:name="com.google.android.gms.version"/>
+
         <activity
             android:name=".LoginScreenActivity"
             android:label="@string/title_activity_login_screen"
-            android:theme="@style/HandsUp.NoActionBar"
             android:parentActivityName=".MainActivity">
         </activity>
         <activity
@@ -57,14 +52,11 @@
                 android:value="com.presentech.handsup.LoginScreenActivity" />
         </activity>
         <activity android:name=".ModeSelectActivity" />
-        <activity
-            android:name=".HostingWizardActivity"
+        <activity android:name=".HostingWizardActivity"
             android:screenOrientation="landscape"
             />
         
-        <activity android:name=".PresentationFileListActivity">
-        <activity android:name=".ModeSelectActivity"/>
-        <activity android:name=".SessionSelectActivity"/>
+        <activity android:name=".PresentationFileListActivity"/>
         <activity
             android:name=".PresentationModeTutorial"
             android:label="@string/title_activity_presentation_mode_tutorial"

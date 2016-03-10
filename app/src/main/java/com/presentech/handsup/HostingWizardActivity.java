@@ -25,6 +25,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.presentech.handsup.presentationfile.PresentationFile;
+
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.File;
@@ -83,20 +85,20 @@ public class HostingWizardActivity extends AppCompatActivity {
     public void createSession(View view) throws IOException, XmlPullParserException {
         PresentationFile presentationFile = getPresentation(pathName);
         //Go to Presentation with options set
-        Intent Intent = new Intent(this, PresentationActivity.class);
+        //Intent Intent = new Intent(this, PresentationActivity.class);
         Bundle b = new Bundle();
         //Add options to Presentation
-        Intent.putExtra(PresentationActivity.BOOLEAN_NAME1, understanding);
-        Intent.putExtra(PresentationActivity.BOOLEAN_NAME2, multiChoice);
-        Intent.putExtra(PresentationActivity.BOOLEAN_NAME3, messaging);
-        Intent.putExtra(PresentationActivity.BOOLEAN_NAME4, hideFeedback);
-        Intent.putExtra(PresentationActivity.BOOLEAN_NAME5, feedbackPerSlide);
+        //Intent.putExtra(PresentationActivity.BOOLEAN_NAME1, understanding);
+        //Intent.putExtra(PresentationActivity.BOOLEAN_NAME2, multiChoice);
+        //Intent.putExtra(PresentationActivity.BOOLEAN_NAME3, messaging);
+        //Intent.putExtra(PresentationActivity.BOOLEAN_NAME4, hideFeedback);
+        //Intent.putExtra(PresentationActivity.BOOLEAN_NAME5, feedbackPerSlide);
 
 
-        b.putParcelable(SyncStateContract.Constants.CUSTOM_LISTING, presentationFile);
-        Intent.putExtras(b);
+        //b.putParcelable(SyncStateContract.Constants.CUSTOM_LISTING, presentationFile);
+        //Intent.putExtras(b);
 
-        startActivity(Intent);
+        //startActivity(Intent);
     }
     public PresentationFile getPresentation(String pathName) throws IOException, XmlPullParserException {
         XMLParser parser = new XMLParser();
@@ -179,11 +181,6 @@ public class HostingWizardActivity extends AppCompatActivity {
         super.onConfigurationChanged(newConfig);
         drawer.mDrawerToggle.onConfigurationChanged(newConfig);
     }
-<<<<<<< HEAD
-
-
-=======
->>>>>>> origin/HostingWizard
     //This handles action bar events
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

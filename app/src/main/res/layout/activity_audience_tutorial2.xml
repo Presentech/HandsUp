@@ -25,7 +25,7 @@
             android:id="@+id/audienceText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:textColor="@color/textColour"
             android:text="@string/title2" />
 
         <RelativeLayout
@@ -67,7 +67,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textColor="@color/white"
+                android:textColor="@color/textColour"
                 android:text="@string/iconsExplanation"
                 android:layout_below="@id/feedbackIcons" />
 
@@ -112,7 +112,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textColor="@color/white"
+                android:textColor="@color/textColour"
                 android:text="@string/lettersExplanation"
                 android:layout_below="@id/letterIcons" />
 
@@ -129,7 +129,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:textColor="@color/white"
+        android:textColor="@color/textColour"
         android:text="@string/button3"
         android:onClick="backClicked"/>
 
@@ -139,7 +139,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:textColor="@color/white"
+        android:textColor="@color/textColour"
         android:text="@string/button4"
         android:onClick="doneClicked"/>
 

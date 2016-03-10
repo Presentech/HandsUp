@@ -84,7 +84,8 @@ package com.presentech.handsup;
 
         }
         public void goToAudienceMode(View view){
-            //Intent AudienceIntent = new Intent(this, SessionSelectActivity.this);
+            Intent AudienceIntent = new Intent(this, AudienceSessionSelect.class);
+            startActivity(AudienceIntent);
         }
         public void goToPresenterMode(View view){
             Intent PresenterIntent = new Intent(this, LoginScreenActivity.class);

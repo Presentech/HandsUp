@@ -12,7 +12,6 @@
         <!--Drawer Theme used to change text colour to white. ListView has no textColor attribute -->
         <item name="android:textColor">@color/textColour</item>
     </style>
-
     <style name="AppThemeNoActionBar" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <!-- THEME USED FOR contsel ACTIVITY ONLY -->
         <item name="colorPrimary">@color/presentechBlue</item>
@@ -41,7 +40,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">20sp</item>
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/textColour</item>
         <item name="android:background">@color/darkgrey</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textAlignment">textStart</item>
@@ -52,7 +51,7 @@
     <style name="tutorialContent">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/textColour</item>
         <item name="android:background">@color/darkgrey</item>
         <item name="android:padding">10dp</item>
     </style>
@@ -65,22 +64,20 @@
     <style name="HandsUp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="HandsUp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
     <style name="EditTextTheme" parent="@android:style/Widget.EditText">
-        <item name="android:textColor">@color/colourOfText</item>
+        <item name="android:textColor">@color/textColour</item>
         <item name="android:background">@color/darkgrey</item>
         <item name="android:layout_marginTop">5dp</item>
         <item name="android:layout_marginBottom">5dp</item>
         <item name="android:layout_marginRight">5dp</item>
         <item name="android:layout_marginLeft">5dp</item>
+    </style>
     <style name="audienceSessionSelectButton">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@color/backgroundGrey</item>
+        <item name="android:background">@color/backgroundgrey</item>
         <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
         <item name="android:gravity">center_horizontal</item>
         <item name="android:textStyle">bold</item>
-        <item name=
     </style>
-
 </resources>
