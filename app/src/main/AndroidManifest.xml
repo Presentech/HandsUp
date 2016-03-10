@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.presentech.handsup">
-
-    <uses-permission android:name="android.permission.WRITE_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_STORAGE"/>
-
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -57,6 +54,16 @@
                 android:value="com.presentech.handsup.LoginScreenActivity" />
         </activity>
         <activity android:name=".ModeSelectActivity" />
+        <activity
+            android:name=".HostingWizardActivity"
+            android:screenOrientation="landscape"
+            />
+        
+        <activity android:name=".PresentationFileListActivity">
+        <activity android:name=".ModeSelectActivity"/>
+        <activity android:name=".SessionSelectActivity"/>
+
+        </activity>
     </application>
 
 </manifest>

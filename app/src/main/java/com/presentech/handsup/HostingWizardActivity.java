@@ -7,6 +7,7 @@ import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
+import android.provider.SyncStateContract;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -17,19 +18,29 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 public class HostingWizardActivity extends AppCompatActivity {
 
     private Bitmap background;
     private navDrawer drawer;
+    private boolean understanding, multiChoice, messaging, hideFeedback, feedbackPerSlide;
     String mode = "PRESENTER";
     //String mode = "AUDIENCE";
+    public static final String FILE_PATH_NAME = "path name";
+    String pathName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +48,13 @@ public class HostingWizardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_hosting_wizard);
         setTitle(R.string.hosting_wizard_title);
 
-        //INPUT BITMAPS
-        //get width and height of screen for background
+        //Get preesntation filePath if returning from PresentationFileListActivity
+        Intent intent = getIntent();
+        if (intent.getStringExtra(FILE_PATH_NAME) != null){
+            pathName = intent.getStringExtra(FILE_PATH_NAME);
+        }
+
+        //get width and height of screen for views
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
@@ -47,13 +63,6 @@ public class HostingWizardActivity extends AppCompatActivity {
 
         changeViewWidths(width);
 
-
-        //Map smaller images to views - DO NOT REMOVE APP WILL CRASH
-        //background = decodeSampledBitmapFromResource(getResources(), R.drawable.background,width, height);
-        //ImageView backgroundView = (ImageView) findViewById(R.id.SessionSelectBackground);
-        //backgroundView.setImageBitmap(background);
-        //Stretch background view to fill screen
-        //backgroundView.setScaleType(ImageView.ScaleType.FIT_XY);
 
         //NAVIGATION DRAWER
         //Create new presenter drawer object
@@ -70,15 +79,89 @@ public class HostingWizardActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
+
+    public void createSession(View view) throws IOException, XmlPullParserException {
+        PresentationFile presentationFile = getPresentation(pathName);
+        //Go to Presentation with options set
+        Intent Intent = new Intent(this, PresentationActivity.class);
+        Bundle b = new Bundle();
+        //Add options to Presentation
+        Intent.putExtra(PresentationActivity.BOOLEAN_NAME1, understanding);
+        Intent.putExtra(PresentationActivity.BOOLEAN_NAME2, multiChoice);
+        Intent.putExtra(PresentationActivity.BOOLEAN_NAME3, messaging);
+        Intent.putExtra(PresentationActivity.BOOLEAN_NAME4, hideFeedback);
+        Intent.putExtra(PresentationActivity.BOOLEAN_NAME5, feedbackPerSlide);
+
+
+        b.putParcelable(SyncStateContract.Constants.CUSTOM_LISTING, presentationFile);
+        Intent.putExtras(b);
+
+        startActivity(Intent);
+    }
+    public PresentationFile getPresentation(String pathName) throws IOException, XmlPullParserException {
+        XMLParser parser = new XMLParser();
+        InputStream in = null;
+        in = getAssets().open(pathName);
+        PresentationFile presentationFile = parser.getPresentation(in);
+        return presentationFile;
+    }
+
+    //Start activity to select a presentation file
+    public void selectFile(View view){
+        Intent Intent = new Intent(this, PresentationFileListActivity.class);
+        startActivity(Intent);
+    }
+
     public void changeViewWidths(int width){
 
         double columnWidthDouble = (width/2);
         int columnWidth = (int) columnWidthDouble;
+        int checkBoxWidth;
 
         LinearLayout inputColumn = (LinearLayout) findViewById(R.id.inputGrid);
         LinearLayout optionsColumn = (LinearLayout) findViewById(R.id.optionsGrid);
         inputColumn.getLayoutParams().width = columnWidth;
         optionsColumn.getLayoutParams().width = columnWidth;
+
+    }
+
+    public void onCheckboxClicked(View view){
+        //Check if checkBox is checked! Check check check
+        boolean checked = ((CheckBox) view).isChecked();
+        // Check which checkbox was clicked
+        // Update presentation object to
+        switch(view.getId()) {
+            case R.id.HWcheckbox1:
+                if (checked)
+                    understanding = true;
+                else
+                    understanding = false;
+                break;
+            case R.id.HWcheckbox2:
+                if (checked)
+                    multiChoice = true;
+                else
+                    multiChoice = false;
+                break;
+            case R.id.HWcheckbox3:
+                if (checked)
+                    messaging = true;
+                else
+                    messaging = false;
+                break;
+            case R.id.HWcheckbox4:
+                if (checked)
+                    feedbackPerSlide = true;
+                else
+                    feedbackPerSlide = false;
+                break;
+            case R.id.HWcheckbox5:
+                if (checked)
+                    hideFeedback = true;
+                else
+                    hideFeedback = false;
+                break;
+        }
     }
 
     /* Called whenever we call invalidateOptionsMenu() */
@@ -96,8 +179,11 @@ public class HostingWizardActivity extends AppCompatActivity {
         super.onConfigurationChanged(newConfig);
         drawer.mDrawerToggle.onConfigurationChanged(newConfig);
     }
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> origin/HostingWizard
     //This handles action bar events
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -115,50 +201,5 @@ public class HostingWizardActivity extends AppCompatActivity {
         super.onPostCreate(savedInstanceState);
         // Sync the toggle state after onRestoreInstanceState has occurred.
         drawer.mDrawerToggle.syncState();
-    }
-
-
-
-    public static Bitmap decodeSampledBitmapFromResource(Resources res,int id, int reqWidth, int reqHeight){
-        // Reset sample Size to 0 every time
-        int sampleSize = 0;
-        //Create new bitmap options
-        final BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inSampleSize = sampleSize;
-        //avoids mem allocation means returns NULL not bitmap sets outwidth outheight and outmimetype
-        options.inJustDecodeBounds = true;
-        //Get the maximum
-        BitmapFactory.decodeResource(res, id, options);
-
-        //calculate sample size for bitmap integer = 2^(n-1) where n is magnitudes smaller
-        sampleSize= calculateInSampleSize(options, reqWidth, reqHeight);
-        options.inSampleSize = sampleSize;
-        //Set Just decode bounds to false so decode resources returns bitmap not NULL
-        options.inJustDecodeBounds = false;
-
-        //Return the bitmap with new bounds set
-        return BitmapFactory.decodeResource(res, id , options);
-    }
-
-    public static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
-        // Raw height and width of image
-        final int height = options.outHeight;
-        final int width = options.outWidth;
-        int inSampleSize = 1;
-
-        if (height > reqHeight || width > reqWidth) {
-
-            final int halfHeight = height / 2;
-            final int halfWidth = width / 2;
-
-            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
-            // height and width larger than the requested height and width.
-            while ((halfHeight / inSampleSize) > reqHeight
-                    && (halfWidth / inSampleSize) > reqWidth) {
-                inSampleSize *= 2;
-            }
-        }
-
-        return inSampleSize;
     }
 }

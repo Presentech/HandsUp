@@ -52,7 +52,23 @@
     <string name="aboutTeamMember7">Luke Richardson</string>
     <string name="aboutTeamMember8">Noor Mansur</string>
     <string name="aboutTeamMember9">Steve Clarke</string>
-    <string name="aboutThanks">Special Thanks to Martin Robinson</string>
+
+    <string name="title_hint">Session Name</string>
+    <string name="password_hint">Session Password</string>
+    <string name="location_hint">Session Location</string>
+
+    <!-- Hosting Wizard Strings -->
+    <string name="hosting_wizard_title">Create New Session</string>
+    <string name="selectPresentation">Source File</string>
+    <string name="sessionName">Name:</string>
+    <string name="sessionPassword">Password:</string>
+    <string name="FeedbackOptionsTitle">Feedback Options</string>
+    <string name="UnderstandingIconsSelect">Understanding Icons</string>
+    <string name="MessagingSelect">Messaging</string>
+    <string name="MultipleChoiceIconsSelect">Multiple-Choice Icons</string>
+    <string name="FeedbackPerSlideSelect">Feedback per Slide</string>
+    <string name="HideFeedbackSelect">Hide feedback during presentation</string>
+    <string name="createSession">Create Session</string>
 
     /*Strings for colours*/
     <string name="presentechblue">#60ccbf</string>

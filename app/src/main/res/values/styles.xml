@@ -12,7 +12,6 @@
         <!--Drawer Theme used to change text colour to white. ListView has no textColor attribute -->
         <item name="android:textColor">@color/textColour</item>
     </style>
-
     <style name="AppThemeNoActionBar" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <!-- THEME USED FOR contsel ACTIVITY ONLY -->
         <item name="colorPrimary">@color/presentechBlue</item>
@@ -51,5 +50,13 @@
         <item name="android:background">@color/darkgrey</item>
         <item name="android:layout_marginTop">5dp</item>
         <item name="android:layout_marginBottom">5dp</item>
+    </style>
+    <style name="EditTextTheme" parent="@android:style/Widget.EditText">
+        <item name="android:textColor">@color/colourOfText</item>
+        <item name="android:background">@color/darkgrey</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+        <item name="android:layout_marginLeft">5dp</item>
     </style>
 </resources>
