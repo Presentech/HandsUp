@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceScreen android:key="colour_ratio"
+        android:title="Colour Ratio"/>
+
+    <PreferenceScreen android:key="brightness"
+        android:title="Brightness"/>
+
+    <SwitchPreference android:key="auto_rotate"
+        android:checked="false"
+        android:title="AutoRotate"/>
+
+    <SwitchPreference android:key="zoom"
+        android:checked="false"
+        android:title="Zooming"/>
+
+</PreferenceScreen>

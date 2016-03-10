@@ -15,4 +15,35 @@
     <string name="ptutorial_exit_content">EXIT \nCONTENT \nINSERT\n</string>
     <string name="ptutorial_export_title">How to Export a Presentation</string>
     <string name="ptutorial_export_content">EXPORT \nCONTENT \nINSERT\n</string>
+
+
+
+    <string name="action_settings">SETTINGS</string>
+    <string name="accessibility_title">Accessibility</string>
+    <string name="account_title">Account &amp; Privacy</string>
+    <string name="presentation_feedback_title">Presentation &amp; Feedback Preferences</string>
+    <string name="file_storage_title">File &amp; Storage Preferences</string>
+    <string name="default_setting_title">Default Settings</string>
+    <string-array name="default_storage_list">
+        <item>Media Card</item>
+        <item>Email</item>
+        <item>Dropbox</item>
+        <item>Google Drive</item>
+    </string-array>
+    <string-array name="default_storage_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+    <string-array name="setting_entries">
+        <item>ACCESSIBILITY</item>
+        <item>ACCOUNT &amp; PRIVACY</item>
+        <item>PRESENTATION &amp; FEEDBACK PREFERENCES</item>
+        <item>FILE &amp; STORAGE PREFERENCES</item>
+        <item>DEFAULT SETTINGS</item>
+    </string-array>
+
+
+
 </resources>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="Accessibility">
+
+        <SwitchPreference
+            android:checked="false"
+            android:key="talkback_support_key"
+            android:title="TalkBack Support" />
+
+        <PreferenceScreen
+            android:key="content_lang_key"
+            android:title="Content Language" />
+
+        <PreferenceScreen
+            android:key="visibility_key"
+            android:title="Visibilty">
+
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:targetClass="com.presentech.handsup.VisibilityActivity"
+                android:targetPackage="com.presentech.handsup" />
+
+        </PreferenceScreen>
+
+
+    </PreferenceCategory>
+</PreferenceScreen>

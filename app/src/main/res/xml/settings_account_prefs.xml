@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="Account &amp; Privacy">
+
+        <SwitchPreference
+            android:checked="false"
+            android:key="diagnostics_report_key"
+            android:summary="(Send anonymously to developer)"
+            android:title="Diagnostic &amp; Usage Report" />
+
+        <PreferenceScreen
+            android:key="active_account_key"
+            android:title="Active Account" />
+
+        <PreferenceScreen
+            android:key="account_credentials_key"
+            android:title="Account Credentials" />
+
+        <PreferenceScreen
+            android:key="sharing_prefs_key"
+            android:title="Sharing Preferences" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

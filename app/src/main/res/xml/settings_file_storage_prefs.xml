@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="File &amp; Storage Preferences">
+
+        <PreferenceScreen
+            android:key="feedback_export_key"
+            android:title="Feedback Export" />
+
+        <ListPreference
+            android:entries="@array/default_storage_list"
+            android:entryValues="@array/default_storage_values"
+            android:key="default_storage_selection_key"
+            android:title="Default Storage Location" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
