@@ -149,7 +149,7 @@ public class navDrawer {
                     activity.startActivity(audienceTutorialActivityIntent);
                     break;
                 case 2:
-                    Intent sessionSelectActivityIntent = new Intent(activity, sessionSelectActivity.class);
+                    Intent sessionSelectActivityIntent = new Intent(activity, AudienceSessionSelectActivity.class);
                     activity.startActivity(sessionSelectActivityIntent);
                     break;
                 case 3:
