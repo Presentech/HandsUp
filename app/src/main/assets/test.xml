@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<presentation>
+    <documentInfo>
+        <Title>Example File</Title>
+        <Author>Lexxy</Author>
+        <Version>1.0</Version>
+        <Comment>An example file used to demonstrate the appearance of this format</Comment>
+    </documentInfo>
+    <defaults>
+        <backgroundColour>383838</backgroundColour>
+        <font>Helvetica</font>
+        <fontsize>12</fontsize>
+        <fontColour>FFFFFF</fontColour>
+        <lineColour>0000CC</lineColour>
+        <fillColour>2222AA</fillColour>
+    </defaults>
+    <slide slideID="0" duration="5" nextSlide="2">
+        <text duration="-1" ystart="0.3" starttime="0" xstart="0.1"
+            fontsize="30" font="Impact"> <b>Music Theory</b> 101</text>
+        <interactable targetSlide="1">
+            <shape width="0.3" duration="-1" ystart="0.65" type="circle"
+                starttime="2" xstart="0.55" height="0.3">
+                <shading x2="0.80" x1="0.60" y2="0.65" y1="0.90" colour2="0066CC"
+                    colour1="73ECFF" />
+            </shape>
+        </interactable>
+        <text duration="1" ystart="0.55" starttime="3" xstart="0.55">Click here to jump to <i>video</i> ?</text>
+    </slide>
+    <slide slideID="1">
+        <video ystart="0.2" loop="true" xstart="0.3" sourceFile="vid"
+            duration="-1" starttime="0" />
+    </slide>
+    <slide slideID="2">
+        <text duration="-1" ystart="0.1" starttime="0" xstart="0.3" fontsize="25">
+            <i>Click waveform to jump to audio clip.</i>
+        </text>
+        <interactable targetSlide="3">
+            <image width="0.6" duration="-1" ystart="0.2" sourceFile="audio.png"
+                starttime="0" xstart="0.2" height="0.6" />
+
+        </interactable>
+        <interactable targetSlide="4">
+            <polygon duration="-1" starttime="0" sourceFile="carrot.csv" />
+        </interactable>
+    </slide>
+    <slide slideID="3" duration="8" nextSlide="-1">
+        <text ystart="0.2" starttime="0" xstart="0" fontsize="14">"Grace Kelly" is a song by the British singer Mika, released for download on
+            9 January 2007. It also appears on Mika's 2007 album Life in Cartoon Motion. Produced and mixed by
+            Greg Wells,the song entered the UK Singles Chart
+            at number three and the UK Official Download Chart at number one.[1]</text>
+        <audio loop="false" sourceFile="audio" duration="6"
+            starttime="2" />
+        <text ystart="0.6" xstart="0.1" fontsize="12">[1] "Top 40 Singles of the Year 2007". BBC Music. Retrieved 2007-12-27</text>
+    </slide>
+    <slide slideID="4" duration="10" nextSlide="-1">
+        <video ystart="0.2" loop="false" xstart="0.1" sourceFile="vid2"
+            duration="5" starttime="3" />
+    </slide>
+    <slide slideID="5" duration="-1" nextSlide="6">
+        <shape starttime="0" duration="-1" xstart="0.75" ystart="0.2" type="rectangle"
+            width="0.2" height="0.2" lineColour="FFFFFF" fillColour="1F6DBD"/>
+        <shape starttime="0" duration="-1" xstart="0.75" ystart="0.44" type="rectangle"
+            width="0.2" height="0.2" lineColour="FFFFFF">
+            <shading x2="0.80" x1="0.60" y2="0.65" y1="0.90" colour2="FF0000"
+                colour1="00FF00" />
+        </shape>
+        <polygon starttime="6" duration="300" lineColour="FFFFFE" fillColour="1C57A8"
+            sourceFile="carrot.csv"/>
+        <polygon starttime="6" duration="300" lineColour="FFFFFE" sourceFile="carrot.csv">
+            <shading x2="0.70" x1="0.50" y2="0.99" y1="0.85" colour2="ABCDEF"
+                colour1="EEEFFF" />
+        </polygon>
+        <text duration="-1" ystart="0.1" starttime="0" xstart="0.1" fontsize="15">
+            <b><i>The Circle of Fifths</i></b>
+        </text>
+        <image width="0.6" duration="-1" ystart="0.3" sourceFile="circle.png"
+            starttime="0" xstart="0" height="0.6"/>
+    </slide>
+</presentation>
