@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.presentech.handsup" >
+    package="com.presentech.handsup">
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
-        <activity android:name=".MainActivity" >
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,11 +19,15 @@
             android:name=".PresentationModeTutorial"
             android:label="@string/title_activity_presentation_mode_tutorial"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.presentech.handsup.MainActivity" />
         </activity>
+        <activity
+            android:name=".presentationfile.AudienceSessionSelect"
+            android:label="@string/title_activity_audience_session_select"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

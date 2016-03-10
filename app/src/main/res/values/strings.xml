@@ -15,4 +15,5 @@
     <string name="ptutorial_exit_content">EXIT \nCONTENT \nINSERT\n</string>
     <string name="ptutorial_export_title">How to Export a Presentation</string>
     <string name="ptutorial_export_content">EXPORT \nCONTENT \nINSERT\n</string>
+    <string name="title_activity_audience_session_select">AudienceSessionSelect</string>
 </resources>
