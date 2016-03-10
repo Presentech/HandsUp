@@ -7,6 +7,7 @@ import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
+import android.provider.SyncStateContract;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -24,7 +25,11 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 public class HostingWizardActivity extends AppCompatActivity {
@@ -74,15 +79,30 @@ public class HostingWizardActivity extends AppCompatActivity {
         }
     }
 
-    public void createSession(View view){
-        //Intent Intent = new Intent(this, NEXTACTIVITY.class);
+    public void createSession(View view) throws IOException, XmlPullParserException {
+        PresentationFile presentationFile = getPresentation(pathName);
+        //Go to Presentation with options set
+        Intent Intent = new Intent(this, PresentationActivity.class);
+        Bundle b = new Bundle();
+        //Add options to Presentation
+        Intent.putExtra(PresentationActivity.BOOLEAN_NAME1, understanding);
+        Intent.putExtra(PresentationActivity.BOOLEAN_NAME2, multiChoice);
+        Intent.putExtra(PresentationActivity.BOOLEAN_NAME3, messaging);
+        Intent.putExtra(PresentationActivity.BOOLEAN_NAME4, hideFeedback);
+        Intent.putExtra(PresentationActivity.BOOLEAN_NAME5, feedbackPerSlide);
 
-        Intent.putExtra(NEXTACTIVITY.BOOLEAN_NAME1, understanding);
-        Intent.putExtra(NEXTACTIVITY.BOOLEAN_NAME2, multiChoice);
-        Intent.putExtra(NEXTACTIVITY.BOOLEAN_NAME3, messaging);
-        Intent.putExtra(NEXTACTIVITY.BOOLEAN_NAME4, hideFeedback);
-        Intent.putExtra(NEXTACTIVITY.BOOLEAN_NAME5, feedbackPerSlide);
-        //startActivity(Intent);
+
+        b.putParcelable(SyncStateContract.Constants.CUSTOM_LISTING, presentationFile);
+        Intent.putExtras(b);
+
+        startActivity(Intent);
+    }
+    public PresentationFile getPresentation(String pathName) throws IOException, XmlPullParserException {
+        XMLParser parser = new XMLParser();
+        InputStream in = null;
+        in = getAssets().open(pathName);
+        PresentationFile presentationFile = parser.getPresentation(in);
+        return presentationFile;
     }
 
     //Start activity to select a presentation file
