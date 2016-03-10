@@ -39,11 +39,13 @@ public class navDrawer {
     private DrawerAdapter adapter;
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
+    private String intMode;
 
     public void createDrawer(Activity activity, String mode ){
         //Set Activity to local variable
         this.activity = activity;
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+        intMode = mode;
 
         //Set Title
         mTitle = mDrawerTitle = activity.getTitle();
@@ -115,16 +117,45 @@ public class navDrawer {
     //Switch case method to determine action based on click position in drawer
     public void selectItem(int position) {
         mDrawerList.setItemChecked(position, true);
-        switch(position) {
-            case 0:
-                Intent mainActivityIntent = new Intent(activity, ModeSelectActivity.class);
-                activity.startActivity(mainActivityIntent);
-                break;
-            //case 4:
-            //    Intent aboutActivityIntent = new Intent(AudienceMainActivity.this, aboutAppActivity.class);
-            //    startActivity(aboutActivityIntent);
-            default:
+        if (intMode.equals("PRESENTER")) {
+            switch(position) {
+                case 0:
+                    Intent mainActivityIntent = new Intent(activity, ModeSelectActivity.class);
+                    activity.startActivity(mainActivityIntent);
+                    break;
+                case 1:
+                    Intent hostingActivityIntent = new Intent(activity, HostingWizardActivity.class);
+                    activity.startActivity(hostingActivityIntent);
+                    break;
+                case 2:
+                    Intent unknownActivityIntent = new Intent(activity, UNKNOWN.class);
+                    activity.startActivity(aboutActivityIntent);
+                    break;
+                case 3:
+                    Intent aboutActivityIntent = new Intent(activity, aboutActivity.class);
+                    activity.startActivity(aboutActivityIntent);
+                    break;
+                default:
+            }
         }
+        else if (intMode.equals("AUDIENCE")){
+            switch(position) {
+                case 0:
+                    Intent mainActivityIntent = new Intent(activity, ModeSelectActivity.class);
+                    activity.startActivity(mainActivityIntent);
+                    break;
+                case 1:
+                    Intent tutorialActivityIntent = new Intent(activity, audienceTutorialActivity.class);
+                    activity.startActivity(tutorialActivityIntent);
+                    break;
+                case 3:
+                    Intent aboutActivityIntent = new Intent(activity, aboutActivity.class);
+                    activity.startActivity(aboutActivityIntent);
+                    break;
+                default:
+            }
+        }
+
     }
 
 

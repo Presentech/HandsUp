@@ -15,8 +15,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ModeSelectActivity"/>
-        <activity android:name=".SessionSelectActivity"/>
+        <activity android:name=".ModeSelectActivity" />
+        <activity android:name=".SessionSelectActivity" />
+        <activity
+            android:name=".aboutActivity"
+            android:label="@string/title_activity_about"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
