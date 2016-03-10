@@ -38,7 +38,6 @@ public class PresentationFileListActivity extends AppCompatActivity {
               String fileName = (String) FilesInFolder.get(position);
               String filePath = Environment.getExternalStorageDirectory().getPath() + "/HandsUp/" + fileName;
               //put filePath as extra message with intent
-              Log.d("FilePath", filePath);
               Intent.putExtra(HostingWizardActivity.FILE_PATH_NAME, filePath);
 
               startActivity(Intent);
@@ -62,6 +61,10 @@ public class PresentationFileListActivity extends AppCompatActivity {
         File f = new File(dataRoot, DirectoryPath);
         //Add all files to an arryList
         //f.mkdirs();
+        if(f.exists()){
+            Log.d("FilePath", "DIE");
+
+        }
         File[] files = f.listFiles();
         if (files.length == 0) {
             //No Files found at this location

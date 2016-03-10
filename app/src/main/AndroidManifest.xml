@@ -53,9 +53,12 @@
         <activity android:name=".ModeSelectActivity" />
         <activity android:name=".HostingWizardActivity"
             android:screenOrientation="landscape"
+
             />
         
-        <activity android:name=".PresentationFileListActivity"/>
+        <activity android:name=".PresentationFileListActivity"></activity>
+
+
         <activity
             android:name=".PresentationModeTutorial"
             android:label="@string/title_activity_presentation_mode_tutorial"
