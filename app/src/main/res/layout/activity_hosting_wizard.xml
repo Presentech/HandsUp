@@ -31,8 +31,8 @@
                     android:paddingBottom="5dp"
                     android:inputType="text"
                     android:hint="@string/title_hint"
-                    android:textColorHint="@color/colourOfText"
-                    android:textColor="@color/colourOfText"
+                    android:textColorHint="@color/textColour"
+                    android:textColor="@color/textColour"
                     android:background="@color/darkgrey"/>
 
                 <EditText
@@ -47,8 +47,8 @@
                     android:paddingBottom="5dp"
                     android:inputType="textVisiblePassword"
                     android:hint="@string/password_hint"
-                    android:textColorHint="@color/colourOfText"
-                    android:textColor="@color/colourOfText"
+                    android:textColorHint="@color/textColour"
+                    android:textColor="@color/textColour"
                     android:background="@color/darkgrey"/>
 
                 <EditText
@@ -63,8 +63,8 @@
                     android:paddingBottom="5dp"
                     android:inputType="textVisiblePassword"
                     android:hint="@string/location_hint"
-                    android:textColorHint="@color/colourOfText"
-                    android:textColor="@color/colourOfText"
+                    android:textColorHint="@color/textColour"
+                    android:textColor="@color/textColour"
                     android:background="@color/darkgrey"/>
 
                 <Button
@@ -73,7 +73,7 @@
                     android:id="@+id/chooseSourceFile"
                     android:text="@string/selectPresentation"
                     android:background="@color/darkgrey"
-                    android:textColor="@color/colourOfText"
+                    android:textColor="@color/textColour"
                     android:onClick="selectFile"/>
 
             </LinearLayout>
@@ -89,7 +89,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/FeedbackOptionsTitle"
                     android:text="@string/FeedbackOptionsTitle"
-                    android:textColor="@color/colourOfText"
+                    android:textColor="@color/textColour"
                     android:background="@color/darkgrey"
                     android:paddingTop="5dp"
                     android:paddingLeft="5dp"
@@ -132,7 +132,7 @@
                         android:layout_weight="1.6"
                         android:id="@+id/MultipleChoiceIcons"
                         android:text="@string/MultipleChoiceIconsSelect"
-                        android:textColor="@color/colourOfText"
+                        android:textColor="@color/textColour"
                         android:layout_gravity="fill_horizontal"
                         android:paddingTop="5dp"
                         android:paddingLeft="5dp"
@@ -157,7 +157,7 @@
                         android:layout_weight="1.6"
                         android:id="@+id/Messaging"
                         android:text="@string/MessagingSelect"
-                        android:textColor="@color/colourOfText"
+                        android:textColor="@color/textColour"
                         android:layout_gravity="fill_horizontal"
                         android:paddingTop="5dp"
                         android:paddingLeft="5dp"
@@ -182,7 +182,7 @@
                         android:layout_weight="1.6"
                         android:id="@+id/FeedbackPerSlide"
                         android:text="@string/FeedbackPerSlideSelect"
-                        android:textColor="@color/colourOfText"
+                        android:textColor="@color/textColour"
                         android:layout_gravity="fill_horizontal"
                         android:paddingTop="5dp"
                         android:paddingLeft="5dp"
@@ -207,7 +207,7 @@
                         android:layout_weight="1.6"
                         android:id="@+id/HideFeedbackDuringPresentation"
                         android:text="@string/HideFeedbackSelect"
-                        android:textColor="@color/colourOfText"
+                        android:textColor="@color/textColour"
                         android:layout_gravity="fill_horizontal"
                         android:paddingTop="5dp"
                         android:paddingLeft="5dp"
@@ -227,7 +227,7 @@
                     android:id="@+id/CreateSession"
                     android:text="@string/createSession"
                     android:background="@color/darkgrey"
-                    android:textColor="@color/colourOfText"
+                    android:textColor="@color/textColour"
                     android:layout_marginTop="16dp"
                     android:onClick="createSession"/>
             </LinearLayout>

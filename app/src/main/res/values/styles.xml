@@ -23,6 +23,16 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
+    <style name="SettingsTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/textColour</item>
+        <item name="android:textColor">@color/textColour</item>
+    </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
@@ -63,6 +73,7 @@
     <style name="HandsUp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="HandsUp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
     <style name="EditTextTheme" parent="@android:style/Widget.EditText">
         <item name="android:textColor">@color/textColour</item>
         <item name="android:background">@color/darkgrey</item>

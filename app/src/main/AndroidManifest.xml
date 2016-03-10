@@ -94,12 +94,15 @@
             android:label="@string/default_setting_title"
             android:screenOrientation="portrait" />
 
+        <activity android:name=".SettingsActivity"/>
 
 
         <activity
             android:name=".AudienceSessionSelect"
             android:label="@string/title_activity_audience_session_select"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme"></activity>
+        <activity android:name=".aboutActivity"/>
+        <activity android:name=".AudienceTutorial"/>
     </application>
 
 </manifest>

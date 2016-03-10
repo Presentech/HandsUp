@@ -28,7 +28,6 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         setContentView(R.layout.activity_settings_main);
 
 
-        setupToolBar();
         bindComponents();
         init();
         addListeners();
@@ -49,22 +48,6 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
     private void bindComponents() {
 
         lvSetting = (ListView) findViewById(R.id.listView);
-    }
-
-    private void setupToolBar() {
-
-        toolBar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolBar);
-        toolBar.setNavigationIcon(null);
-
-        toolBar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                finish();
-            }
-        });
-
     }
 
     @Override

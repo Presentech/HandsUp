@@ -18,6 +18,7 @@
     <string-array name="presenterDrawerIcons">
         <item>@drawable/home_icon</item>
         <item>@drawable/create_icon</item>
+        <item>@drawable/settings_icon</item>
         <item>@drawable/question_icon</item>
         <item>@drawable/info_icon</item>
     </string-array>
@@ -25,6 +26,7 @@
     <string-array name="presenterDrawerOptions">
         <item>Home</item>
         <item>Create New Session</item>
+        <item>Settings</item>
         <item>Help</item>
         <item>About</item>
     </string-array>
@@ -57,7 +59,6 @@
     <string name="title_activity_registration">Hands Up registration</string>
     <string name="title_activity_login_success">Login Successful</string>
     <string name="title_activity_login_failed">Login Failed</string>
-    <string name="action_settings">Settings</string>
     <string name="sign_in_button">Login</string>
     <string name="register_button">Register</string>
     <string name="login_success_confirmation">Login Attempt Successful</string>
@@ -128,4 +129,19 @@
     <string name="FeedbackPerSlideSelect">Feedback per Slide</string>
     <string name="HideFeedbackSelect">Hide feedback during presentation</string>
     <string name="createSession">Create Session</string>
+
+    <!-- Audience Tutorial Strings -->
+    <string name="title_activity_audience_tutorial">Help!</string>
+    <string name="welcome">Welcome to Hands Up - tagline!</string>
+    <string name="aboutApp">What hands up does</string>
+    <string name="title2">Feedback options available are:</string>
+    <string name="button1">Skip</string>
+    <string name="button2">Next</string>
+    <string name="button3">Back</string>
+    <string name="button4">Done</string>
+    <string name="tickExplanation">Select to show understanding of the topic</string>
+    <string name="crossExplanation">Select to show you need the topic to be repeated</string>
+    <string name="questionExplanation">Select to show you need some extra help on the topic</string>
+    <string name="iconsExplanation">These icons can be used to indicate understanding on a topic.</string>
+    <string name="lettersExplanation">Letters can be used to respond to multiple choice questions.</string>
 </resources>

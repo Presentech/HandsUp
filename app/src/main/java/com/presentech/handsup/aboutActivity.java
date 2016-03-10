@@ -10,7 +10,12 @@ import android.view.Display;
 import android.widget.ImageView;
 
 public class aboutActivity extends AppCompatActivity {
-
+    Bitmap background;
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        background.recycle();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +27,7 @@ public class aboutActivity extends AppCompatActivity {
         int width = size.x;
         int height = size.y;
 
-        Bitmap background=decodeSampledBitmapFromResource(getResources(),R.drawable.background,width,height);
+        background=decodeSampledBitmapFromResource(getResources(),R.drawable.background,width,height);
         ImageView backgroundView = (ImageView) findViewById(R.id.aboutBackground);
         backgroundView.setImageBitmap(background);
 

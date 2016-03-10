@@ -27,8 +27,8 @@
         android:layout_below="@+id/export_content"
         android:layout_marginTop="10dp"
         android:onClick="nextActivity"
-        android:background="@color/presentechblue"
-        android:textColor="@color/white"
+        android:background="@color/presentechBlue"
+        android:textColor="@color/textColour"
         android:text="@string/skip_button" />
 
     <TextView android:id="@+id/title"
@@ -37,7 +37,7 @@
         android:layout_alignParentRight="true"
         android:textSize="25sp"
         android:textStyle="bold"
-        android:textColor="@color/white"
+        android:textColor="@color/textColour"
         android:text="@string/ptutorial_title" />
 
     <Button android:id="@+id/load_title"
