@@ -106,7 +106,7 @@ public class HostingWizardActivity extends AppCompatActivity {
         //Intent.putExtra(PresentationActivity.SESSION_LOCATION, session_location);
 
 
-        //b.putParcelable(SyncStateContract.Constants.CUSTOM_LISTING, presentationFile);
+        b.putParcelable(SyncStateContract.Constants.PRESENTATION_FILE, presentationFile);
         //Intent.putExtras(b);
 
         //startActivity(Intent);
