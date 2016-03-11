@@ -80,6 +80,7 @@ public class PresentationActivity extends AppCompatActivity {
         //NAVIGATION DRAWER
         //Create new presenter drawer object
         drawer = new navDrawer();
+        drawer.mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         //Pass views to attach drawer to mDrawerLayout is the top level 'DrawerLayout'
         //mDrawerList is the ListView that holds the options
         drawer.mDrawerLayout = (DrawerLayout) findViewById(R.id.hostingWizard_drawerFrame);
@@ -410,11 +411,11 @@ public class PresentationActivity extends AppCompatActivity {
         return super.onPrepareOptionsMenu(menu);
     }
 
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        drawer.mDrawerToggle.onConfigurationChanged(newConfig);
-    }
+    //@Override
+    //public void onConfigurationChanged(Configuration newConfig) {
+        //super.onConfigurationChanged(newConfig);
+        //drawer.mDrawerToggle.onConfigurationChanged(newConfig);
+    //}
     //This handles action bar events
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

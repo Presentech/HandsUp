@@ -1,5 +1,6 @@
 package com.presentech.handsup;
 
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -7,12 +8,17 @@ import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Display;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -21,10 +27,19 @@ import android.widget.TextView;
  */
 public class FeedbackActivity extends AppCompatActivity {
 
+    String mode = "AUDIENCE";
+    private Bitmap background;
+    private navDrawer drawer;
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        background.recycle();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_feedback);
+        setContentView(R.layout.activity_feedback);
 
 
         Display display = getWindowManager().getDefaultDisplay();
@@ -32,19 +47,39 @@ public class FeedbackActivity extends AppCompatActivity {
         display.getSize(size);
         int width = size.x;
         int height = size.y;
+        changeViewWidths(width);
+        background = decodeSampledBitmapFromResource(getResources(), R.drawable.background, width, height);
 
-        Bitmap background = decodeSampledBitmapFromResource(getResources(), R.drawable.background, width, height);
 
+        ImageView backgroundView = (ImageView) findViewById(R.id.feedbackActivityBackground);
+        backgroundView.setImageBitmap(background);
 
-        //RelativeLayout mainBaseLayout = (RelativeLayout) findViewById(R.id.feedbackBaseRelativeLayout);
-        //Drawable dr = new  BitmapDrawable(getResources(), background);
+        //NAVIGATION DRAWER
+        //Create new presenter drawer object
+        drawer = new navDrawer();
+        //Pass views to attach drawer to mDrawerLayout is the top level 'DrawerLayout'
+        //mDrawerList is the ListView that holds the options
+        drawer.mDrawerLayout = (DrawerLayout) findViewById(R.id.hostingWizard_drawerFrame);
+        drawer.mDrawerList = (ListView) findViewById(R.id.hostingWizard_leftDrawer);
+        drawer.createDrawer(FeedbackActivity.this, mode);
 
-        int sdk = android.os.Build.VERSION.SDK_INT;
-        if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-            //mainBaseLayout.setBackgroundDrawable(dr);
-        } else {
-            //mainBaseLayout.setBackground(dr);
+        //I think Action Bar things HAVE to be done inside the activity
+        //Enable drawer display button in Action Bar
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+
+    }
+    public void changeViewWidths(int width){
+
+        double columnWidthDouble = width*0.8;
+
+        LinearLayout feedbackButtons = (LinearLayout) findViewById(R.id.feedbackButtonsLayout);
+        feedbackButtons.getLayoutParams().width = (int) columnWidthDouble;
+
+        ImageView backgroundView = (ImageView) findViewById(R.id.feedbackActivityBackground);
+        //backgroundView.getLayoutParams().width = width;
+        backgroundView.setScaleType(ImageView.ScaleType.FIT_XY);
 
     }
 
@@ -90,5 +125,37 @@ public class FeedbackActivity extends AppCompatActivity {
 
         return inSampleSize;
     }
+    /* Called whenever we call invalidateOptionsMenu() */
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        // If the nav drawer is open, hide action items related to the content view
+        // Nothing to hide currently!
+        boolean drawerOpen = drawer.mDrawerLayout.isDrawerOpen(drawer.mDrawerList);
+        //menu.findItem(R.id.action_websearch).setVisible(!drawerOpen);
+        return super.onPrepareOptionsMenu(menu);
+    }
 
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        drawer.mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+    //This handles action bar events
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Pass the event to ActionBarDrawerToggle, if it returns
+        // true, then it has handled the app icon touch event
+        if (drawer.mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        // Handle your other action bar items...
+        return super.onOptionsItemSelected(item);
+    }
+    //This toggles the image on the action bar when the drawer is open
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        drawer.mDrawerToggle.syncState();
+    }
 }
