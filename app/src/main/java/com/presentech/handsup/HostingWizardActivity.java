@@ -121,7 +121,7 @@ public class HostingWizardActivity extends AppCompatActivity {
     //Start activity to select a presentation file
     public void selectFile(View view){
         Intent Intent = new Intent(this, PresentationFileListActivity.class);
-        startActivity(Intent);
+        //startActivity(Intent);
     }
 
     public void changeViewWidths(int width){

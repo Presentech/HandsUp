@@ -52,7 +52,7 @@ public class FeedbackActivity extends AppCompatActivity {
         background = decodeSampledBitmapFromResource(getResources(), R.drawable.background, width, height);
         ImageView backgroundView = (ImageView) findViewById(R.id.feedbackActivityBackground);
 
-        backgroundView.setImageBitmap(background);
+       // backgroundView.setImageBitmap(background);
 
         //NAVIGATION DRAWER
         //Create new presenter drawer object
