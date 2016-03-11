@@ -144,4 +144,5 @@
     <string name="questionExplanation">Select to show you need some extra help on the topic</string>
     <string name="iconsExplanation">These icons can be used to indicate understanding on a topic.</string>
     <string name="lettersExplanation">Letters can be used to respond to multiple choice questions.</string>
+    <string name="presentation_container">Presentation</string>
 </resources>
