@@ -28,7 +28,7 @@ import android.widget.TextView;
 public class FeedbackActivity extends AppCompatActivity {
 
     String mode = "AUDIENCE";
-    private Bitmap background;
+    private Bitmap background, arrow_left, arrow_right, tick, question, refresh, returnA, returnB, returnC;
     private navDrawer drawer;
 
     @Override
@@ -48,10 +48,10 @@ public class FeedbackActivity extends AppCompatActivity {
         int width = size.x;
         int height = size.y;
         changeViewWidths(width);
+
         background = decodeSampledBitmapFromResource(getResources(), R.drawable.background, width, height);
-
-
         ImageView backgroundView = (ImageView) findViewById(R.id.feedbackActivityBackground);
+
         backgroundView.setImageBitmap(background);
 
         //NAVIGATION DRAWER
