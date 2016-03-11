@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -85,7 +86,7 @@ public class HostingWizardActivity extends AppCompatActivity {
     public void createSession(View view) throws IOException, XmlPullParserException {
         PresentationFile presentationFile = getPresentation(pathName);
         //Go to Presentation with options set
-        //Intent Intent = new Intent(this, PresentationActivity.class);
+        Intent Intent = new Intent(this, PresentationActivity.class);
         Bundle b = new Bundle();
         //Add options to Presentation
         //Intent.putExtra(PresentationActivity.BOOLEAN_NAME1, understanding);
@@ -93,10 +94,20 @@ public class HostingWizardActivity extends AppCompatActivity {
         //Intent.putExtra(PresentationActivity.BOOLEAN_NAME3, messaging);
         //Intent.putExtra(PresentationActivity.BOOLEAN_NAME4, hideFeedback);
         //Intent.putExtra(PresentationActivity.BOOLEAN_NAME5, feedbackPerSlide);
+        EditText session_name_view = (EditText) findViewById(R.id.SessionTitle);
+        EditText session_password_view = (EditText) findViewById(R.id.SessionPassword);
+        EditText session_location_view = (EditText) findViewById(R.id.SessionLocation);
+
+        String session_name = session_name_view.getText().toString();
+        String session_password = session_name_view.getText().toString();
+        String session_location = session_name_view.getText().toString();
+        //Intent.putExtra(PresentationActivity.SESSION_NAME, session_name);
+        //Intent.putExtra(PresentationActivity.SESSION_PASSWORD, session_password);
+        //Intent.putExtra(PresentationActivity.SESSION_LOCATION, session_location);
 
 
-        //b.putParcelable(SyncStateContract.Constants.CUSTOM_LISTING, presentationFile);
-        //Intent.putExtras(b);
+        b.putParcelable(SyncStateContract.Constants.PRESENTATION_FILE, presentationFile);
+        Intent.putExtras(b);
 
         //startActivity(Intent);
     }
@@ -104,8 +115,7 @@ public class HostingWizardActivity extends AppCompatActivity {
         XMLParser parser = new XMLParser();
         InputStream in = null;
         in = getAssets().open(pathName);
-        PresentationFile presentationFile = parser.getPresentation(in);
-        return presentationFile;
+        return parser.getPresentation(in);
     }
 
     //Start activity to select a presentation file

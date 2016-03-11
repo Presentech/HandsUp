@@ -61,10 +61,6 @@ public class PresentationFileListActivity extends AppCompatActivity {
         File f = new File(dataRoot, DirectoryPath);
         //Add all files to an arryList
         //f.mkdirs();
-        if(f.exists()){
-            Log.d("FilePath", "DIE");
-
-        }
         File[] files = f.listFiles();
         if (files.length == 0) {
             //No Files found at this location
