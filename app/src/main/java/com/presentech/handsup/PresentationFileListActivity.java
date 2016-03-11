@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class PresentationFileListActivity extends AppCompatActivity {
@@ -31,14 +32,17 @@ public class PresentationFileListActivity extends AppCompatActivity {
         lv.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, FilesInFolder));
         //Wait for item click return position
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-          public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+          public void onItemClick(AdapterView<?> parent, View v, int position, long id){
               //On item click create intent for returning to hosting wizard
               Intent Intent = new Intent(PresentationFileListActivity.this, HostingWizardActivity.class);
               //Get name of file selected
               String fileName = (String) FilesInFolder.get(position);
               String filePath = Environment.getExternalStorageDirectory().getPath() + "/HandsUp/" + fileName;
+              Log.d("FILEPATH", filePath);
               //put filePath as extra message with intent
-              Intent.putExtra(HostingWizardActivity.FILE_PATH_NAME, filePath);
+              //try{
+                 // Intent.putExtra(HostingWizardActivity.FILE_PATH_NAME, getAssets().open("test.xml"));
+              //}catch (IOException e){}
 
               startActivity(Intent);
 

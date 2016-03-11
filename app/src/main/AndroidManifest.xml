@@ -95,11 +95,13 @@
         <activity
             android:name=".SettingsDefaultSettingActivity"
             android:label="@string/default_setting_title"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            />
 
         <activity android:name=".SettingsActivity"/>
-
-
+        <activity android:name=".FeedbackActivity"/>
+        <activity android:name=".PresentationActivity"
+            android:screenOrientation="landscape"/>
         <activity
             android:name=".AudienceSessionSelect"
             android:label="@string/title_activity_audience_session_select"

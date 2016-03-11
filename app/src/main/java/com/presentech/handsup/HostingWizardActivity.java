@@ -54,9 +54,9 @@ public class HostingWizardActivity extends AppCompatActivity {
         //Get preesntation filePath if returning from PresentationFileListActivity
         Intent intent = getIntent();
         if (intent.getStringExtra(FILE_PATH_NAME) != null){
-            pathName = intent.getStringExtra(FILE_PATH_NAME);
+            //pathName = intent.getStringExtra(FILE_PATH_NAME);
         }
-
+        pathName = "test.xml";
         //get width and height of screen for views
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
@@ -86,7 +86,7 @@ public class HostingWizardActivity extends AppCompatActivity {
     public void createSession(View view) throws IOException, XmlPullParserException {
         PresentationFile presentationFile = getPresentation(pathName);
         //Go to Presentation with options set
-        //Intent Intent = new Intent(this, PresentationActivity.class);
+        Intent intent = new Intent(this, PresentationActivity.class);
         Bundle b = new Bundle();
         //Add options to Presentation
         //Intent.putExtra(PresentationActivity.BOOLEAN_NAME1, understanding);
@@ -106,10 +106,10 @@ public class HostingWizardActivity extends AppCompatActivity {
         //Intent.putExtra(PresentationActivity.SESSION_LOCATION, session_location);
 
 
-        //b.putParcelable(SyncStateContract.Constants.PRESENTATION_FILE, presentationFile);
-        //Intent.putExtras(b);
+       // b.putParcelable(SyncStateContract.Constants.CUSTOM_LISTING, presentationFile);
+        //intent.putExtra("pF", presentationFile);
 
-        //startActivity(Intent);
+        startActivity(intent);
     }
     public PresentationFile getPresentation(String pathName) throws IOException, XmlPullParserException {
         XMLParser parser = new XMLParser();
