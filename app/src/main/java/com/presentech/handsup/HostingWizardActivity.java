@@ -86,7 +86,7 @@ public class HostingWizardActivity extends AppCompatActivity {
     public void createSession(View view) throws IOException, XmlPullParserException {
         PresentationFile presentationFile = getPresentation(pathName);
         //Go to Presentation with options set
-        Intent Intent = new Intent(this, PresentationActivity.class);
+        //Intent Intent = new Intent(this, PresentationActivity.class);
         Bundle b = new Bundle();
         //Add options to Presentation
         //Intent.putExtra(PresentationActivity.BOOLEAN_NAME1, understanding);
@@ -106,8 +106,8 @@ public class HostingWizardActivity extends AppCompatActivity {
         //Intent.putExtra(PresentationActivity.SESSION_LOCATION, session_location);
 
 
-        b.putParcelable(SyncStateContract.Constants.PRESENTATION_FILE, presentationFile);
-        Intent.putExtras(b);
+        //b.putParcelable(SyncStateContract.Constants.PRESENTATION_FILE, presentationFile);
+        //Intent.putExtras(b);
 
         //startActivity(Intent);
     }

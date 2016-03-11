@@ -46,12 +46,6 @@ public class PresentationFileListActivity extends AppCompatActivity {
         });
     }
 
-    public void selectItem (int position, Intent intent, ArrayList<String> FilesInFolder){
-        //Attach different things to the intent depending on which file was selected
-        //Intent gives new activity to start, position is item clicked, i is number of items
-
-
-    }
 
     public ArrayList<String> GetFiles(String DirectoryPath) {
         //Create a list to store file names in
