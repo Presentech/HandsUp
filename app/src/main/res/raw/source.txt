@@ -1,0 +1,9 @@
+I am the <b>text</b> inside <b>a</b> source file!
+TextFlow is <b><i>special layout </b></i>designed to lay out rich text. It can be used to layout several Text nodes in a single text flow. The TextFlow uses the text and the font of each Text node inside of it plus it own width and text alignment to determine the location for each child. A single Text node can span over several lines due to wrapping and the visual location of Text node can differ from the logical location due to bidi reordering.
+Did you see that <i>wrap</i>? 
+Adding <b>lots</b> of lines to see if <i>it really works!</i>
+I'm confused.
+
+What if there was a space?
+
+PHEWWWW!!!!!!
