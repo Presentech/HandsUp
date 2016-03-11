@@ -24,7 +24,7 @@ public class FeedbackActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_feedback);
+        //setContentView(R.layout.activity_feedback);
 
 
         Display display = getWindowManager().getDefaultDisplay();
@@ -33,17 +33,17 @@ public class FeedbackActivity extends AppCompatActivity {
         int width = size.x;
         int height = size.y;
 
-        Bitmap background = decodeSampledBitmapFromResource(getResources(), R.drawable.bgd, width, height);
+        Bitmap background = decodeSampledBitmapFromResource(getResources(), R.drawable.background, width, height);
 
 
-        RelativeLayout mainBaseLayout = (RelativeLayout) findViewById(R.id.feedbackBaseRelativeLayout);
-        Drawable dr = new  BitmapDrawable(getResources(), background);
+        //RelativeLayout mainBaseLayout = (RelativeLayout) findViewById(R.id.feedbackBaseRelativeLayout);
+        //Drawable dr = new  BitmapDrawable(getResources(), background);
 
         int sdk = android.os.Build.VERSION.SDK_INT;
         if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-            mainBaseLayout.setBackgroundDrawable(dr);
+            //mainBaseLayout.setBackgroundDrawable(dr);
         } else {
-            mainBaseLayout.setBackground(dr);
+            //mainBaseLayout.setBackground(dr);
         }
 
     }
