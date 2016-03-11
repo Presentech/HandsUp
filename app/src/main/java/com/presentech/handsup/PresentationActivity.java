@@ -49,6 +49,8 @@ public class PresentationActivity extends AppCompatActivity {
     int screenWidth;
     int screenHeight;
     PresentationFile presentationFile;
+    private navDrawer drawer;
+    String mode = "PRESENTER";
 
     TextHandler tH = new TextHandler();
     RelativeLayout slide = null;
@@ -82,7 +84,7 @@ public class PresentationActivity extends AppCompatActivity {
         //mDrawerList is the ListView that holds the options
         drawer.mDrawerLayout = (DrawerLayout) findViewById(R.id.hostingWizard_drawerFrame);
         drawer.mDrawerList = (ListView) findViewById(R.id.hostingWizard_leftDrawer);
-        drawer.createDrawer(HostingWizardActivity.this, mode);
+        drawer.createDrawer(PresentationActivity.this, mode);
 
         //I think Action Bar things HAVE to be done inside the activity
         //Enable drawer display button in Action Bar
