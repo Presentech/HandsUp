@@ -98,7 +98,7 @@ public class HostingWizardActivity extends AppCompatActivity {
         final String PREF_VERSION_CODE_KEY = "version_code";
         final int DOESNT_EXIST = -1;
         // Get current version code
-        int currentVersionCode = 0;
+        int currentVersionCode;
         try {
             currentVersionCode = getPackageManager().getPackageInfo(getPackageName(), 0).versionCode;
         } catch (android.content.pm.PackageManager.NameNotFoundException e) {
@@ -114,7 +114,6 @@ public class HostingWizardActivity extends AppCompatActivity {
         // Check for first run or upgrade
         if (currentVersionCode == savedVersionCode) {
             // This is just a normal run
-            runWalkthrough();
             return;
         } else if (savedVersionCode == DOESNT_EXIST) {
             // Show the Tutorial Here
