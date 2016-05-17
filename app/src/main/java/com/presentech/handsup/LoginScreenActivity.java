@@ -52,7 +52,7 @@ public class LoginScreenActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         if (loginCompleted) {
-            setContentView(R.layout.activity_hosting_wizard);
+            //setContentView(R.layout.activity_hosting_wizard);
             startActivity(submitLoginDetails);
         }
     }

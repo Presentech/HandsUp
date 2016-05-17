@@ -53,6 +53,9 @@ public class navDrawer {
         if (mode.equals("PRESENTER")) {
             navMenuTitles = activity.getResources().getStringArray(R.array.presenterDrawerOptions);
             navMenuIcons = activity.getResources().obtainTypedArray(R.array.presenterDrawerIcons);
+        }if (mode.equals("PRESENTER_RO")) {
+            navMenuTitles = activity.getResources().getStringArray(R.array.presenterDrawerOptions_RO);
+            navMenuIcons = activity.getResources().obtainTypedArray(R.array.presenterDrawerIcons_RO);
         }
         else if (mode.equals("AUDIENCE")){
             navMenuTitles = activity.getResources().getStringArray(R.array.audienceDrawerOptions);
@@ -162,7 +165,26 @@ public class navDrawer {
                 default:
             }
         }
-
+        else if (navDrawerMode.equals("PRESENTER_RO")){
+            switch(position) {
+                case 0:
+                    Intent mainActivityIntent = new Intent(activity, ModeSelectActivity.class);
+                    activity.startActivity(mainActivityIntent);
+                    break;
+                case 1:
+                    Intent newSessionIntent = new Intent(activity, HostingWizardActivity.class);
+                    activity.startActivity(newSessionIntent);
+                    break;
+                case 2:
+                    Intent tutorialIntent = new Intent(activity, PresentationModeTutorial.class);
+                    activity.startActivity(tutorialIntent);
+                    break;
+                case 3:
+                    Intent aboutIntent = new Intent(activity, aboutActivity.class);
+                    activity.startActivity(aboutIntent);
+                default:
+            }
+        }
     }
 
 

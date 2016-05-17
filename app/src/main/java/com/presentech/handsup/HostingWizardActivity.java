@@ -1,6 +1,7 @@
 package com.presentech.handsup;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -40,10 +41,13 @@ public class HostingWizardActivity extends AppCompatActivity {
     private Bitmap background;
     private navDrawer drawer;
     private boolean understanding, multiChoice, messaging, hideFeedback, feedbackPerSlide;
-    String mode = "PRESENTER";
+    String mode = "PRESENTER_RO";
     //String mode = "AUDIENCE";
     public static final String FILE_PATH_NAME = "path name";
     String pathName;
+    private LinearLayout inputColumn;
+    private LinearLayout optionsColumn;
+    private LinearLayout walkthrough1, walkthrough2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +68,7 @@ public class HostingWizardActivity extends AppCompatActivity {
         int width = size.x;
         int height = size.y;
 
-        changeViewWidths(width);
+        changeViewWidths(width, height);
 
 
         //NAVIGATION DRAWER
@@ -81,6 +85,66 @@ public class HostingWizardActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+
+        //Tutorial
+        walkthrough1.setVisibility(View.INVISIBLE);
+        walkthrough2.setVisibility(View.INVISIBLE);
+        checkFirstRun();
+    }
+
+    private void checkFirstRun() {
+
+        final String PREFS_NAME = "MyPrefsFile";
+        final String PREF_VERSION_CODE_KEY = "version_code";
+        final int DOESNT_EXIST = -1;
+        // Get current version code
+        int currentVersionCode = 0;
+        try {
+            currentVersionCode = getPackageManager().getPackageInfo(getPackageName(), 0).versionCode;
+        } catch (android.content.pm.PackageManager.NameNotFoundException e) {
+            // handle exception
+            e.printStackTrace();
+            return;
+        }
+
+        // Get saved version code
+        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        int savedVersionCode = prefs.getInt(PREF_VERSION_CODE_KEY, DOESNT_EXIST);
+
+        // Check for first run or upgrade
+        if (currentVersionCode == savedVersionCode) {
+            // This is just a normal run
+            runWalkthrough();
+            return;
+        } else if (savedVersionCode == DOESNT_EXIST) {
+            // Show the Tutorial Here
+            // Update this tutorial with new features added
+            runWalkthrough();
+        } else if (currentVersionCode > savedVersionCode) {
+            // If something new is added to this code in an update inform users here.
+        }
+
+        // Update the shared preferences with the current version code
+        prefs.edit().putInt(PREF_VERSION_CODE_KEY, currentVersionCode).apply();
+
+    }
+
+    private void runWalkthrough() {
+        walkthrough1.setVisibility(View.VISIBLE);
+        optionsColumn.setVisibility(View.INVISIBLE);
+    }
+
+    public void goToWalkthroughState2(View view) {
+        walkthrough1.setVisibility(View.INVISIBLE);
+        optionsColumn.setVisibility(View.VISIBLE);
+        inputColumn.setVisibility(View.INVISIBLE);
+        walkthrough2.setVisibility(View.VISIBLE);
+    }
+
+    public void finishWalkthrough(View view) {
+        inputColumn.setVisibility(View.VISIBLE);
+        walkthrough2.setVisibility(View.INVISIBLE);
+
     }
 
     public void createSession(View view) throws IOException, XmlPullParserException {
@@ -124,16 +188,27 @@ public class HostingWizardActivity extends AppCompatActivity {
         //startActivity(Intent);
     }
 
-    public void changeViewWidths(int width){
+    public void changeViewWidths(int width, int height){
 
-        double columnWidthDouble = (width/2);
+        double columnWidthDouble = width*0.5;
         int columnWidth = (int) columnWidthDouble;
-        int checkBoxWidth;
+        double Walk2WidthDouble = width*0.46;
+        int Walk2Width = (int) Walk2WidthDouble;
 
-        LinearLayout inputColumn = (LinearLayout) findViewById(R.id.inputGrid);
-        LinearLayout optionsColumn = (LinearLayout) findViewById(R.id.optionsGrid);
+        double walkthroughHeightDouble = height * 0.75;
+        int walkthroughHeight = (int) walkthroughHeightDouble;
+
+        inputColumn = (LinearLayout) findViewById(R.id.inputGrid);
+        optionsColumn = (LinearLayout) findViewById(R.id.optionsGrid);
+        walkthrough1 = (LinearLayout) findViewById(R.id.HWwalkthrough1);
+        walkthrough2 = (LinearLayout) findViewById(R.id.HWwalkthrough2);
+
         inputColumn.getLayoutParams().width = columnWidth;
         optionsColumn.getLayoutParams().width = columnWidth;
+        walkthrough1.getLayoutParams().width = columnWidth;
+        walkthrough1.getLayoutParams().height = walkthroughHeight;
+        walkthrough2.getLayoutParams().width = Walk2Width;
+        walkthrough2.getLayoutParams().height = walkthroughHeight;
 
     }
 

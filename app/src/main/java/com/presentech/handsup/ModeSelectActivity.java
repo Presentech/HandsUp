@@ -82,13 +82,16 @@ package com.presentech.handsup;
             //Stretch background view to fill screen
             backgroundView.setScaleType(ImageView.ScaleType.FIT_XY);
 
-        }
+        }public void goToPresenterTutorial(View view){
+        Intent THIS_INTENT = new Intent(this, SettingsActivity.class);
+        startActivity(THIS_INTENT);
+         }
         public void goToAudienceMode(View view){
             Intent AudienceIntent = new Intent(this, AudienceSessionSelect.class);
             startActivity(AudienceIntent);
         }
         public void goToPresenterMode(View view){
-            Intent PresenterIntent = new Intent(this, LoginScreenActivity.class);
+            Intent PresenterIntent = new Intent(this, HostingWizardActivity.class);
             startActivity(PresenterIntent);
         }
         public static Bitmap decodeSampledBitmapFromResource(Resources res,int id, int reqWidth, int reqHeight){
