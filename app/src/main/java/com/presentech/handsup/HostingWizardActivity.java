@@ -39,8 +39,8 @@ import java.util.ArrayList;
 public class HostingWizardActivity extends AppCompatActivity {
 
     private Bitmap background;
-    private navDrawer drawer;
     private boolean understanding, multiChoice, messaging, hideFeedback, feedbackPerSlide;
+    private navDrawer drawer;
     String mode = "PRESENTER_RO";
     //String mode = "AUDIENCE";
     public static final String FILE_PATH_NAME = "path name";
@@ -55,10 +55,10 @@ public class HostingWizardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_hosting_wizard);
         setTitle(R.string.hosting_wizard_title);
 
-        //Get preesntation filePath if returning from PresentationFileListActivity
+        //Get presntation filePath if returning from PresentationFileListActivity
         Intent intent = getIntent();
         if (intent.getStringExtra(FILE_PATH_NAME) != null){
-            //pathName = intent.getStringExtra(FILE_PATH_NAME);
+            pathName = intent.getStringExtra(FILE_PATH_NAME);
         }
         pathName = "test.xml";
         //get width and height of screen for views
@@ -184,7 +184,7 @@ public class HostingWizardActivity extends AppCompatActivity {
     //Start activity to select a presentation file
     public void selectFile(View view){
         Intent Intent = new Intent(this, PresentationFileListActivity.class);
-        //startActivity(Intent);
+        startActivity(Intent);
     }
 
     public void changeViewWidths(int width, int height){

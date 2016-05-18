@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class PresentationFileListActivity extends AppCompatActivity {
-
+    public ArrayList<String> FilesInFolder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +25,9 @@ public class PresentationFileListActivity extends AppCompatActivity {
         ListView lv;
         String sdCardLocation = Environment.getExternalStorageDirectory().getPath();
         //Get files from storage
-        final ArrayList<String> FilesInFolder = GetFiles("/HandsUp");
+        Log.d("FILEPATH", "YOU FUCKIN WAHT MATE");
+        FilesInFolder = GetFiles("/HandsUp");
+        Log.d("FILEPATH", "lol innit");
         //Create reference to listview
         lv = (ListView)findViewById(R.id.fileListView);
         //Set adapter for listview (standard)

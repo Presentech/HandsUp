@@ -1,32 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/settings_drawerFrame"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundgrey"
-    tools:context=".SettingsActivity">
-
-    <TextView
-        android:id="@+id/settingHeader"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/action_settings"
-        android:textColor="@color/textColour"
-        android:layout_below="@+id/toolbar"
-        android:layout_margin="10dp"
-        android:paddingLeft="10dp"
-        android:textSize="14sp" />
-
-    <ListView
-        android:id="@+id/listView"
+    android:background="@color/backgroundgrey">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/settingHeader"
-        android:divider="@color/textColour"
-        android:dividerHeight="0.15dp"
-        android:entries="@array/setting_entries"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp" />
+        android:background="@color/backgroundgrey"
+        tools:context=".SettingsActivity">
+
+        <TextView
+            android:id="@+id/settingHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/action_settings"
+            android:textColor="@color/textColour"
+            android:layout_below="@+id/toolbar"
+            android:layout_margin="10dp"
+            android:paddingLeft="10dp"
+            android:textSize="14sp" />
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/settingHeader"
+            android:divider="@color/textColour"
+            android:dividerHeight="0.15dp"
+            android:entries="@array/setting_entries"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" />
 
 
-</RelativeLayout>
+    </RelativeLayout>
+    <!-- The navigation view -->
+    <ListView
+    android:theme="@style/DrawerTheme"
+    android:id="@+id/settings_leftDrawer"
+    android:layout_width="240dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    android:choiceMode="singleChoice"
+    android:divider="@color/presentechBlue"
+    android:dividerHeight="1dp"
+    android:background="@color/drawerBackground" />
+
+
+
+</android.support.v4.widget.DrawerLayout>
