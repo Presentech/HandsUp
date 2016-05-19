@@ -20,6 +20,8 @@ package com.presentech.handsup;
     import android.widget.ImageView;
     import android.widget.ListView;
 
+    import com.presentech.handsup.presentationfile.ExampleStackedBars;
+
 /**
 * Created by Luke on 05/03/2016.
 */
@@ -83,8 +85,8 @@ package com.presentech.handsup;
             backgroundView.setScaleType(ImageView.ScaleType.FIT_XY);
 
         }public void goToPresenterTutorial(View view){
-        Intent THIS_INTENT = new Intent(this, SettingsActivity.class);
-        startActivity(THIS_INTENT);
+            Intent THIS_INTENT = new Intent(this, ExampleStackedBars.class);
+            startActivity(THIS_INTENT);
          }
         public void goToAudienceMode(View view){
             Intent AudienceIntent = new Intent(this, AudienceSessionSelect.class);

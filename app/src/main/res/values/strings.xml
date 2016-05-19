@@ -67,7 +67,7 @@
     <string name="backgroundgrey">#292929</string>
     <string name="darkgrey">#6c6c6c</string>
     <string name="lightgrey">#b9b3b3</string>
-    
+
     /*Login Screen Strings*/
     <string name="title_activity_login_screen">Hands Up Account Login</string>
     <string name="title_activity_registration">Hands Up registration</string>
@@ -78,7 +78,7 @@
     <string name="login_success_confirmation">Login Attempt Successful</string>
     <string name="login_failed_confirmation">Login Attempt Failed</string>
     <string name="title_activity_login">LoginActivity</string>
-    
+
     <!--Session Select Strings -->
     <string name="title_activity_presentation_mode_tutorial">PresentationModeTutorial</string>
     <string name="skip_button">Skip</string>
@@ -95,7 +95,6 @@
     <string name="ptutorial_exit_content">EXIT \nCONTENT \nINSERT\n</string>
     <string name="ptutorial_export_title">How to Export a Presentation</string>
     <string name="ptutorial_export_content">EXPORT \nCONTENT \nINSERT\n</string>
-
 
 
     <string name="action_settings">SETTINGS</string>
@@ -125,9 +124,8 @@
     </string-array>
 
 
-
     <string name="title_activity_audience_session_select">AudienceSessionSelect</string>
-    
+
     <!-- Hosting Wizard Strings -->
     <string name="hosting_wizard_title">Create New Session</string>
     <string name="selectPresentation">Source File</string>
