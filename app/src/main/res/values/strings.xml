@@ -132,8 +132,8 @@
 
     <!-- Audience Tutorial Strings -->
     <string name="title_activity_audience_tutorial">Help!</string>
-    <string name="welcome">Welcome to Hands Up - tagline!</string>
-    <string name="aboutApp">What hands up does</string>
+    <string name="welcome">Welcome to Hands Up - </string>
+    <string name="aboutApp">Hands Up! provides feedback to the presenter based on the reponses given anonymously by the audience. This could be answers to a multi-choice question or an idea of how well you understand the topic.</string>
     <string name="title2">Feedback options available are:</string>
     <string name="button1">Skip</string>
     <string name="button2">Next</string>

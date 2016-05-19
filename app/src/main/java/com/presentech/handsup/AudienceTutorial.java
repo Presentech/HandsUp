@@ -13,12 +13,12 @@ public class AudienceTutorial extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_audience_tutorial);
-
     }
 
     //this is called when 'Skip' is clicked, returns to specified activity
     public void skipClicked(View view){
         Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
@@ -30,6 +30,7 @@ public class AudienceTutorial extends AppCompatActivity {
     //this is called when the 'Done' button is clicked, returns to specified activity
     public void doneClicked(View view) {
         Intent intent = new Intent(this, AudienceSessionSelect.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
@@ -37,5 +38,4 @@ public class AudienceTutorial extends AppCompatActivity {
     public void backClicked(View view) {
         setContentView(R.layout.activity_audience_tutorial);
     }
-
 }
