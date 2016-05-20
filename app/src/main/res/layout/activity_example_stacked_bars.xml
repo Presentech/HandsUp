@@ -48,43 +48,49 @@
             android:layout_width="50dp"
             android:layout_height="40dp"
             android:onClick="increaseA"
+            android:text="G+"
             android:layout_column="0"
             android:layout_row="0" />
         <Button
             android:layout_width="50dp"
             android:layout_height="40dp"
             android:onClick="decreaseA"
+            android:text="G-"
             android:layout_column="0"
             android:layout_row="1" />
         <Button
             android:layout_width="50dp"
             android:layout_height="40dp"
             android:onClick="increaseB"
+            android:text="Y+"
             android:layout_column="1"
             android:layout_row="0" />
         <Button
             android:layout_width="50dp"
             android:layout_height="40dp"
             android:onClick="decreaseB"
+            android:text="Y-"
             android:layout_column="1"
             android:layout_row="1" />
         <Button
             android:layout_width="50dp"
             android:layout_height="40dp"
             android:onClick="increaseC"
+            android:text="R+"
             android:layout_column="2"
             android:layout_row="0" />
         <Button
             android:layout_width="50dp"
             android:layout_height="40dp"
             android:onClick="decreaseC"
+            android:text="R-"
             android:layout_column="2"
             android:layout_row="1" />
         <Button
             android:layout_width="50dp"
             android:layout_height="40dp"
             android:onClick="updateChart"
-            android:layout_column="1"
+            android:layout_columnSpan="3"
             android:layout_row="2"  />
     </GridLayout>
 
