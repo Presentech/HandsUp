@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.androidplot.pie.PieChart xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
     xmlns:ap="http://schemas.android.com/apk/res-auto"
-    tools:context="com.presentech.handsup.ExamplePieChart">
+    android:id="@+id/PiePlotFRAG"
+    android:orientation="vertical"
+    android:theme="@style/APDefacto.Dark"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context="com.presentech.handsup.pieChartFragment"
+    android:padding="10dp"
+    ap:label="A Simple Pie chart"
+    ap:rangeLabel="range"
+    ap:domainLabel="domain"
+    android:background="@color/backgroundgrey">
 
-    <com.androidplot.pie.PieChart
-        android:theme="@style/APDefacto.Dark"
-        android:id="@+id/PiePlotFRAG"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        ap:label="A Simple Pie chart"
-        ap:rangeLabel="range"
-        ap:domainLabel="domain"
-        android:background="@color/backgroundgrey"/>
 
-</LinearLayout>
+
+
+</com.androidplot.pie.PieChart>

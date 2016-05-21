@@ -1,30 +1,42 @@
 package com.presentech.handsup;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.androidplot.pie.PieChart;
 import com.androidplot.pie.Segment;
 import com.androidplot.pie.SegmentFormatter;
 import com.presentech.handsup.R;
 
+import java.util.Random;
+
 public class pieChartFragment extends Fragment{
 
     public SingleFeedback[] feedbackArray = new SingleFeedback[10];
-    public PieChart understandingPlot, ABCPlot;
     public int qNo = 0, numberofPlots = 2;
     public int[] answerA, answerB, answerC;
     public int a, b, c, good, bad, meh;
+    private ViewGroup.LayoutParams PieChartParams;
+    public int screenWidth, screenHeight;
+    View DummyView;
+    LinearLayout pieLayout;    // Root layout for fragment
+    ViewGroup viewParent;
+    public PieChart pieChartView; // PieChart View within
+    SegmentFormatter segmentFormat;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Log.d("ABCD","Here");
         super.onCreate(savedInstanceState);
     }
 
@@ -32,7 +44,52 @@ public class pieChartFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pie_chart, container, false);
+        pieChartView = (PieChart) inflater.inflate(R.layout.fragment_pie_chart, container, false);
+        //init_bar();
+        return pieChartView;
+    }
+    @Override
+     public void onViewCreated(View view, Bundle savedInstanceState) {
+        Log.d("ABCD", "InitialisePieChart");
+        initPieChart();
+    }
+
+    public void initPieChart(){
+        //Create references to views
+        //pieChartView = (PieChart) pieLayout.findViewById(R.id.PiePlotFRAG);
+        //viewParent = pieLayout;
+        //Get Paramater values for each bar section
+        PieChartParams = pieChartView.getLayoutParams();
+
+        //Calculate the width of the bar
+        double pieHeightDouble = 0.3*screenHeight;
+
+        //Set width to all views
+        PieChartParams.height = (int) pieHeightDouble;
+        plotPitChart();
+    }
+
+    public void setFeedbackArray(SingleFeedback[] feedback){
+        Random r = new Random();
+        int rV;
+        feedbackArray = feedback;
+        /*Set some example ojects that would be expected to recieve*/
+        for(int i=0; i<10;i++){
+            rV = r.nextInt(4 - 1) + 1;
+            feedbackArray[i] = new SingleFeedback("abc",1.00,1,1,rV,rV,"abc",123L);
+        }
+    }
+
+    public void setScreenParams(int height, int width){
+        screenHeight = height;
+        screenWidth = width;
+    }
+
+    public void plotPitChart(){
+        setFeedbackArray(feedbackArray);
+        getQuestionNumber();
+        calculateQuestionResponse();
+        QuestionResponsePlot();
     }
 
     public void calculateUnderstandingResponse(){
@@ -94,23 +151,6 @@ public class pieChartFragment extends Fragment{
 
     }
 
-    public void setFeedbackArray(SingleFeedback[] feedback){
-
-        feedbackArray = feedback;
-        /*Set some example objects that would be expected to recieve*/
-        feedbackArray[0] = new SingleFeedback("abc",1.00,1,1,2,2,"abc",123L);
-        feedbackArray[1] = new SingleFeedback("abc",1.00,1,1,2,1,"abc",123L);
-        feedbackArray[2] = new SingleFeedback("abc",1.00,1,1,1,2,"abc",123L);
-        feedbackArray[3] = new SingleFeedback("abc",1.00,1,1,1,3,"abc",123L);
-        feedbackArray[4] = new SingleFeedback("abc",1.00,1,1,3,1,"abc",123L);
-        feedbackArray[5] = new SingleFeedback("abc",1.00,1,1,2,2,"abc",123L);
-        feedbackArray[6] = new SingleFeedback("abc",1.00,1,1,2,3,"abc",123L);
-        feedbackArray[7] = new SingleFeedback("abc",1.00,1,1,1,2,"abc",123L);
-        feedbackArray[8] = new SingleFeedback("abc",1.00,1,1,1,3,"abc",123L);
-        feedbackArray[9] = new SingleFeedback("abc",1.00,1,1,3,1,"abc",123L);
-    }
-
-
     /*Get Number of questions*/
     public void getQuestionNumber() {
         for (int i = 0; i < feedbackArray.length; i++) {
@@ -139,51 +179,48 @@ public class pieChartFragment extends Fragment{
             }
         }
 
-        understandingPlot = (PieChart) getView().findViewById(R.id.PiePlotFRAG);
+        //PieChart = (PieChart) pieLayout.findViewById(R.id.PiePlotFRAG);
 
-        SegmentFormatter segmentFormat = new SegmentFormatter();
+        segmentFormat = new SegmentFormatter();
         segmentFormat.configure(getActivity().getApplicationContext(), R.xml.segmentformat);
 
-
         int currentQuestion = 0;
-        understandingPlot.setTitle("Understanding Response to Slide " + Integer.toString(currentQuestion+1));
+        pieChartView.setTitle("Understanding Response to Slide " + Integer.toString(currentQuestion+1));
 
         if (good > 0){
             Segment segA = new Segment("Good", good);
-            understandingPlot.addSeries(segA, segmentFormat);
+            pieChartView.addSeries(segA, segmentFormat);
         }
         if (meh > 0){
             Segment segB = new Segment("Meh", meh);
-            understandingPlot.addSeries(segB, segmentFormat);
+            pieChartView.addSeries(segB, segmentFormat);
         }
         if (bad > 0){
             Segment segC = new Segment("Bad", bad);
-            understandingPlot.addSeries(segC, segmentFormat);
+            pieChartView.addSeries(segC, segmentFormat);
         }
     }
 
     public void QuestionResponsePlot(){
 
-        ABCPlot = (PieChart) getView().findViewById(R.id.PiePlotFRAG);
-
-        SegmentFormatter segmentFormat = new SegmentFormatter();
-        segmentFormat.configure(getActivity().getApplicationContext(), R.xml.segmentformat);
-
-
         int currentQuestion = 0;
-        ABCPlot.setTitle("Answers to question number " + Integer.toString(currentQuestion+1));
+
+        segmentFormat = new SegmentFormatter();
+
+        //segmentFormat.configure(, R.xml.segmentformat);
+        pieChartView.setTitle("Answers to question number " + Integer.toString(currentQuestion+1));
 
         if (answerA[currentQuestion] > 0){
             Segment segA = new Segment("A", answerA[currentQuestion]);
-            ABCPlot.addSeries(segA, segmentFormat);
+            pieChartView.addSeries(segA, segmentFormat);
         }
         if (answerB[currentQuestion] > 0){
             Segment segB = new Segment("B", answerB[currentQuestion]);
-            ABCPlot.addSeries(segB, segmentFormat);
+            pieChartView.addSeries(segB, segmentFormat);
         }
         if (answerC[currentQuestion] > 0){
             Segment segC = new Segment("C", answerC[currentQuestion]);
-            ABCPlot.addSeries(segC, segmentFormat);
+            pieChartView.addSeries(segC, segmentFormat);
         }
 
     }

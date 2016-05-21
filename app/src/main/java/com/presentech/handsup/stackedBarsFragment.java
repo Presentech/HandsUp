@@ -23,8 +23,8 @@ public class stackedBarsFragment extends Fragment{
     public int a, b, c, good, bad, meh;
     double A =1, B = 1, C = 1;
     double APercent, BPercent, CPercent, totalInputs, barHeight;
-    View AView, BView, CView, DummyView;
     ViewGroup viewParent;
+    View AView, BView, CView, DummyView;
     private ViewGroup.LayoutParams AParams, BParams, CParams;
     public int screenWidth, screenHeight;
     LinearLayout barLayout;
@@ -44,6 +44,49 @@ public class stackedBarsFragment extends Fragment{
         initBar();
         return barLayout;
     }
+
+
+    public void setFeedbackArray(SingleFeedback[] feedback){
+        Random r = new Random();
+        int rV;
+        feedbackArray = feedback;
+        /*Set some example ojects that would be expected to recieve*/
+        for(int i=0; i<10;i++){
+            rV = r.nextInt(4 - 1) + 1;
+            feedbackArray[i] = new SingleFeedback("abc",1.00,1,1,rV,rV,"abc",123L);
+        }
+    }
+
+    public void setScreenParams(int height, int width){
+        screenHeight = height;
+        screenWidth = width;
+    }
+
+    public void initBar(){
+        //Create references to views
+        AView = barLayout.findViewById(R.id.greenLayoutfrag);
+        BView = barLayout.findViewById(R.id.yellowLayoutfrag);
+        CView = barLayout.findViewById(R.id.redLayoutfrag);
+        DummyView = barLayout.findViewById(R.id.dummyBar);
+        viewParent = barLayout;
+
+        //Get Paramater values for each bar section
+        AParams = AView.getLayoutParams();
+        BParams = BView.getLayoutParams();
+        CParams = CView.getLayoutParams();
+        //Calculate the width of the bar
+        double barWidthDouble = 0.1*screenWidth;
+        int barWidth = (int) barWidthDouble;
+        //Calculate the height of the bar
+        barHeight = 0.8*screenHeight;
+        //Set width to all views
+        AParams.width = barWidth;
+        BParams.width = barWidth;
+        CParams.width = barWidth;
+        updateBarHeight();
+    }
+
+
     public void calculateUnderstandingResponse(){
         good = 0;
         bad = 0;
@@ -109,51 +152,6 @@ public class stackedBarsFragment extends Fragment{
         }
 
     }
-
-    public void setFeedbackArray(SingleFeedback[] feedback){
-        Random r = new Random();
-        int rV;
-        feedbackArray = feedback;
-        /*Set some example ojects that would be expected to recieve*/
-        for(int i=0; i<10;i++){
-            rV = r.nextInt(4 - 1) + 1;
-            feedbackArray[i] = new SingleFeedback("abc",1.00,1,1,rV,rV,"abc",123L);
-        }
-    }
-
-    public void setScreenParams(int height, int width){
-        screenHeight = height;
-        screenWidth = width;
-    }
-    public void initBar(){
-        //Create references to views
-        AView = barLayout.findViewById(R.id.greenLayoutfrag);
-        BView = barLayout.findViewById(R.id.yellowLayoutfrag);
-        CView = barLayout.findViewById(R.id.redLayoutfrag);
-        DummyView = barLayout.findViewById(R.id.dummyBar);
-        viewParent = barLayout;
-
-        //Get Paramater values for each bar section
-        AParams = AView.getLayoutParams();
-        BParams = BView.getLayoutParams();
-        CParams = CView.getLayoutParams();
-        setBar();
-        updateBarHeight();
-
-    }
-
-    private void setBar(){
-        //Calculate the width of the bar
-        double barWidthDouble = 0.1*screenWidth;
-        int barWidth = (int) barWidthDouble;
-        //Calculate the height of the bar
-        barHeight = 0.8*screenHeight;
-
-        //Set width to all views
-        AParams.width = barWidth;
-        BParams.width = barWidth;
-        CParams.width = barWidth;
-    }
     public void updateBarHeight(){
         //Calculate the percent of the bar filled by each section
         totalInputs = a+b+c;
@@ -173,33 +171,5 @@ public class stackedBarsFragment extends Fragment{
         AParams.height = AHeight;
         BParams.height = BHeight;
         CParams.height = CHeight;
-    }
-
-    public void updateBarHeight(View v){
-        //Calculate the percent of the bar filled by each section
-        totalInputs = A+B+C;
-        APercent = A/totalInputs;
-        BPercent = B/totalInputs;
-        CPercent = C/totalInputs;
-
-        //Calculate the height of each bar section
-        double AHeightDouble = APercent * barHeight;
-        int AHeight = (int) AHeightDouble;
-        double BHeightDouble = BPercent * barHeight;
-        int BHeight = (int) BHeightDouble;
-        double CHeightDouble = CPercent * barHeight;
-        int CHeight = (int) CHeightDouble;
-
-        //Set Height
-        AParams.height = AHeight;
-        BParams.height = BHeight;
-        CParams.height = CHeight;
-        updateBars();
-    }
-
-    private void updateBars(){
-        viewParent.removeView(DummyView);
-        DummyView = new View(getActivity());
-        viewParent.addView(DummyView, 4);
     }
 }
