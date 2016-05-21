@@ -157,4 +157,6 @@
     <string name="iconsExplanation">These icons can be used to indicate understanding on a topic.</string>
     <string name="lettersExplanation">Letters can be used to respond to multiple choice questions.</string>
     <string name="presentation_container">Presentation</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

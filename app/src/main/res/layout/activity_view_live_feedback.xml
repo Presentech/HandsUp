@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:ap="http://schemas.android.com/apk/res-auto"
+    tools:context="com.presentech.handsup.ViewLiveFeedback">
+
+    <fragment
+        class="com.presentech.handsup.pieChartFragment"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/ABCPieChart">
+    </fragment>
+    <fragment
+        class="com.presentech.handsup.pieChartFragment"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/ABCPieChart"
+        android:id="@+id/understandingPieChart">
+    </fragment>
+    <fragment
+        class="com.presentech.handsup.stackedBarsFragment"
+        android:layout_width="100dp"
+        android:layout_height="800dp"
+        android:layout_toEndOf="@+id/ABCPieChart"
+        android:id="@+id/ABCstackedBars">
+    </fragment>
+
+    <Button
+        android:id="@+id/buarsttonforb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="updateValues"
+        android:text="New Values"/>
+</RelativeLayout>

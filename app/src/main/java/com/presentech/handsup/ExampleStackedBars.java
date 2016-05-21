@@ -1,4 +1,4 @@
-package com.presentech.handsup.presentationfile;
+package com.presentech.handsup;
 
 import android.app.Activity;
 import android.content.res.Configuration;
@@ -92,12 +92,6 @@ public class ExampleStackedBars extends AppCompatActivity {
         AParams.height = AHeight;
         BParams.height = BHeight;
         CParams.height = CHeight;
-    }
-
-    public void updateChart(View vew){
-        viewParent.removeView(DummyView);
-        DummyView = new View(ExampleStackedBars.this);
-        viewParent.addView(DummyView, 3);
     }
     public void increaseA(View view){
         if (A < 100) A++;
