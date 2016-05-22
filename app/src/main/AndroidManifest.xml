@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.presentech.handsup">
 
-    <uses-permission android:name="android.permission.WRITE_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -21,8 +21,7 @@
         <activity
             android:name=".LoginScreenActivity"
             android:label="@string/title_activity_login_screen"
-            android:parentActivityName=".ModeSelectActivity">
-        </activity>
+            android:parentActivityName=".ModeSelectActivity"></activity>
         <activity
             android:name=".RegistrationActivity"
             android:label="@string/title_activity_registration"
@@ -50,14 +49,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.presentech.handsup.LoginScreenActivity" />
         </activity>
-        <activity android:name=".HostingWizardActivity"
-            android:screenOrientation="landscape"
-
-            />
-        
-        <activity android:name=".PresentationFileListActivity"></activity>
-
-
+        <activity
+            android:name=".HostingWizardActivity"
+            android:screenOrientation="landscape" />
+        <activity android:name=".PresentationFileListActivity" />
         <activity
             android:name=".PresentationModeTutorial"
             android:label="@string/title_activity_presentation_mode_tutorial"
@@ -67,46 +62,41 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.presentech.handsup.MainActivity" />
         </activity>
-
         <activity
             android:name=".SettingsAccessibilityActivity"
             android:label="@string/accessibility_title"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".SettingsFileStorageActivity"
             android:label="@string/file_storage_title"
             android:screenOrientation="portrait" />
-
-        <activity android:name=".SettingsPresentationFeedbackActivity"
+        <activity
+            android:name=".SettingsPresentationFeedbackActivity"
             android:label="@string/presentation_feedback_title"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name=".SettingsAccountActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SettingsAccountActivity"
             android:label="@string/account_title"
-            android:screenOrientation="portrait"/>
-
+            android:screenOrientation="portrait" />
         <activity
             android:name=".SettingsVisibilityActivity"
             android:label="Visibility"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".SettingsDefaultSettingActivity"
             android:label="@string/default_setting_title"
-            android:screenOrientation="portrait"
-            />
-
-        <activity android:name=".SettingsActivity"/>
-        <activity android:name=".FeedbackActivity"/>
-        <activity android:name=".PresentationActivity"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="portrait" />
+        <activity android:name=".SettingsActivity" />
+        <activity android:name=".FeedbackActivity" />
+        <activity
+            android:name=".PresentationActivity"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".AudienceSessionSelect"
             android:label="@string/title_activity_audience_session_select"
-            android:theme="@style/AppTheme"></activity>
-        <activity android:name=".aboutActivity"/>
-        <activity android:name=".AudienceTutorial"/>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".aboutActivity" />
+        <activity android:name=".AudienceTutorial" />
     </application>
 
 </manifest>

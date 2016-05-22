@@ -41,7 +41,7 @@ public class navDrawer {
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
 
-    public void createDrawer(Activity activity, String mode ){
+    public void createDrawer(Activity activity, String mode) {
         //Set Activity to local variable
         this.activity = activity;
         navDrawerMode = mode;
