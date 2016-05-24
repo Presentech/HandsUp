@@ -8,15 +8,13 @@
     tools:context="com.presentech.handsup.pieChartFragment">
 
 
+
     <com.androidplot.pie.PieChart
         style="@style/APDefacto.Dark"
         android:id="@+id/piePlotFrag"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:padding="10dp"
-        ap:label="A Simple Pie chart"
-        ap:rangeLabel="range"
-        ap:domainLabel="domain"
         android:background="@color/backgroundgrey"/>
 
 

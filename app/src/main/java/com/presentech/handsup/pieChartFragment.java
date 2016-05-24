@@ -1,6 +1,7 @@
 package com.presentech.handsup;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -55,6 +56,7 @@ public class pieChartFragment extends Fragment{
         //Set width to all views
         pieParams.height = pieSize;
         pieParams.width = pieSize;
+        getQuestionNumber();
         calculateQuestionResponse();
         QuestionResponsePlot();
     }
@@ -93,7 +95,6 @@ public class pieChartFragment extends Fragment{
                         a++;
                         answerA[i] = a;
                         break;
-                        /*answerA[i] = answerA[i] + 1;*/
                     }
                     if (feedbackArray[k].getABC() == 2) {
                         b++;
@@ -104,7 +105,6 @@ public class pieChartFragment extends Fragment{
                         c++;
                         answerC[i] = c;
                         break;
-                        /*answerC[i] = answerC[i] + 1;*/
                     }
                 }
             }
@@ -116,10 +116,15 @@ public class pieChartFragment extends Fragment{
 
         int currentQuestion = 0;
         //Log.d("ABCD", "QRP");
-        segmentFormat = new SegmentFormatter();
+        SegmentFormatter segmentFormat = new SegmentFormatter();
+        segmentFormat.configure(getActivity(), R.xml.segment_formatter);
         //ERROR HERE It accesses this method BEFORE initPieChart and I can't figure out WHY.
         //segmentFormat.configure(, R.xml.segmentformat);
-        pieChart.setTitle("Answers to question number " + Integer.toString(currentQuestion+1));
+        /*pieChart.setTitle("Answers to question number " + Integer.toString(currentQuestion+1));*/
+
+        pieChart.getBorderPaint().setColor(Color.TRANSPARENT);
+        pieChart.getBackgroundPaint().setColor(Color.TRANSPARENT);
+
 
         if (answerA[currentQuestion] > 0){
             segA = new Segment("A", answerA[currentQuestion]);
