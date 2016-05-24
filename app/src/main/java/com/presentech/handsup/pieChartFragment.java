@@ -1,13 +1,9 @@
 package com.presentech.handsup;
 
-import android.app.Activity;
-import android.content.Context;
-import android.graphics.Point;
-import android.net.Uri;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,27 +12,28 @@ import android.widget.LinearLayout;
 import com.androidplot.pie.PieChart;
 import com.androidplot.pie.Segment;
 import com.androidplot.pie.SegmentFormatter;
-import com.presentech.handsup.R;
 
 import java.util.Random;
 
 public class pieChartFragment extends Fragment{
 
     public SingleFeedback[] feedbackArray = new SingleFeedback[10];
+    public int a, b, c, good, bad, meh;
+    double A =1, B = 1, C = 1;
+    double APercent, BPercent, CPercent, totalInputs;
+    ViewGroup viewParent;
+    private ViewGroup.LayoutParams pieParams;
+    public int screenWidth, screenHeight;
+    LinearLayout pieLayout;
+    PieChart pieChart;
     public int qNo = 0, numberofPlots = 2;
     public int[] answerA, answerB, answerC;
-    public int a, b, c, good, bad, meh;
-    private ViewGroup.LayoutParams PieChartParams;
-    public int screenWidth, screenHeight;
-    View DummyView;
-    LinearLayout pieLayout;    // Root layout for fragment
-    ViewGroup viewParent;
-    public PieChart pieChartView; // PieChart View within
     SegmentFormatter segmentFormat;
+    public Segment segA, segB, segC;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Log.d("ABCD","Here");
+        Log.d("ABCD", "CreateSB");
         super.onCreate(savedInstanceState);
     }
 
@@ -44,29 +41,22 @@ public class pieChartFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        pieChartView = (PieChart) inflater.inflate(R.layout.fragment_pie_chart, container, false);
-        //init_bar();
-        return pieChartView;
-    }
-    @Override
-     public void onViewCreated(View view, Bundle savedInstanceState) {
-        Log.d("ABCD", "InitialisePieChart");
+        pieLayout = (LinearLayout) inflater.inflate(R.layout.fragment_pie_chart, container, false);
         initPieChart();
+        return pieLayout;
     }
 
     public void initPieChart(){
-        //Create references to views
-        //pieChartView = (PieChart) pieLayout.findViewById(R.id.PiePlotFRAG);
-        //viewParent = pieLayout;
-        //Get Paramater values for each bar section
-        PieChartParams = pieChartView.getLayoutParams();
-
-        //Calculate the width of the bar
-        double pieHeightDouble = 0.3*screenHeight;
-
+        pieChart = (PieChart) pieLayout.findViewById(R.id.piePlotFrag);
+        pieParams = pieLayout.getLayoutParams();
+        //Calculate the height of the bar
+        double pieSizeDouble = (0.8*screenHeight)/numberofPlots;
+        int pieSize = (int) pieSizeDouble;
         //Set width to all views
-        PieChartParams.height = (int) pieHeightDouble;
-        plotPitChart();
+        pieParams.height = pieSize;
+        pieParams.width = pieSize;
+        calculateQuestionResponse();
+        QuestionResponsePlot();
     }
 
     public void setFeedbackArray(SingleFeedback[] feedback){
@@ -83,35 +73,6 @@ public class pieChartFragment extends Fragment{
     public void setScreenParams(int height, int width){
         screenHeight = height;
         screenWidth = width;
-    }
-
-    public void plotPitChart(){
-        setFeedbackArray(feedbackArray);
-        getQuestionNumber();
-        calculateQuestionResponse();
-        QuestionResponsePlot();
-    }
-
-    public void calculateUnderstandingResponse(){
-        good = 0;
-        bad = 0;
-        meh = 0;
-            for (int i = 0; i < feedbackArray.length; i++){
-
-                if (feedbackArray[i].getGOOD_MEH_BAD() == 1) {
-                    good++;
-                }
-                if (feedbackArray[i].getGOOD_MEH_BAD() == 3) {
-                    bad++;
-                }
-                if (feedbackArray[i].getGOOD_MEH_BAD() == 2) {
-                    meh++;
-                }
-                else if (feedbackArray[i].getGOOD_MEH_BAD() == -1) {
-                    return;
-                }
-            }
-
     }
 
     public void calculateQuestionResponse(){
@@ -151,77 +112,36 @@ public class pieChartFragment extends Fragment{
 
     }
 
+    public void QuestionResponsePlot(){
+
+        int currentQuestion = 0;
+        //Log.d("ABCD", "QRP");
+        segmentFormat = new SegmentFormatter();
+        //ERROR HERE It accesses this method BEFORE initPieChart and I can't figure out WHY.
+        //segmentFormat.configure(, R.xml.segmentformat);
+        pieChart.setTitle("Answers to question number " + Integer.toString(currentQuestion+1));
+
+        if (answerA[currentQuestion] > 0){
+            segA = new Segment("A", answerA[currentQuestion]);
+            pieChart.addSeries(segA, segmentFormat);
+        }
+        if (answerB[currentQuestion] > 0){
+            segB = new Segment("B", answerB[currentQuestion]);
+            pieChart.addSeries(segB, segmentFormat);
+        }
+        if (answerC[currentQuestion] > 0){
+            segC = new Segment("C", answerC[currentQuestion]);
+            pieChart.addSeries(segC, segmentFormat);
+        }
+
+    }
+
+
     /*Get Number of questions*/
     public void getQuestionNumber() {
         for (int i = 0; i < feedbackArray.length; i++) {
             qNo = feedbackArray[i].getQUESTION();
         }
     }
-    /*Get good/meh/bad values*/
-    public void understandingResponsePlot() {
-        int good = 0;
-        int meh = 0;
-        int bad = 0;
-            /*iterate through objects to find whether value is good, meh or bad*/
-        for (int k = 0; k < feedbackArray.length; k++){
 
-            if (feedbackArray[k].getGOOD_MEH_BAD() == 1) {
-                good++;
-            }
-            if (feedbackArray[k].getGOOD_MEH_BAD() == 3) {
-                bad++;
-            }
-            if (feedbackArray[k].getGOOD_MEH_BAD() == 2) {
-                meh++;
-            }
-            else if (feedbackArray[k].getGOOD_MEH_BAD() == -1) {
-                return;
-            }
-        }
-
-        //PieChart = (PieChart) pieLayout.findViewById(R.id.PiePlotFRAG);
-
-        segmentFormat = new SegmentFormatter();
-        segmentFormat.configure(getActivity().getApplicationContext(), R.xml.segmentformat);
-
-        int currentQuestion = 0;
-        pieChartView.setTitle("Understanding Response to Slide " + Integer.toString(currentQuestion+1));
-
-        if (good > 0){
-            Segment segA = new Segment("Good", good);
-            pieChartView.addSeries(segA, segmentFormat);
-        }
-        if (meh > 0){
-            Segment segB = new Segment("Meh", meh);
-            pieChartView.addSeries(segB, segmentFormat);
-        }
-        if (bad > 0){
-            Segment segC = new Segment("Bad", bad);
-            pieChartView.addSeries(segC, segmentFormat);
-        }
-    }
-
-    public void QuestionResponsePlot(){
-
-        int currentQuestion = 0;
-
-        segmentFormat = new SegmentFormatter();
-
-        //segmentFormat.configure(, R.xml.segmentformat);
-        pieChartView.setTitle("Answers to question number " + Integer.toString(currentQuestion+1));
-
-        if (answerA[currentQuestion] > 0){
-            Segment segA = new Segment("A", answerA[currentQuestion]);
-            pieChartView.addSeries(segA, segmentFormat);
-        }
-        if (answerB[currentQuestion] > 0){
-            Segment segB = new Segment("B", answerB[currentQuestion]);
-            pieChartView.addSeries(segB, segmentFormat);
-        }
-        if (answerC[currentQuestion] > 0){
-            Segment segC = new Segment("C", answerC[currentQuestion]);
-            pieChartView.addSeries(segC, segmentFormat);
-        }
-
-    }
 }

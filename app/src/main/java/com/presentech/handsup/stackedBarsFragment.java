@@ -63,6 +63,7 @@ public class stackedBarsFragment extends Fragment{
     }
 
     public void initBar(){
+        Log.d("ABCD", "StackedBars Initialise");
         //Create references to views
         AView = barLayout.findViewById(R.id.greenLayoutfrag);
         BView = barLayout.findViewById(R.id.yellowLayoutfrag);
@@ -153,6 +154,7 @@ public class stackedBarsFragment extends Fragment{
 
     }
     public void updateBarHeight(){
+        //Log.d("ABCD", "QRP");
         //Calculate the percent of the bar filled by each section
         totalInputs = a+b+c;
         APercent = a/totalInputs;

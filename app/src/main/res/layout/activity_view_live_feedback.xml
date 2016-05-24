@@ -14,18 +14,18 @@
         android:text="New Values"/>
 
     <FrameLayout
-        android:layout_width="100dp"
-        android:layout_height="800dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/fragmentContainerFBBarABC"
         android:id="@+id/fragmentContainerFBPieUnderstanding" />
     <FrameLayout
-        android:layout_width="400dp"
-        android:layout_height="400dp"
-        android:layout_alignEnd="@+id/fragmentContainerFBBarABC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
         android:id="@+id/fragmentContainerFBPieABC" />
     <FrameLayout
-        android:layout_width="400dp"
-        android:layout_height="400dp"
-        android:layout_below="@+id/buarsttonforb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/fragmentContainerFBBarABC" />
 </RelativeLayout>
