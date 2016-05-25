@@ -95,7 +95,7 @@ public class LoginScreenActivity extends AppCompatActivity {
         currentToast.show();
     }
 
-    /*Called when the user clicks the Login button*/
+    /*Called when the user clicks the login button*/
     public void loginAttempt(View view) {
         //Get user entered information from edit texts
         String enteredEmail = emailAddress.getText().toString();
