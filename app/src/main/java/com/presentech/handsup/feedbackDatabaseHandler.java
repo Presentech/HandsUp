@@ -48,18 +48,18 @@ private static final String COLUMN_SLIDE = "slideNumber"; /**Slide number, float
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_FEEDBACK + "(" +
-        COLUMN_UUID + "TEXT," +
-        COLUMN_SLIDE + "INTEGER," +
-        COLUMN_SLIDE_ITERATION + "INTEGER," +
-        COLUMN_QUESTION + "INTEGER,"    +
-        COLUMN_ABC + "INTEGER," +
-        COLUMN_GOODMEHBAD + "INTEGER" +
-        COLUMN_COMMENTS + "TEXT," +
-        COLUMN_TIME_RECEIVED + "INTEGER" +
+        COLUMN_UUID + " TEXT," +
+        COLUMN_SLIDE + " INTEGER," +
+        COLUMN_SLIDE_ITERATION + " INTEGER," +
+        COLUMN_QUESTION + " INTEGER,"    +
+        COLUMN_ABC + " INTEGER," +
+        COLUMN_GOODMEHBAD + " INTEGER" +
+        COLUMN_COMMENTS + " TEXT," +
+        COLUMN_TIME_RECEIVED + " INTEGER" +
         COLUMN_KEY_ID + " INTEGER PRIMARY KEY," +
         /**Checks*/
-        "CHECK (" + COLUMN_ABC + "IN (-1,0,1,2))" +
-        "CHECK (" + COLUMN_GOODMEHBAD + "IN (-1,0,1,2))" +
+        "CHECK (" + COLUMN_ABC + " IN (-1,0,1,2))" +
+        "CHECK (" + COLUMN_GOODMEHBAD + " IN (-1,0,1,2))" +
                 ")";
         db.execSQL(CREATE_CONTACTS_TABLE);
     }
@@ -74,7 +74,7 @@ private static final String COLUMN_SLIDE = "slideNumber"; /**Slide number, float
     }
 
     // Adding new contact
-    public void addFeedbackCollumn(SingleFeedback contact) {
+     public void addFeedbackCollumn(SingleFeedback contact) {
         ContentValues values = new ContentValues();
         values.put(COLUMN_UUID, contact.getUUID());
         values.put(COLUMN_SLIDE, contact.getSLIDE());
@@ -90,45 +90,8 @@ private static final String COLUMN_SLIDE = "slideNumber"; /**Slide number, float
         db.close();
     }
 
-    // Getting single contact
-    public SingleFeedback getFeedback(int id) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_FEEDBACK,
-                new String[]{COLUMN_KEY_ID,
-                        COLUMN_UUID,
-                        COLUMN_SLIDE,
-                        COLUMN_SLIDE_ITERATION,
-                        COLUMN_QUESTION,
-                        COLUMN_ABC,
-                        COLUMN_GOODMEHBAD,
-                        COLUMN_COMMENTS,
-                        COLUMN_TIME_RECEIVED},
-                COLUMN_KEY_ID + "=?",
-                new String[]{String.valueOf(id)}, null, null, null, null);
-
-        String updateNameEvent = null;
-        if (cursor != null)
-            cursor.moveToFirst();
-//Checks not NULL.
-        SingleFeedback feedback = new SingleFeedback();
-        if(cursor.moveToFirst() && cursor.getCount() != 0)
-        {
-
-                feedback.setUUID(cursor.getString(1));
-                feedback.setSLIDE(Float.parseFloat(cursor.getString(2)));
-                feedback.setSLIDE_ITERATION(Integer.parseInt(cursor.getString(3)));
-                feedback.setQUESTION(Integer.parseInt(cursor.getString(4)));
-                feedback.setABC(Integer.parseInt(cursor.getString(5)));
-                feedback.setGOOD_MEH_BAD(Integer.parseInt(cursor.getString(6)));
-                feedback.setTEXT(cursor.getString(7));
-                feedback.setTIME_RECEIVED(Long.parseLong(cursor.getString(8)));                          }
-        return feedback;
-
-        // TODO - error handling if  the curser pointer if null or 0.
-    }
-
     // Getting All Feedback
-    public List<SingleFeedback> getAllContacts() {
+    public List<SingleFeedback> getAllFeedback() {
 
         List<SingleFeedback> feedbackList = new ArrayList<SingleFeedback>();
         String selectQuery = "SELECT  * FROM " + TABLE_FEEDBACK;
@@ -138,9 +101,8 @@ private static final String COLUMN_SLIDE = "slideNumber"; /**Slide number, float
         SingleFeedback feedback = new SingleFeedback();
 
         // add to list until table runs out of rows
-        if (cursor.moveToFirst()) {
             do {
-                feedback.setSLIDE(Float.parseFloat(cursor.getString(1)));
+                feedback.setSLIDE(cursor.getDouble(COLUMN_SLIDE));
                 feedback.setSLIDE_ITERATION(Integer.parseInt(cursor.getString(1)));
                 feedback.setQUESTION(Integer.parseInt(cursor.getString(2)));
                 feedback.setABC(Integer.parseInt(cursor.getString(3)));
@@ -150,7 +112,7 @@ private static final String COLUMN_SLIDE = "slideNumber"; /**Slide number, float
                 // Adding contact to list
                 feedbackList.add(feedback);
             } while (cursor.moveToNext());
-        }
+
         return feedbackList; //TODO more error handling?
     }
 
@@ -158,5 +120,43 @@ private static final String COLUMN_SLIDE = "slideNumber"; /**Slide number, float
 
 
 
+// THIS CODE IS DEAD TO ME
+//    // Getting single contact
+//    public SingleFeedback getFeedback(int id) {
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        Cursor cursor = db.query(TABLE_FEEDBACK,
+//                new String[]{COLUMN_KEY_ID,
+//                        COLUMN_UUID,
+//                        COLUMN_SLIDE,
+//                        COLUMN_SLIDE_ITERATION,
+//                        COLUMN_QUESTION,
+//                        COLUMN_ABC,
+//                        COLUMN_GOODMEHBAD,
+//                        COLUMN_COMMENTS,
+//                        COLUMN_TIME_RECEIVED},
+//                COLUMN_KEY_ID + "=?",
+//                new String[]{String.valueOf(id)}, null, null, null, null);
+//
+//        String updateNameEvent = null;
+//        if (cursor != null)
+//            cursor.moveToFirst();
+////Checks not NULL.
+//        SingleFeedback feedback;
+//             feedback = new SingleFeedback();
+//            if (cursor != null && cursor.moveToFirst() && cursor.getCount() != 0) {
+//                feedback.setUUID(cursor.getString(1));
+//                feedback.setSLIDE(Float.parseFloat(cursor.getString(2)));
+//                feedback.setSLIDE_ITERATION(Integer.parseInt(cursor.getString(3)));
+//                feedback.setQUESTION(Integer.parseInt(cursor.getString(4)));
+//                feedback.setABC(Integer.parseInt(cursor.getString(5)));
+//                feedback.setGOOD_MEH_BAD(Integer.parseInt(cursor.getString(6)));
+//                feedback.setTEXT(cursor.getString(7));
+//                feedback.setTIME_RECEIVED(Long.parseLong(cursor.getString(8)));
+//            }
+//
+//        return feedback;
+//
+//        // TODO - error handling if  the curser pointer if null or 0.
+//    }
 
 }

@@ -33,12 +33,13 @@ import static junit.framework.Assert.assertTrue;
  * Created by Alex Butcher on 18/02/2016.
  */
 
+
+
 @RunWith(AndroidJUnit4.class)
 public class InstXMLParserTest {
     private XMLParser parser;
     private PresentationFile presentationFile;
     private DocumentInfo documentInfo;
-
 
 
     @Before

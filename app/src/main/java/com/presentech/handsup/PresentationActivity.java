@@ -41,8 +41,6 @@ import java.util.List;
 
 public class PresentationActivity extends AppCompatActivity {
 
-
-
     //the presentation container
     private ViewFlipper viewFlipper;
     private float lastX;
