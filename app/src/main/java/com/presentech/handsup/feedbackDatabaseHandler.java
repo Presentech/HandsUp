@@ -20,8 +20,6 @@ public class feedbackDatabaseHandler extends SQLiteOpenHelper {
     // All Static variables
     // Database Version
     private static final int DATABASE_VERSION = 1;
-    // Database Name
-    private static final String DATABASE_NAME = "PRESENTATION_DATE";
     // Contacts table name
     private static final String TABLE_FEEDBACK = "TABLE_OF_FEEDBACK";
     private String DATABASE_PATH = "/data/data/com.presentech.handsup/FeedbackDatabases/";
@@ -44,7 +42,7 @@ public class feedbackDatabaseHandler extends SQLiteOpenHelper {
 
     public feedbackDatabaseHandler(Context context, String name, SQLiteDatabase.CursorFactory factory,
                                    int version, String filepath) {
-        super(context, DATABASE_NAME, factory, DATABASE_VERSION); //TODO - this is where multiple saves can be sorted
+        super(context, name, factory, DATABASE_VERSION); //TODO - this is where multiple saves can be sorted
 
         this.myContext = context;
     }
@@ -94,6 +92,46 @@ public class feedbackDatabaseHandler extends SQLiteOpenHelper {
         db.insert(TABLE_FEEDBACK, null, values);
         db.close();
     }
+
+    // WILL RETURN MULTIPLE ITERATIONS
+    public List<SingleFeedback> getFeedbackBySlideAndQuestion(int slide, int question) {
+
+        List<SingleFeedback> feedbackList = new ArrayList<SingleFeedback>();
+        String selectQuery = "SELECT  * FROM " + TABLE_FEEDBACK;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        SingleFeedback feedback;
+        cursor.moveToFirst();
+        int COLUMNindex_UUID = cursor.getColumnIndex(COLUMN_UUID);
+        int COLUMNindex_SLIDE = cursor.getColumnIndex(COLUMN_SLIDE);
+        int COLUMNindex_SLIDE_ITERATION = cursor.getColumnIndex(COLUMN_SLIDE_ITERATION);
+        int COLUMNindex_QUESTION = cursor.getColumnIndex(COLUMN_QUESTION);
+        int COLUMNindex_ABC = cursor.getColumnIndex(COLUMN_ABC);
+        int COLUMNindex_GOODMEHBAD = cursor.getColumnIndex(COLUMN_GOODMEHBAD);
+        int COLUMNindex_COMMENTS = cursor.getColumnIndex(COLUMN_COMMENTS);
+        int COLUMNindex_TIME_RECEIVED = cursor.getColumnIndex(COLUMN_TIME_RECEIVED);
+        int COLUMNindex_KEY_ID = cursor.getColumnIndex(COLUMN_KEY_ID);
+
+        // add to list until table runs out of rows
+        do {
+            feedback = new SingleFeedback();
+            feedback.setUUID(cursor.getString(COLUMNindex_UUID));
+            feedback.setSLIDE(cursor.getDouble(COLUMNindex_SLIDE));
+            feedback.setSLIDE_ITERATION(cursor.getInt(COLUMNindex_SLIDE_ITERATION));
+            feedback.setQUESTION(cursor.getInt(COLUMNindex_QUESTION));
+            feedback.setABC(cursor.getInt(COLUMNindex_ABC));
+            feedback.setGOOD_MEH_BAD(cursor.getInt(COLUMNindex_GOODMEHBAD));
+            feedback.setTEXT(cursor.getString(COLUMNindex_COMMENTS));
+            feedback.setTIME_RECEIVED(cursor.getLong(COLUMNindex_TIME_RECEIVED));
+            // Adding contact to list
+            if ((feedback.getSLIDE()== slide) && (feedback.getQUESTION()==question))
+            feedbackList.add(feedback);
+        } while (cursor.moveToNext());
+
+        return feedbackList; //TODO more error handling?
+    }
+
 
     // Getting All Feedback
     public List<SingleFeedback> getAllFeedback() {
