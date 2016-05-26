@@ -1,5 +1,8 @@
 package com.presentech.handsup;
 import static android.support.test.InstrumentationRegistry.getTargetContext;
+
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.After;
@@ -22,17 +25,23 @@ import static junit.framework.Assert.assertTrue;
 
 @RunWith(AndroidJUnit4.class)
 public class feedbackDatabaseHandlerTest {
-    private SingleFeedback inputFeedback = new SingleFeedback();
-    private SingleFeedback outputFeedback = new SingleFeedback() ;
+    private SingleFeedback inputFeedback1 = new SingleFeedback();
+    private SingleFeedback inputFeedback2 = new SingleFeedback();
+    private SingleFeedback inputFeedback3 = new SingleFeedback();
+
     feedbackDatabaseHandler database;
 
-
+    UUID uuid1;
+    UUID uuid2;
+    UUID uuid3;
 
     @Before
     public void setUp() {
         getTargetContext().deleteDatabase("Test Database");
-        database = new feedbackDatabaseHandler(getTargetContext());
+        database = new feedbackDatabaseHandler(getTargetContext(), "name", null, 1, "FP");
+        database.deleteTable();
     }
+
 
     @After
     public void tearDown() throws Exception {
@@ -43,47 +52,45 @@ public class feedbackDatabaseHandlerTest {
     @Test
     public void writeThreeInRead3Out() throws Exception {
         this.getSingleFeedbackSetupExample1();
-        database.addFeedbackCollumn(inputFeedback);
         this.getSingleFeedbackSetupExample2();
-        database.addFeedbackCollumn(inputFeedback);
         this.getSingleFeedbackSetupExample3();
-        database.addFeedbackCollumn(inputFeedback);
+
+        database.addFeedbackCollumn(inputFeedback1);
+        database.addFeedbackCollumn(inputFeedback2);
+        database.addFeedbackCollumn(inputFeedback3);
+
 
         List<SingleFeedback> allFeedback;
 
         allFeedback = database.getAllFeedback();
 
-        this.getSingleFeedbackSetupExample1();
-        testAllFieldsEqual(allFeedback.get(0));
-        this.getSingleFeedbackSetupExample2();
-        testAllFieldsEqual(allFeedback.get(1));
-        this.getSingleFeedbackSetupExample3();
-        testAllFieldsEqual(allFeedback.get(2));
+        testAllFieldsEqual(allFeedback.get(0), inputFeedback1);
+        testAllFieldsEqual(allFeedback.get(1), inputFeedback2);
+        testAllFieldsEqual(allFeedback.get(2), inputFeedback3);
 
     }
 
 private void getSingleFeedbackSetupExample1(){
-        UUID uuid = UUID.randomUUID();//Example UUID
-        int slide = 1;
-        int iteration = 1;
-        int question = 1;
-        int abc = 1;
-        int gmb = 1;
-        String testText = "1";
-        Long exampleTime = 1L;
-        inputFeedback.setUUID(uuid.toString());
-        inputFeedback.setSLIDE(slide);
-        inputFeedback.setSLIDE_ITERATION(iteration);
-        inputFeedback.setQUESTION(question);
-        inputFeedback.setABC(abc);
-        inputFeedback.setGOOD_MEH_BAD(gmb);
-        inputFeedback.setTEXT(testText);
-        inputFeedback.setTIME_RECEIVED(exampleTime);
+    uuid1 = UUID.randomUUID();//Example UUID
+        int slide = 51;
+        int iteration = 6;
+        int question = 7;
+        int abc = 8;
+        int gmb = 9;
+        String testText = "blah";
+        Long exampleTime = 20L;
+        inputFeedback1.setUUID(uuid1.toString());
+        inputFeedback1.setSLIDE(slide);
+        inputFeedback1.setSLIDE_ITERATION(iteration);
+        inputFeedback1.setQUESTION(question);
+        inputFeedback1.setABC(abc);
+        inputFeedback1.setGOOD_MEH_BAD(gmb);
+        inputFeedback1.setTEXT(testText);
+        inputFeedback1.setTIME_RECEIVED(exampleTime);
     }
 
 private void getSingleFeedbackSetupExample2(){
-
-        UUID uuid = UUID.randomUUID();//Example UUID
+        uuid2 = UUID.randomUUID();//Example UUID
         int slide = 2;
         int iteration = 2;
         int question = 2;
@@ -91,17 +98,17 @@ private void getSingleFeedbackSetupExample2(){
         int gmb = 2;
         String testText = "Text2";
         Long exampleTime = 2L;
-        inputFeedback.setUUID(uuid.toString());
-        inputFeedback.setSLIDE(slide);
-        inputFeedback.setSLIDE_ITERATION(iteration);
-        inputFeedback.setQUESTION(question);
-        inputFeedback.setABC(abc);
-        inputFeedback.setGOOD_MEH_BAD(gmb);
-        inputFeedback.setTEXT(testText);
-        inputFeedback.setTIME_RECEIVED(exampleTime);
+        inputFeedback2.setUUID(uuid2.toString());
+        inputFeedback2.setSLIDE(slide);
+        inputFeedback2.setSLIDE_ITERATION(iteration);
+        inputFeedback2.setQUESTION(question);
+        inputFeedback2.setABC(abc);
+        inputFeedback2.setGOOD_MEH_BAD(gmb);
+        inputFeedback2.setTEXT(testText);
+        inputFeedback2.setTIME_RECEIVED(exampleTime);
     }
 private void getSingleFeedbackSetupExample3(){
-        UUID uuid = UUID.randomUUID();//Example UUID
+        uuid3 = UUID.randomUUID();//Example UUID
         int slide = -1;
         int iteration = -1;
         int question = -1;
@@ -109,20 +116,20 @@ private void getSingleFeedbackSetupExample3(){
         int gmb = -1;
         String testText = null;
         Long exampleTime = 1L;
-        inputFeedback.setUUID(uuid.toString());
-        inputFeedback.setSLIDE(slide);
-        inputFeedback.setSLIDE_ITERATION(iteration);
-        inputFeedback.setQUESTION(question);
-        inputFeedback.setABC(abc);
-        inputFeedback.setGOOD_MEH_BAD(gmb);
-        inputFeedback.setTEXT(testText);
-        inputFeedback.setTIME_RECEIVED(exampleTime);
+        inputFeedback3.setUUID(uuid3.toString());
+        inputFeedback3.setSLIDE(slide);
+        inputFeedback3.setSLIDE_ITERATION(iteration);
+        inputFeedback3.setQUESTION(question);
+        inputFeedback3.setABC(abc);
+        inputFeedback3.setGOOD_MEH_BAD(gmb);
+        inputFeedback3.setTEXT(testText);
+        inputFeedback3.setTIME_RECEIVED(exampleTime);
     }
 
 
 
 
-     public void testAllFieldsEqual(SingleFeedback feedbackin) {
+     public void testAllFieldsEqual(SingleFeedback feedbackin, SingleFeedback inputFeedback) {
          assertEquals(feedbackin.getUUID(), inputFeedback.getUUID());
          assertTrue(feedbackin.getSLIDE() == inputFeedback.getSLIDE());/** Slide number, float is smaller than double and can hold branches to sufficient accuracy (e.g. slide 1.51 as 1.51)*/
          assertTrue(feedbackin.getSLIDE_ITERATION() == inputFeedback.getSLIDE_ITERATION());/** Slide iteration - for when a slide is visited multiple times.*/

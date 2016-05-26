@@ -26,7 +26,7 @@ import static junit.framework.Assert.assertTrue;
 
 
 @RunWith(AndroidJUnit4.class)
-public class SingleFeedbackTest {
+public class singleFeedbackTEst {
     private SingleFeedback singlefeedback;
 
     @Before
