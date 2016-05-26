@@ -21,7 +21,8 @@
         <activity
             android:name=".LoginScreenActivity"
             android:label="@string/title_activity_login_screen"
-            android:parentActivityName=".ModeSelectActivity">
+            android:parentActivityName=".ModeSelectActivity"
+            android:screenOrientation="landscape">
         </activity>
         <activity android:name=".HostingWizardActivity"
             android:screenOrientation="landscape"
