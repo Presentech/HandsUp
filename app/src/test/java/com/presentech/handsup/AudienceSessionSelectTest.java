@@ -1,5 +1,6 @@
 package com.presentech.handsup;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
@@ -192,6 +193,71 @@ public class AudienceSessionSelectTest {
         assertEquals(R.mipmap.arrowright, shadowDrawable4.getCreatedFromResId());
         assertEquals(R.mipmap.arrowright, shadowDrawable5.getCreatedFromResId());
 
+    }
+
+    /* Check that feedback activity is called when connect button 1 is pressed */
+    @Test
+    public void feedbackActivityCalledOnConnect1Click() {
+        /* Press COnenct Button 1 */
+        activity.findViewById(R.id.connectButton1).performClick();
+
+        /*Check Expected intent is Called */
+        Intent expectedIntent = new Intent(activity, FeedbackActivity.class);
+        Intent actualIntent = Shadows.shadowOf(activity).getNextStartedActivity();
+
+        assertEquals(expectedIntent,actualIntent);
+    }
+
+    /* Check that feedback activity is called when connect button 2 is pressed */
+    @Test
+    public void feedbackActivityCalledOnConnect2Click() {
+        /* Press COnenct Button 1 */
+        activity.findViewById(R.id.connectButton2).performClick();
+
+        /*Check Expected intent is Called */
+        Intent expectedIntent = new Intent(activity, FeedbackActivity.class);
+        Intent actualIntent = Shadows.shadowOf(activity).getNextStartedActivity();
+
+        assertEquals(expectedIntent,actualIntent);
+    }
+
+    /* Check that feedback activity is called when connect button 3 is pressed */
+    @Test
+    public void feedbackActivityCalledOnConnect3Click() {
+        /* Press COnenct Button 1 */
+        activity.findViewById(R.id.connectButton3).performClick();
+
+        /*Check Expected intent is Called */
+        Intent expectedIntent = new Intent(activity, FeedbackActivity.class);
+        Intent actualIntent = Shadows.shadowOf(activity).getNextStartedActivity();
+
+        assertEquals(expectedIntent,actualIntent);
+    }
+
+    /* Check that feedback activity is called when connect button 4 is pressed */
+    @Test
+    public void feedbackActivityCalledOnConnect4Click() {
+        /* Press COnenct Button 1 */
+        activity.findViewById(R.id.connectButton4).performClick();
+
+        /*Check Expected intent is Called */
+        Intent expectedIntent = new Intent(activity, FeedbackActivity.class);
+        Intent actualIntent = Shadows.shadowOf(activity).getNextStartedActivity();
+
+        assertEquals(expectedIntent,actualIntent);
+    }
+
+    /* Check that feedback activity is called when connect button 5 is pressed */
+    @Test
+    public void feedbackActivityCalledOnConnect5Click() {
+        /* Press COnenct Button 1 */
+        activity.findViewById(R.id.connectButton5).performClick();
+
+        /*Check Expected intent is Called */
+        Intent expectedIntent = new Intent(activity, FeedbackActivity.class);
+        Intent actualIntent = Shadows.shadowOf(activity).getNextStartedActivity();
+
+        assertEquals(expectedIntent,actualIntent);
     }
 
 }
