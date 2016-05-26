@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:ap="http://schemas.android.com/apk/res-auto"
+    tools:context="com.presentech.handsup.ViewLiveFeedback">
+
+    <Button
+        android:id="@+id/buarsttonforb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="updateValues"
+        android:text="New Values"/>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/fragmentContainerFBBarABC"
+        android:id="@+id/fragmentContainerFBPieUnderstanding" />
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/fragmentContainerFBPieABC" />
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fragmentContainerFBBarABC" />
+</RelativeLayout>

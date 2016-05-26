@@ -21,7 +21,7 @@
         <activity
             android:name=".LoginScreenActivity"
             android:label="@string/title_activity_login_screen"
-            android:parentActivityName=".ModeSelectActivity"></activity>
+            android:parentActivityName=".ModeSelectActivity" />
         <activity
             android:name=".RegistrationActivity"
             android:label="@string/title_activity_registration"
@@ -97,6 +97,8 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".aboutActivity" />
         <activity android:name=".AudienceTutorial" />
+        <activity android:name=".presentationfile.ExampleStackedBars" />
+        <activity android:name=".ViewLiveFeedback"></activity>
     </application>
 
 </manifest>
