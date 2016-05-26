@@ -28,7 +28,6 @@ import static org.junit.Assert.*;
 public class LoginScreenActivityTest {
 
     private LoginScreenActivity activity;
-    private UserDBHandler dbHandler;
     private EditText email;
     private EditText password;
 
