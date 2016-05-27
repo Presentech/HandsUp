@@ -38,7 +38,7 @@ public class SeekBarPreference extends Preference implements OnSeekBarChangeList
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         if (!fromUser)
             return;
-
+        //get value set of the seekbar
         setValue(progress);
     }
 
