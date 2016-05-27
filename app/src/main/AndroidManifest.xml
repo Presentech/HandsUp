@@ -98,7 +98,8 @@
         <activity android:name=".aboutActivity" />
         <activity android:name=".AudienceTutorial" />
         <activity android:name=".presentationfile.ExampleStackedBars" />
-        <activity android:name=".ViewLiveFeedback"></activity>
+        <activity android:name=".ViewLiveFeedback" />
+        <activity android:name=".TestActivity"></activity>
     </application>
 
 </manifest>

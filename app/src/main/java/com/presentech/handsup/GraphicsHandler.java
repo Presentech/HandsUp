@@ -46,12 +46,10 @@ public class GraphicsHandler extends View {
     RectF rect;
 
 
-    public GraphicsHandler(Context context, ArrayList x, ArrayList y, Polygon polygon, Shape shape, int screenWidth, int screenHeight) {
+    public GraphicsHandler(Context context, Polygon polygon, Shape shape, int screenWidth, int screenHeight) {
         super(context);
         this.polygon = polygon;
         this.shape = shape;
-        this.x = x;
-        this.y = y;
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
 

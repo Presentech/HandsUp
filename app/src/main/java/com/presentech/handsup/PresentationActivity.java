@@ -196,7 +196,7 @@ public class PresentationActivity extends AppCompatActivity {
 //                    }
 
 
-                    GraphicsHandler pH = new GraphicsHandler(this, x, y, p , s, screenWidth, screenHeight);
+                    GraphicsHandler pH = new GraphicsHandler(this, p , s, screenWidth, screenHeight);
                     pH.draw(canvas);
                     slide.addView(pH);
 
