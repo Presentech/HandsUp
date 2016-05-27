@@ -76,7 +76,8 @@ public class SlideContentTimingsActivity extends AppCompatActivity implements Nu
             //Using Boolean parameter with constructor, to determine if toggle is set.
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 sharedPreferences.edit().putBoolean(PREF_KEY_ADVANCE_CHECKED, b).commit();
-                if (sharedPreferences.getBoolean(PREF_KEY_LOOP_CHECKED, false) && b == false) {
+                //if (sharedPreferences.getBoolean(PREF_KEY_LOOP_CHECKED, false) && b == false) {
+                if (sharedPreferences.getBoolean(PREF_KEY_LOOP_CHECKED, false) && !b) {
                     sharedPreferences.edit().putBoolean(PREF_KEY_LOOP_CHECKED, b).commit();
                     cbLoopContinuous.setChecked(false);
                 }
