@@ -18,12 +18,12 @@ public class SettingsAccountActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_toolbar);
+        setContentView(R.layout.activity_settings_toolbar);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+        //toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
 
         getFragmentManager().beginTransaction().replace(R.id.content_frame, new MyPreferenceFragment()).commit();
     }
@@ -42,7 +42,7 @@ public class SettingsAccountActivity extends AppCompatActivity {
         @Override
         public void onCreate(final Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.account_prefs);
+            //addPreferencesFromResource(R.xml.account_prefs);
 
         }
 
@@ -52,7 +52,7 @@ public class SettingsAccountActivity extends AppCompatActivity {
 
             View rootView = getView();
             ListView list = (ListView) rootView.findViewById(android.R.id.list);
-            list.setDivider(ContextCompat.getDrawable(getActivity(),R.color.white));
+            list.setDivider(ContextCompat.getDrawable(getActivity(),R.color.textColour));
             list.setDividerHeight(1);
 
 

@@ -41,7 +41,7 @@ public class navDrawer {
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
 
-    public void createDrawer(Activity activity, String mode ){
+    public void createDrawer(Activity activity, String mode) {
         //Set Activity to local variable
         this.activity = activity;
         navDrawerMode = mode;
@@ -53,6 +53,9 @@ public class navDrawer {
         if (mode.equals("PRESENTER")) {
             navMenuTitles = activity.getResources().getStringArray(R.array.presenterDrawerOptions);
             navMenuIcons = activity.getResources().obtainTypedArray(R.array.presenterDrawerIcons);
+        }if (mode.equals("PRESENTER_RO")) {
+            navMenuTitles = activity.getResources().getStringArray(R.array.presenterDrawerOptions_RO);
+            navMenuIcons = activity.getResources().obtainTypedArray(R.array.presenterDrawerIcons_RO);
         }
         else if (mode.equals("AUDIENCE")){
             navMenuTitles = activity.getResources().getStringArray(R.array.audienceDrawerOptions);
@@ -120,12 +123,21 @@ public class navDrawer {
         if (navDrawerMode.equals("AUDIENCE")){
             switch(position) {
                 case 0:
-                    //Intent mainActivityIntent = new Intent(activity, ModeSelectActivity.class);
-                    //activity.startActivity(mainActivityIntent);
+                    Intent mainActivityIntent = new Intent(activity, ModeSelectActivity.class);
+                    activity.startActivity(mainActivityIntent);
                     break;
-                //case 4:
-                //    Intent aboutActivityIntent = new Intent(AudienceMainActivity.this, aboutAppActivity.class);
-                //    startActivity(aboutActivityIntent);
+                case 1:
+                    Intent AudTutorialIntent = new Intent(activity, AudienceTutorial.class);
+                    activity.startActivity(AudTutorialIntent);
+                    break;
+                case 2:
+                    Intent SessionSelectIntent = new Intent(activity, AudienceSessionSelect.class);
+                    activity.startActivity(SessionSelectIntent);
+                    break;
+                case 3:
+                    Intent aboutIntent = new Intent(activity, aboutActivity.class);
+                    activity.startActivity(aboutIntent);
+                    break;
                 default:
             }
         }
@@ -135,13 +147,44 @@ public class navDrawer {
                     Intent mainActivityIntent = new Intent(activity, ModeSelectActivity.class);
                     activity.startActivity(mainActivityIntent);
                     break;
-                //case 4:
-                //    Intent aboutActivityIntent = new Intent(AudienceMainActivity.this, aboutAppActivity.class);
-                //    startActivity(aboutActivityIntent);
+                case 1:
+                    Intent newSessionIntent = new Intent(activity, HostingWizardActivity.class);
+                    activity.startActivity(newSessionIntent);
+                    break;
+                case 2:
+                    Intent settingsIntent = new Intent(activity, SettingsActivity.class);
+                    activity.startActivity(settingsIntent);
+                    break;
+                case 3:
+                    Intent tutorialIntent = new Intent(activity, PresentationModeTutorial.class);
+                    activity.startActivity(tutorialIntent);
+                    break;
+                case 4:
+                    Intent aboutIntent = new Intent(activity, aboutActivity.class);
+                    activity.startActivity(aboutIntent);
                 default:
             }
         }
-
+        else if (navDrawerMode.equals("PRESENTER_RO")){
+            switch(position) {
+                case 0:
+                    Intent mainActivityIntent = new Intent(activity, ModeSelectActivity.class);
+                    activity.startActivity(mainActivityIntent);
+                    break;
+                case 1:
+                    Intent newSessionIntent = new Intent(activity, HostingWizardActivity.class);
+                    activity.startActivity(newSessionIntent);
+                    break;
+                case 2:
+                    Intent tutorialIntent = new Intent(activity, PresentationModeTutorial.class);
+                    activity.startActivity(tutorialIntent);
+                    break;
+                case 3:
+                    Intent aboutIntent = new Intent(activity, aboutActivity.class);
+                    activity.startActivity(aboutIntent);
+                default:
+            }
+        }
     }
 
 

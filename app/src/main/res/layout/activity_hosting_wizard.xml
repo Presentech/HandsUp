@@ -12,6 +12,41 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:padding="16dp">
+                <LinearLayout
+                    android:id="@+id/HWwalkthrough2"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/layout_roundcorners">
+                    <GridLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:columnCount="2">
+                        <TextView
+                            android:layout_row="0"
+                            android:layout_columnSpan="2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Select which options you would like this presentation to offer."/>
+                        <TextView
+                            android:layout_row="1"
+                            android:layout_columnSpan="2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tap Create Session when you're happy with your choices."/>
+                        <Button
+                            android:layout_row="3"
+                            android:layout_column="1"
+                            android:text="Got It!"
+                            android:onClick="finishWalkthrough"/>
+                    </GridLayout>
+                </LinearLayout>
+            </RelativeLayout>
             <LinearLayout
                 android:id="@+id/inputGrid"
                 android:layout_width="wrap_content"
@@ -73,16 +108,54 @@
                     android:id="@+id/chooseSourceFile"
                     android:text="@string/selectPresentation"
                     android:background="@color/darkgrey"
-                    android:textColor="@color/textColour"/>
+                    android:textColor="@color/textColour"
+                    android:onClick="selectFile"/>
 
             </LinearLayout>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/inputGrid"
+                android:layout_centerVertical="true"
+                android:padding="16dp">
+                <LinearLayout
+                    android:id="@+id/HWwalkthrough1"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/layout_roundcorners">
+                    <GridLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:columnCount="2">
+                        <TextView
+                            android:layout_row="0"
+                            android:layout_columnSpan="2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Type Name, Password, and Location for Session"/>
+                        <TextView
+                            android:layout_row="1"
+                            android:layout_columnSpan="2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Select XML presentation file from SD Card"/>
+                        <Button
+                            android:layout_row="3"
+                            android:layout_column="1"
+                            android:text="Got It!"
+                            android:onClick="goToWalkthroughState2"/>
+                    </GridLayout>
+                </LinearLayout>
+            </RelativeLayout>
+
             <LinearLayout
                 android:id="@+id/optionsGrid"
                 android:orientation="vertical"
                 android:layout_toEndOf="@+id/inputGrid"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="16dp">
+                android:padding="16dp"
+                android:layout_height="match_parent">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -94,61 +167,137 @@
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
                     android:paddingBottom="5dp"/>
-                <TextView
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/UnderstandingIcons"
-                    android:text="@string/UnderstandingIconsSelect"
-                    android:textColor="@color/textColour"
                     android:background="@color/lightgrey"
-                    android:paddingTop="5dp"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
-                    android:paddingBottom="5dp"/>
-                <TextView
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="fill_horizontal"
+                        android:layout_weight="1.6"
+                        android:id="@+id/UnderstandingIcons"
+                        android:text="@string/UnderstandingIconsSelect"
+                        android:textColor="@color/textColour"
+                        android:paddingTop="5dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:paddingBottom="5dp"/>
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:shadowColor="@color/textColour"
+                        android:id="@+id/HWcheckbox1"
+                        android:buttonTint="@color/backgroundgrey"
+                        android:onClick="onCheckboxClicked" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/MultipleChoiceIcons"
-                    android:text="@string/MultipleChoiceIconsSelect"
-                    android:textColor="@color/textColour"
                     android:background="@color/darkgrey"
-                    android:paddingTop="5dp"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
-                    android:paddingBottom="5dp"/>
-                <TextView
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.6"
+                        android:id="@+id/MultipleChoiceIcons"
+                        android:text="@string/MultipleChoiceIconsSelect"
+                        android:textColor="@color/textColour"
+                        android:layout_gravity="fill_horizontal"
+                        android:paddingTop="5dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:paddingBottom="5dp"/>
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:id="@+id/HWcheckbox2"
+                        android:buttonTint="@color/backgroundgrey"
+                        android:onClick="onCheckboxClicked" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/Messaging"
-                    android:text="@string/MessagingSelect"
-                    android:textColor="@color/textColour"
                     android:background="@color/lightgrey"
-                    android:paddingTop="5dp"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
-                    android:paddingBottom="5dp"/>
-                <TextView
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.6"
+                        android:id="@+id/Messaging"
+                        android:text="@string/MessagingSelect"
+                        android:textColor="@color/textColour"
+                        android:layout_gravity="fill_horizontal"
+                        android:paddingTop="5dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:paddingBottom="5dp"/>
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:buttonTint="@color/backgroundgrey"
+                        android:id="@+id/HWcheckbox3"
+                        android:onClick="onCheckboxClicked" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/FeedbackPerSlide"
-                    android:text="@string/FeedbackPerSlideSelect"
-                    android:textColor="@color/textColour"
                     android:background="@color/darkgrey"
-                    android:paddingTop="5dp"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
-                    android:paddingBottom="5dp"/>
-                <TextView
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.6"
+                        android:id="@+id/FeedbackPerSlide"
+                        android:text="@string/FeedbackPerSlideSelect"
+                        android:textColor="@color/textColour"
+                        android:layout_gravity="fill_horizontal"
+                        android:paddingTop="5dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:paddingBottom="5dp"/>
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:id="@+id/HWcheckbox4"
+                        android:buttonTint="@color/backgroundgrey"
+                        android:onClick="onCheckboxClicked" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/HideFeedbackDuringPresentation"
-                    android:text="@string/HideFeedbackSelect"
-                    android:textColor="@color/textColour"
                     android:background="@color/lightgrey"
-                    android:paddingTop="5dp"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
-                    android:paddingBottom="5dp"/>
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.6"
+                        android:id="@+id/HideFeedbackDuringPresentation"
+                        android:text="@string/HideFeedbackSelect"
+                        android:textColor="@color/textColour"
+                        android:layout_gravity="fill_horizontal"
+                        android:paddingTop="5dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:paddingBottom="5dp"/>
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/HWcheckbox5"
+                        android:buttonTint="@color/backgroundgrey"
+                        android:onClick="onCheckboxClicked" />
+                </LinearLayout>
+
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -156,7 +305,8 @@
                     android:text="@string/createSession"
                     android:background="@color/darkgrey"
                     android:textColor="@color/textColour"
-                    android:layout_marginTop="16dp"/>
+                    android:layout_marginTop="16dp"
+                    android:onClick="createSession"/>
             </LinearLayout>
         </RelativeLayout>
     </FrameLayout>

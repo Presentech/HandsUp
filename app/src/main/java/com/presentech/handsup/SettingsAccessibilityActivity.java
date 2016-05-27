@@ -19,12 +19,7 @@ public class SettingsAccessibilityActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_toolbar);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+        setContentView(R.layout.activity_settings_toolbar);
 
         getFragmentManager().beginTransaction().replace(R.id.content_frame, new MyPreferenceFragment()).commit();
     }
@@ -43,7 +38,7 @@ public class SettingsAccessibilityActivity extends AppCompatActivity {
         @Override
         public void onCreate(final Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.accessibility_prefs);
+            //addPreferencesFromResource(R.xml.accessibility_prefs);
 
         }
 
@@ -54,7 +49,7 @@ public class SettingsAccessibilityActivity extends AppCompatActivity {
 
             View rootView = getView();
             ListView list = (ListView) rootView.findViewById(android.R.id.list);
-            list.setDivider(ContextCompat.getDrawable(getActivity(), R.color.white));
+            list.setDivider(ContextCompat.getDrawable(getActivity(), R.color.textColour));
             list.setDividerHeight(1);
 
 

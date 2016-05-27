@@ -66,7 +66,7 @@ public class PresentationModeTutorial extends AppCompatActivity {
 
     /*Skip button intent*/
     public void nextActivity(View view) {
-        Intent intent = new Intent();
+        Intent intent = new Intent(this, HostingWizardActivity.class);
         startActivity(intent);
     }
 

@@ -1,12 +1,13 @@
 package com.presentech.handsup.presentationfile;
 
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Alex Butcher on 22/02/2016.
  */
-public class PresentationFile {
+public class PresentationFile implements Serializable {
     /* Document Info */
 //    String title;
 //    String author;

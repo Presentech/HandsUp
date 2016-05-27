@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config
+    fillPaint.color="@color/backgroundgrey"
+    innerEdgePaint.color="@color/presentechBlue"
+    outerEdgePaint.color="@color/presentechBlue"
+    radialEdgePaint.color="@color/presentechBlue"
+    />

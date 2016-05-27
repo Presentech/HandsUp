@@ -10,10 +10,9 @@
     tools:context="com.presentech.handsup.MainActivity">
 
     <Button
+        android:id="@+id/ModeSelectButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Presentation Tutorial"
-        android:onClick="loadTutorial"/>
-
-
+        android:text="GOTOMODESELECT"
+        android:onClick="goToModeSelect"/>
 </RelativeLayout>
