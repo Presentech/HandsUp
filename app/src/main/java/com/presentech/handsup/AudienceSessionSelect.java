@@ -81,7 +81,7 @@ public class AudienceSessionSelect extends AppCompatActivity {
         drawer.mDrawerLayout = (DrawerLayout) findViewById(R.id.audience_session_select_drawerFrame);
         drawer.mDrawerList = (ListView) findViewById(R.id.audience_session_select_leftDrawer);
         drawer.createDrawer(AudienceSessionSelect.this, mode);
-        //Enable drawer display button in Action Bar
+       // Enable drawer display button in Action Bar
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
@@ -108,7 +108,6 @@ public class AudienceSessionSelect extends AppCompatActivity {
         /*Toggle visibility of content TextViews*/
         textView2.setVisibility(textView2.isShown() ? View.GONE : View.VISIBLE);
         connectButton2.setVisibility(connectButton2.isShown() ? View.GONE : View.VISIBLE);
-
         /*Toggle up/down arrows*/
         if (textView2.getVisibility() == View.VISIBLE)
             button2.setCompoundDrawablesWithIntrinsicBounds(null, null, ContextCompat.getDrawable(this, R.mipmap.arrowndown), null);

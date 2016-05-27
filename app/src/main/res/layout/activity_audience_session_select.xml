@@ -41,7 +41,7 @@
                     android:clickable="true"
                     android:layout_marginTop="20dp"
                     android:drawableStart="@mipmap/wifi_icon1"
-                    android:drawableRight="@mipmap/arrow"
+                    android:drawableRight="@mipmap/arrowright"
                     android:onClick="textView1Expand"/>
                 ​
                 <TextView
@@ -78,7 +78,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_below="@+id/textView1"
                     android:drawableStart="@mipmap/wifi_icon1"
-                    android:drawableRight="@mipmap/arrow"
+                    android:drawableRight="@mipmap/arrowright"
                     android:clickable="true"
                     android:onClick="textView2Expand"/>
                 ​
@@ -116,7 +116,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_below="@+id/textView2"
                     android:drawableStart="@mipmap/wifi_icon1"
-                    android:drawableRight="@mipmap/arrow"
+                    android:drawableRight="@mipmap/arrowright"
                     android:clickable="true"
                     android:onClick="textView3Expand"/>
                 ​
@@ -154,7 +154,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_below="@+id/textView3"
                     android:drawableStart="@mipmap/wifi_icon1"
-                    android:drawableRight="@mipmap/arrow"
+                    android:drawableRight="@mipmap/arrowright"
                     android:clickable="true"
                     android:onClick="textView4Expand"/>
                 ​
@@ -192,7 +192,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_below="@+id/textView4"
                     android:drawableStart="@mipmap/wifi_icon1"
-                    android:drawableRight="@mipmap/arrow"
+                    android:drawableRight="@mipmap/arrowright"
                     android:clickable="true"
                     android:onClick="textView5Expand"/>
                 ​
