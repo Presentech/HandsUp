@@ -44,6 +44,9 @@
         <item>DEFAULT SETTINGS</item>
     </string-array>
 
+    <string name="pref_brightness">pref_brightness</string>
+    <string name="pref_auto_rotate">auto_rotate</string>
+    <string name="pref_zoom">zoom</string>
 
 
 </resources>

@@ -6,7 +6,6 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
@@ -18,12 +17,8 @@ public class SettingsPresentationFeedbackActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_toolbar);
+        setContentView(R.layout.activity_settings_toolbar);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
-        setSupportActionBar(toolbar);
-        toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
         getFragmentManager().beginTransaction().replace(R.id.content_frame, new MyPreferenceFragment()).commit();
     }
 
@@ -41,7 +36,7 @@ public class SettingsPresentationFeedbackActivity extends AppCompatActivity {
         @Override
         public void onCreate(final Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.presentation_feedback_prefs);
+            addPreferencesFromResource(R.xml.settings_presentation_feedback_prefs);
 
         }
 
@@ -52,7 +47,7 @@ public class SettingsPresentationFeedbackActivity extends AppCompatActivity {
 
             View rootView = getView();
             ListView list = (ListView) rootView.findViewById(android.R.id.list);
-            list.setDivider(ContextCompat.getDrawable(getActivity(), R.color.white));
+            list.setDivider(ContextCompat.getDrawable(getActivity(), R.color.textColour));
             list.setDividerHeight(1);
 
 
