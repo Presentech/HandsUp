@@ -1,5 +1,6 @@
 package com.presentech.handsup;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -51,6 +52,9 @@ public class FeedbackActivity extends AppCompatActivity   {
     EditText messageInput;
     ImageButton sendButton;
 
+    MyApplication application;
+    Client client;
+
     @Override
     protected void onDestroy(){
         super.onDestroy();
@@ -68,15 +72,9 @@ public class FeedbackActivity extends AppCompatActivity   {
         sendButton = (ImageButton) findViewById(R.id.imageButton10);
 
         // set its click listener
-       // sendButton.setOnClickListener(this);
-
-
-
-
-
-
-
-        /////////////////////////////////////////////////
+        addListenerOnButton();
+        application = (MyApplication)getApplication();
+        client = application.getClient();
 
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
@@ -105,59 +103,18 @@ public class FeedbackActivity extends AppCompatActivity   {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-
     }
 
-//    @Override
-//    public void onClick(View v) {
-////        postMessage();
-//    }
+    public void addListenerOnButton() {
+        sendButton.setOnClickListener(new View.OnClickListener() {
 
-//
-//    private void postMessage() {
-//
-//        String text = messageInput.getText().toString();
-//
-//        // return if the text is blank
-//        if (text.equals("")) {
-//            return;
-//        }
-//
-//
-//        RequestParams params = new RequestParams();
-//
-//        // set our JSON object
-//        params.put("text", text);
-//
-//        // create our HTTP client
-//        AsyncHttpClient client = new AsyncHttpClient();
-//
-//        client.post(MESSAGES_ENDPOINT, params, new JsonHttpResponseHandler() {
-//
-//            @Override
-//            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-//                runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        messageInput.setText("");
-//                    }
-//                });
-//            }
-//
-//            @Override
-//            public void onFailure(int statusCode, PreferenceActivity.Header[] headers, String responseString, Throwable throwable) {
-//                Toast.makeText(
-//                        getApplicationContext(),
-//                        "Something went wrong :(",
-//                        Toast.LENGTH_LONG
-//                ).show();
-//            }
-//        });
-//
-//
-//
-//    }
+            @Override
+            public void onClick(View arg0) {
+                client.onSend(messageInput.getText().toString());
+            }
 
+        });
+    }
     public void changeViewWidths(int width){
 
         double columnWidthDouble = width*0.8;

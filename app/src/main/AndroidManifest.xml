@@ -2,10 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.presentech.handsup">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-permission android:name="android.permission.WRITE_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
+        android:name="com.presentech.handsup.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -98,6 +103,14 @@
         <activity android:name=".aboutActivity" />
         <activity android:name=".AudienceTutorial" />
         <activity android:name=".presentationfile.ExampleStackedBars" />
+        <activity
+            android:name=".AudienceConnect"
+            android:label="@string/title_activity_audience_connect"
+            android:parentActivityName=".ModeSelectActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.presentech.handsup.ModeSelectActivity" />
+        </activity>
     </application>
 
 </manifest>
