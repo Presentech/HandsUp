@@ -84,7 +84,6 @@ public class FeedbackJSONTest {
         String testText = null; // HERE is the importaint bit
         Long exampleTime = 23L;
 
-
         inputFeedback.setUUID(uuid.toString());
         inputFeedback.setSLIDE(slide);
         inputFeedback.setSLIDE_ITERATION(iteration);

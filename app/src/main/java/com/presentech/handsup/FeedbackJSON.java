@@ -10,6 +10,9 @@ import org.json.JSONObject;
 /**
  * Created by epren on 13/05/2016.
  */
+
+// "{"theTeam":[{"teamId":"1","status":"pending"},{"teamId":"2","status":"member"},{"teamId":"3","status":"member"},{"teamId":"4","status":"pending"}]}"
+
 public  class FeedbackJSON {
 
 
@@ -58,8 +61,6 @@ catch (JSONException e) {feedbackJSONParse.setUUID(null);}
       catch (JSONException e) {feedbackJSONParse.setTIME_RECEIVED(-1);}
       try {feedbackJSONParse.setTEXT(obj.getString("TEXT"));}
       catch (JSONException e) {feedbackJSONParse.setTEXT(null);}
-
-
 
       return  feedbackJSONParse;
     }
