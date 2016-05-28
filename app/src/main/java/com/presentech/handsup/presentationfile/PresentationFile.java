@@ -9,20 +9,10 @@ import java.util.List;
  */
 public class PresentationFile implements Serializable {
     /* Document Info */
-//    String title;
-//    String author;
-//    String version;
-//    String Comment;
     DocumentInfo documentInfo;
 
 
     /* Defaults */
-//    String defBackgroundColour;
-//    String defFont;
-//    int defFontSize;
-//    String defFontColour;
-//    String defLineColour;
-//    String defFillColour;
     Defaults defaults;
 
     List<Slide> slides;

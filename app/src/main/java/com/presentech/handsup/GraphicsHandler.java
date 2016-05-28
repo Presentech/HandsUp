@@ -12,6 +12,7 @@ import android.graphics.Shader;
 import android.util.Log;
 import android.view.View;
 
+import com.presentech.handsup.presentationfile.Defaults;
 import com.presentech.handsup.presentationfile.Polygon;
 import com.presentech.handsup.presentationfile.Shape;
 
@@ -36,30 +37,32 @@ public class GraphicsHandler extends View {
     int screenWidth;
     int screenHeight;
 
-    float left;
-    float right;
-    float bottom;
-    float top;
+    float rleft;
+    float rright;
+    float rbottom;
+    float rtop;
 
     Polygon polygon;
     Shape shape;
+    Defaults defaults;
     RectF rect;
 
 
-    public GraphicsHandler(Context context, Polygon polygon, Shape shape, int screenWidth, int screenHeight) {
+    public GraphicsHandler(Context context, Polygon polygon, Shape shape, int screenWidth, int screenHeight, Defaults defaults) {
         super(context);
         this.polygon = polygon;
         this.shape = shape;
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
+        this.defaults = defaults;
 
         setDrawingParameters();
         setColors();
     }
 
-
+    @Override
     public void onDraw(Canvas canvas) {
-
+        super.onDraw(canvas);
         if (shape !=  null) {
             if (shape.getType().equals("circle") || shape.getType().equals("oval")){
                 canvas.drawOval(rect, paint);
@@ -107,34 +110,90 @@ public class GraphicsHandler extends View {
     public void setDrawingParameters(){
 
         if (shape != null) {
-            left = shape.getxStart() * screenWidth;
-            right = left + (shape.getWidth() * screenWidth);
-            top = shape.getyStart() * screenHeight;
-            bottom = top + (shape.getHeight() * screenHeight);
-            rect = new RectF(left, top, right, bottom);
+            rleft = shape.getxStart() * screenWidth;
+            rright = rleft + (shape.getWidth() * screenWidth);
+            rtop = shape.getyStart() * screenHeight;
+            rbottom = rtop + (shape.getHeight() * screenHeight);
+            rect = new RectF(rleft, rtop, rright, rbottom);
         }
     }
 
     public void setColors () {
         paint = new Paint();
+        stroke = new Paint();
         if (shape != null) {
             if (shape.getShading() != null) {
-                shade = new LinearGradient(0, right, 0, bottom, Color.parseColor("#" + shape.getShading().getColour1()),
-                        Color.parseColor("#" + shape.getShading().getColour2()), Shader.TileMode.MIRROR);
+                shade = new LinearGradient(shape.getShading().getX1(), shape.getShading().getY1(),
+                        shape.getShading().getX2(), shape.getShading().getY2(), Color.parseColor("#"
+                        + shape.getShading().getColour1()), Color.parseColor("#" +
+                        shape.getShading().getColour2()), Shader.TileMode.MIRROR);
                 paint.setShader(shade);
             } else {
-                paint.setColor(Color.parseColor("#" + shape.getFillColour()));
+                if (shape.getFillColour() != null) {
+                    paint.setColor(Color.parseColor("#" + shape.getFillColour()));
+                }else {
+                    paint.setColor(Color.parseColor("#" + defaults.getFillColour()));
+                }
             }
 
             paint.setStyle(Paint.Style.FILL);
-            ;
+
             if (shape.getLineColour() != null) {
-                stroke = new Paint();
                 stroke.setColor(Color.parseColor("#" + shape.getLineColour()));
-                stroke.setStyle(Paint.Style.STROKE);
-                stroke.setStrokeWidth(5);
+            } else {
+                stroke.setColor(Color.parseColor("#" + defaults.getLineColour()));
             }
+            stroke.setStyle(Paint.Style.STROKE);
+            stroke.setStrokeWidth(5);
         }
     }
 
+
+    public LinearGradient getShade() {
+        return shade;
+    }
+
+    public Paint getPaint() {
+        return paint;
+    }
+
+    public Paint getStroke() {
+        return stroke;
+    }
+
+    public int getScreenWidth() {
+        return screenWidth;
+    }
+
+    public int getScreenHeight() {
+        return screenHeight;
+    }
+
+    public float getRleft() {
+        return rleft;
+    }
+
+    public float getRright() {
+        return rright;
+    }
+
+    public float getRbottom() {
+        return rbottom;
+    }
+
+    public float getRtop() {
+        return rtop;
+    }
+
+    public Polygon getPolygon() {
+        return polygon;
+    }
+
+    public Shape getShape() {
+        return shape;
+    }
+
+    public RectF getRect() {
+        return rect;
+    }
 }
