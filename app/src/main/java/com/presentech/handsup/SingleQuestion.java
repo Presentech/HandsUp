@@ -18,7 +18,7 @@ public class SingleQuestion {
     private String questionText;
 
     // Empty constructor - should be used.
-    public SingleQuestion(double inSlide, int inQuestion, boolean inabc, boolean inGoodMehBad, String inQuestionText  ){
+    public SingleQuestion(double inSlide, int inQuestion, boolean inabc, boolean inGoodMehBad, String inQuestionText ){
         this.SLIDE = inSlide;
         this.QUESTION = inQuestion;
         this.abc = inabc;
