@@ -9,6 +9,10 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.NumberPicker;
 
+/**
+ * Created by Jay on 21-05-2016.
+ */
+
 public class SlideContentTimingsActivity extends AppCompatActivity implements NumberPicker.OnValueChangeListener {
     private CheckBox cbAdvanceAutomatically, cbLoopContinuous;
     private NumberPicker npAdvanceAutomatically;

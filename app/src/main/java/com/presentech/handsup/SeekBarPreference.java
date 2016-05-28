@@ -8,6 +8,10 @@ import android.view.View;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
+/**
+ * Created by Jay on 21-05-2016.
+ */
+
 public class SeekBarPreference extends Preference implements OnSeekBarChangeListener {
     private SeekBar mSeekBar;
     private int mProgress;
@@ -30,11 +34,12 @@ public class SeekBarPreference extends Preference implements OnSeekBarChangeList
         super.onBindView(view);
         mSeekBar = (SeekBar) view.findViewById(R.id.seekbar);
         mSeekBar.setProgress(mProgress);
-        //A search term to grab code
+        //A method to notifies the user actions/changes in the SeekBar
         mSeekBar.setOnSeekBarChangeListener(this);
     }
 
     @Override
+    //This abstract listener method is invoked if there is any change made in the seekbar
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         if (!fromUser)
             return;
@@ -43,11 +48,13 @@ public class SeekBarPreference extends Preference implements OnSeekBarChangeList
     }
 
     @Override
+    //This listener method is invoked at start of user touch event
     public void onStartTrackingTouch(SeekBar seekBar) {
         // not used
     }
 
     @Override
+    //This listener method is invoked at the end of user touch
     public void onStopTrackingTouch(SeekBar seekBar) {
         // not used
     }

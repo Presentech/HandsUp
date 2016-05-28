@@ -20,7 +20,7 @@ import android.view.WindowManager;
 import android.widget.ListView;
 
 /**
- * Created by Jay on 10-03-2016.
+ * Created by Jay on 23-05-2016.
  */
 public class SettingsVisibilityActivity extends AppCompatActivity {
 
