@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.Display;
@@ -11,7 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.presentech.handsup.R;
 
@@ -21,36 +23,31 @@ public class stackedBarsFragment extends Fragment{
 
     public SingleFeedback[] feedbackArray = new SingleFeedback[10];
     public int a, b, c, good, bad, meh;
-    double A =1, B = 1, C = 1;
-    double APercent, BPercent, CPercent, totalInputs, barHeight;
+    double A = 1, B = 1, C = 1;
+    double APercent, BPercent, CPercent, totalInputs;
     ViewGroup viewParent;
-    View AView, BView, CView, DummyView;
-    private ViewGroup.LayoutParams AParams, BParams, CParams;
-    public int screenWidth, screenHeight;
-    LinearLayout barLayout;
+    View DummyView, AView, BView, CView;
+    TextView textView;
+
+    public int barWidth, lastBar, barHeight;
+    RelativeLayout barLayout;
     public int qNo = 0, numberofPlots = 2;
     public int[] answerA, answerB, answerC;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        barLayout = (LinearLayout) inflater.inflate(R.layout.fragment_stacked_bars, container, false);
+        barLayout = (RelativeLayout) inflater.inflate(R.layout.fragment_stacked_bars, container, false);
+        Log.d("ABCD", "HELLO");
         initBar();
         return barLayout;
     }
-
 
     public void setFeedbackArray(SingleFeedback[] feedback){
         Random r = new Random();
         int rV;
         feedbackArray = feedback;
-        /*Set some example ojects that would be expected to recieve*/
+        /*Set some example objects that would be expected to recieve*/
         for(int i=0; i<10;i++){
             rV = r.nextInt(4 - 1) + 1;
             feedbackArray[i] = new SingleFeedback("abc",1.00,1,1,rV,rV,"abc",123L);
@@ -58,36 +55,24 @@ public class stackedBarsFragment extends Fragment{
     }
 
     public void setScreenParams(int height, int width){
-        screenHeight = height;
-        screenWidth = width;
+        barHeight = height;
+        barWidth = width-350;
+        Log.d("1234","h="+barHeight+"w="+barWidth);
     }
 
-    public void initBar(){
-        Log.d("ABCD", "StackedBars Initialise");
+    private void initBar(){
         //Create references to views
         AView = barLayout.findViewById(R.id.greenLayoutfrag);
         BView = barLayout.findViewById(R.id.yellowLayoutfrag);
         CView = barLayout.findViewById(R.id.redLayoutfrag);
-        DummyView = barLayout.findViewById(R.id.dummyBar);
+        textView = (TextView) barLayout.findViewById(R.id.FBtextView);
         viewParent = barLayout;
 
-        //Get Paramater values for each bar section
-        AParams = AView.getLayoutParams();
-        BParams = BView.getLayoutParams();
-        CParams = CView.getLayoutParams();
-        //Calculate the width of the bar
-        double barWidthDouble = 0.1*screenWidth;
-        int barWidth = (int) barWidthDouble;
-        //Calculate the height of the bar
-        barHeight = 0.8*screenHeight;
-        //Set width to all views
-        AParams.width = barWidth;
-        BParams.width = barWidth;
-        CParams.width = barWidth;
-        updateBarHeight();
+        updateBarHeight(" ");
     }
-
-
+    public void setName(String name){
+        textView.setText(name);
+    }
     public void calculateUnderstandingResponse(){
         good = 0;
         bad = 0;
@@ -153,8 +138,9 @@ public class stackedBarsFragment extends Fragment{
         }
 
     }
-    public void updateBarHeight(){
-        //Log.d("ABCD", "QRP");
+
+    public void updateBarHeight(String barName){
+        Log.d("ABCD", "UBH");
         //Calculate the percent of the bar filled by each section
         totalInputs = a+b+c;
         APercent = a/totalInputs;
@@ -162,16 +148,37 @@ public class stackedBarsFragment extends Fragment{
         CPercent = c/totalInputs;
 
         //Calculate the height of each bar section
-        double AHeightDouble = APercent * barHeight;
-        int AHeight = (int) AHeightDouble;
-        double BHeightDouble = BPercent * barHeight;
-        int BHeight = (int) BHeightDouble;
-        double CHeightDouble = CPercent * barHeight;
-        int CHeight = (int) CHeightDouble;
+        double AHeightDouble = APercent * barWidth;
+        int AWidth = (int) AHeightDouble;
+        double BHeightDouble = BPercent * barWidth;
+        int BWidth = (int) BHeightDouble;
+        double CHeightDouble = CPercent * barWidth;
+        int CWidth = (int) CHeightDouble;
 
-        //Set Height
-        AParams.height = AHeight;
-        BParams.height = BHeight;
-        CParams.height = CHeight;
+
+        ViewGroup.LayoutParams AParams = AView.getLayoutParams();
+        ViewGroup.LayoutParams BParams = BView.getLayoutParams();
+        ViewGroup.LayoutParams CParams = CView.getLayoutParams();
+        ViewGroup.LayoutParams tvParams = textView.getLayoutParams();
+
+        AParams.height = barHeight;
+        AParams.width = AWidth;
+        BParams.height = barHeight;
+        BParams.width = BWidth;
+        CParams.height = barHeight;
+        CParams.width = CWidth;
+        tvParams.height = barHeight;
+        tvParams.width = 300;
+
+        AView.setLayoutParams(AParams);
+        BView.setLayoutParams(BParams);
+        CView.setLayoutParams(CParams);
+        textView.setLayoutParams(tvParams);
+        textView.setText(barName);
+
+        Log.d("1234","" + barWidth);
+        Log.d("1234", "" + a);
+        Log.d("1234", "" + b);
+        Log.d("1234", "" + c);
     }
 }
