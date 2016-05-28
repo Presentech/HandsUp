@@ -16,18 +16,27 @@
         android:id="@+id/audienceText"
         android:layout_width="fill_parent"
         android:layout_height="120dp"
-        android:gravity="center"
         android:textColor="@color/textColour"
-        android:text="@string/welcome" />
+        android:text="@string/welcome"
+        android:gravity="center"/>
 
     <TextView
         android:id="@+id/aboutText"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:textColor="@color/textColour"
         android:text="@string/aboutApp"
-        android:layout_below="@id/audienceText" />
+        android:layout_below="@id/audienceText"
+        android:gravity="center_horizontal"/>
+
+    <TextView
+        android:id="@+id/connectText"
+        android:layout_width="fill_parent"
+        android:layout_height="120dp"
+        android:textColor="@color/textColour"
+        android:text="@string/toConnect"
+        android:layout_below="@id/aboutText"
+        android:gravity="center_horizontal" />
 
     <Button
         android:id="@+id/skipButton"
