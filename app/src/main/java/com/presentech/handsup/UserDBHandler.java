@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -43,7 +44,6 @@ public class UserDBHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
     }
 
     //removes the old database and create a new one
@@ -107,6 +107,7 @@ public class UserDBHandler extends SQLiteOpenHelper {
     }
 
     //Method to delete user from userDB, searching via email
+    //Not currently used in app
     public boolean deleteUser(String email) {
         boolean result = false;
         String query = "Select * FROM " + TABLE_USERS + " WHERE " + COLUMN_EMAIL + " =  \"" + email + "\"";
@@ -141,17 +142,6 @@ public class UserDBHandler extends SQLiteOpenHelper {
         myInput.close();
         myOutput.flush();
         myOutput.close();
-    }
-
-    //Method to delete UserDB file from device
-    //Not currently used in app
-    public void deleteDb() {
-        File file = new File(DATABASE_PATH + DATABASE_NAME);
-        //delete specified database file if it exists
-        if (file.exists()) {
-            file.delete();
-            Log.d(TAG, "Database deleted.");
-        }
     }
 
     //Method to check if UserDB file exists on device

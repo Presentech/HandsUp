@@ -225,6 +225,7 @@ public class LoginScreenActivity extends AppCompatActivity {
     }
 
     //Method to search for and remove specified user from UserDB
+    //Not currently used in app
     public void removeUser(View view) {
         UserDBHandler dbHandler = new UserDBHandler(this, null, null, 1, null);
         boolean result = dbHandler.deleteUser(emailAddress.getText().toString());
