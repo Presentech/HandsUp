@@ -17,7 +17,7 @@ public class AudienceTutorial extends AppCompatActivity {
 
     //this is called when 'Skip' is clicked, returns to specified activity
     public void skipClicked(View view){
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, AudienceSessionSelect.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
