@@ -1,5 +1,8 @@
 package com.presentech.handsup;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -63,7 +66,6 @@ public class PresentationActivity extends AppCompatActivity {
     int screenHeight, feedbackHeight, feedbackWidth;
     public Boolean understanding, multiChoice, messaging, hideFeedback, feedbackPerSlide;
     PresentationFile presentationFile;
-    private navDrawer drawer;
     String mode = "PRESENTER";
     liveFeedbackFragment fbFragment;
     public SingleFeedback[] feedbackArray = new SingleFeedback[10];
@@ -104,6 +106,11 @@ public class PresentationActivity extends AppCompatActivity {
 
         getScreenSize();
         populateSlides();
+
+        for (int i = 0; i < animations.size() ; i++) {
+            animations.get(i).start();
+        }
+
         SharedPreferences sharedPreferences = getSharedPreferences(SlideContentTimingsActivity.PREF_KEY_NAME, MODE_PRIVATE);
         int duration = sharedPreferences.getInt(SlideContentTimingsActivity.PREF_KEY_DURATION, 0);
         boolean isAdvanceActive = sharedPreferences.getBoolean(SlideContentTimingsActivity.PREF_KEY_ADVANCE_CHECKED, false);
@@ -113,10 +120,6 @@ public class PresentationActivity extends AppCompatActivity {
             setAutomaticHandler(duration, isLoopActive);
         }
         //setAutomaticHandler(3);
-    }
-        for (int i = 0; i < animations.size() ; i++) {
-            animations.get(i).start();
-        }
 
         // If presenter wants to view feedback create feedback fragment
         if (!hideFeedback){
@@ -134,6 +137,9 @@ public class PresentationActivity extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction().add(R.id.feedbackFragmentContainer, fbFragment).commit();
             }
         }
+    }
+
+
 
     private void setAutomaticHandler(final int duration, final boolean isInLoop) {
         new Handler().postDelayed(new Runnable() {
