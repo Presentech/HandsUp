@@ -36,6 +36,7 @@ public class testingConnections extends Activity {
     FeedbackJSON feedbackJSON = new FeedbackJSON();
     List<SingleFeedback> feedbackList = new ArrayList<SingleFeedback>();
     String feedback = "";
+    SingleFeedback feedbackObjectRx = new SingleFeedback();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +64,31 @@ public class testingConnections extends Activity {
         }
         //use button to refresh log
         addListenerOnButton();
+
+        // Step 4 - Setup the listener for this object
+        server.setCustomObjectListener(new Server.onMessageListener() {
+            @Override
+            public void onObjectReady(String title) {
+                // Code to handle object ready
+            }
+            @Override
+            public void onDataLoaded(SingleFeedback feedbackObject) {
+                // Code to handle data loaded from network
+                // Use the data here!
+                feedbackObjectRx = feedbackObject;
+                Log.d("testingConnections", "In Presentation!!!");
+                if(feedbackObjectRx.getTEXT() != null){
+                    Log.d("testingConnections", feedbackObjectRx.getTEXT());
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            testTextView.setText(feedbackObjectRx.getTEXT());
+                        }
+                    });
+
+                }
+            }
+        });
     }
 
     public void addListenerOnButton() {

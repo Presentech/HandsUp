@@ -119,20 +119,20 @@ public class PresentationActivity extends AppCompatActivity {
         application = (MyApplication)getApplication();
         presenterServer = application.getServer();
 
-        // Step 4 - Setup the listener for this object
-        presenterServer.setCustomObjectListener(new Server.onMessageListener() {
-            @Override
-            public void onObjectReady(String title) {
-                // Code to handle object ready
-            }
-
-            @Override
-            public void onDataLoaded(SingleFeedback feedbackObject) {
-                // Code to handle data loaded from network
-                // Use the data here!
-                Log.d("ABCD","In Presentation!!!");
-            }
-        });
+//        // Step 4 - Setup the listener for this object
+//        presenterServer.setCustomObjectListener(new Server.onMessageListener() {
+//            @Override
+//            public void onObjectReady(String title) {
+//                // Code to handle object ready
+//            }
+//
+//            @Override
+//            public void onDataLoaded(SingleFeedback feedbackObject) {
+//                // Code to handle data loaded from network
+//                // Use the data here!
+//                Log.d("ABCD","In Presentation!!!");
+//            }
+//        });
 
 
     }

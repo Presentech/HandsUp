@@ -102,6 +102,8 @@ public class Server {
             Log.d("Server", "Message received: " + feedbackString);
             feedbackObject = usingJSON.FeedbackJSONParse(feedbackString);
             contents.setLength(0);
+            //fire listener here
+            Log.d("Server", "Listener fired");
             listener.onDataLoaded(feedbackObject);
         }
     }
@@ -124,14 +126,11 @@ public class Server {
 
         @Override
         public void run() {
-
             int c;
             try {
                 while (true) {
                     c = in.read();
                     if (c == -1) continue;
-                   // Log.d(TAG, "Message: " + c);
-                    final int finalC = c;
                     ctx.onMessage(c);
                 }
 
@@ -146,7 +145,6 @@ public class Server {
                     e.printStackTrace();
                 }
             }
-
         }
     }
 }
