@@ -45,9 +45,9 @@ repositories {
     maven { url 'http://clojars.org/repo' }
 }
 
-dependencies {
-    compile 'com.android.support:support-v4:23.+'
-}
+//dependencies {
+//    compile 'com.android.support:support-v4:23.+'
+//}
 dependencies {
     compile 'com.pusher:pusher-java-client:1.0.0'
     compile 'com.loopj.android:android-async-http:1.4.9' // for our HTTP requests later
