@@ -81,6 +81,7 @@
                     android:paddingRight="5dp"
                     android:paddingBottom="5dp"
                     android:inputType="textVisiblePassword"
+                    android:editable="false"
                     android:hint="@string/password_hint"
                     android:textColorHint="@color/textColour"
                     android:textColor="@color/textColour"

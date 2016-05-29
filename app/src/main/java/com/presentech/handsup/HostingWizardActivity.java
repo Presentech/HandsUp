@@ -67,6 +67,8 @@ public class HostingWizardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_hosting_wizard);
         setTitle(R.string.hosting_wizard_title);
         Toast.makeText(HostingWizardActivity.this, getIpAddress(), Toast.LENGTH_LONG).show();
+        EditText password = (EditText) findViewById(R.id.SessionPassword);
+        password.setText(getIpAddress());
 
         application = (MyApplication)getApplication();
         server = application.getServer();
@@ -165,7 +167,7 @@ public class HostingWizardActivity extends AppCompatActivity {
     public void createSession(View view) throws IOException, XmlPullParserException {
         PresentationFile presentationFile = getPresentation(pathName);
         //Go to Presentation with options set
-        Intent intent = new Intent(this, testingConnections.class);
+        Intent intent = new Intent(this, PresentationActivity.class);
         Bundle b = new Bundle();
         //Add options to Presentation
         intent.putExtra(PresentationActivity.BOOLEAN_NAME1, understanding);

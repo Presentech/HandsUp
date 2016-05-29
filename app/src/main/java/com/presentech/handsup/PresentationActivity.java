@@ -60,6 +60,7 @@ public class PresentationActivity extends AppCompatActivity {
     String mode = "PRESENTER";
     liveFeedbackFragment fbFragment;
     public SingleFeedback[] feedbackArray = new SingleFeedback[10];
+    SingleFeedback feedbackObjectRx = new SingleFeedback();
 
     TextHandler tH = new TextHandler();
     RelativeLayout slide = null;
@@ -113,26 +114,37 @@ public class PresentationActivity extends AppCompatActivity {
                 fbFragment.setFeedbackSettings(messaging, multiChoice, understanding);
                 //fbFragment.setName();
                 getSupportFragmentManager().beginTransaction().add(R.id.feedbackFragmentContainer, fbFragment).commit();
+                getSupportFragmentManager().beginTransaction().hide(fbFragment);
             }
         }
 
         application = (MyApplication)getApplication();
         presenterServer = application.getServer();
 
-//        // Step 4 - Setup the listener for this object
-//        presenterServer.setCustomObjectListener(new Server.onMessageListener() {
-//            @Override
-//            public void onObjectReady(String title) {
-//                // Code to handle object ready
-//            }
-//
-//            @Override
-//            public void onDataLoaded(SingleFeedback feedbackObject) {
-//                // Code to handle data loaded from network
-//                // Use the data here!
-//                Log.d("ABCD","In Presentation!!!");
-//            }
-//        });
+        //Step 4 - Setup the listener for this object
+        presenterServer.setCustomObjectListener(new Server.onMessageListener() {
+            @Override
+            public void onObjectReady(String title) {
+                // Code to handle object ready
+            }
+
+            @Override
+            public void onDataLoaded(SingleFeedback feedbackObject) {
+                // Code to handle data loaded from network
+                // Use the data here!
+                feedbackObjectRx = feedbackObject;
+                Log.d("testingConnections", "In Presentation!!!");
+                if(feedbackObjectRx != null){
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            fbFragment.updateFeedback(feedbackObjectRx);
+                        }
+                    });
+
+                }
+            }
+        });
 
 
     }
@@ -294,7 +306,6 @@ public class PresentationActivity extends AppCompatActivity {
                 if(!hideFeedback){
                     if (fbFragment.isHidden()) getSupportFragmentManager().beginTransaction().show(fbFragment).commit();
                     else getSupportFragmentManager().beginTransaction().hide(fbFragment).commit();
-                    fbFragment.updateStackedBars();
                 }
                 return true;
             case R.id.action_settings:

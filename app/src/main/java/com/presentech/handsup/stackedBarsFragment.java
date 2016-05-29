@@ -21,7 +21,7 @@ import java.util.Random;
 
 public class stackedBarsFragment extends Fragment{
 
-    public SingleFeedback[] feedbackArray = new SingleFeedback[10];
+    public SingleFeedback[] feedbackArray = new SingleFeedback[20];
     public int a, b, c, good, bad, meh;
     double A = 1, B = 1, C = 1;
     double APercent, BPercent, CPercent, totalInputs;
@@ -29,7 +29,7 @@ public class stackedBarsFragment extends Fragment{
     View AView, BView, CView;
     TextView textView, ATextView, BTextView, CTextView;
 
-    public int barWidth, lastBar, barHeight;
+    public int barWidth, lastBar, barHeight, i = 0;
     RelativeLayout barLayout;
     public int qNo = 0, numberofPlots = 2;
     public int[] answerA, answerB, answerC;
@@ -43,16 +43,35 @@ public class stackedBarsFragment extends Fragment{
         return barLayout;
     }
 
-    public void setFeedbackArray(SingleFeedback[] feedback){
-        Random r = new Random();
-        int rV;
-        feedbackArray = feedback;
-        /*Set some example objects that would be expected to recieve*/
-        for(int i=0; i<10;i++){
-            rV = r.nextInt(4 - 1) + 1;
-            feedbackArray[i] = new SingleFeedback("abc",1.00,1,1,rV,rV,"abc",123L);
+    public void setFeedbackResponse(SingleFeedback feedback){
+        SingleFeedback[] questionResponses = new SingleFeedback[100];
+        SingleFeedback[] understandingResponses = new SingleFeedback[100];
+        //Add User ID
+        i++; //I is the index we are storing feedback Objects
+        if (i>99) i = 0; //If looking above 100 start overwriting from oldest first.
+
+        for (int j=0; j <100; j++){//Look through each object in array
+            if (questionResponses[j].getABC() == -1){
+
+            }
+        }
+        int ABC = feedback.getABC();
+        int GOODmehBAD = feedback.getGOOD_MEH_BAD();
+        String newMessage = feedback.getTEXT();
+        if (ABC != -1){ // Question Response
+            if (ABC == 1) a++;
+            else if (ABC == 2) b++;
+            else c++;
+            questionResponses[i] = feedback;
+        }
+        else if (GOODmehBAD != -1){ //Understanding Response
+            if (GOODmehBAD == 1) good++;
+            else if (GOODmehBAD == 2) meh++;
+            else bad++;
+            understandingResponses[i] = feedback;
         }
     }
+
 
     public void setScreenParams(int height, int width){
         barHeight = height;
@@ -63,10 +82,10 @@ public class stackedBarsFragment extends Fragment{
     private void initBar(){
         //Create references to views
         //AView = barLayout.findViewById(R.id.greenLayoutfrag);
-        BTextView = (TextView) barLayout.findViewById(R.id.yellowLayoutfrag);
-        CTextView = (TextView) barLayout.findViewById(R.id.redLayoutfrag);
+        BView = barLayout.findViewById(R.id.yellowLayoutfrag);
+        CView = barLayout.findViewById(R.id.redLayoutfrag);
         textView = (TextView) barLayout.findViewById(R.id.FBtextView);
-        ATextView = (TextView) barLayout.findViewById(R.id.greenLayoutfrag);
+        AView = barLayout.findViewById(R.id.greenLayoutfrag);
         //BTextView = (TextView) BView;
         //CTextView = (TextView) CView;
         viewParent = barLayout;
@@ -145,10 +164,18 @@ public class stackedBarsFragment extends Fragment{
     public void updateBarHeight(String barName){
         Log.d("ABCD", "UBH");
         //Calculate the percent of the bar filled by each section
-        totalInputs = a+b+c;
-        APercent = a/totalInputs;
-        BPercent = b/totalInputs;
-        CPercent = c/totalInputs;
+        if (barName.equals("Level of Understanding")){ //Use good meh bad values
+            totalInputs = good+meh+bad;
+            APercent = good/totalInputs;
+            BPercent = meh/totalInputs;
+            CPercent = bad/totalInputs;
+        }
+        if (barName.equals("Question Response")){ //Use good meh bad values
+            totalInputs = a+b+c;
+            APercent = a/totalInputs;
+            BPercent = b/totalInputs;
+            CPercent = c/totalInputs;
+        }
 
         //Calculate the height of each bar section
         double AHeightDouble = APercent * barWidth;
@@ -159,9 +186,9 @@ public class stackedBarsFragment extends Fragment{
         int CWidth = (int) CHeightDouble;
 
 
-        ViewGroup.LayoutParams AParams = ATextView.getLayoutParams();
-        ViewGroup.LayoutParams BParams = BTextView.getLayoutParams();
-        ViewGroup.LayoutParams CParams = CTextView.getLayoutParams();
+        ViewGroup.LayoutParams AParams = AView.getLayoutParams();
+        ViewGroup.LayoutParams BParams = BView.getLayoutParams();
+        ViewGroup.LayoutParams CParams = CView.getLayoutParams();
         ViewGroup.LayoutParams tvParams = textView.getLayoutParams();
 
         AParams.height = barHeight;
@@ -173,9 +200,9 @@ public class stackedBarsFragment extends Fragment{
         tvParams.height = barHeight;
         tvParams.width = 300;
 
-        ATextView.setLayoutParams(AParams);
-        BTextView.setLayoutParams(BParams);
-        CTextView.setLayoutParams(CParams);
+        AView.setLayoutParams(AParams);
+        BView.setLayoutParams(BParams);
+        CView.setLayoutParams(CParams);
         textView.setLayoutParams(tvParams);
         textView.setText(barName);
     }
