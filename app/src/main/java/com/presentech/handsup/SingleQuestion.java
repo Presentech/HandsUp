@@ -11,11 +11,12 @@ package com.presentech.handsup;
 
 public class SingleQuestion {
 
-   private  double SLIDE;
-    private  int QUESTION;
-    private boolean abc;
-    private boolean goodmehbad;
-    private String questionText;
+    double SLIDE;
+    int QUESTION;
+    boolean abc;
+    boolean goodmehbad;
+    String questionText;
+    long TIME_RECEIVED;
 
     // Empty constructor - should be used.
     public SingleQuestion(double inSlide, int inQuestion, boolean inabc, boolean inGoodMehBad, String inQuestionText ){
@@ -25,6 +26,15 @@ public class SingleQuestion {
         this.goodmehbad = inGoodMehBad;
         this.questionText = inQuestionText;
     }
+
+    public SingleQuestion() {
+        this.SLIDE = -1;
+        this.QUESTION = -1;
+        this.abc = false;
+        this.goodmehbad = false;
+        this.questionText = null;
+    }
+
 
     public double getSLIDE() {
         return SLIDE;
