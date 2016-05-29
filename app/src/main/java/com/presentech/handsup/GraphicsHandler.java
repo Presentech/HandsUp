@@ -27,6 +27,8 @@ import java.util.List;
  */
 public class GraphicsHandler extends View {
 
+    public final static int ROUNDRECT_RADIUS = 10;
+
     ArrayList x;
     ArrayList y;
 
@@ -66,16 +68,13 @@ public class GraphicsHandler extends View {
         if (shape !=  null) {
             if (shape.getType().equals("circle") || shape.getType().equals("oval")){
                 canvas.drawOval(rect, paint);
-                if (shape.getLineColour() != null) {
-                    canvas.drawOval(rect, stroke);
-                }
+                canvas.drawOval(rect, stroke);
             }else if (shape.getType().equals("rectangle")){
                 canvas.drawRect(rect, paint);
-                if (shape.getLineColour() != null) {
-                    canvas.drawRect(rect, stroke);
-                }
-            }else if (shape.getType().equals("triangle")){
-                Log.d("TAG shape handler", "it's a triangle!");
+                canvas.drawRect(rect, stroke);
+            }else if (shape.getType().equals("roundedRectangle")){
+                canvas.drawRoundRect(rect, ROUNDRECT_RADIUS, ROUNDRECT_RADIUS, paint);
+                canvas.drawRoundRect(rect, ROUNDRECT_RADIUS, ROUNDRECT_RADIUS, stroke);
             }
         }
 //

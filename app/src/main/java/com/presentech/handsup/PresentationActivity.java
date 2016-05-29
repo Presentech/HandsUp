@@ -1,5 +1,8 @@
 package com.presentech.handsup;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -56,6 +59,8 @@ public class PresentationActivity extends AppCompatActivity {
     RelativeLayout slide = null;
     Canvas canvas = new Canvas();
 
+    List<AnimatorSet> animations = new ArrayList<AnimatorSet>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +81,10 @@ public class PresentationActivity extends AppCompatActivity {
         viewFlipper.setBackgroundColor(Color.parseColor("#"+presentationFile.getDefaults().getBackgroundColour()));
         getScreenSize();
         populateSlides();
+
+        for (int i = 0; i < animations.size() ; i++) {
+            animations.get(i).start();
+        }
 
 
 
@@ -199,6 +208,29 @@ public class PresentationActivity extends AppCompatActivity {
                     GraphicsHandler pH = new GraphicsHandler(this, p , s, screenWidth, screenHeight, presentationFile.getDefaults());
                     pH.draw(canvas);
                     slide.addView(pH);
+                    pH.setAlpha(0f);
+
+        if (s != null) {
+            ObjectAnimator appearDelay = ObjectAnimator.ofFloat(pH, "alpha", 0f, 0f);
+            appearDelay.setDuration(s.getStartTime()); // Start Time
+
+            ObjectAnimator appear = ObjectAnimator.ofFloat(pH, "alpha", 0f, 1f);
+            appear.setDuration(0);
+
+            ObjectAnimator durationDelay = ObjectAnimator.ofFloat(pH, "alpha", 1f, 1f);
+            durationDelay.setDuration(s.getDuration()); // Duration
+
+            ObjectAnimator disappear = ObjectAnimator.ofFloat(pH, "alpha", 1f, 0f);
+            disappear.setDuration(0);
+
+            AnimatorSet anim = new AnimatorSet();
+            anim.play(appear).after(appearDelay);
+            anim.play(durationDelay).after(appear);
+            anim.play(disappear).after(durationDelay);
+
+            animations.add(anim);
+        }
+
 
 //
 //                } catch (IOException e) {
@@ -355,6 +387,9 @@ public class PresentationActivity extends AppCompatActivity {
                     viewFlipper.setOutAnimation(this, R.anim.slide_out_to_right);
 //                    vf.showNext();
                     viewFlipper.showPrevious();
+                    for (int i = 0; i < animations.size() ; i++) {
+                        animations.get(i).start();
+                    }
                 }
 
                 if (lastX > currentX)
@@ -367,6 +402,9 @@ public class PresentationActivity extends AppCompatActivity {
                     viewFlipper.setOutAnimation(this, R.anim.slide_out_to_left);
 //                    vf.showPrevious();
                     viewFlipper.showNext();
+                    for (int i = 0; i < animations.size() ; i++) {
+                        animations.get(i).start();
+                    }
                 }
 
                 break;
