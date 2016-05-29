@@ -16,6 +16,7 @@ import android.text.Html;
 import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -41,14 +42,24 @@ import java.util.List;
 
 public class PresentationActivity extends AppCompatActivity {
 
+    public static final String BOOLEAN_NAME1 = "boolean1";
+    public static final String  BOOLEAN_NAME2 = "boolean2";
+    public static final String  BOOLEAN_NAME3 = "boolean3";
+    public static final String  BOOLEAN_NAME4= "boolean4";
+    public static final String  BOOLEAN_NAME5 = "boolean5";
+
     //the presentation container
     private ViewFlipper viewFlipper;
     private float lastX;
-    int screenWidth;
-    int screenHeight;
+    int screenWidth, stackedBarsAmount;
+    int screenHeight, feedbackHeight, feedbackWidth;
+    public Boolean understanding, multiChoice, messaging, hideFeedback, feedbackPerSlide;
     PresentationFile presentationFile;
     private navDrawer drawer;
+
     String mode = "PRESENTER";
+    liveFeedbackFragment fbFragment;
+    public SingleFeedback[] feedbackArray = new SingleFeedback[10];
 
     TextHandler tH = new TextHandler();
     RelativeLayout slide = null;
@@ -60,25 +71,48 @@ public class PresentationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_presentation);
         viewFlipper = (ViewFlipper) findViewById(R.id.viewflipper);
         setTitle(R.string.presentation_container);
-        //Bundle b = this.getIntent().getExtras();
+        Bundle b = this.getIntent().getExtras();
         //String id = b.getParcelable(SyncStateContract.Constants.CUSTOM_LISTING);
         //presentationFile = (PresentationFile) this.getIntent().getSerializableExtra("pF");
 
         try {
-           getPresentation();
+            getPresentation();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (XmlPullParserException e) {
             e.printStackTrace();
         }
-        viewFlipper.setBackgroundColor(Color.parseColor("#"+presentationFile.getDefaults().getBackgroundColour()));
+        viewFlipper.setBackgroundColor(Color.parseColor("#" + presentationFile.getDefaults().getBackgroundColour()));
+        viewFlipper.getParent().getParent().requestDisallowInterceptTouchEvent(true);
+
+        understanding = b.getBoolean(BOOLEAN_NAME1);
+        messaging = b.getBoolean(BOOLEAN_NAME2);
+        multiChoice = b.getBoolean(BOOLEAN_NAME3);
+        hideFeedback = b.getBoolean(BOOLEAN_NAME4);
+        //feedbackPerSlide = b.getBoolean(BOOLEAN_NAME5);
+
         getScreenSize();
         populateSlides();
 
+        // If presenter wants to view feedback create feedback fragment
+        if (!hideFeedback){
+            if (findViewById(R.id.feedbackFragmentContainer) != null){
+                // If we're being restored from a previous state, don't do anything
+                // we could end up with overlapping fragments.
+                if (savedInstanceState != null) {
+                    return;
+                }
+                // Create a new Fragment to be placed in the activity layout
+                fbFragment = new liveFeedbackFragment();
+                fbFragment.setScreenParams(feedbackHeight, feedbackWidth);
+                fbFragment.setFeedbackSettings(messaging, multiChoice, understanding);
+                //fbFragment.setName();
+                getSupportFragmentManager().beginTransaction().add(R.id.feedbackFragmentContainer, fbFragment).commit();
+            }
+        }
 
 
     }
-
 
     public void createTextViews(Text t) {
         String textDisplay = null;
@@ -134,7 +168,7 @@ public class PresentationActivity extends AppCompatActivity {
     }
 
     public void createVideoViews(Video v) {
-    Uri uri = Uri.parse("android.resource://" + getPackageName() + "/"
+        Uri uri = Uri.parse("android.resource://" + getPackageName() + "/"
                 + getResources().getIdentifier(v.getSourceFile(), "raw", getPackageName()));
         VideoView vV = new VideoView(this);
         MediaController mediaController = new
@@ -145,7 +179,7 @@ public class PresentationActivity extends AppCompatActivity {
         vV.requestFocus();
         vV.setVideoURI(uri);
         vV.setX(v.getxStart() * screenWidth);
-        vV.setY(v.getyStart()*screenHeight);
+        vV.setY(v.getyStart() * screenHeight);
         //vV.layout((int) vV.getX(), (int) vV.getY(),(int) vV.getX() + 800, (int) vV.getY() + 500);
         vV.start();
         slide.addView(vV);
@@ -186,17 +220,17 @@ public class PresentationActivity extends AppCompatActivity {
 //                        }
 //                    }
 
-                    ArrayList x = new ArrayList();
-                    ArrayList y = new ArrayList();
+        ArrayList x = new ArrayList();
+        ArrayList y = new ArrayList();
 //                    for (int i = 0; i < list.size(); i++) {
 //                        x.add(list.get(i)[0]);
 ////                        y.add(list.get(i)[1]);
 //                    }
 
 
-                    GraphicsHandler pH = new GraphicsHandler(this, x, y, p , s, screenWidth, screenHeight);
-                    pH.draw(canvas);
-                    slide.addView(pH);
+        GraphicsHandler pH = new GraphicsHandler(this, x, y, p , s, screenWidth, screenHeight);
+        pH.draw(canvas);
+        slide.addView(pH);
 
 //
 //                } catch (IOException e) {
@@ -210,8 +244,61 @@ public class PresentationActivity extends AppCompatActivity {
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
-        screenWidth = size.x;
-        screenHeight = size.y;
+        //Set screen params differently if the presenter wants to be able to see feedback
+        if (hideFeedback){
+            screenWidth = size.x;
+            screenHeight = size.y;
+        }
+        else{
+            int tempx = size.x;
+            int tempy = size.y;
+            double screenWidthDouble = tempx*0.7;
+            double screenHeightDouble = tempy-360;
+            screenWidth = (int) screenWidthDouble;
+            screenHeight = (int) screenHeightDouble;
+            feedbackHeight = tempy;
+            feedbackWidth = tempx;
+        }
+    }
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_feedback:
+                //Show feedback here
+                if(!hideFeedback){
+                    if (fbFragment.isHidden()) getSupportFragmentManager().beginTransaction().show(fbFragment).commit();
+                    else getSupportFragmentManager().beginTransaction().hide(fbFragment).commit();
+                    fbFragment.updateStackedBars();
+                }
+                return true;
+            case R.id.action_settings:
+                Intent settings_Intent = new Intent(this, SettingsActivity.class);
+                startActivity(settings_Intent);
+                return true;
+            case R.id.action_presenterHelp:
+                Intent tutorial_Intent = new Intent(this, PresentationModeTutorial.class);
+                startActivity(tutorial_Intent);
+                return true;
+            case R.id.action_home:
+                Intent home_Intent = new Intent(this, HostingWizardActivity.class);
+                startActivity(home_Intent);
+                return true;
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.action_bar_presentation, menu);
+        return true;
     }
 
     public void populateSlides(){
@@ -261,7 +348,7 @@ public class PresentationActivity extends AppCompatActivity {
             if (numberOfImages > 0){
                 for (int j = 0; j< numberOfImages; j++){
                     Image image = slides.get(i).getImage().get(j);
-                        createImageViews(image);
+                    createImageViews(image);
                 }
             }
 
