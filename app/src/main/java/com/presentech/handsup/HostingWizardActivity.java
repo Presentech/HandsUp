@@ -152,10 +152,10 @@ public class HostingWizardActivity extends AppCompatActivity {
         Intent intent = new Intent(this, PresentationActivity.class);
         Bundle b = new Bundle();
         //Add options to Presentation
-        //Intent.putExtra(PresentationActivity.BOOLEAN_NAME1, understanding);
-        //Intent.putExtra(PresentationActivity.BOOLEAN_NAME2, multiChoice);
-        //Intent.putExtra(PresentationActivity.BOOLEAN_NAME3, messaging);
-        //Intent.putExtra(PresentationActivity.BOOLEAN_NAME4, hideFeedback);
+        intent.putExtra(PresentationActivity.BOOLEAN_NAME1, understanding);
+        intent.putExtra(PresentationActivity.BOOLEAN_NAME2, multiChoice);
+        intent.putExtra(PresentationActivity.BOOLEAN_NAME3, messaging);
+        intent.putExtra(PresentationActivity.BOOLEAN_NAME4, hideFeedback);
         //Intent.putExtra(PresentationActivity.BOOLEAN_NAME5, feedbackPerSlide);
         EditText session_name_view = (EditText) findViewById(R.id.SessionTitle);
         EditText session_password_view = (EditText) findViewById(R.id.SessionPassword);

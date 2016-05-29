@@ -24,6 +24,7 @@ public class aboutActivityTest {
         /*Robolectric method to run About Activity */
         activity = Robolectric.setupActivity(aboutActivity.class);
     }
+}
 
     @Test
     public void checkListVisibility(){

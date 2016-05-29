@@ -31,13 +31,29 @@ dependencies {
     androidTestCompile 'junit:junit:4.12'
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'org.robolectric:robolectric:3.0'
+    testCompile "org.mockito:mockito-core:1.+"
     androidTestCompile 'com.android.support:support-annotations:23.2.0'
     androidTestCompile 'com.android.support.test:runner:0.4.1'
     androidTestCompile 'com.android.support.test:rules:0.4.1'
+    androidTestCompile 'org.mockito:mockito-core:1.+'
+    androidTestCompile "com.google.dexmaker:dexmaker:1.2"
+    androidTestCompile "com.google.dexmaker:dexmaker-mockito:1.2"
     compile 'com.android.support:appcompat-v7:23.2.0'
     compile 'com.android.support:design:23.2.0'
     compile 'com.androidplot:androidplot-core:0.9.8'
     compile 'com.android.support:support-v4:23.2.0'
-
 }
 
+repositories {
+    maven { url 'http://clojars.org/repo' }
+}
+
+//dependencies {
+//    compile 'com.android.support:support-v4:23.+'
+//}
+dependencies {
+    compile 'com.pusher:pusher-java-client:1.0.0'
+    compile 'com.loopj.android:android-async-http:1.4.9' // for our HTTP requests later
+    compile 'com.google.code.gson:gson:2.4' // for parsing JSON
+    compile 'com.squareup.picasso:picasso:2.1.1' // for image rendering
+}

@@ -85,8 +85,6 @@ package com.presentech.handsup;
             backgroundView.setScaleType(ImageView.ScaleType.FIT_XY);
 
         }public void goToPresenterTutorial(View view){
-            Intent THIS_INTENT = new Intent(this, ViewLiveFeedback.class);
-            startActivity(THIS_INTENT);
          }
         public void goToAudienceMode(View view){
             Intent AudienceIntent = new Intent(this, AudienceSessionSelect.class);
