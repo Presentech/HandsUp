@@ -7,6 +7,8 @@ import android.text.Html;
 import android.util.Log;
 import android.widget.TextView;
 
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,6 +31,8 @@ public class Server {
     //Feedback objects
     FeedbackJSON usingJSON = new FeedbackJSON();
     SingleFeedback feedbackObject = new SingleFeedback();
+
+    private onMessageListener listener;
 
     //Connections
     Socket socket;
@@ -70,17 +74,35 @@ public class Server {
 
         );
 
+        this.listener = null;
         t.start();
+    }
+
+
+
+    // Step 1 - This interface defines the type of messages I want to communicate to my owner
+    public interface onMessageListener {
+        // These methods are the different events and
+        // need to pass relevant arguments related to the event triggered
+        public void onObjectReady(String title);
+        // or when data has been loaded
+        public void onDataLoaded(SingleFeedback feedback);
+    }
+
+    // Assign the listener implementing events interface that will receive the events
+    public void setCustomObjectListener(onMessageListener listener) {
+        this.listener = listener;
     }
 
 
     public void onMessage(final int c) {
         contents.append(Character.toChars(c));
-        if (contents.toString().contains("}")){
+        if (contents.toString().contains("}")) {
             feedbackString = contents.toString();
             Log.d("Server", "Message received: " + feedbackString);
             feedbackObject = usingJSON.FeedbackJSONParse(feedbackString);
             contents.setLength(0);
+            listener.onDataLoaded(feedbackObject);
         }
     }
 

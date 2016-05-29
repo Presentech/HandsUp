@@ -65,6 +65,10 @@ public class PresentationActivity extends AppCompatActivity {
     RelativeLayout slide = null;
     Canvas canvas = new Canvas();
 
+    //Connectivity requirements
+    MyApplication application;
+    Server presenterServer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,6 +98,7 @@ public class PresentationActivity extends AppCompatActivity {
         getScreenSize();
         populateSlides();
 
+
         // If presenter wants to view feedback create feedback fragment
         if (!hideFeedback){
             if (findViewById(R.id.feedbackFragmentContainer) != null){
@@ -110,6 +115,24 @@ public class PresentationActivity extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction().add(R.id.feedbackFragmentContainer, fbFragment).commit();
             }
         }
+
+        application = (MyApplication)getApplication();
+        presenterServer = application.getServer();
+
+        // Step 4 - Setup the listener for this object
+        presenterServer.setCustomObjectListener(new Server.onMessageListener() {
+            @Override
+            public void onObjectReady(String title) {
+                // Code to handle object ready
+            }
+
+            @Override
+            public void onDataLoaded(SingleFeedback feedbackObject) {
+                // Code to handle data loaded from network
+                // Use the data here!
+                Log.d("ABCD","In Presentation!!!");
+            }
+        });
 
 
     }
