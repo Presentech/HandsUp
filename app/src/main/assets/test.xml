@@ -26,6 +26,7 @@
         </interactable>
         <text duration="1" ystart="0.55" starttime="3" xstart="0.55">Click here to jump to <i>video</i> ?</text>
         <polygon starttime="0" duration="-1" fillColour="000000" lineColour="B4A8F2" sourceFile="diamond.csv"></polygon>
+        <question> Are we going to fail Sweng? </question>
     </slide>
     <slide slideID="1">
         <video ystart="0.2" loop="true" xstart="0.3" sourceFile="vid"

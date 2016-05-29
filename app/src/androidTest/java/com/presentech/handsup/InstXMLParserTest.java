@@ -9,6 +9,7 @@ import com.presentech.handsup.presentationfile.Image;
 import com.presentech.handsup.presentationfile.Interactable;
 import com.presentech.handsup.presentationfile.Polygon;
 import com.presentech.handsup.presentationfile.PresentationFile;
+import com.presentech.handsup.presentationfile.Question;
 import com.presentech.handsup.presentationfile.Shading;
 import com.presentech.handsup.presentationfile.Shape;
 import com.presentech.handsup.presentationfile.Slide;
@@ -269,6 +270,15 @@ public class InstXMLParserTest {
         assertNull(interactable.getShape());
         assertNull(interactable.getVideo());
         assertNull(interactable.getImage());
+    }
+
+    @Test
+    //Check that Question Element contains correct string
+    public void questionElemnetsContainsCorrectString() {
+        Slide slide = presentationFile.getSlides().get(0);
+        Question question = slide.getQuestion().get(0);
+
+        assertEquals("How much do we love sweng? A - A lot, B - Very Much so, C - Quite a bit", question.getQuestion());
     }
 
 
