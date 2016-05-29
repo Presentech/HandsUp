@@ -96,7 +96,7 @@
     <string name="ptutorial_export_title">How to Export a Presentation</string>
     <string name="ptutorial_export_content">EXPORT \nCONTENT \nINSERT\n</string>
 
-
+    <!-- Settings Strings -->
     <string name="action_settings">SETTINGS</string>
     <string name="accessibility_title">Accessibility</string>
     <string name="account_title">Account &amp; Privacy</string>
@@ -122,6 +122,11 @@
         <item>FILE &amp; STORAGE PREFERENCES</item>
         <item>DEFAULT SETTINGS</item>
     </string-array>
+
+    <string name="pref_brightness">pref_brightness</string>
+    <string name="pref_auto_rotate">auto_rotate</string>
+    <string name="pref_zoom">zoom</string>
+    <string name="slide_content_timings_title">Media Transition Settings</string>
 
 
     <string name="title_activity_audience_session_select">AudienceSessionSelect</string>

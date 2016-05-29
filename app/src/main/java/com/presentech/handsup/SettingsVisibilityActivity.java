@@ -1,64 +1,152 @@
 package com.presentech.handsup;
 
+import android.annotation.TargetApi;
+import android.content.ContentResolver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.preference.PreferenceActivity;
-import android.preference.PreferenceFragment;
-import android.support.v4.content.ContextCompat;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ListView;
+import android.util.Log;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.CompoundButton;
+import android.widget.SeekBar;
+import android.widget.Switch;
 
 /**
  * Created by Jay on 10-03-2016.
  */
-public class SettingsVisibilityActivity extends AppCompatActivity {
+public class SettingsVisibilityActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener, CompoundButton.OnCheckedChangeListener {
+
+    private String keySeekBarBrightness, keyAutoRotate, keyZoom;
+    //Variable to store brightness value
+    private int brightness;
+    //Content resolver used as a handle to the system's settings
+    private ContentResolver cResolver;
+    //Window object, that will store a reference to the current window
+    private Window window;
+
+    private SeekBar seekBarBrightness;
+    Switch switchAutoRotate, switchZoom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings_toolbar);
+        setContentView(R.layout.activity_settings_visibility);
 
 
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //getSupportActionBar().setDisplayShowHomeEnabled(true);
+        keyAutoRotate = getString(R.string.pref_auto_rotate);
+        keySeekBarBrightness = getString(R.string.pref_brightness);
+        keyZoom = getString(R.string.pref_zoom);
 
-        getFragmentManager().beginTransaction().replace(R.id.content_frame, new MyPreferenceFragment()).commit();
+
+        seekBarBrightness = (SeekBar) findViewById(R.id.seekbarBrightness);
+
+
+        switchAutoRotate = (Switch) findViewById(R.id.switchAutoRotate);
+
+        switchZoom = (Switch) findViewById(R.id.switchZoooming);
+
+        seekBarBrightness.setOnSeekBarChangeListener(this);
+
+        switchZoom.setOnCheckedChangeListener(this);
+        switchAutoRotate.setOnCheckedChangeListener(this);
+
+
+        checkWriteSettingsPermission();
+
 
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+        switch (compoundButton.getId()) {
+            case R.id.switchAutoRotate:
+                setAutoOrientationEnabled(this, b);
+                break;
+            case R.id.switchZoooming:
+                break;
+            default:
+                break;
 
-        if(item.getItemId() == android.R.id.home)
-            finish();
-
-        return true;
+        }
     }
 
-
-    public static class MyPreferenceFragment extends PreferenceFragment {
-        @Override
-        public void onCreate(final Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            //addPreferencesFromResource(R.xml.visibility_prefs);
-        }
-
-
-        @Override
-        public void onActivityCreated(Bundle savedInstanceState) {
-            super.onActivityCreated(savedInstanceState);
-
-            View rootView = getView();
-            ListView list = (ListView) rootView.findViewById(android.R.id.list);
-            list.setDivider(ContextCompat.getDrawable(getActivity(), R.color.textColour));
-            list.setDividerHeight(1);
-
-
-        }
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+        int brightness = i;
+        seekBarBrightness.setProgress(brightness);
+        //Set the system brightness using the brightness variable value
+        Settings.System.putInt(cResolver, Settings.System.SCREEN_BRIGHTNESS, brightness);
+        //Get the current window attributes
+        WindowManager.LayoutParams layoutpars = window.getAttributes();
+        //Set the brightness of this window
+        layoutpars.screenBrightness = brightness / (float) 255;
+        //Apply attribute changes to this window
+        window.setAttributes(layoutpars);
 
     }
 
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+
+    }
+
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
+
+    }
+
+    @TargetApi(23)
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            initializeBrightnessSettingCode();
+        } else {
+            seekBarBrightness.setEnabled(false);
+        }
+    }
+
+    private void checkWriteSettingsPermission() {
+
+
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (Settings.System.canWrite(this)) {
+                initializeBrightnessSettingCode();
+            } else {
+                startActivity(new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS));
+            }
+        } else {
+            initializeBrightnessSettingCode();
+        }
+
+    }
+
+    private void initializeBrightnessSettingCode() {
+
+        cResolver = getContentResolver();
+        window = getWindow();
+        try {
+            // To handle the auto
+            Settings.System.putInt(cResolver,
+                    Settings.System.SCREEN_BRIGHTNESS_MODE, Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
+            //Get the current system brightness
+            brightness = Settings.System.getInt(cResolver, Settings.System.SCREEN_BRIGHTNESS);
+            seekBarBrightness.setProgress(brightness);
+
+        } catch (Settings.SettingNotFoundException e) {
+            //Throw an error case it couldn't be retrieved
+            Log.e("Error", "Cannot access system brightness");
+            e.printStackTrace();
+        }
+    }
+
+    private void setAutoOrientationEnabled(Context context, boolean enabled) {
+        Settings.System.putInt(context.getContentResolver(), Settings.System.ACCELEROMETER_ROTATION, enabled ? 1 : 0);
+    }
 }
+

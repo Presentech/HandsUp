@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/backgroundgrey"
+        android:orientation="vertical">
+
+        <TextView
+            android:onClick="colourRatioOption"
+            style="@style/style_text_option"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Colour Ratio" />
+
+        <View
+            style="@style/style_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+
+        <TextView
+            style="@style/style_text_option"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Brightness" />
+
+
+
+        <SeekBar
+            android:id="@+id/seekbarBrightness"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp" />
+        <View
+            style="@style/style_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/style_text_option"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="AutoRotate" />
+
+            <Switch
+                android:id="@+id/switchAutoRotate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true" />
+        </RelativeLayout>
+
+        <View
+            style="@style/style_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/style_text_option"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="Zooming" />
+
+            <Switch
+                android:id="@+id/switchZoooming"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true" />
+        </RelativeLayout>
+
+        <View
+            style="@style/style_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+
+    </LinearLayout>
+
+</LinearLayout>
