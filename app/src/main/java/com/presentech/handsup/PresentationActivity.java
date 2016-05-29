@@ -38,6 +38,7 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -179,66 +180,77 @@ public class PresentationActivity extends AppCompatActivity {
         slide.addView(button);
     }
 
-    public void addGraphics(Shape s, Polygon p){
-
-//        if (p.sourceFile != null){
+    public void addGraphics(Shape s, Polygon p) {
+//        if (p != null){
+//        if (p.getSourceFile() != null) {
 //
-//                String next[] = {};
-//                List<String[]> list = new ArrayList<String[]>();
+//            String next[] = {};
+//            List<String[]> list = new ArrayList<String[]>();
 //
-//                try {
-//                    CSVReader reader = new CSVReader(new InputStreamReader(getAssets().open(p.sourceFile)));
-//                    while(true) {
-//                        next = reader.readNext();
-//                        if(next != null) {
-//                            list.add(next);
-//                        } else {
-//                            break;
-//                        }
+//            try {
+//                CSVReader reader = new CSVReader(new InputStreamReader(getAssets().open(p.getSourceFile())));
+//                while (true) {
+//                    next = reader.readNext();
+//                    if (next != null) {
+//                        list.add(next);
+//                    } else {
+//                        break;
 //                    }
+//                }
+//
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//            float polyPath[] = {};
+//            for (int i = 0; i<next.length; i++) {
+//                polyPath[i] = Float.parseFloat(next[i]);
+//            }
+//
+//        }
 
-                    ArrayList x = new ArrayList();
-                    ArrayList y = new ArrayList();
+
 //                    for (int i = 0; i < list.size(); i++) {
 //                        x.add(list.get(i)[0]);
 ////                        y.add(list.get(i)[1]);
 //                    }
 
 
-                    GraphicsHandler pH = new GraphicsHandler(this, p , s, screenWidth, screenHeight, presentationFile.getDefaults());
-                    pH.draw(canvas);
-                    slide.addView(pH);
-                    pH.setAlpha(0f);
+            GraphicsHandler pH = new GraphicsHandler(this, p, s, screenWidth, screenHeight, presentationFile.getDefaults());
+            pH.draw(canvas);
+            slide.addView(pH);
 
-        if (s != null) {
-            ObjectAnimator appearDelay = ObjectAnimator.ofFloat(pH, "alpha", 0f, 0f);
-            appearDelay.setDuration(s.getStartTime()); // Start Time
 
-            ObjectAnimator appear = ObjectAnimator.ofFloat(pH, "alpha", 0f, 1f);
-            appear.setDuration(0);
+            if (s != null) {
+                pH.setAlpha(0f);
+                ObjectAnimator appearDelay = ObjectAnimator.ofFloat(pH, "alpha", 0f, 0f);
+                ObjectAnimator appear = ObjectAnimator.ofFloat(pH, "alpha", 0f, 1f);
+                ObjectAnimator durationDelay = ObjectAnimator.ofFloat(pH, "alpha", 1f, 1f);
+                ObjectAnimator disappear = ObjectAnimator.ofFloat(pH, "alpha", 1f, 0f);
 
-            ObjectAnimator durationDelay = ObjectAnimator.ofFloat(pH, "alpha", 1f, 1f);
-            durationDelay.setDuration(s.getDuration()); // Duration
+                appearDelay.setDuration(s.getStartTime()); // Start Time
+                appear.setDuration(0);
+                if (s.getDuration() != -1){
+                    durationDelay.setDuration(s.getDuration()); // Duration
+                    disappear.setDuration(0);
+                }
 
-            ObjectAnimator disappear = ObjectAnimator.ofFloat(pH, "alpha", 1f, 0f);
-            disappear.setDuration(0);
+                AnimatorSet anim = new AnimatorSet();
+                anim.play(appear).after(appearDelay);
+                if (s.getDuration() != -1) {
+                    anim.play(durationDelay).after(appear);
+                    anim.play(disappear).after(durationDelay);
+                }
 
-            AnimatorSet anim = new AnimatorSet();
-            anim.play(appear).after(appearDelay);
-            anim.play(durationDelay).after(appear);
-            anim.play(disappear).after(durationDelay);
-
-            animations.add(anim);
-        }
+                animations.add(anim);
+            }
 
 
 //
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
+
 
 //        }
-    }
+        }
+
 
     public void getScreenSize() {
         Display display = getWindowManager().getDefaultDisplay();
@@ -360,7 +372,7 @@ public class PresentationActivity extends AppCompatActivity {
     public void getPresentation() throws IOException, XmlPullParserException{
         XMLParser parser = new XMLParser();
         InputStream in = null;
-        in = getAssets().open("test.xml");
+        in = getAssets().open("testPoly.xml");
         presentationFile = parser.getPresentation(in);
     }
 

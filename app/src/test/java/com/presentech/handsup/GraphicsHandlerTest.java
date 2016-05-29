@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.test.ActivityUnitTestCase;
@@ -32,7 +33,7 @@ import static junit.framework.Assert.assertNotNull;
 @RunWith(RobolectricGradleTestRunner.class)
 public class GraphicsHandlerTest {
     TestActivity activity;
-    GraphicsHandler gh, gh2, gh3;
+    GraphicsHandler gh, gh2, gh3, gh4;
 
 
     @Before
@@ -44,6 +45,7 @@ public class GraphicsHandlerTest {
         gh = (GraphicsHandler) activity.slide.getChildAt(0);
         gh2 =(GraphicsHandler) activity.slide.getChildAt(1);
         gh3 =(GraphicsHandler) activity.slide.getChildAt(2);
+        gh4 =(GraphicsHandler) activity.slide.getChildAt(3);
     }
 
     /* Check that Rect object to be drawn is set with the correct parameters */
@@ -102,12 +104,19 @@ public class GraphicsHandlerTest {
     }
 
     @Test
-    /* Check that correct draw function is called for each shape type */
-    public void correctDrawFunctionUsedForEachType() {
-        GraphicsHandler gh = new GraphicsHandler(activity, null, activity.shape, activity.screenWidth, activity.screenHeight, activity.defaults);
-        Canvas canvas = Mockito.mock(Canvas.class);
-        gh.draw(canvas);
-        verify(canvas,times(1)).drawRect(gh.getRect(), gh.getPaint());
+    /*Check that Polygon Path object is correct */
+    public void checkPolygonPathCorrect(){
+        Path path = new Path();
+
+        path.moveTo(0.4f,0.1f);
+        path.lineTo(0.6f,0.1f);
+        path.lineTo(0.65f,0.2f);
+        path.lineTo(0.5f,0.9f);
+        path.lineTo(0.35f,0.2f);
+        path.lineTo(0.4f,0.1f);
+
+        assertEquals(path, gh4.getPath());
+
     }
 
 

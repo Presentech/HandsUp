@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<presentation>
+    <documentInfo>
+        <Title>Example File</Title>
+        <Author>Lexxy</Author>
+        <Version>1.0</Version>
+        <Comment>An example file used to demonstrate the appearance of this format</Comment>
+    </documentInfo>
+    <defaults>
+        <backgroundColour>383838</backgroundColour>
+        <font>Helvetica</font>
+        <fontsize>12</fontsize>
+        <fontColour>FFFFFF</fontColour>
+        <lineColour>0000CC</lineColour>
+        <fillColour>2222AA</fillColour>
+    </defaults>
+    <slide slideID="0" duration="5" nextSlide="2">
+        <text duration="-1" ystart="0.3" starttime="0" xstart="0.1"
+            fontsize="30" font="Impact"> <b>Music Theory</b> 101</text>
+        <interactable targetSlide="1">
+            <shape width="0.3" duration="-1" ystart="0.65" type="circle"
+                starttime="2" xstart="0.55" height="0.3">
+                <shading x2="0.80" x1="0.60" y2="0.65" y1="0.90" colour2="0066CC"
+                    colour1="73ECFF" />
+            </shape>
+        </interactable>
+        <text duration="1" ystart="0.55" starttime="3" xstart="0.55">Click here to jump to <i>video</i> ?</text>
+        <polygon starttime="0" duration="-1" fillColour="B4A8F2" lineColour="000000" sourceFile="diamond.csv"></polygon>
+    </slide>
+</presentation>

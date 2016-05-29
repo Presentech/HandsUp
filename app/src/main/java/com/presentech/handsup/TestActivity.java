@@ -13,6 +13,7 @@ import com.presentech.handsup.presentationfile.Shape;
 public class TestActivity extends Activity {
     Shape shape, shape2, shape3;
     Polygon polygon;
+    float[] polyPath = {0.4f,0.1f,0.6f,0.1f,0.65f,0.2f,0.5f,0.9f,0.35f,0.2f,0.4f,0.1f};
 
     /*Test Variables */
     int startTime = 0;
@@ -43,13 +44,19 @@ public class TestActivity extends Activity {
         shape2 = new Shape(startTime, duration, xStart, yStart, type, width, height, null, null, null);
         shape3 = new Shape(startTime, duration, xStart, yStart, type, width, height, null, null, shading);
 
+        polygon = new Polygon(startTime, duration,lineColour,fillColour, null, "diamond.csv");
+
         GraphicsHandler gh = new GraphicsHandler(this,null, shape, screenWidth, screenHeight, defaults);
         GraphicsHandler gh2 = new GraphicsHandler(this,null, shape2 ,screenWidth, screenHeight, defaults);
         GraphicsHandler gh3 = new GraphicsHandler(this,null, shape3 ,screenWidth, screenHeight, defaults);
 
+        GraphicsHandler gh4 = new GraphicsHandler(this,polygon, null ,screenWidth, screenHeight, defaults);
+
+
         gh.draw(canvas);
         gh2.draw(canvas);
         gh3.draw(canvas);
+        gh4.draw(canvas);
 
         slide = new RelativeLayout(this);
         RelativeLayout.LayoutParams llp = new RelativeLayout.LayoutParams(
@@ -60,5 +67,6 @@ public class TestActivity extends Activity {
         slide.addView(gh, 0);
         slide.addView(gh2, 1);
         slide.addView(gh3, 2);
+        slide.addView(gh4, 3);
     }
 }
