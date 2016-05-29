@@ -38,6 +38,7 @@ public class SlideContentTimingsActivity extends AppCompatActivity implements Nu
         cbAdvanceAutomatically = (CheckBox) findViewById(R.id.cbAdvanceAutomatically);
         cbLoopContinuous = (CheckBox) findViewById(R.id.cbLoopContinuously);
 
+
         if (sharedPreferences.getBoolean(PREF_KEY_ADVANCE_CHECKED, false)) {
             cbAdvanceAutomatically.setChecked(true);
             npAdvanceAutomatically.setEnabled(true);
@@ -53,7 +54,7 @@ public class SlideContentTimingsActivity extends AppCompatActivity implements Nu
         }
 
         //Populate NumberPicker values from minimum and maximum value range
-        //Set the minimum value of NumberPicker
+        //Set the minimum value of NumberPicker (i.e. initialise state)
         npAdvanceAutomatically.setMinValue(0);
         //Specify the maximum value/number of NumberPicker
         npAdvanceAutomatically.setMaxValue(20);

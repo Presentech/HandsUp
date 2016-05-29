@@ -33,17 +33,14 @@ public class SettingsVisibilityActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings_toolbar);
         myPreferenceFragment = new MyPreferenceFragment();
 
-
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         getFragmentManager().beginTransaction().replace(R.id.content_frame, myPreferenceFragment).commit();
-
     }
 
 
     public static class MyPreferenceFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
-
         private SeekBarPreference seekBarBrightness;
         private SwitchPreference spZoom, spAutoRotate;
         private String keySeekBarBrightness, keyAutoRotate, keyZoom;
@@ -68,8 +65,6 @@ public class SettingsVisibilityActivity extends AppCompatActivity {
         }
 
         private void checkWriteSettingsPermission() {
-
-
             if (Build.VERSION.SDK_INT >= 23) {
                 if (Settings.System.canWrite(getActivity())) {
                     initializeBrightnessSettingCode();
@@ -93,11 +88,9 @@ public class SettingsVisibilityActivity extends AppCompatActivity {
             }else{
                 initializeBrightnessSettingCode();
             }
-
         }
 
         private void initializeBrightnessSettingCode() {
-
             cResolver = getActivity().getContentResolver();
             window = getActivity().getWindow();
             try {
@@ -125,14 +118,11 @@ public class SettingsVisibilityActivity extends AppCompatActivity {
             keySeekBarBrightness = getString(R.string.pref_brightness);
             keyZoom = getString(R.string.pref_zoom);
 
-
             seekBarBrightness = (SeekBarPreference) findPreference(keySeekBarBrightness);
             spZoom = (SwitchPreference) findPreference(keyZoom);
             spAutoRotate = (SwitchPreference) findPreference(keyAutoRotate);
 
             checkWriteSettingsPermission();
-
-
         }
 
 
@@ -150,7 +140,6 @@ public class SettingsVisibilityActivity extends AppCompatActivity {
             prefs.unregisterOnSharedPreferenceChangeListener(this);
         }
 
-
         private void setAutoOrientationEnabled(Context context, boolean enabled) {
             Settings.System.putInt(context.getContentResolver(), Settings.System.ACCELEROMETER_ROTATION, enabled ? 1 : 0);
         }
@@ -163,7 +152,6 @@ public class SettingsVisibilityActivity extends AppCompatActivity {
             ListView list = (ListView) rootView.findViewById(android.R.id.list);
             list.setDivider(ContextCompat.getDrawable(getActivity(), R.color.textColour));
             list.setDividerHeight(1);
-
         }
 
         @Override
@@ -182,19 +170,11 @@ public class SettingsVisibilityActivity extends AppCompatActivity {
 
             } else if (s.equalsIgnoreCase(keyAutoRotate)) {
                 boolean autoRotate = sharedPreferences.getBoolean(keyAutoRotate, false);
-
                 setAutoOrientationEnabled(getActivity(), autoRotate);
 
-
             } else if (s.equalsIgnoreCase(keyZoom)) {
-
                 boolean zoom = sharedPreferences.getBoolean(keyZoom, false);
-
-
             }
-
         }
-
     }
 }
-
