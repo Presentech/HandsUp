@@ -26,8 +26,8 @@ public class stackedBarsFragment extends Fragment{
     double A = 1, B = 1, C = 1;
     double APercent, BPercent, CPercent, totalInputs;
     ViewGroup viewParent;
-    View DummyView, AView, BView, CView;
-    TextView textView;
+    View AView, BView, CView;
+    TextView textView, ATextView, BTextView, CTextView;
 
     public int barWidth, lastBar, barHeight;
     RelativeLayout barLayout;
@@ -62,10 +62,13 @@ public class stackedBarsFragment extends Fragment{
 
     private void initBar(){
         //Create references to views
-        AView = barLayout.findViewById(R.id.greenLayoutfrag);
-        BView = barLayout.findViewById(R.id.yellowLayoutfrag);
-        CView = barLayout.findViewById(R.id.redLayoutfrag);
+        //AView = barLayout.findViewById(R.id.greenLayoutfrag);
+        BTextView = (TextView) barLayout.findViewById(R.id.yellowLayoutfrag);
+        CTextView = (TextView) barLayout.findViewById(R.id.redLayoutfrag);
         textView = (TextView) barLayout.findViewById(R.id.FBtextView);
+        ATextView = (TextView) barLayout.findViewById(R.id.greenLayoutfrag);
+        //BTextView = (TextView) BView;
+        //CTextView = (TextView) CView;
         viewParent = barLayout;
 
         updateBarHeight(" ");
@@ -156,9 +159,9 @@ public class stackedBarsFragment extends Fragment{
         int CWidth = (int) CHeightDouble;
 
 
-        ViewGroup.LayoutParams AParams = AView.getLayoutParams();
-        ViewGroup.LayoutParams BParams = BView.getLayoutParams();
-        ViewGroup.LayoutParams CParams = CView.getLayoutParams();
+        ViewGroup.LayoutParams AParams = ATextView.getLayoutParams();
+        ViewGroup.LayoutParams BParams = BTextView.getLayoutParams();
+        ViewGroup.LayoutParams CParams = CTextView.getLayoutParams();
         ViewGroup.LayoutParams tvParams = textView.getLayoutParams();
 
         AParams.height = barHeight;
@@ -170,15 +173,10 @@ public class stackedBarsFragment extends Fragment{
         tvParams.height = barHeight;
         tvParams.width = 300;
 
-        AView.setLayoutParams(AParams);
-        BView.setLayoutParams(BParams);
-        CView.setLayoutParams(CParams);
+        ATextView.setLayoutParams(AParams);
+        BTextView.setLayoutParams(BParams);
+        CTextView.setLayoutParams(CParams);
         textView.setLayoutParams(tvParams);
         textView.setText(barName);
-
-        Log.d("1234","" + barWidth);
-        Log.d("1234", "" + a);
-        Log.d("1234", "" + b);
-        Log.d("1234", "" + c);
     }
 }
