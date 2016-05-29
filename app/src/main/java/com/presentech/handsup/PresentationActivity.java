@@ -93,9 +93,8 @@ public class PresentationActivity extends AppCompatActivity {
         Bundle b = this.getIntent().getExtras();
         //String id = b.getParcelable(SyncStateContract.Constants.CUSTOM_LISTING);
         //presentationFile = (PresentationFile) this.getIntent().getSerializableExtra("pF");
-        presenterServer.onSend("blah");
         try {
-           getPresentation();
+            getPresentation();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (XmlPullParserException e) {
@@ -113,7 +112,7 @@ public class PresentationActivity extends AppCompatActivity {
         getScreenSize();
         populateSlides();
 
-        for (int i = 0; i < animations.size() ; i++) {
+        for (int i = 0; i < animations.size(); i++) {
             animations.get(i).start();
         }
 
@@ -128,8 +127,8 @@ public class PresentationActivity extends AppCompatActivity {
         //setAutomaticHandler(3);
 
         // If presenter wants to view feedback create feedback fragment
-        if (!hideFeedback){
-            if (findViewById(R.id.feedbackFragmentContainer) != null){
+        if (!hideFeedback) {
+            if (findViewById(R.id.feedbackFragmentContainer) != null) {
                 // If we're being restored from a previous state, don't do anything
                 // we could end up with overlapping fragments.
                 if (savedInstanceState != null) {
@@ -145,7 +144,7 @@ public class PresentationActivity extends AppCompatActivity {
             }
         }
 
-        application = (MyApplication)getApplication();
+        application = (MyApplication) getApplication();
         presenterServer = application.getServer();
 
         //Step 4 - Setup the listener for this object
@@ -161,7 +160,7 @@ public class PresentationActivity extends AppCompatActivity {
                 // Use the data here!
                 feedbackObjectRx = feedbackObject;
                 Log.d("testingConnections", "In Presentation!!!");
-                if(feedbackObjectRx != null){
+                if (feedbackObjectRx != null) {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -172,6 +171,7 @@ public class PresentationActivity extends AppCompatActivity {
                 }
             }
         });
+    }
 
 
 
@@ -388,7 +388,7 @@ public class PresentationActivity extends AppCompatActivity {
                 if(!hideFeedback){
                     if (fbFragment.isHidden()) getSupportFragmentManager().beginTransaction().show(fbFragment).commit();
                     else getSupportFragmentManager().beginTransaction().hide(fbFragment).commit();
-                    fbFragment.updateStackedBars();
+                    //fbFragment.updateStackedBars();
                 }
                 return true;
             case R.id.action_settings:

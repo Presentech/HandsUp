@@ -42,7 +42,7 @@
 
         </interactable>
         <interactable targetSlide="4">
-            <polygon duration="-1" starttime="0" sourceFile="carrot.csv" />
+            <polygon duration="-1" starttime="0" sourceFile="diamond.csv" />
         </interactable>
     </slide>
     <slide slideID="3" duration="8" nextSlide="-1">
@@ -67,8 +67,8 @@
                 colour1="00FF00" />
         </shape>
         <polygon starttime="6" duration="300" lineColour="FFFFFE" fillColour="1C57A8"
-            sourceFile="carrot.csv"/>
-        <polygon starttime="6" duration="300" lineColour="FFFFFE" sourceFile="carrot.csv">
+            sourceFile="diamond.csv"/>
+        <polygon starttime="6" duration="300" lineColour="FFFFFE" sourceFile="diamond.csv">
             <shading x2="0.70" x1="0.50" y2="0.99" y1="0.85" colour2="ABCDEF"
                 colour1="EEEFFF" />
         </polygon>
