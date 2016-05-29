@@ -68,7 +68,7 @@ public class ViewLiveFeedback extends FragmentActivity {
         PieChartFragment.setFeedbackArray(feedbackArray);
 
         PieChartFragment.setScreenParams(screenHeight, screenWidth);
-        PieChartFragment.getQuestionNumber();
+
         //newFragment.calculateQuestionResponse();
 
             }
@@ -94,13 +94,17 @@ public class ViewLiveFeedback extends FragmentActivity {
     public void updateValues(View view){
         //Create new fragments to replace the old ones
         stackedBarsFragment newFragment = new stackedBarsFragment();
+        pieChartFragment newPieFragment = new pieChartFragment();
 
         //Draw these and set random feedback values
+        newFragment.setFeedbackArray(feedbackArray);
         newFragment.setFeedbackArray(feedbackArray);
 
         newFragment.setScreenParams(screenHeight, screenWidth);
         newFragment.getQuestionNumber();
         newFragment.calculateQuestionResponse();
+
+        newPieFragment.updatePlot();
 
         //Replace the fragment currently in the fragment container with the new fragments
         if(newFragment != null){

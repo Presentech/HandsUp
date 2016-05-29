@@ -28,7 +28,7 @@ public class pieChartFragment extends Fragment{
     LinearLayout pieLayout;
     PieChart pieChart;
     public int qNo = 0, numberofPlots = 2;
-    public int[] answerA, answerB, answerC;
+    public int answerA, answerB, answerC;
     SegmentFormatter segmentFormat;
     public Segment segA, segB, segC;
 
@@ -43,12 +43,13 @@ public class pieChartFragment extends Fragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         pieLayout = (LinearLayout) inflater.inflate(R.layout.fragment_pie_chart, container, false);
+        pieChart = (PieChart) pieLayout.findViewById(R.id.piePlotFrag);
         initPieChart();
         return pieLayout;
     }
 
     public void initPieChart(){
-        pieChart = (PieChart) pieLayout.findViewById(R.id.piePlotFrag);
+        //pieChart = (PieChart) pieLayout.findViewById(R.id.piePlotFrag);
         pieParams = pieLayout.getLayoutParams();
         //Calculate the height of the bar
         double pieSizeDouble = (0.8*screenHeight)/numberofPlots;
@@ -56,7 +57,8 @@ public class pieChartFragment extends Fragment{
         //Set width to all views
         pieParams.height = pieSize;
         pieParams.width = pieSize;
-        getQuestionNumber();
+        //getQuestionNumber();
+        setFeedbackArray(feedbackArray);
         calculateQuestionResponse();
         QuestionResponsePlot();
     }
@@ -78,43 +80,45 @@ public class pieChartFragment extends Fragment{
     }
 
     public void calculateQuestionResponse(){
-        answerA = new int[qNo];           /*Initialise array for A answers for questions*/
-        answerB = new int[qNo];           /*Initialise array for B answers for questions*/
-        answerC = new int[qNo];           /*Initialise array for C answers for questions*/
+        //answerA = new int[qNo];           /*Initialise array for A answers for questions*/
+        //answerB = new int[qNo];           /*Initialise array for B answers for questions*/
+        //answerC = new int[qNo];           /*Initialise array for C answers for questions*/
 
         a = 0;
         b = 0;
         c = 0;
 
         /*iterate through questions*/
-        for (int i = 0; i < qNo; i++) {
+        //for (int i = 0; i < qNo; i++) {
             /*iterate through objects to find whether value is A, B or C*/
             for (int k = 0; k < feedbackArray.length; k++) {
-                while (feedbackArray[k].getQUESTION() == i+1) {
+               // while (feedbackArray[k].getQUESTION() == i+1) {
                     if (feedbackArray[k].getABC() == 1) {
                         a++;
-                        answerA[i] = a;
+
                         break;
                     }
                     if (feedbackArray[k].getABC() == 2) {
                         b++;
-                        answerB[i] = b;
+
                         break;
-                       /* answerB[i] = answerB[i] + 1;*/
                     }if (feedbackArray[k].getABC() == 3) {
                         c++;
-                        answerC[i] = c;
+
                         break;
                     }
                 }
-            }
-        }
+           // }
+        //}
+
+        answerA = a;
+        answerB = b;
+        answerC = c;
 
     }
 
     public void QuestionResponsePlot(){
 
-        int currentQuestion = 0;
         //Log.d("ABCD", "QRP");
         SegmentFormatter segmentFormat = new SegmentFormatter();
         segmentFormat.configure(getActivity(), R.xml.segment_formatter);
@@ -125,28 +129,36 @@ public class pieChartFragment extends Fragment{
         pieChart.getBorderPaint().setColor(Color.TRANSPARENT);
         pieChart.getBackgroundPaint().setColor(Color.TRANSPARENT);
 
+        pieChart.clear();
 
-        if (answerA[currentQuestion] > 0){
-            segA = new Segment("A", answerA[currentQuestion]);
+        if (answerA > 0){
+            segA = new Segment("A", answerA);
             pieChart.addSeries(segA, segmentFormat);
         }
-        if (answerB[currentQuestion] > 0){
-            segB = new Segment("B", answerB[currentQuestion]);
+        if (answerB > 0){
+            segB = new Segment("B", answerB);
             pieChart.addSeries(segB, segmentFormat);
         }
-        if (answerC[currentQuestion] > 0){
-            segC = new Segment("C", answerC[currentQuestion]);
+        if (answerC > 0){
+            segC = new Segment("C", answerC);
             pieChart.addSeries(segC, segmentFormat);
         }
+
+        pieChart.redraw();
 
     }
 
 
     /*Get Number of questions*/
-    public void getQuestionNumber() {
+    /*public void getQuestionNumber() {
         for (int i = 0; i < feedbackArray.length; i++) {
             qNo = feedbackArray[i].getQUESTION();
         }
+    }*/
+
+    public void updatePlot(){
+        calculateQuestionResponse();
+        QuestionResponsePlot();
     }
 
 }

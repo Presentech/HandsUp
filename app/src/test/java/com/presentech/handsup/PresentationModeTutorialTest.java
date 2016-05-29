@@ -33,11 +33,14 @@ public class PresentationModeTutorialTest {
         /* Simulate button press */
         activity.findViewById(R.id.skip_button).performClick();
 
+        /*Simulate expected intent*/
+        Intent expectedIntent = new Intent(activity, HostingWizardActivity.class);
+
         /*Capture intent*/
         ShadowActivity shadowActivity = Shadows.shadowOf(activity);
         Intent intent = shadowActivity.getNextStartedActivity();
 
-        assertNotNull(intent);
+        assertEquals(intent, expectedIntent);
 
     }
 

@@ -39,7 +39,7 @@ import java.util.ArrayList;
 public class HostingWizardActivity extends AppCompatActivity {
 
     private Bitmap background;
-    private boolean understanding, multiChoice, messaging, hideFeedback, feedbackPerSlide;
+    public boolean understanding, multiChoice, messaging, hideFeedback, feedbackPerSlide;
     private navDrawer drawer;
     String mode = "PRESENTER_RO";
     //String mode = "AUDIENCE";

@@ -96,6 +96,13 @@ package com.presentech.handsup;
             Intent PresenterIntent = new Intent(this, LoginScreenActivity.class);
             startActivity(PresenterIntent);
         }
+
+    //FOR TESTING ONLY, DELETE
+    public void goToReviewFeedback(View view){
+        Intent PresenterIntent = new Intent(this, ReviewFeedback.class);
+        startActivity(PresenterIntent);
+    }
+
         public static Bitmap decodeSampledBitmapFromResource(Resources res,int id, int reqWidth, int reqHeight){
             // Reset sample Size to 0 every time
             int sampleSize = 0;
