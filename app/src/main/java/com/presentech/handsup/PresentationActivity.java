@@ -1,5 +1,8 @@
 package com.presentech.handsup;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -36,6 +39,7 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +60,6 @@ public class PresentationActivity extends AppCompatActivity {
     public Boolean understanding, multiChoice, messaging, hideFeedback, feedbackPerSlide;
     PresentationFile presentationFile;
     private navDrawer drawer;
-
     String mode = "PRESENTER";
     liveFeedbackFragment fbFragment;
     public SingleFeedback[] feedbackArray = new SingleFeedback[10];
@@ -64,6 +67,8 @@ public class PresentationActivity extends AppCompatActivity {
     TextHandler tH = new TextHandler();
     RelativeLayout slide = null;
     Canvas canvas = new Canvas();
+
+    List<AnimatorSet> animations = new ArrayList<AnimatorSet>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +99,10 @@ public class PresentationActivity extends AppCompatActivity {
         getScreenSize();
         populateSlides();
 
+        for (int i = 0; i < animations.size() ; i++) {
+            animations.get(i).start();
+        }
+
         // If presenter wants to view feedback create feedback fragment
         if (!hideFeedback){
             if (findViewById(R.id.feedbackFragmentContainer) != null){
@@ -113,6 +122,7 @@ public class PresentationActivity extends AppCompatActivity {
 
 
     }
+
 
     public void createTextViews(Text t) {
         String textDisplay = null;
@@ -202,43 +212,77 @@ public class PresentationActivity extends AppCompatActivity {
         slide.addView(button);
     }
 
-    public void addGraphics(Shape s, Polygon p){
-
-//        if (p.sourceFile != null){
+    public void addGraphics(Shape s, Polygon p) {
+//        if (p != null){
+//        if (p.getSourceFile() != null) {
 //
-//                String next[] = {};
-//                List<String[]> list = new ArrayList<String[]>();
+//            String next[] = {};
+//            List<String[]> list = new ArrayList<String[]>();
 //
-//                try {
-//                    CSVReader reader = new CSVReader(new InputStreamReader(getAssets().open(p.sourceFile)));
-//                    while(true) {
-//                        next = reader.readNext();
-//                        if(next != null) {
-//                            list.add(next);
-//                        } else {
-//                            break;
-//                        }
+//            try {
+//                CSVReader reader = new CSVReader(new InputStreamReader(getAssets().open(p.getSourceFile())));
+//                while (true) {
+//                    next = reader.readNext();
+//                    if (next != null) {
+//                        list.add(next);
+//                    } else {
+//                        break;
 //                    }
+//                }
+//
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//            float polyPath[] = {};
+//            for (int i = 0; i<next.length; i++) {
+//                polyPath[i] = Float.parseFloat(next[i]);
+//            }
+//
+//        }
 
-        ArrayList x = new ArrayList();
-        ArrayList y = new ArrayList();
+
 //                    for (int i = 0; i < list.size(); i++) {
 //                        x.add(list.get(i)[0]);
 ////                        y.add(list.get(i)[1]);
 //                    }
 
 
-        GraphicsHandler pH = new GraphicsHandler(this, x, y, p , s, screenWidth, screenHeight);
-        pH.draw(canvas);
-        slide.addView(pH);
+            GraphicsHandler pH = new GraphicsHandler(this, p, s, screenWidth, screenHeight, presentationFile.getDefaults());
+            pH.draw(canvas);
+            slide.addView(pH);
+
+
+            if (s != null) {
+                pH.setAlpha(0f);
+                ObjectAnimator appearDelay = ObjectAnimator.ofFloat(pH, "alpha", 0f, 0f);
+                ObjectAnimator appear = ObjectAnimator.ofFloat(pH, "alpha", 0f, 1f);
+                ObjectAnimator durationDelay = ObjectAnimator.ofFloat(pH, "alpha", 1f, 1f);
+                ObjectAnimator disappear = ObjectAnimator.ofFloat(pH, "alpha", 1f, 0f);
+
+                appearDelay.setDuration(s.getStartTime()); // Start Time
+                appear.setDuration(0);
+                if (s.getDuration() != -1){
+                    durationDelay.setDuration(s.getDuration()); // Duration
+                    disappear.setDuration(0);
+                }
+
+                AnimatorSet anim = new AnimatorSet();
+                anim.play(appear).after(appearDelay);
+                if (s.getDuration() != -1) {
+                    anim.play(durationDelay).after(appear);
+                    anim.play(disappear).after(durationDelay);
+                }
+
+                animations.add(anim);
+            }
+
 
 //
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
+
 
 //        }
-    }
+        }
+
 
     public void getScreenSize() {
         Display display = getWindowManager().getDefaultDisplay();
@@ -348,7 +392,7 @@ public class PresentationActivity extends AppCompatActivity {
             if (numberOfImages > 0){
                 for (int j = 0; j< numberOfImages; j++){
                     Image image = slides.get(i).getImage().get(j);
-                    createImageViews(image);
+                        createImageViews(image);
                 }
             }
 
@@ -440,6 +484,9 @@ public class PresentationActivity extends AppCompatActivity {
                     viewFlipper.setOutAnimation(this, R.anim.slide_out_to_right);
 //                    vf.showNext();
                     viewFlipper.showPrevious();
+                    for (int i = 0; i < animations.size() ; i++) {
+                        animations.get(i).start();
+                    }
                 }
 
                 if (lastX > currentX)
@@ -452,6 +499,9 @@ public class PresentationActivity extends AppCompatActivity {
                     viewFlipper.setOutAnimation(this, R.anim.slide_out_to_left);
 //                    vf.showPrevious();
                     viewFlipper.showNext();
+                    for (int i = 0; i < animations.size() ; i++) {
+                        animations.get(i).start();
+                    }
                 }
 
                 break;
