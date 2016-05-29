@@ -1,15 +1,15 @@
-buildscript {
-    repositories {
-        maven { url 'https://maven.fabric.io/public' }
-    }
-
-    dependencies {
-        classpath 'io.fabric.tools:gradle:1.+'
-    }
-}
+//buildscript {
+//    repositories {
+//        maven { url 'https://maven.fabric.io/public' }
+//    }
+//
+//    dependencies {
+//        classpath 'io.fabric.tools:gradle:1.+'
+//    }
+//}
 apply plugin: 'com.android.application'
-apply plugin: 'io.fabric'
-apply plugin: 'com.google.gms.google-services'
+//apply plugin: 'io.fabric'
+//apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 23
@@ -64,5 +64,5 @@ dependencies {
     compile 'com.loopj.android:android-async-http:1.4.9' // for our HTTP requests later
     compile 'com.google.code.gson:gson:2.4' // for parsing JSON
     compile 'com.squareup.picasso:picasso:2.1.1' // for image rendering
-    compile 'com.google.android.gms:play-services-analytics:9.0.0'
+    //compile 'com.google.android.gms:play-services-analytics:9.0.0'
 }
