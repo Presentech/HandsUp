@@ -21,6 +21,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.presentech.handsup.ExampleStackedBars;
+//import com.crashlytics.android.Crashlytics;
+//import io.fabric.sdk.android.Fabric;
 
 /**
  * Created by Luke on 05/03/2016.
@@ -43,6 +45,7 @@ public class ModeSelectActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_mode_select);
         if (getSupportActionBar() != null){
             getSupportActionBar().hide();
@@ -84,7 +87,10 @@ public class ModeSelectActivity extends AppCompatActivity{
         //Stretch background view to fill screen
         backgroundView.setScaleType(ImageView.ScaleType.FIT_XY);
 
-    }public void goToPresenterTutorial(View view){
+    }
+    public void goToPresenterTutorial(View view) {
+        Intent THIS_INTENT = new Intent(this, SettingsActivity.class);
+        startActivity(THIS_INTENT);
     }
     public void goToAudienceMode(View view){
         Intent AudienceIntent = new Intent(this, AudienceSessionSelect.class);
@@ -115,7 +121,6 @@ public class ModeSelectActivity extends AppCompatActivity{
         return BitmapFactory.decodeResource(res, id , options);
     }
 
-
     public static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
         // Raw height and width of image
         final int height = options.outHeight;
@@ -138,3 +143,5 @@ public class ModeSelectActivity extends AppCompatActivity{
         return inSampleSize;
     }
 }
+
+
