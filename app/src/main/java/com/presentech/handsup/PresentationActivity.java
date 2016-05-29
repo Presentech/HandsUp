@@ -49,7 +49,6 @@ import java.util.List;
 
 public class PresentationActivity extends AppCompatActivity {
 
-
     int screenWidth;
     int screenHeight;
     PresentationFile presentationFile;
