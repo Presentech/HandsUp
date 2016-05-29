@@ -1,13 +1,10 @@
 package com.presentech.handsup;
 
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
-import android.content.Intent;
-import android.content.res.Configuration;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -15,6 +12,8 @@ import android.provider.SyncStateContract;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.util.Log;
 import android.view.Display;
@@ -44,6 +43,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by Noor.
+ * Updated to include autoflip handler (by Jay)
+ */
+
 public class PresentationActivity extends AppCompatActivity {
 
     public static final String BOOLEAN_NAME1 = "boolean1";
@@ -68,6 +72,8 @@ public class PresentationActivity extends AppCompatActivity {
     RelativeLayout slide = null;
     Canvas canvas = new Canvas();
 
+    private navDrawer drawer;
+
     List<AnimatorSet> animations = new ArrayList<AnimatorSet>();
 
     @Override
@@ -81,7 +87,7 @@ public class PresentationActivity extends AppCompatActivity {
         //presentationFile = (PresentationFile) this.getIntent().getSerializableExtra("pF");
 
         try {
-            getPresentation();
+           getPresentation();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (XmlPullParserException e) {
@@ -98,7 +104,16 @@ public class PresentationActivity extends AppCompatActivity {
 
         getScreenSize();
         populateSlides();
+        SharedPreferences sharedPreferences = getSharedPreferences(SlideContentTimingsActivity.PREF_KEY_NAME, MODE_PRIVATE);
+        int duration = sharedPreferences.getInt(SlideContentTimingsActivity.PREF_KEY_DURATION, 0);
+        boolean isAdvanceActive = sharedPreferences.getBoolean(SlideContentTimingsActivity.PREF_KEY_ADVANCE_CHECKED, false);
+        boolean isLoopActive = sharedPreferences.getBoolean(SlideContentTimingsActivity.PREF_KEY_LOOP_CHECKED, false);
 
+        if (duration != 0 && isAdvanceActive) {
+            setAutomaticHandler(duration, isLoopActive);
+        }
+        //setAutomaticHandler(3);
+    }
         for (int i = 0; i < animations.size() ; i++) {
             animations.get(i).start();
         }
@@ -120,8 +135,27 @@ public class PresentationActivity extends AppCompatActivity {
             }
         }
 
+    private void setAutomaticHandler(final int duration, final boolean isInLoop) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (viewFlipper.getDisplayedChild() != viewFlipper.getChildCount() - 1) {
 
+                    viewFlipper.setInAnimation(PresentationActivity.this, R.anim.slide_in_from_right);
+                    viewFlipper.setOutAnimation(PresentationActivity.this, R.anim.slide_out_to_left);
+                    viewFlipper.showNext();
+                    setAutomaticHandler(duration, isInLoop);
+                } else {
+                    if (isInLoop) {
+                        viewFlipper.setDisplayedChild(0);
+                    }
+                    setAutomaticHandler(duration, isInLoop);
+                }
+            }
+        }, duration * 1000);
     }
+
+
 
 
     public void createTextViews(Text t) {
@@ -178,7 +212,7 @@ public class PresentationActivity extends AppCompatActivity {
     }
 
     public void createVideoViews(Video v) {
-        Uri uri = Uri.parse("android.resource://" + getPackageName() + "/"
+    Uri uri = Uri.parse("android.resource://" + getPackageName() + "/"
                 + getResources().getIdentifier(v.getSourceFile(), "raw", getPackageName()));
         VideoView vV = new VideoView(this);
         MediaController mediaController = new
@@ -189,7 +223,7 @@ public class PresentationActivity extends AppCompatActivity {
         vV.requestFocus();
         vV.setVideoURI(uri);
         vV.setX(v.getxStart() * screenWidth);
-        vV.setY(v.getyStart() * screenHeight);
+        vV.setY(v.getyStart()*screenHeight);
         //vV.layout((int) vV.getX(), (int) vV.getY(),(int) vV.getX() + 800, (int) vV.getY() + 500);
         vV.start();
         slide.addView(vV);
@@ -240,7 +274,8 @@ public class PresentationActivity extends AppCompatActivity {
 //
 //        }
 
-
+                    ArrayList x = new ArrayList();
+                    ArrayList y = new ArrayList();
 //                    for (int i = 0; i < list.size(); i++) {
 //                        x.add(list.get(i)[0]);
 ////                        y.add(list.get(i)[1]);
@@ -278,11 +313,12 @@ public class PresentationActivity extends AppCompatActivity {
 
 
 //
-
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
 
 //        }
-        }
-
+    }
 
     public void getScreenSize() {
         Display display = getWindowManager().getDefaultDisplay();
