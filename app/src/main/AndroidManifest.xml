@@ -22,8 +22,7 @@
             android:name=".LoginScreenActivity"
             android:label="@string/title_activity_login_screen"
             android:parentActivityName=".ModeSelectActivity"
-            android:screenOrientation="landscape">
-        </activity>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".HostingWizardActivity"
             android:screenOrientation="landscape" />
@@ -70,11 +69,18 @@
             android:name=".AudienceSessionSelect"
             android:label="@string/title_activity_audience_session_select"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ReviewFeedback"
+            android:screenOrientation="portrait" />
         <activity android:name=".aboutActivity" />
         <activity android:name=".AudienceTutorial" />
-        <activity android:name=".presentationfile.ExampleStackedBars" />
-        <activity android:name=".ViewLiveFeedback" />
-        <activity android:name=".TestActivity"></activity>
+        <!-- <activity android:name=".presentationfile.ExampleStackedBars" /> -->
+        <!-- <activity android:name=".ViewLiveFeedback" /> -->
+        <activity android:name=".TestActivity" />
+        <activity
+            android:name=".ReviewFeedbackGMB"
+            android:label="@string/title_activity_review_feedback_gmb" />
+        <activity android:name=".ReviewFeedbackSelect"></activity>
     </application>
 
 </manifest>

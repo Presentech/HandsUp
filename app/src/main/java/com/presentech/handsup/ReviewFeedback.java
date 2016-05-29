@@ -3,6 +3,7 @@ package com.presentech.handsup;
 /*Created by Jack Bardsley on 18/05/16*/
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -10,55 +11,56 @@ import com.androidplot.pie.PieChart;
 import com.androidplot.pie.Segment;
 import com.androidplot.pie.SegmentFormatter;
 
+import java.util.List;
 
 
 public class ReviewFeedback extends Activity {
 
     public int qNo;         //Number of questions
+    public int sNo;          //Number of slides
     int j = 0;              //currently displayed question answers
+    int h = 0;              //currently displayed slide responses
     public PieChart questionABC;
+    //feedbackDatabaseHandler database;
+    List<SingleFeedback> singleFeedbackList;
 
-    /*Example object array*/
-    public SingleFeedback[] feedbackArray = new SingleFeedback[10];
+    /*public List<SingleFeedback> getDatabase(){
+        feedbackDatabaseHandler database = new feedbackDatabaseHandler(getApplicationContext(), "TestFeedbackList", null, 1, "FP");
+        List<SingleFeedback> singleFeedbackList = database.getAllFeedback();
 
-    public void setFeedbackArray() {
-        /*Set some example objects that would be expected to recieve*/
-        feedbackArray[0] = new SingleFeedback("abc", 1.00, 1, 1, 2, 2, "abc", 123L);
-        feedbackArray[1] = new SingleFeedback("abc", 1.00, 3, 1, 2, 1, "abc", 123L);
-        feedbackArray[2] = new SingleFeedback("abc", 1.00, 1, 1, 1, 2, "abc", 123L);
-        feedbackArray[3] = new SingleFeedback("abc", 1.00, 1, 1, 1, 1, "abc", 123L);
-        feedbackArray[4] = new SingleFeedback("abc", 1.00, 2, 1, 3, 1, "abc", 123L);
-        feedbackArray[5] = new SingleFeedback("abc", 1.00, 1, 2, 2, 2, "abc", 123L);
-        feedbackArray[6] = new SingleFeedback("abc", 1.00, 1, 2, 2, 1, "abc", 123L);
-        feedbackArray[7] = new SingleFeedback("abc", 1.00, 1, 2, 1, 2, "abc", 123L);
-        feedbackArray[8] = new SingleFeedback("abc", 1.00, 3, 2, 1, 1, "abc", 123L);
-        feedbackArray[9] = new SingleFeedback("abc", 1.00, 1, 3, 3, 1, "abc", 123L);
-    }
-
-    /*Get Number of questions*/
-    public void getQuestionNumber() {
-        for (int i = 0; i < feedbackArray.length; i++) {
-            if (feedbackArray[i].getQUESTION() > 0) {
-                qNo = feedbackArray[i].getQUESTION();
-            }
-        }
-    }
+        return singleFeedbackList;
+    }*/
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review_feedback);
-
-
-        setFeedbackArray();
-        getQuestionNumber();
+        //getDatabase();
         getPiePlots();
 
     }
 
 
     public void getPiePlots() {
+
+        //get list of objects from database
+        feedbackDatabaseHandler database = new feedbackDatabaseHandler(getApplicationContext(), "TestFeedbackList", null, 1, "FP");
+        List<SingleFeedback> singleFeedbackList = database.getAllFeedback();
+
+        //convert list of feedback objects to object array
+        SingleFeedback[] feedbackArray = new SingleFeedback[singleFeedbackList.size()];
+        singleFeedbackList.toArray(feedbackArray);
+
+        //get number of questions
+        qNo = feedbackArray[0].getQUESTION();
+
+        for (int i = 0; i < feedbackArray.length; i++) {
+            if (feedbackArray[i].getQUESTION() > qNo){
+                qNo = feedbackArray[i].getQUESTION();
+            }
+        }
+
         int[] answerA = new int[qNo];           /*Initialise array for A answers for questions*/
         int[] answerB = new int[qNo];           /*Initialise array for B answers for questions*/
         int[] answerC = new int[qNo];           /*Initialise array for C answers for questions*/
