@@ -78,7 +78,7 @@ public class PresentationActivity extends AppCompatActivity {
         Bundle b = this.getIntent().getExtras();
         //String id = b.getParcelable(SyncStateContract.Constants.CUSTOM_LISTING);
         //presentationFile = (PresentationFile) this.getIntent().getSerializableExtra("pF");
-
+        presenterServer.onSend("blah");
         try {
             getPresentation();
         } catch (IOException e) {

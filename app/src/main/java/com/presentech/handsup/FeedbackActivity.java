@@ -99,6 +99,8 @@ public class FeedbackActivity extends AppCompatActivity   {
         badButton = (ImageButton) findViewById(R.id.badButton);
         sendButton = (ImageButton) findViewById(R.id.sendButton);
 
+        slideContentTextView = (TextView)findViewById(R.id.slideContentTextView);
+
         //add button click listeners to all buttons
         addListenerOnButton();
         application = (MyApplication)getApplication();
@@ -135,6 +137,7 @@ public class FeedbackActivity extends AppCompatActivity   {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
+                slideContentTextView.setText(client.messageFromServer);
 
             }
         });

@@ -96,28 +96,7 @@ public class testingConnections extends Activity {
         refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-
-                feedbackHandler.processIncomingFeedback(server.feedbackString, "Jack");
-
-
-                //Viewing on the activity
-                if(server.feedbackObject.getTEXT() != null){
-                    Log.d("testingConnections", server.feedbackObject.getTEXT());
-                    testTextView.setText(server.feedbackObject.getTEXT());
-                }
-
-                if (server.feedbackObject != null){
-                    fdHandler.addFeedbackCollumn(server.feedbackObject);
-                }
-               // getting whatever is in the database
-                feedbackList = fdHandler.getAllFeedback();
-                Log.d("testingConnections", "feedbackList size is " + feedbackList);
-                //and printing each object as a string
-                for (int i = 0; i<feedbackList.size(); i++){
-                    feedback = feedbackJSON.FeedbackJSONGenerate(feedbackList.get(i+1));
-                    Log.d("This is in the database", feedback);
-                }
-
+                server.onSend("blah");
             }
         });
     }

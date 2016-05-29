@@ -3,6 +3,8 @@ package com.presentech.handsup;
 import android.content.Context;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.text.Html;
 import android.util.Log;
 import android.widget.TextView;
@@ -13,6 +15,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.io.Reader;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -35,12 +38,15 @@ public class Server {
     private onMessageListener listener;
 
     //Connections
-    Socket socket;
+    Socket s;
     Thread t;
 
+    Handler h;
+    HandlerThread tx;
+    PrintWriter writer;
+
     public Server(){
-        //main.setText(Html.fromHtml(contents.toString()));
-        //header.setText("Host: " + getIpAddress());
+
         this.feedbackString = "";
         this.feedbackObject = null;
 
@@ -53,9 +59,10 @@ public class Server {
 
                     Log.d(TAG, "Opened connection");
                     while (!Thread.interrupted() && !socket.isClosed()) {
-                        Socket s = socket.accept();
+                        s = socket.accept();
                         new Thread(new ConnectionHandler(Server.this, s.getInputStream())).start();
                         onConnection(s.getInetAddress().getHostAddress());
+                        writer = new PrintWriter(s.getOutputStream());
                     }
 
                 } catch (IOException e1) {
@@ -74,13 +81,16 @@ public class Server {
 
         );
 
+        tx = new HandlerThread("Server");
+        tx.start();
+        h = new Handler(tx.getLooper());
         this.listener = null;
         t.start();
     }
 
 
 
-    // Step 1 - This interface defines the type of messages I want to communicate to my owner
+    //This interface defines the type of messages I want to communicate to my owner
     public interface onMessageListener {
         // These methods are the different events and
         // need to pass relevant arguments related to the event triggered
@@ -94,6 +104,22 @@ public class Server {
         this.listener = listener;
     }
 
+    public void onSend(String msg) {
+        Log.d(TAG, "Sending: " + msg);
+
+        h.post(new Runnable() {
+            @Override
+            public void run() {
+                writer.println("incoming from server");
+                writer.flush();
+                try {
+                    s.getOutputStream().flush();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 
     public void onMessage(final int c) {
         contents.append(Character.toChars(c));
