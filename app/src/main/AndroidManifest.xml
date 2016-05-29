@@ -105,7 +105,6 @@
         <activity android:name=".aboutActivity" />
         <activity android:name=".AudienceTutorial" />
         <activity android:name=".ExampleStackedBars" />
-        <activity android:name=".ViewLiveFeedback"></activity>
         <!--<meta-data-->
             <!--android:name="io.fabric.ApiKey"-->
             <!--android:value="0cddf07189e7770b126a853ae1c73ab8a83c2615" />-->
