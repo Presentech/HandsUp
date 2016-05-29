@@ -2,7 +2,6 @@ package com.presentech.handsup;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -52,7 +51,7 @@ public class AudienceSessionSelectTest {
         Button connectButton5 = (Button) activity.findViewById(R.id.connectButton5);
 
         TextView textView1 = (TextView) activity.findViewById(R.id.textView1);
-        TextView textView2 = (TextView) activity.findViewById(R.id.textView2);
+        TextView textView2 = (TextView) activity.findViewById(R.id.slideTitleTextView);
         TextView textView3 = (TextView) activity.findViewById(R.id.textView3);
         TextView textView4 = (TextView) activity.findViewById(R.id.textView4);
         TextView textView5 = (TextView) activity.findViewById(R.id.textView5);

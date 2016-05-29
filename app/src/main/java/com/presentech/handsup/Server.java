@@ -22,14 +22,23 @@ public class Server {
 
     final String TAG = "Server";
 
-    StringBuffer contents = new StringBuffer().append("Waiting for connections...<br>");
+    //debugging
+    StringBuffer contents = new StringBuffer();
+    String feedbackString = new String();
 
+    //Feedback objects
+    FeedbackJSON usingJSON = new FeedbackJSON();
+    SingleFeedback feedbackObject = new SingleFeedback();
+
+    //Connections
     Socket socket;
     Thread t;
 
     public Server(){
         //main.setText(Html.fromHtml(contents.toString()));
         //header.setText("Host: " + getIpAddress());
+        this.feedbackString = "";
+        this.feedbackObject = null;
 
         t = new Thread(new Runnable() {
             @Override
@@ -66,11 +75,18 @@ public class Server {
 
 
     public void onMessage(final int c) {
-                contents.append(Character.toChars(c));
+        contents.append(Character.toChars(c));
+        if (contents.toString().contains("}")){
+            feedbackString = contents.toString();
+            Log.d("Server", "Message received: " + feedbackString);
+            feedbackObject = usingJSON.FeedbackJSONParse(feedbackString);
+            contents.setLength(0);
+        }
     }
 
     public void onConnection(final String s) {
-                contents.append("New client connected from ").append(s).append("<br>");
+        //contents.append("New client connected from ").append(s).append("<br>");
+        Log.d("Server", "New client connected from "+ s);
     }
 
     class ConnectionHandler implements Runnable {
@@ -92,7 +108,7 @@ public class Server {
                 while (true) {
                     c = in.read();
                     if (c == -1) continue;
-                    Log.d(TAG, "Message: " + c);
+                   // Log.d(TAG, "Message: " + c);
                     final int finalC = c;
                     ctx.onMessage(c);
                 }

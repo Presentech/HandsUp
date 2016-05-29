@@ -11,13 +11,16 @@ import com.presentech.handsup.SingleFeedback;
 public class IncomingFeedbackHandler {
 
 
+
     private static final Object MUTEX = new Object();
 
     public  IncomingFeedbackHandler(Context context) {
         feedbackDatabaseHandler database;
                                        //TODO What goes here??
-  database = new  feedbackDatabaseHandler(context, "name", null, 1, "FP");
+  database = new  feedbackDatabaseHandler(context);
         database.deleteTable();
+
+
     }
 
     public void processIncomingFeedback(String textFeedbackIn, String nameOfSQLDatabase) {

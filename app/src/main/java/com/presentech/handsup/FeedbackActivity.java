@@ -42,6 +42,8 @@ import cz.msebera.android.httpclient.Header;
 
 /**
  *Created by Edward Prentice on 9/03/2016
+ *Modified by Noor Mansure on 18/05/2016:
+ * Adding functionality to the activity, including connectivity
  */
 //public class FeedbackActivity extends AppCompatActivity  implements View.OnClickListener {
 public class FeedbackActivity extends AppCompatActivity   {
@@ -49,29 +51,55 @@ public class FeedbackActivity extends AppCompatActivity   {
     String mode = "AUDIENCE";
     private Bitmap background, arrow_left, arrow_right, tick, question, refresh, returnA, returnB, returnC;
     private navDrawer drawer;
+
+    //Text box for sending comments/questions
     EditText messageInput;
+
+    //Text views for slide title and content
+    TextView slideTitleTextView;
+    TextView slideContentTextView;
+
+    //Buttons
+    ImageButton nextButton;
+    ImageButton backButton;
+    ImageButton aButton;
+    ImageButton bButton;
+    ImageButton cButton;
+    ImageButton goodButton;
+    ImageButton mehButton;
+    ImageButton badButton;
     ImageButton sendButton;
 
+    //Connectivity requirements
     MyApplication application;
     Client client;
+
+    //Creating JSON objects for sending
+    FeedbackJSON feedbackJSON = new FeedbackJSON();
 
     @Override
     protected void onDestroy(){
         super.onDestroy();
         background.recycle();
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feedback);
 
-        ///////////////////////////////////////////////////////////////EDSADDITION
-        // get our input field by its ID
-        messageInput = (EditText) findViewById(R.id.editText);
-        // get our button by its ID
-        sendButton = (ImageButton) findViewById(R.id.imageButton10);
+        messageInput = (EditText) findViewById(R.id.commentEditText);
+        nextButton = (ImageButton)findViewById(R.id.nextButton);
+        backButton = (ImageButton) findViewById(R.id.backButton);
+        aButton = (ImageButton) findViewById(R.id.aButton);
+        bButton = (ImageButton) findViewById(R.id.bButton);
+        cButton = (ImageButton) findViewById(R.id.cButton);
+        goodButton = (ImageButton) findViewById(R.id.goodButton);
+        mehButton = (ImageButton) findViewById(R.id.mehButton);
+        badButton = (ImageButton) findViewById(R.id.badButton);
+        sendButton = (ImageButton) findViewById(R.id.sendButton);
 
-        // set its click listener
+        //add button click listeners to all buttons
         addListenerOnButton();
         application = (MyApplication)getApplication();
         client = application.getClient();
@@ -86,8 +114,6 @@ public class FeedbackActivity extends AppCompatActivity   {
         background = decodeSampledBitmapFromResource(getResources(), R.drawable.background, width, height);
         ImageView backgroundView = (ImageView) findViewById(R.id.feedbackActivityBackground);
 
-       // backgroundView.setImageBitmap(background);
-
         //NAVIGATION DRAWER
         //Create new presenter drawer object
         drawer = new navDrawer();
@@ -97,7 +123,6 @@ public class FeedbackActivity extends AppCompatActivity   {
         drawer.mDrawerList = (ListView) findViewById(R.id.hostingWizard_leftDrawer);
         drawer.createDrawer(FeedbackActivity.this, mode);
 
-        //I think Action Bar things HAVE to be done inside the activity
         //Enable drawer display button in Action Bar
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -106,11 +131,89 @@ public class FeedbackActivity extends AppCompatActivity   {
     }
 
     public void addListenerOnButton() {
+        //show the next slide content
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+
+            }
+        });
+        //show the previous slide content
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+
+            }
+        });
+        //set A as the answer to the question
+        aButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                SingleFeedback singleFeedback = new SingleFeedback();
+                singleFeedback.setABC(1);
+                String sendThis = feedbackJSON.FeedbackJSONGenerate(singleFeedback);
+                client.onSend(sendThis);
+            }
+        });
+        //set B as the answer to the question
+        bButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                SingleFeedback singleFeedback = new SingleFeedback();
+                singleFeedback.setABC(2);
+                String sendThis = feedbackJSON.FeedbackJSONGenerate(singleFeedback);
+                client.onSend(sendThis);
+            }
+        });
+        //set C as the answer to the question
+        cButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                SingleFeedback singleFeedback = new SingleFeedback();
+                singleFeedback.setABC(3);
+                String sendThis = feedbackJSON.FeedbackJSONGenerate(singleFeedback);
+                client.onSend(sendThis);;
+            }
+        });
+        //set feedback to good
+        goodButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                SingleFeedback singleFeedback = new SingleFeedback();
+                singleFeedback.setGOOD_MEH_BAD(1);
+                String sendThis = feedbackJSON.FeedbackJSONGenerate(singleFeedback);
+                client.onSend(sendThis);
+            }
+        });
+        //set feedback as meh
+        mehButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                SingleFeedback singleFeedback = new SingleFeedback();
+                singleFeedback.setGOOD_MEH_BAD(2);
+                String sendThis = feedbackJSON.FeedbackJSONGenerate(singleFeedback);
+                client.onSend(sendThis);
+            }
+        });
+        //set feedback as bad
+        badButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                SingleFeedback singleFeedback = new SingleFeedback();
+                singleFeedback.setGOOD_MEH_BAD(3);
+                String sendThis = feedbackJSON.FeedbackJSONGenerate(singleFeedback);
+                client.onSend(sendThis);
+            }
+        });
+        //send a comment or question
         sendButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
-                client.onSend(messageInput.getText().toString());
+                SingleFeedback singleFeedback = new SingleFeedback();
+                singleFeedback.setTEXT(messageInput.getText().toString());
+                String sendThis = feedbackJSON.FeedbackJSONGenerate(singleFeedback);
+                client.onSend(sendThis);
             }
 
         });

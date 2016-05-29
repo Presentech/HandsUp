@@ -53,8 +53,6 @@ public class Client {
 
     public String onConnect(String host) {
         hostAddress = host;
-
-
         final String ip = hexToIp(hostAddress.toUpperCase());
         out.append("Connecting to ").append(ip).append("\n\r");
         h.post(new Runnable() {

@@ -15,7 +15,7 @@ import org.json.JSONObject;
 
 public  class FeedbackJSON {
 
-
+//Construct this in the Audience FeedbackActivity to send over to the Presenter side
 public static String FeedbackJSONGenerate(SingleFeedback feedback){
     JSONObject obj = new JSONObject();
     try {
@@ -32,7 +32,7 @@ public static String FeedbackJSONGenerate(SingleFeedback feedback){
     }
     return obj.toString();
 }
-
+//Use this to regenerate the feedback object on the Pesenter side for storing and live feedback
   public static SingleFeedback FeedbackJSONParse(String jsonFeedback) {
       JSONObject obj = new JSONObject();
 

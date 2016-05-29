@@ -5,12 +5,11 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.WRITE_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:name="com.presentech.handsup.MyApplication"
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -111,6 +110,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.presentech.handsup.ModeSelectActivity" />
         </activity>
+        <activity
+            android:name=".testingConnections"
+            android:label="@string/title_activity_testing_connections"></activity>
     </application>
 
 </manifest>
