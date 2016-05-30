@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<presentation>
+    <documentInfo>
+        <Title>Example File</Title>
+        <Author>Lexxy</Author>
+        <Version>1.0</Version>
+        <Comment>An example file used to demonstrate the appearance of this format</Comment>
+    </documentInfo>
+    <defaults>
+        <backgroundColour>E6DCD2</backgroundColour>
+        <font>Helvetica</font>
+        <fontsize>12</fontsize>
+        <fontColour>676767</fontColour>
+        <lineColour>0000CC</lineColour>
+        <fillColour>2222AA</fillColour>
+    </defaults>
+    <slide slideID="0" duration="5" nextSlide="1">
+        <text duration="-1" ystart="0.9" starttime="0" xstart="0.3"
+            fontsize="20" font="Impact" fontcolour="596984"> <b>BROUGHT TO YOU BY PRESENTECH</b></text>
+        <question> Are you ready?</question>
+    </slide>
+    <slide slideID="1">
+        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05"
+            fontsize="18" font="Impact" fontcolour="596984"><b> PRESENTECH: AN AGENDA</b>
+        </text>
+    </slide>
+    <slide slideID="2" duration="8" nextSlide="3">
+        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05"
+            fontsize="18" font="Impact" fontcolour="596984"> <b>PRESENTECH: AN EXCELLENT COMPANY</b>
+        </text>
+    </slide>
+    <slide slideID="3">
+        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05"
+            fontsize="18" font="Impact" fontcolour="596984"> <b>PRESENTECH: THE PEOPLE</b>
+        </text>
+    </slide>
+    <slide slideID="4">
+        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05"
+            fontsize="18" font="Impact" fontcolour="596984"> <b>HANDS UP: THE NEXT SOLUTION</b>
+        </text>
+    </slide>
+    <slide slideID="5" duration="8" nextSlide="3">
+        <video ystart="0" loop="true" xstart="0" sourceFile="promo" duration="-1" starttime="0" />
+    </slide>
+    <slide slideID="6">
+        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05"
+            fontsize="18" font="Impact" fontcolour="596984"> <b>HANDS UP: A VALUED PROPOSITION</b>
+        </text>
+    </slide>
+    <slide slideID="7">
+        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05"
+            fontsize="18" font="Impact" fontcolour="596984"><b>HANDS UP: A LOW PRICE TO PAY FOR THE VALUE
+        </b>
+        </text>
+    </slide>
+    <slide slideID="8">
+        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05"
+            fontsize="18" font="Impact" fontcolour="596984"> <b>HANDS UP: GENERATING PROFIT</b>
+        </text>
+    </slide>
+    <slide slideID="9">
+        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05"
+            fontsize="18" font="Impact" fontcolour="596984"> <b>HANDS UP: GENERATING VALUE</b>
+        </text>
+    </slide>
+    <slide slideID="10">
+        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05"
+            fontsize="18" font="Impact" fontcolour="596984"> <b>HANDS UP:COMPETING WITH THE BEST</b>
+        </text>
+    </slide>
+    <slide slideID="11">
+        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05"
+            fontsize="18" font="Impact" fontcolour="596984"> <b>TOTAL BI-ANNUAL PAID USER BY NET LICENSE VARIATION</b>
+        </text>
+    </slide>
+    <slide slideID="12">
+        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05"
+            fontsize="18" font="Impact" fontcolour="596984"> <b>HANDS UP:CONDENSED CASH-FLOW STATEMENT</b>
+        </text>
+    </slide>
+    <slide slideID="13">
+        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05"
+            fontsize="18" font="Impact" fontcolour="596984"> <b>HANDS UP: PROJECED PROFIT NUMBERS</b>
+        </text>
+    </slide>
+    <slide slideID="14">
+        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05"
+            fontsize="18" font="Impact" fontcolour="596984"> <b>HANDS UP: RETURNING ON INVESTMENTS</b>
+        </text>
+    </slide>
+    <slide slideID="15">
+        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05"
+            fontsize="18" font="Impact" fontcolour="596984"> <b>HANDS UP: OVERCOMING RISKS</b>
+        </text>
+    </slide>
+    <slide slideID="16">
+        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05"
+            fontsize="18" font="Impact" fontcolour="596984"> <b>HANDS UP: CONFIDENCE AND FUTURE PROOFING</b>
+        </text>
+    </slide>
+    <slide slideID="17">
+        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05"
+            fontsize="18" font="Impact" fontcolour="596984"> <b>HANDS UP: THE FINAL QUESTION</b>
+        </text>
+    </slide>
+    <slide slideID="18">
+        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05"
+            fontsize="18" font="Impact" fontcolour="596984"> <b>HANDS UP: MARKING THE MARKERS</b>
+        </text>
+    </slide>
+</presentation>

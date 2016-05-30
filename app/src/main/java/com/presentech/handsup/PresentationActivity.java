@@ -123,7 +123,10 @@ public class PresentationActivity extends AppCompatActivity {
 
         getScreenSize();
         populateSlides();
-        sendSlideContent();
+        if (presenterServer.connections > 0){
+            sendSlideContent();
+        }
+
 
         for (int i = 0; i < animations.size(); i++) {
             animations.get(i).start();
@@ -523,7 +526,7 @@ public class PresentationActivity extends AppCompatActivity {
     public void getPresentation() throws IOException, XmlPullParserException{
         XMLParser parser = new XMLParser();
         InputStream in = null;
-        in = getAssets().open("test.xml");
+        in = getAssets().open("salespitch.xml");
         presentationFile = parser.getPresentation(in);
     }
 

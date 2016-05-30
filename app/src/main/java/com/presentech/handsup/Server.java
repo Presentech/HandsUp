@@ -40,6 +40,7 @@ public class Server {
     //Connections
     Socket s;
     Thread t;
+    int connections = 0;
 
     Handler h;
     HandlerThread tx;
@@ -61,6 +62,7 @@ public class Server {
                     Log.d(TAG, "Opened connection");
                     while (!Thread.interrupted() && !socket.isClosed()) {
                         s = socket.accept();
+                        connections++;
                         new Thread(new ConnectionHandler(Server.this, s.getInputStream())).start();
                         onConnection(s.getInetAddress().getHostAddress());
                         writer = new PrintWriter(s.getOutputStream());
