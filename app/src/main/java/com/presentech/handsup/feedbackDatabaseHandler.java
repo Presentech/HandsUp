@@ -40,8 +40,8 @@ public class feedbackDatabaseHandler extends SQLiteOpenHelper {
 
 
 
-    public feedbackDatabaseHandler(Context context) {
-        super(context, "feedback database", null, DATABASE_VERSION); //TODO - this is where multiple saves can be sorted
+    public feedbackDatabaseHandler(Context context, String name) {
+        super(context, name, null, DATABASE_VERSION); //TODO - this is where multiple saves can be sorted
         this.myContext = context;
     }
 

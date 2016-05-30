@@ -58,7 +58,7 @@ public class testingConnections extends Activity {
             }
         };
 
-        fdHandler = new feedbackDatabaseHandler(getBaseContext());
+        fdHandler = new feedbackDatabaseHandler(getBaseContext(), "");
         if (fdHandler == null) {
             Log.d("Server", "empty database");
         }

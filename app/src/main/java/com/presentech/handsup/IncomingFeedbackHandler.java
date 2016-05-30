@@ -17,7 +17,7 @@ public class IncomingFeedbackHandler {
     public  IncomingFeedbackHandler(Context context) {
         feedbackDatabaseHandler database;
                                        //TODO What goes here??
-  database = new  feedbackDatabaseHandler(context);
+        database = new  feedbackDatabaseHandler(context, "");
         database.deleteTable();
 
 

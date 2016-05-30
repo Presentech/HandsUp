@@ -68,7 +68,7 @@ public class HostingWizardActivity extends AppCompatActivity {
         setTitle(R.string.hosting_wizard_title);
         Toast.makeText(HostingWizardActivity.this, getIpAddress(), Toast.LENGTH_LONG).show();
         EditText password = (EditText) findViewById(R.id.SessionPassword);
-        password.setText(getIpAddress());
+        password.setText("0" + getIpAddress());
 
         application = (MyApplication)getApplication();
         server = application.getServer();
@@ -182,7 +182,7 @@ public class HostingWizardActivity extends AppCompatActivity {
         String session_name = session_name_view.getText().toString();
         String session_password = session_name_view.getText().toString();
         String session_location = session_name_view.getText().toString();
-        //Intent.putExtra(PresentationActivity.SESSION_NAME, session_name);
+        intent.putExtra(PresentationActivity.SESSION_NAME, session_name);
         //Intent.putExtra(PresentationActivity.SESSION_PASSWORD, session_password);
         //Intent.putExtra(PresentationActivity.SESSION_LOCATION, session_location);
 

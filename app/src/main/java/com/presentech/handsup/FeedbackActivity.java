@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.wifi.WifiManager;
 import android.preference.PreferenceActivity;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -153,6 +154,7 @@ public class FeedbackActivity extends AppCompatActivity   {
             @Override
             public void onClick(View arg0) {
                 SingleFeedback singleFeedback = new SingleFeedback();
+                singleFeedback.setUUID("" + getIpAddress());
                 singleFeedback.setABC(1);
                 String sendThis = feedbackJSON.FeedbackJSONGenerate(singleFeedback);
                 client.onSend(sendThis);
@@ -163,6 +165,7 @@ public class FeedbackActivity extends AppCompatActivity   {
             @Override
             public void onClick(View arg0) {
                 SingleFeedback singleFeedback = new SingleFeedback();
+                singleFeedback.setUUID("" + getIpAddress());
                 singleFeedback.setABC(2);
                 String sendThis = feedbackJSON.FeedbackJSONGenerate(singleFeedback);
                 client.onSend(sendThis);
@@ -173,6 +176,7 @@ public class FeedbackActivity extends AppCompatActivity   {
             @Override
             public void onClick(View arg0) {
                 SingleFeedback singleFeedback = new SingleFeedback();
+                singleFeedback.setUUID("" + getIpAddress());
                 singleFeedback.setABC(3);
                 String sendThis = feedbackJSON.FeedbackJSONGenerate(singleFeedback);
                 client.onSend(sendThis);;
@@ -183,6 +187,7 @@ public class FeedbackActivity extends AppCompatActivity   {
             @Override
             public void onClick(View arg0) {
                 SingleFeedback singleFeedback = new SingleFeedback();
+                singleFeedback.setUUID("" + getIpAddress());
                 singleFeedback.setGOOD_MEH_BAD(1);
                 String sendThis = feedbackJSON.FeedbackJSONGenerate(singleFeedback);
                 client.onSend(sendThis);
@@ -193,6 +198,7 @@ public class FeedbackActivity extends AppCompatActivity   {
             @Override
             public void onClick(View arg0) {
                 SingleFeedback singleFeedback = new SingleFeedback();
+                singleFeedback.setUUID("" + getIpAddress());
                 singleFeedback.setGOOD_MEH_BAD(2);
                 String sendThis = feedbackJSON.FeedbackJSONGenerate(singleFeedback);
                 client.onSend(sendThis);
@@ -203,6 +209,7 @@ public class FeedbackActivity extends AppCompatActivity   {
             @Override
             public void onClick(View arg0) {
                 SingleFeedback singleFeedback = new SingleFeedback();
+                singleFeedback.setUUID("" + getIpAddress());
                 singleFeedback.setGOOD_MEH_BAD(3);
                 String sendThis = feedbackJSON.FeedbackJSONGenerate(singleFeedback);
                 client.onSend(sendThis);
@@ -214,6 +221,7 @@ public class FeedbackActivity extends AppCompatActivity   {
             @Override
             public void onClick(View arg0) {
                 SingleFeedback singleFeedback = new SingleFeedback();
+                singleFeedback.setUUID("" + getIpAddress());
                 singleFeedback.setTEXT(messageInput.getText().toString());
                 String sendThis = feedbackJSON.FeedbackJSONGenerate(singleFeedback);
                 client.onSend(sendThis);
@@ -311,6 +319,10 @@ public class FeedbackActivity extends AppCompatActivity   {
     }
 
 
+    String getIpAddress() {
+        WifiManager wm = (WifiManager) getSystemService(WIFI_SERVICE);
+        return Integer.toHexString(wm.getConnectionInfo().getIpAddress());
+    }
 
 
 

@@ -57,7 +57,7 @@ public class PresentationActivity extends AppCompatActivity {
     public static final String  BOOLEAN_NAME2 = "boolean2";
     public static final String  BOOLEAN_NAME3 = "boolean3";
     public static final String  BOOLEAN_NAME4= "boolean4";
-    public static final String  BOOLEAN_NAME5 = "boolean5";
+    public static final String  SESSION_NAME = "boolean5";
 
     //the presentation container
     private ViewFlipper viewFlipper;
@@ -72,6 +72,7 @@ public class PresentationActivity extends AppCompatActivity {
     liveFeedbackFragment fbFragment;
     public SingleFeedback[] feedbackArray = new SingleFeedback[10];
     SingleFeedback feedbackObjectRx = new SingleFeedback();
+    feedbackDatabaseHandler presentation_db;
 
     TextHandler tH = new TextHandler();
     RelativeLayout slide = null;
@@ -108,6 +109,9 @@ public class PresentationActivity extends AppCompatActivity {
         multiChoice = b.getBoolean(BOOLEAN_NAME3);
         hideFeedback = b.getBoolean(BOOLEAN_NAME4);
         //feedbackPerSlide = b.getBoolean(BOOLEAN_NAME5);
+        String presentationName = b.getString(SESSION_NAME);
+
+        presentation_db = new feedbackDatabaseHandler(this, presentationName);
 
         getScreenSize();
         populateSlides();
@@ -126,6 +130,7 @@ public class PresentationActivity extends AppCompatActivity {
         }
         //setAutomaticHandler(3);
 
+        Log.d("ABCD", "Hello This is an error");
         // If presenter wants to view feedback create feedback fragment
         if (!hideFeedback) {
             if (findViewById(R.id.feedbackFragmentContainer) != null) {
@@ -159,16 +164,16 @@ public class PresentationActivity extends AppCompatActivity {
                 // Code to handle data loaded from network
                 // Use the data here!
                 feedbackObjectRx = feedbackObject;
-                Log.d("testingConnections", "In Presentation!!!");
                 if (feedbackObjectRx != null) {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            fbFragment.updateFeedback(feedbackObjectRx);
+                        fbFragment.updateFeedback(feedbackObjectRx);
+                        presentation_db.addFeedbackCollumn(feedbackObjectRx);
                         }
                     });
-
                 }
+
             }
         });
     }
@@ -394,6 +399,10 @@ public class PresentationActivity extends AppCompatActivity {
             case R.id.action_settings:
                 Intent settings_Intent = new Intent(this, SettingsActivity.class);
                 startActivity(settings_Intent);
+                return true;
+            case R.id.action_feedbackStored:
+                Intent feedback_Intent = new Intent(this, FeedbackActivity.class);
+                startActivity(feedback_Intent);
                 return true;
             case R.id.action_presenterHelp:
                 Intent tutorial_Intent = new Intent(this, PresentationModeTutorial.class);
