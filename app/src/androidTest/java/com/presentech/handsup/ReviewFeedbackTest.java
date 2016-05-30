@@ -87,7 +87,7 @@ public class ReviewFeedbackTest {
         int question = 1;
         int abc = 2;
         int gmb = 1;
-        String testText = "blah";
+        String testText = "The Bartered Bride is a comic opera in three acts by the Czech composer Bedřich Smetana, first performed at the Provisional Theatre, Prague, on 30 May 1866. Set in a country village with realistic characters, it tells the story of how true love prevails over the combined efforts of ambitious parents and a scheming marriage broker. Originally presented in a two-act format with spoken dialogue, the opera was not immediately successful, but it gained rapid popularity after numerous revisions. Smetana's musical treatment made considerable use of traditional Bohemian dance forms such as the polka and furiant, creating music which was accurately folk-like, and considered to be quintessentially Czech in spirit. After a performance in Vienna in 1892 the opera achieved international recognition. It reached Chicago in 1893, London in 1895 and New York in 1909, becoming the first, and for many years the only, Czech opera in the general repertory. Many of these early international performances were in German, under the title Die verkaufte BraThe Bartered Bride is a comic opera in three acts by the Czech composer Bedřich Smetana, first performed at the Provisional Theatre, Prague, on 30 May 1866. Set in a country village with realistic characters, it tells the story of how true love prevails over the combined efforts of ambitious parents and a scheming marriage broker. Originally presented in a two-act format with spoken dialogue, the opera was not immediately successful, but it gained rapid popularity after numerous revisions. Smetana's musical treatment made considerable use of traditional Bohemian dance forms such as the polka and furiant, creating music which was accurately folk-like, and considered to be quintessentially Czech in spirit. After a performance in Vienna in 1892 the opera achieved international recognition. It reached Chicago in 1893, London in 1895 and New York in 1909, becoming the first, and for many years the only, Czech opera in the general repertory. Many of these early international performances were in German, under the title Die verkaufte Bra";
         Long exampleTime = 20L;
         inputFeedback1.setUUID(uuid1.toString());
         inputFeedback1.setSLIDE(slide);
@@ -124,7 +124,7 @@ public class ReviewFeedbackTest {
         int question = 2;
         int abc = 1;
         int gmb = 3;
-        String testText = null;
+        String testText = "mmmm";
         Long exampleTime = 1L;
         inputFeedback3.setUUID(uuid3.toString());
         inputFeedback3.setSLIDE(slide);
@@ -143,7 +143,7 @@ public class ReviewFeedbackTest {
         int question = 1;
         int abc = 1;
         int gmb = 1;
-        String testText = null;
+        String testText = "ddddd";
         Long exampleTime = 1L;
         inputFeedback3.setUUID(uuid3.toString());
         inputFeedback3.setSLIDE(slide);
@@ -162,7 +162,7 @@ public class ReviewFeedbackTest {
         int question = 2;
         int abc = 1;
         int gmb = 2;
-        String testText = null;
+        String testText = "hhhhh";
         Long exampleTime = 1L;
         inputFeedback3.setUUID(uuid3.toString());
         inputFeedback3.setSLIDE(slide);

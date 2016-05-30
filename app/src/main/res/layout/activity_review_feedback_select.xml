@@ -24,4 +24,13 @@
         android:text="Get Good/Meh/Bad Responses"
         android:onClick="doGMB" />
 
+    <Button
+        android:id="@+id/messages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/gmb"
+        android:text="Get Messages"
+        android:onClick="doMessages" />
+
+
 </RelativeLayout>

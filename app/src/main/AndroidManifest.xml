@@ -80,7 +80,8 @@
         <activity
             android:name=".ReviewFeedbackGMB"
             android:label="@string/title_activity_review_feedback_gmb" />
-        <activity android:name=".ReviewFeedbackSelect"></activity>
+        <activity android:name=".ReviewFeedbackSelect" />
+        <activity android:name=".ReviewFeedbackMessages" />
     </application>
 
 </manifest>

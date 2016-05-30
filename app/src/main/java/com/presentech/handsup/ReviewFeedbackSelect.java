@@ -22,4 +22,10 @@ public class ReviewFeedbackSelect extends Activity {
         Intent GMBIntent = new Intent(this, ReviewFeedbackGMB.class);
         startActivity(GMBIntent);
     }
+
+    public void doMessages(View v){
+        Intent MessageIntent = new Intent(this, ReviewFeedbackMessages.class);
+        startActivity(MessageIntent);
+    }
+
 }

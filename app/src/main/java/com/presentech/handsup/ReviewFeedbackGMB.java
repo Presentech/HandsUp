@@ -36,9 +36,10 @@ public class ReviewFeedbackGMB extends Activity {
         feedbackDatabaseHandler database = new feedbackDatabaseHandler(getApplicationContext(), "TestFeedbackList", null, 1, "FP");
         List<SingleFeedback> singleFeedbackList = database.getAllFeedback();
 
-        //convert list of feedback objects to object array
+        //convert list of feedback objects to array of feedbackobjects
         SingleFeedback[] feedbackArray = new SingleFeedback[singleFeedbackList.size()];
         singleFeedbackList.toArray(feedbackArray);
+
 
 
         //get number of slides
@@ -60,23 +61,26 @@ public class ReviewFeedbackGMB extends Activity {
         int b = 0;
         int c = 0;
 
-        /*iterate through quesitons*/
+        /*iterate through slides*/
         for (int i = 0; i < sNo; i++) {
             a = b = c = 0;
             /*iterate through objects to find whether value is A, B or C*/
             for (int k = 0; k < feedbackArray.length; k++) {
-                if (feedbackArray[k].getSLIDE() == i + 1) {
+                if ((int) feedbackArray[k].getSLIDE() == i + 1) {
                     if (feedbackArray[k].getGOOD_MEH_BAD() == 1) {
                         a++;
                         answerA[i] = a;
+                        break;
                     }
                     if (feedbackArray[k].getGOOD_MEH_BAD() == 2) {
                         b++;
                         answerB[i] = b;
+                        break;
                     }
                     if (feedbackArray[k].getGOOD_MEH_BAD() == 3) {
                         c++;
                         answerC[i] = c;
+                        break;
                     }
 
                 }

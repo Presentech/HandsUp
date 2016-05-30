@@ -3,7 +3,6 @@ package com.presentech.handsup;
 /*Created by Jack Bardsley on 18/05/16*/
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -17,26 +16,13 @@ import java.util.List;
 public class ReviewFeedback extends Activity {
 
     public int qNo;         //Number of questions
-    public int sNo;          //Number of slides
     int j = 0;              //currently displayed question answers
-    int h = 0;              //currently displayed slide responses
     public PieChart questionABC;
-    //feedbackDatabaseHandler database;
-    List<SingleFeedback> singleFeedbackList;
-
-    /*public List<SingleFeedback> getDatabase(){
-        feedbackDatabaseHandler database = new feedbackDatabaseHandler(getApplicationContext(), "TestFeedbackList", null, 1, "FP");
-        List<SingleFeedback> singleFeedbackList = database.getAllFeedback();
-
-        return singleFeedbackList;
-    }*/
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review_feedback);
-        //getDatabase();
         getPiePlots();
 
     }
@@ -61,15 +47,15 @@ public class ReviewFeedback extends Activity {
             }
         }
 
-        int[] answerA = new int[qNo];           /*Initialise array for A answers for questions*/
-        int[] answerB = new int[qNo];           /*Initialise array for B answers for questions*/
-        int[] answerC = new int[qNo];           /*Initialise array for C answers for questions*/
+        int[] answerA = new int[qNo];           //Initialise array for A answers for questions
+        int[] answerB = new int[qNo];           //Initialise array for B answers for questions
+        int[] answerC = new int[qNo];           //Initialise array for C answers for questions
 
-        int a = 0;
-        int b = 0;
-        int c = 0;
+        int a;
+        int b;
+        int c;
 
-        /*iterate through quesitons*/
+        /*iterate through questions*/
         for (int i = 0; i < qNo; i++) {
             a = b = c = 0;
             /*iterate through objects to find whether value is A, B or C*/
@@ -78,14 +64,17 @@ public class ReviewFeedback extends Activity {
                     if (feedbackArray[k].getABC() == 1) {
                         a++;
                         answerA[i] = a;
+                        break;
                     }
                     if (feedbackArray[k].getABC() == 2) {
                         b++;
                         answerB[i] = b;
+                        break;
                     }
                     if (feedbackArray[k].getABC() == 3) {
                         c++;
                         answerC[i] = c;
+                        break;
                     }
 
                 }
