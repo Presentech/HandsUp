@@ -33,6 +33,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.VideoView;
 import android.widget.ViewFlipper;
+import android.widget.FrameLayout;
 import android.graphics.Color;
 
 import com.presentech.handsup.presentationfile.*;
@@ -57,7 +58,7 @@ public class PresentationActivity extends AppCompatActivity {
     public static final String  BOOLEAN_NAME2 = "boolean2";
     public static final String  BOOLEAN_NAME3 = "boolean3";
     public static final String  BOOLEAN_NAME4= "boolean4";
-    public static final String  BOOLEAN_NAME5 = "boolean5";
+    public static final String  SESSION_NAME = "boolean5";
 
     //the presentation container
     private ViewFlipper viewFlipper;
@@ -78,7 +79,6 @@ public class PresentationActivity extends AppCompatActivity {
     RelativeLayout slide = null;
     Canvas canvas = new Canvas();
 
-    private navDrawer drawer;
 
     List<AnimatorSet> animations = new ArrayList<AnimatorSet>();
     List<SingleQuestion> singleQuestions = new ArrayList<SingleQuestion>();
@@ -466,7 +466,7 @@ public class PresentationActivity extends AppCompatActivity {
                 if(!hideFeedback){
                     if (fbFragment.isHidden()) getSupportFragmentManager().beginTransaction().show(fbFragment).commit();
                     else getSupportFragmentManager().beginTransaction().hide(fbFragment).commit();
-                    fbFragment.updateStackedBars();
+                   // fbFragment.updateStackedBars();
                 }
                 return true;
             case R.id.action_settings:
