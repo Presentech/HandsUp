@@ -99,8 +99,6 @@ public class PresentationActivity extends AppCompatActivity {
         application = (MyApplication) getApplication();
         presenterServer = application.getServer();
 
-        //String id = b.getParcelable(SyncStateContract.Constants.CUSTOM_LISTING);
-        //presentationFile = (PresentationFile) this.getIntent().getSerializableExtra("pF");
         try {
             getPresentation();
         } catch (IOException e) {
@@ -121,15 +119,14 @@ public class PresentationActivity extends AppCompatActivity {
         //feedbackPerSlide = b.getBoolean(BOOLEAN_NAME5);
         String presentationName = b.getString(SESSION_NAME);
 
-        presentation_db = new feedbackDatabaseHandler(this, presentationName);
+        presentation_db = application.getDB();
 
         getScreenSize();
         populateSlides();
 
         if (presenterServer.connections > 0){
-            sendSlideContent();
+            sendSlideContent(viewFlipper.getDisplayedChild());
         }
-
 
         for (int i = 0; i < animations.size(); i++) {
             animations.get(i).start();
@@ -143,9 +140,7 @@ public class PresentationActivity extends AppCompatActivity {
         if (duration != 0 && isAdvanceActive) {
             setAutomaticHandler(duration, isLoopActive);
         }
-        //setAutomaticHandler(3);
 
-        Log.d("ABCD", "Hello This is an error");
         // If presenter wants to view feedback create feedback fragment
         if (!hideFeedback) {
             if (findViewById(R.id.feedbackFragmentContainer) != null) {
@@ -187,7 +182,6 @@ public class PresentationActivity extends AppCompatActivity {
                         }
                     });
                 }
-
             }
         });
     }
@@ -240,7 +234,7 @@ public class PresentationActivity extends AppCompatActivity {
             tV.setTextColor(Color.parseColor("#"+presentationFile.getDefaults().getFontColour()));
         }
         tV.setMaxWidth(screenWidth);
-        tV.setPadding(0,0,10,0);
+        tV.setPadding(0, 0, 10, 0);
         tV.setX(marginLeft);
         tV.setY(marginTop);
         if (t.getFontSize() == Slide.NULL_INT_ATTR){
@@ -526,8 +520,8 @@ public class PresentationActivity extends AppCompatActivity {
                 startActivity(settings_Intent);
                 return true;
             case R.id.action_feedbackStored:
-                Intent feedback_Intent = new Intent(this, FeedbackActivity.class);
-                startActivity(feedback_Intent);
+                //Intent feedback_Intent = new Intent(this, ReviewFeedback.class);
+                //startActivity(feedback_Intent);
                 return true;
             case R.id.action_presenterHelp:
                 Intent tutorial_Intent = new Intent(this, PresentationModeTutorial.class);
@@ -660,6 +654,7 @@ public class PresentationActivity extends AppCompatActivity {
                     Question question = slides.get(i).getQuestion().get(j);
                     SingleQuestion singleQuestion = new SingleQuestion(slides.get(i).getSlideID(), j+1, true, false, question.getQuestion() );
                     singleQuestions.add(singleQuestion);
+                    Log.d("PresentationActivity", "singleQuestion added to the list. This should only be called once");
                     }
             }
             viewFlipper.addView(slide);
@@ -668,11 +663,13 @@ public class PresentationActivity extends AppCompatActivity {
 
         }
 
-    public void sendSlideContent(){
+    public void sendSlideContent(int slideNumber){
+
         if (singleQuestions.size() > 0){
            String sendThis = questionJSON.questionCreateJSON(singleQuestions);
             Log.d("PresentationActivity", "Send slide content now");
-            presenterServer.onSend(sendThis);
+            presenterServer.onSend(sendThis + "("+Integer.toString(slideNumber)+")");
+
 
         }
     }
@@ -690,6 +687,7 @@ public class PresentationActivity extends AppCompatActivity {
         {
             case MotionEvent.ACTION_DOWN:
             {
+
                 lastX = touchevent.getX();
                 break;
             }
@@ -697,7 +695,11 @@ public class PresentationActivity extends AppCompatActivity {
             case MotionEvent.ACTION_UP:
             {
                 float currentX = touchevent.getX();
+                if (presenterServer.connections > 0){
 
+                    Log.d("ViewFlipper", Integer.toString(viewFlipper.getDisplayedChild()));
+                    sendSlideContent(viewFlipper.getDisplayedChild());
+                }
                 if (lastX < currentX)
                 {
                     if (viewFlipper.getDisplayedChild()==0)
@@ -705,11 +707,16 @@ public class PresentationActivity extends AppCompatActivity {
 
                     viewFlipper.setInAnimation(this, R.anim.slide_in_from_left);
                     viewFlipper.setOutAnimation(this, R.anim.slide_out_to_right);
-//                    vf.showNext();
+//
                     viewFlipper.showPrevious();
+
 
                     for (int i = 0; i < animations.size() ; i++) {
                         animations.get(i).start();
+                    }
+
+                    if (presenterServer.connections > 0){
+                        sendSlideContent(viewFlipper.getDisplayedChild());
                     }
                 }
 
@@ -727,6 +734,9 @@ public class PresentationActivity extends AppCompatActivity {
                     for (int i = 0; i < animations.size() ; i++) {
                         animations.get(i).start();
                     }
+                    if (presenterServer.connections > 0){
+                        sendSlideContent(viewFlipper.getDisplayedChild());
+                    }
                 }
 
                 break;
@@ -734,11 +744,8 @@ public class PresentationActivity extends AppCompatActivity {
 
             case MotionEvent.ACTION_MOVE:
             {
+
                 float tempX = touchevent.getX();
-                int scrollX = (int) (tempX - lastX);
-
-                //vf.scrollBy(scrollX, 0);
-
                 break;
             }
 

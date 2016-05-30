@@ -17,9 +17,10 @@ public class questionJSON {
     private String goodmehbadJName = "gmbBool";
     private String questionTextJName = "QuestionText";
     private JSONObject jo;
-    private JSONArray ja = new JSONArray();
+    private JSONArray ja;
 
     public String questionCreateJSON(List<SingleQuestion> listIn) {
+        ja = new JSONArray();
         for (SingleQuestion singleIn : listIn) {
             try {
                 jo = new JSONObject();
