@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".MyApplication"
@@ -83,11 +83,9 @@
         <activity android:name=".aboutActivity" />
         <activity android:name=".AudienceTutorial" />
         <activity android:name=".ExampleStackedBars" />
-        <activity android:name=".ViewLiveFeedback"></activity>
         <!--<meta-data-->
             <!--android:name="io.fabric.ApiKey"-->
             <!--android:value="0cddf07189e7770b126a853ae1c73ab8a83c2615" />-->
-        <activity android:name=".presentationfile.ExampleStackedBars" />
         <activity
             android:name=".AudienceConnect"
             android:label="@string/title_activity_audience_connect"
@@ -99,7 +97,6 @@
         <activity
             android:name=".testingConnections"
             android:label="@string/title_activity_testing_connections"></activity>
-        <activity android:name=".ViewLiveFeedback" />
         <activity android:name=".TestActivity"></activity>
     </application>
 

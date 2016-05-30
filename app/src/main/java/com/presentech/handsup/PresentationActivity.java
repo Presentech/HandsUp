@@ -40,6 +40,8 @@ import com.presentech.handsup.presentationfile.*;
 
 import org.xmlpull.v1.XmlPullParserException;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -59,7 +61,8 @@ public class PresentationActivity extends AppCompatActivity {
     public static final String  BOOLEAN_NAME3 = "boolean3";
     public static final String  BOOLEAN_NAME4= "boolean4";
     public static final String  SESSION_NAME = "boolean5";
-
+    public static final String SESSION_PATH = "String";
+    String pathName;
     //the presentation container
     private ViewFlipper viewFlipper;
     private float lastX;
@@ -95,6 +98,7 @@ public class PresentationActivity extends AppCompatActivity {
         viewFlipper = (ViewFlipper) findViewById(R.id.viewflipper);
 
         Bundle b = this.getIntent().getExtras();
+        pathName = b.getString(SESSION_PATH);
 
         application = (MyApplication) getApplication();
         presenterServer = application.getServer();
@@ -155,7 +159,7 @@ public class PresentationActivity extends AppCompatActivity {
                 fbFragment.setFeedbackSettings(messaging, multiChoice, understanding);
                 //fbFragment.setName();
                 getSupportFragmentManager().beginTransaction().add(R.id.feedbackFragmentContainer, fbFragment).commit();
-                getSupportFragmentManager().beginTransaction().hide(fbFragment);
+                getSupportFragmentManager().beginTransaction().hide(fbFragment).commit();
             }
         }
 
@@ -627,7 +631,8 @@ public class PresentationActivity extends AppCompatActivity {
     public void getPresentation() throws IOException, XmlPullParserException{
         XMLParser parser = new XMLParser();
         InputStream in = null;
-        in = getAssets().open("salespitch.xml");
+        File initFile = new File(pathName);
+        in = new FileInputStream(initFile);
         presentationFile = parser.getPresentation(in);
     }
 

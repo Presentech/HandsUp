@@ -31,6 +31,7 @@ public class liveFeedbackFragment extends Fragment{
     boolean fragUnderstanding, fragMultiChoice, fragMessaging;
     stackedBarsFragment ABCBarsFragment = null, understandingBarsFragment = null;
     messagingFragment slideFeedbackMessagesFragment =null;
+    private static final Object MUTEX = new Object();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -193,19 +194,23 @@ public class liveFeedbackFragment extends Fragment{
         if (ABCBarsFragment != null){
             Log.d("ABCD", "Do Something");
             //If Question changed then update bars
-            if (feedbackObject.getABC() != -1) {
-                ABCBarsFragment.setFeedbackResponse(feedbackObject);
-                ABCBarsFragment.updateBarHeight("Question Response");
-                getChildFragmentManager().beginTransaction().replace(R.id.fragmentContainerFBBarABC, ABCBarsFragment).commit();
+            synchronized (MUTEX){
+                if (feedbackObject.getABC() != -1) {
+                    ABCBarsFragment.setFeedbackResponse(feedbackObject);
+                    ABCBarsFragment.updateBarHeight("Question Response");
+                    getChildFragmentManager().beginTransaction().replace(R.id.fragmentContainerFBBarABC, ABCBarsFragment).commit();
+                }
             }
         }
         if (understandingBarsFragment != null){
             Log.d("ABCD", "Do Something Else");
             //Draw these and set random feedback values
             if (feedbackObject.getGOOD_MEH_BAD() != -1){
-                understandingBarsFragment.setFeedbackResponse(feedbackObject);
-                understandingBarsFragment.updateBarHeight("Level of Understanding");
-                getChildFragmentManager().beginTransaction().replace(R.id.fragmentContainerFBBarUnderstanding, understandingBarsFragment).commit();
+                synchronized (MUTEX){
+                    understandingBarsFragment.setFeedbackResponse(feedbackObject);
+                    understandingBarsFragment.updateBarHeight("Level of Understanding");
+                    getChildFragmentManager().beginTransaction().replace(R.id.fragmentContainerFBBarUnderstanding, understandingBarsFragment).commit();
+                }
             }
         }
         //Replace the fragment currently in the fragment container with the new fragments
