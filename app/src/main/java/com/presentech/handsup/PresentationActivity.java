@@ -466,8 +466,58 @@ public class PresentationActivity extends AppCompatActivity {
             case R.id.action_feedback:
                 //Show feedback here
                 if(!hideFeedback){
-                    if (fbFragment.isHidden()) getSupportFragmentManager().beginTransaction().show(fbFragment).commit();
-                    else getSupportFragmentManager().beginTransaction().hide(fbFragment).commit();
+
+                    int oldScreenHeight = screenHeight;
+                    if (fbFragment.isHidden()) {
+
+                        getSupportFragmentManager().beginTransaction().show(fbFragment).commit();
+                        if (viewFlipper.getDisplayedChild() == 5) {
+                            Display display = getWindowManager().getDefaultDisplay();
+                            Point size = new Point();
+                            display.getSize(size);
+                            RelativeLayout rl = (RelativeLayout)viewFlipper.getChildAt(viewFlipper.getDisplayedChild());
+                            VideoView vV = (VideoView) rl.getChildAt(0);
+                            screenHeight = size.y - 360;
+                            //vV.setLayoutParams(new RelativeLayout.LayoutParams(800,400));
+                            vV.layout(0, 0,200,200);
+                            vV.invalidate();
+                        }
+//                        screenHeight = size.y - 360;
+//                        RelativeLayout rl = (RelativeLayout) viewFlipper.getChildAt(viewFlipper.getDisplayedChild());
+//                        for (int i = 0; i < rl.getChildCount() ; i++) {
+//                            View view = rl.getChildAt(i);
+//                            view.setY((view.getY()/oldScreenHeight) * screenHeight);
+//                            if (view instanceof VideoView) {
+//                                view.setLayoutParams(new FrameLayout.LayoutParams(screenWidth,screenHeight));
+//                            }
+//                        }
+                    }
+                    else {
+                        getSupportFragmentManager().beginTransaction().hide(fbFragment).commit();
+                        if (viewFlipper.getDisplayedChild() == 5) {
+                            Display display = getWindowManager().getDefaultDisplay();
+                            Point size = new Point();
+                            display.getSize(size);
+                            RelativeLayout rl = (RelativeLayout)viewFlipper.getChildAt(viewFlipper.getDisplayedChild());
+                            VideoView vV = (VideoView) rl.getChildAt(0);
+                            screenHeight = size.y;
+                            vV.setLayoutParams(new RelativeLayout.LayoutParams(screenWidth,screenHeight));
+                        }
+//                        screenHeight = size.y;
+//                        RelativeLayout rl = (RelativeLayout) viewFlipper.getChildAt(viewFlipper.getDisplayedChild());
+//                        for (int i = 0; i < rl.getChildCount() ; i++) {
+//                            View view = rl.getChildAt(i);
+//                            view.setY((view.getY()/oldScreenHeight) * screenHeight);
+//                            if (view instanceof VideoView) {
+//                                view.setLayoutParams(new FrameLayout.LayoutParams(screenWidth,screenHeight));
+//                            }
+//                        }
+
+
+                    }
+
+
+
                     //fbFragment.updateStackedBars();
                 }
                 return true;
