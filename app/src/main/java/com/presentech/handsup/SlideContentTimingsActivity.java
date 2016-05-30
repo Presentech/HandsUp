@@ -9,10 +9,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.NumberPicker;
 
-/**
- * Created by Jay on 21-05-2016.
- */
-
 public class SlideContentTimingsActivity extends AppCompatActivity implements NumberPicker.OnValueChangeListener {
     private CheckBox cbAdvanceAutomatically, cbLoopContinuous;
     private NumberPicker npAdvanceAutomatically;
@@ -24,20 +20,21 @@ public class SlideContentTimingsActivity extends AppCompatActivity implements Nu
     public static final String PREF_KEY_LOOP_CHECKED = "loop";
 
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_slide_content_timings);
 
-        //Reference to SharedPreferences object
-        sharedPreferences = getSharedPreferences(PREF_KEY_NAME, MODE_PRIVATE);
+
+        sharedPreferences = getSharedPreferences(HandsUpApplication.PREF_NAME, MODE_PRIVATE);
         final int duration = sharedPreferences.getInt(PREF_KEY_DURATION, 0);
 
-        //Get the widgets reference from XML layout
         npAdvanceAutomatically = (NumberPicker) findViewById(R.id.npTransitionTimePicker);
-        cbAdvanceAutomatically = (CheckBox) findViewById(R.id.cbAdvanceAutomatically);
-        cbLoopContinuous = (CheckBox) findViewById(R.id.cbLoopContinuously);
 
+        cbAdvanceAutomatically = (CheckBox) findViewById(R.id.cbAdvanceAutomatically);
+
+        cbLoopContinuous = (CheckBox) findViewById(R.id.cbLoopContinuously);
 
         if (sharedPreferences.getBoolean(PREF_KEY_ADVANCE_CHECKED, false)) {
             cbAdvanceAutomatically.setChecked(true);
@@ -54,24 +51,20 @@ public class SlideContentTimingsActivity extends AppCompatActivity implements Nu
         }
 
         //Populate NumberPicker values from minimum and maximum value range
-        //Set the minimum value of NumberPicker (i.e. initialise state)
+        //Set the minimum value of NumberPicker
         npAdvanceAutomatically.setMinValue(0);
         //Specify the maximum value/number of NumberPicker
         npAdvanceAutomatically.setMaxValue(20);
 
         if (sharedPreferences.getInt(PREF_KEY_DURATION, 0) > 0) {
-            //Specify the NumberPicker data source
             npAdvanceAutomatically.setValue(duration);
         }
 
-        //Register a callback to be invoked when the checked state of this button changes.
         cbAdvanceAutomatically.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            //Called everytime user sets/unsets the checkbox.
-            //Using Boolean parameter with constructor, to determine if toggle is set.
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 sharedPreferences.edit().putBoolean(PREF_KEY_ADVANCE_CHECKED,b).commit();
-                if(sharedPreferences.getBoolean(PREF_KEY_LOOP_CHECKED,false) && b==false) {
+                if(sharedPreferences.getBoolean(PREF_KEY_LOOP_CHECKED,false) && !b) {
                     sharedPreferences.edit().putBoolean(PREF_KEY_LOOP_CHECKED, b).commit();
                     cbLoopContinuous.setChecked(false);
                 }
@@ -87,24 +80,22 @@ public class SlideContentTimingsActivity extends AppCompatActivity implements Nu
             }
         });
 
+
         npAdvanceAutomatically.setOnValueChangedListener(this);
 
         //Gets whether the selector wheel wraps when reaching the min/max value.
-        //Allows/disallows consecutive scrolling through the NumberPicker
         npAdvanceAutomatically.setWrapSelectorWheel(true);
     }
 
 
     public void saveSettings(View v) {
-        //Call edit on sharedPreferences and load data to object
         sharedPreferences.edit().putInt(PREF_KEY_DURATION, duration).commit();
         finish();
     }
 
-    @Override
     //Set a value change listener for NumberPicker
+    @Override
     public void onValueChange(NumberPicker numberPicker, int oldVal, int newVal) {
-        //Display the newly selected number from picker
         duration = newVal;
     }
 }

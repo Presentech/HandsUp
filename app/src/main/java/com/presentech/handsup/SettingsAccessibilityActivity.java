@@ -6,7 +6,6 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
@@ -15,6 +14,7 @@ import android.widget.ListView;
  * Created by Jay on 10-03-2016.
  */
 public class SettingsAccessibilityActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +27,7 @@ public class SettingsAccessibilityActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if(item.getItemId() == android.R.id.home)
+        if (item.getItemId() == android.R.id.home)
             finish();
 
         return true;
@@ -38,7 +38,7 @@ public class SettingsAccessibilityActivity extends AppCompatActivity {
         @Override
         public void onCreate(final Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            //addPreferencesFromResource(R.xml.accessibility_prefs);
+            addPreferencesFromResource(R.xml.settings_accessibility_prefs);
 
         }
 
@@ -48,6 +48,7 @@ public class SettingsAccessibilityActivity extends AppCompatActivity {
             super.onActivityCreated(savedInstanceState);
 
             View rootView = getView();
+            assert rootView != null;
             ListView list = (ListView) rootView.findViewById(android.R.id.list);
             list.setDivider(ContextCompat.getDrawable(getActivity(), R.color.textColour));
             list.setDividerHeight(1);
@@ -73,7 +74,6 @@ public class SettingsAccessibilityActivity extends AppCompatActivity {
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 
-
         }
 
         @Override
@@ -83,3 +83,4 @@ public class SettingsAccessibilityActivity extends AppCompatActivity {
     }
 
 }
+

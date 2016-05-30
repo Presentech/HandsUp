@@ -1,5 +1,8 @@
 package com.presentech.handsup;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,6 +17,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.util.Log;
 import android.view.Display;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -44,22 +50,35 @@ import java.util.List;
 
 /**
  * Created by Noor.
- * Updated to include autoflip handler (by Jay)
+ * Updated to include autoflip handler (Jay)
  */
 
 public class PresentationActivity extends AppCompatActivity {
 
-    int screenWidth;
-    int screenHeight;
-    PresentationFile presentationFile;
-    String mode = "PRESENTER";
-    TextHandler tH = new TextHandler();
-    RelativeLayout slide = null;
-    Canvas canvas = new Canvas();
+    public static final String BOOLEAN_NAME1 = "boolean1";
+    public static final String BOOLEAN_NAME2 = "boolean2";
+    public static final String BOOLEAN_NAME3 = "boolean3";
+    public static final String BOOLEAN_NAME4 = "boolean4";
+    public static final String BOOLEAN_NAME5 = "boolean5";
+
     //the presentation container
     private ViewFlipper viewFlipper;
     private float lastX;
+    int screenWidth, stackedBarsAmount;
+    int screenHeight, feedbackHeight, feedbackWidth;
+    public Boolean understanding, multiChoice, messaging, hideFeedback, feedbackPerSlide;
+    PresentationFile presentationFile;
+    String mode = "PRESENTER";
+    liveFeedbackFragment fbFragment;
+    public SingleFeedback[] feedbackArray = new SingleFeedback[10];
+
+    TextHandler tH = new TextHandler();
+    RelativeLayout slide = null;
+    Canvas canvas = new Canvas();
+
     private navDrawer drawer;
+
+    List<AnimatorSet> animations = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +86,7 @@ public class PresentationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_presentation);
         viewFlipper = (ViewFlipper) findViewById(R.id.viewflipper);
         setTitle(R.string.presentation_container);
-        //Bundle b = this.getIntent().getExtras();
+        Bundle b = this.getIntent().getExtras();
         //String id = b.getParcelable(SyncStateContract.Constants.CUSTOM_LISTING);
         //presentationFile = (PresentationFile) this.getIntent().getSerializableExtra("pF");
 
@@ -78,12 +97,23 @@ public class PresentationActivity extends AppCompatActivity {
         } catch (XmlPullParserException e) {
             e.printStackTrace();
         }
-
-
         viewFlipper.setBackgroundColor(Color.parseColor("#" + presentationFile.getDefaults().getBackgroundColour()));
+        viewFlipper.getParent().getParent().requestDisallowInterceptTouchEvent(true);
+
+        understanding = b.getBoolean(BOOLEAN_NAME1);
+        messaging = b.getBoolean(BOOLEAN_NAME2);
+        multiChoice = b.getBoolean(BOOLEAN_NAME3);
+        hideFeedback = b.getBoolean(BOOLEAN_NAME4);
+        //feedbackPerSlide = b.getBoolean(BOOLEAN_NAME5);
+
         getScreenSize();
         populateSlides();
-        SharedPreferences sharedPreferences = getSharedPreferences(SlideContentTimingsActivity.PREF_KEY_NAME, MODE_PRIVATE);
+
+        for (int i = 0; i < animations.size(); i++) {
+            animations.get(i).start();
+        }
+
+        SharedPreferences sharedPreferences = getSharedPreferences(HandsUpApplication.PREF_NAME, MODE_PRIVATE);
         int duration = sharedPreferences.getInt(SlideContentTimingsActivity.PREF_KEY_DURATION, 0);
         boolean isAdvanceActive = sharedPreferences.getBoolean(SlideContentTimingsActivity.PREF_KEY_ADVANCE_CHECKED, false);
         boolean isLoopActive = sharedPreferences.getBoolean(SlideContentTimingsActivity.PREF_KEY_LOOP_CHECKED, false);
@@ -92,7 +122,25 @@ public class PresentationActivity extends AppCompatActivity {
             setAutomaticHandler(duration, isLoopActive);
         }
         //setAutomaticHandler(3);
+
+        // If presenter wants to view feedback create feedback fragment
+        if (!hideFeedback) {
+            if (findViewById(R.id.feedbackFragmentContainer) != null) {
+                // If we're being restored from a previous state, don't do anything
+                // we could end up with overlapping fragments.
+                if (savedInstanceState != null) {
+                    return;
+                }
+                // Create a new Fragment to be placed in the activity layout
+                fbFragment = new liveFeedbackFragment();
+                fbFragment.setScreenParams(feedbackHeight, feedbackWidth);
+                fbFragment.setFeedbackSettings(messaging, multiChoice, understanding);
+                //fbFragment.setName();
+                getSupportFragmentManager().beginTransaction().add(R.id.feedbackFragmentContainer, fbFragment).commit();
+            }
+        }
     }
+
 
     private void setAutomaticHandler(final int duration, final boolean isInLoop) {
         new Handler().postDelayed(new Runnable() {
@@ -113,8 +161,6 @@ public class PresentationActivity extends AppCompatActivity {
             }
         }, duration * 1000);
     }
-
-
 
 
     public void createTextViews(Text t) {
@@ -206,22 +252,32 @@ public class PresentationActivity extends AppCompatActivity {
     }
 
     public void addGraphics(Shape s, Polygon p) {
-
-//        if (p.sourceFile != null){
+//        if (p != null){
+//        if (p.getSourceFile() != null) {
 //
-//                String next[] = {};
-//                List<String[]> list = new ArrayList<String[]>();
+//            String next[] = {};
+//            List<String[]> list = new ArrayList<String[]>();
 //
-//                try {
-//                    CSVReader reader = new CSVReader(new InputStreamReader(getAssets().open(p.sourceFile)));
-//                    while(true) {
-//                        next = reader.readNext();
-//                        if(next != null) {
-//                            list.add(next);
-//                        } else {
-//                            break;
-//                        }
+//            try {
+//                CSVReader reader = new CSVReader(new InputStreamReader(getAssets().open(p.getSourceFile())));
+//                while (true) {
+//                    next = reader.readNext();
+//                    if (next != null) {
+//                        list.add(next);
+//                    } else {
+//                        break;
 //                    }
+//                }
+//
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//            float polyPath[] = {};
+//            for (int i = 0; i<next.length; i++) {
+//                polyPath[i] = Float.parseFloat(next[i]);
+//            }
+//
+//        }
 
         ArrayList x = new ArrayList();
         ArrayList y = new ArrayList();
@@ -231,14 +287,41 @@ public class PresentationActivity extends AppCompatActivity {
 //                    }
 
 
-        GraphicsHandler pH = new GraphicsHandler(this, x, y, p, s, screenWidth, screenHeight);
+        GraphicsHandler pH = new GraphicsHandler(this, p, s, screenWidth, screenHeight, presentationFile.getDefaults());
         pH.draw(canvas);
         slide.addView(pH);
+
+
+        if (s != null) {
+            pH.setAlpha(0f);
+            ObjectAnimator appearDelay = ObjectAnimator.ofFloat(pH, "alpha", 0f, 0f);
+            ObjectAnimator appear = ObjectAnimator.ofFloat(pH, "alpha", 0f, 1f);
+            ObjectAnimator durationDelay = ObjectAnimator.ofFloat(pH, "alpha", 1f, 1f);
+            ObjectAnimator disappear = ObjectAnimator.ofFloat(pH, "alpha", 1f, 0f);
+
+            appearDelay.setDuration(s.getStartTime()); // Start Time
+            appear.setDuration(0);
+            if (s.getDuration() != -1) {
+                durationDelay.setDuration(s.getDuration()); // Duration
+                disappear.setDuration(0);
+            }
+
+            AnimatorSet anim = new AnimatorSet();
+            anim.play(appear).after(appearDelay);
+            if (s.getDuration() != -1) {
+                anim.play(durationDelay).after(appear);
+                anim.play(disappear).after(durationDelay);
+            }
+
+            animations.add(anim);
+        }
+
 
 //
 //                } catch (IOException e) {
 //                    e.printStackTrace();
 //                }
+
 //        }
     }
 
@@ -246,16 +329,68 @@ public class PresentationActivity extends AppCompatActivity {
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
-        screenWidth = size.x;
-        screenHeight = size.y;
+        //Set screen params differently if the presenter wants to be able to see feedback
+        if (hideFeedback) {
+            screenWidth = size.x;
+            screenHeight = size.y;
+        } else {
+            int tempx = size.x;
+            int tempy = size.y;
+            double screenWidthDouble = tempx * 0.7;
+            double screenHeightDouble = tempy - 360;
+            screenWidth = (int) screenWidthDouble;
+            screenHeight = (int) screenHeightDouble;
+            feedbackHeight = tempy;
+            feedbackWidth = tempx;
+        }
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_feedback:
+                //Show feedback here
+                if (!hideFeedback) {
+                    if (fbFragment.isHidden())
+                        getSupportFragmentManager().beginTransaction().show(fbFragment).commit();
+                    else getSupportFragmentManager().beginTransaction().hide(fbFragment).commit();
+                    fbFragment.updateStackedBars();
+                }
+                return true;
+            case R.id.action_settings:
+                Intent settings_Intent = new Intent(this, SettingsActivity.class);
+                startActivity(settings_Intent);
+                return true;
+            case R.id.action_presenterHelp:
+                Intent tutorial_Intent = new Intent(this, PresentationModeTutorial.class);
+                startActivity(tutorial_Intent);
+                return true;
+            case R.id.action_home:
+                Intent home_Intent = new Intent(this, HostingWizardActivity.class);
+                startActivity(home_Intent);
+                return true;
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.action_bar_presentation, menu);
+        return true;
     }
 
     public void populateSlides() {
         DocumentInfo docInfo = presentationFile.getDocumentInfo();
         List<Slide> slides = presentationFile.getSlides();
         int numberOfSlides = slides.size();
-        Shape shape = null;
-        Polygon poly = null;
+        Shape shape;
+        Polygon poly;
 
         for (int i = 0; i < numberOfSlides; i++) {
             int numberOfTexts = slides.get(i).getText().size();
@@ -351,17 +486,20 @@ public class PresentationActivity extends AppCompatActivity {
                     //add polygon method too
                 }
             }
+
+
             viewFlipper.addView(slide);
         }
+
+
     }
 
     public void getPresentation() throws IOException, XmlPullParserException {
         XMLParser parser = new XMLParser();
-        InputStream in = null;
+        InputStream in;
         in = getAssets().open("test.xml");
         presentationFile = parser.getPresentation(in);
     }
-
 
     public boolean onTouchEvent(MotionEvent touchevent) {
 
@@ -382,6 +520,9 @@ public class PresentationActivity extends AppCompatActivity {
                     viewFlipper.setOutAnimation(this, R.anim.slide_out_to_right);
 //                    vf.showNext();
                     viewFlipper.showPrevious();
+                    for (int i = 0; i < animations.size(); i++) {
+                        animations.get(i).start();
+                    }
                 }
 
                 if (lastX > currentX) {
@@ -393,7 +534,11 @@ public class PresentationActivity extends AppCompatActivity {
                     viewFlipper.setOutAnimation(this, R.anim.slide_out_to_left);
 //                    vf.showPrevious();
                     viewFlipper.showNext();
+                    for (int i = 0; i < animations.size(); i++) {
+                        animations.get(i).start();
+                    }
                 }
+
                 break;
             }
 
@@ -402,10 +547,14 @@ public class PresentationActivity extends AppCompatActivity {
                 int scrollX = (int) (tempX - lastX);
 
                 //vf.scrollBy(scrollX, 0);
+
                 break;
             }
-        }
-        return false;
-    }
-}
 
+        }
+
+        return false;
+
+    }
+
+}

@@ -39,6 +39,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         bindComponents();
         init();
         addListeners();
+
         //NAVIGATION DRAWER
         //Create new presenter drawer object
         drawer = new navDrawer();

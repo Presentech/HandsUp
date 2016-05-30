@@ -36,7 +36,7 @@ public class SettingsDefaultSettingActivity extends AppCompatActivity {
         @Override
         public void onCreate(final Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            //addPreferencesFromResource(R.xml.default_setting_prefs);
+            addPreferencesFromResource(R.xml.settings_default_setting_prefs);
 
         }
 

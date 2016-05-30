@@ -19,7 +19,7 @@ public class SettingsFileStorageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_toolbar);
-        
+
         getFragmentManager().beginTransaction().replace(R.id.content_frame, new MyPreferenceFragment()).commit();
 
     }
@@ -38,7 +38,7 @@ public class SettingsFileStorageActivity extends AppCompatActivity {
         @Override
         public void onCreate(final Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            //addPreferencesFromResource(R.xml.file_storage_prefs);
+            addPreferencesFromResource(R.xml.settings_file_storage_prefs);
 
         }
 
