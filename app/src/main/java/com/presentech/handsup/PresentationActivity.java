@@ -181,7 +181,7 @@ public class PresentationActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                         fbFragment.updateFeedback(feedbackObjectRx);
-                        presentation_db.addFeedbackCollumn(feedbackObjectRx);
+                       // presentation_db.addFeedbackCollumn(feedbackObjectRx);
                         }
                     });
                 }
@@ -241,7 +241,12 @@ public class PresentationActivity extends AppCompatActivity {
         tV.setPadding(0,0,10,0);
         tV.setX(marginLeft);
         tV.setY(marginTop);
-        tV.setTextSize(t.getFontSize());
+        if (t.getFontSize() == Slide.NULL_INT_ATTR){
+            tV.setTextSize(presentationFile.getDefaults().getFontSize());
+        }
+        else {
+            tV.setTextSize(t.getFontSize());
+        }
         slide.addView(tV);
     }
 

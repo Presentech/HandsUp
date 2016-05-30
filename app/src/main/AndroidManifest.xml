@@ -71,7 +71,8 @@
             android:label="@string/default_setting_title"
             android:screenOrientation="portrait" />
         <activity android:name=".SettingsActivity" />
-        <activity android:name=".FeedbackActivity" />
+        <activity android:name=".FeedbackActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".PresentationActivity"
             android:screenOrientation="landscape" />
