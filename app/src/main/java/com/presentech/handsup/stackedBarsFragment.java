@@ -17,11 +17,12 @@ import android.widget.TextView;
 
 import com.presentech.handsup.R;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class stackedBarsFragment extends Fragment{
 
-    public SingleFeedback[] feedbackArray = new SingleFeedback[10];
+    public SingleFeedback[] feedbackArray = new SingleFeedback[20];
     public int a, b, c, good, bad, meh;
     double A = 1, B = 1, C = 1;
     double APercent, BPercent, CPercent, totalInputs;
@@ -29,10 +30,12 @@ public class stackedBarsFragment extends Fragment{
     View AView, BView, CView;
     TextView textView, ATextView, BTextView, CTextView;
 
-    public int barWidth, lastBar, barHeight;
+    public int barWidth, lastBar, barHeight, i = 0, k = 0, j;
     RelativeLayout barLayout;
     public int qNo = 0, numberofPlots = 2;
     public int[] answerA, answerB, answerC;
+    ArrayList<SingleFeedback>  questionResponses = new ArrayList<>();
+    ArrayList<SingleFeedback>  understandingResponses = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -43,16 +46,90 @@ public class stackedBarsFragment extends Fragment{
         return barLayout;
     }
 
-    public void setFeedbackArray(SingleFeedback[] feedback){
-        Random r = new Random();
-        int rV;
-        feedbackArray = feedback;
-        /*Set some example objects that would be expected to recieve*/
-        for(int i=0; i<10;i++){
-            rV = r.nextInt(4 - 1) + 1;
-            feedbackArray[i] = new SingleFeedback("abc",1.00,1,1,rV,rV,"abc",123L);
+    public void setFeedbackResponse(SingleFeedback feedback){
+        SingleFeedback tempObject;
+        int tempIndex = 0;
+        //Add User ID
+        if (i>99) i = 0; //If looking above 100 start overwriting from oldest first.
+        if (k>99) k = 0; // i is question response index k is understanding response index
+
+        int ABC = feedback.getABC();
+        int GOODmehBAD = feedback.getGOOD_MEH_BAD();
+        int understanding_old_value = 0;
+        int ABC_old_value = 0;
+        if (feedback.getTEXT() != null) return;
+        for (j=0; j < questionResponses.size(); j++){//Look through each object in array
+            tempObject = questionResponses.get(j);
+            //if (tempObject.getUUID().equals(feedback.getUUID())){//If same user again!
+                if (ABC != -1){ // If question Response
+                    if (tempObject.getABC() != ABC){// If new Answer
+                        ABC_old_value = tempObject.getABC();
+                        tempIndex = ABC;
+                    }
+                    else tempIndex = -1;
+                    break;
+                }
+            //}
+        }
+
+
+        for (j=0; j < understandingResponses.size(); j++){//Look through each object in array
+            tempObject = understandingResponses.get(j);
+            //if (tempObject.getUUID().equals(feedback.getUUID())){ //If same user again!
+                if (GOODmehBAD != -1){ // If question Response
+                    if (tempObject.getGOOD_MEH_BAD() != GOODmehBAD) {// If new Answer
+                        understanding_old_value = tempObject.getGOOD_MEH_BAD();
+                        tempIndex = GOODmehBAD;
+                    }
+                    else tempIndex = -1;
+                    break;
+                }
+
+            //}
+        }
+
+        if (tempIndex == 0 ){ //New Feedback is the same
+            if (ABC != -1){ // Question Response
+                if (ABC == 1) a++;
+                else if (ABC == 2) b++;
+                else c++;
+                questionResponses.add(i, feedback);
+                i++;
+            }
+            else if (GOODmehBAD != -1){ //Understanding Response
+                if (GOODmehBAD == 1) good++;
+                else if (GOODmehBAD == 2) meh++;
+                else bad++;
+                understandingResponses.add(k, feedback);
+                k++;
+            }
+        }
+        else if ((tempIndex > 0 ) && (tempIndex<4)){ //New Feedback is different
+            if (ABC != -1){
+                if (ABC_old_value == 1) a--; //Remove old Value
+                else if (ABC_old_value == 2) b--;
+                else if (ABC_old_value == 3) c--;
+
+                if (tempIndex == 1) a++; //Add new value
+                else if (tempIndex == 2) b++;
+                else if (tempIndex == 3) c++;
+                feedback.setGOOD_MEH_BAD(tempIndex);
+                questionResponses.set(j, feedback);
+            }
+            else{
+                if (understanding_old_value == 1) good--; //Remove old Value
+                else if (understanding_old_value == 2) meh--;
+                else if (understanding_old_value == 3) bad--;
+
+                if (tempIndex == 1) good++;
+                else if (tempIndex == 2) meh++;
+                else if (tempIndex == 3) bad++;
+                understandingResponses.set(j,feedback);
+            }
+
         }
     }
+
 
     public void setScreenParams(int height, int width){
         barHeight = height;
@@ -63,10 +140,10 @@ public class stackedBarsFragment extends Fragment{
     private void initBar(){
         //Create references to views
         //AView = barLayout.findViewById(R.id.greenLayoutfrag);
-        BTextView = (TextView) barLayout.findViewById(R.id.yellowLayoutfrag);
-        CTextView = (TextView) barLayout.findViewById(R.id.redLayoutfrag);
+        BView = barLayout.findViewById(R.id.yellowLayoutfrag);
+        CView = barLayout.findViewById(R.id.redLayoutfrag);
         textView = (TextView) barLayout.findViewById(R.id.FBtextView);
-        ATextView = (TextView) barLayout.findViewById(R.id.greenLayoutfrag);
+        AView = barLayout.findViewById(R.id.greenLayoutfrag);
         //BTextView = (TextView) BView;
         //CTextView = (TextView) CView;
         viewParent = barLayout;
@@ -145,10 +222,18 @@ public class stackedBarsFragment extends Fragment{
     public void updateBarHeight(String barName){
         Log.d("ABCD", "UBH");
         //Calculate the percent of the bar filled by each section
-        totalInputs = a+b+c;
-        APercent = a/totalInputs;
-        BPercent = b/totalInputs;
-        CPercent = c/totalInputs;
+        if (barName.equals("Level of Understanding")){ //Use good meh bad values
+            totalInputs = good+meh+bad;
+            APercent = good/totalInputs;
+            BPercent = meh/totalInputs;
+            CPercent = bad/totalInputs;
+        }
+        if (barName.equals("Question Response")){ //Use good meh bad values
+            totalInputs = a+b+c;
+            APercent = a/totalInputs;
+            BPercent = b/totalInputs;
+            CPercent = c/totalInputs;
+        }
 
         //Calculate the height of each bar section
         double AHeightDouble = APercent * barWidth;
@@ -159,9 +244,9 @@ public class stackedBarsFragment extends Fragment{
         int CWidth = (int) CHeightDouble;
 
 
-        ViewGroup.LayoutParams AParams = ATextView.getLayoutParams();
-        ViewGroup.LayoutParams BParams = BTextView.getLayoutParams();
-        ViewGroup.LayoutParams CParams = CTextView.getLayoutParams();
+        ViewGroup.LayoutParams AParams = AView.getLayoutParams();
+        ViewGroup.LayoutParams BParams = BView.getLayoutParams();
+        ViewGroup.LayoutParams CParams = CView.getLayoutParams();
         ViewGroup.LayoutParams tvParams = textView.getLayoutParams();
 
         AParams.height = barHeight;
@@ -173,9 +258,9 @@ public class stackedBarsFragment extends Fragment{
         tvParams.height = barHeight;
         tvParams.width = 300;
 
-        ATextView.setLayoutParams(AParams);
-        BTextView.setLayoutParams(BParams);
-        CTextView.setLayoutParams(CParams);
+        AView.setLayoutParams(AParams);
+        BView.setLayoutParams(BParams);
+        CView.setLayoutParams(CParams);
         textView.setLayoutParams(tvParams);
         textView.setText(barName);
     }

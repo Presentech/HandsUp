@@ -56,7 +56,7 @@
                             <ImageButton
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:id="@+id/imageButton7"
+                                android:id="@+id/backButton"
                                 android:layout_marginRight="5dp"
                                 android:background="@drawable/arrow_left" />
                         </RelativeLayout>
@@ -71,15 +71,14 @@
                                 android:layout_height="match_parent"
                                 android:textAppearance="?android:attr/textAppearanceMedium"
                                 android:text="Slide 3: Q 2"
-                                android:id="@+id/textView2"
-                                android:layout_margin="0dp"
+                                android:id="@+id/slideTitleTextView"
                                 android:gravity="center"
                                 android:textColor="@color/white"
-                                android:layout_marginTop="0dp"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp"
-                                android:layout_marginBottom="10dp"
-                                android:textStyle="bold" />
+                                android:layout_marginLeft="0dp"
+                                android:layout_marginRight="0dp"
+                                android:textStyle="bold"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentStart="true" />
                         </RelativeLayout>
 
                         <RelativeLayout
@@ -90,7 +89,7 @@
                             <ImageButton
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:id="@+id/imageButton8"
+                                android:id="@+id/nextButton"
                                 android:layout_marginRight="5dp"
                                 android:background="@drawable/arrow_right" />
                         </RelativeLayout>
@@ -109,7 +108,7 @@
                             android:layout_height="match_parent"
                             android:textAppearance="?android:attr/textAppearanceMedium"
                             android:text="This is the well set question, given for the purposes of assisting both presenter and audience."
-                            android:id="@+id/textView"
+                            android:id="@+id/slideContentTextView"
                             android:gravity="center_horizontal"
                             android:textColor="@color/white"
                             android:singleLine="false" />
@@ -142,21 +141,21 @@
                         <ImageButton
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:id="@+id/imageButton"
+                            android:id="@+id/goodButton"
                             android:layout_weight="0.33"
                             android:background="@drawable/tick_icon" />
 
                         <ImageButton
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:id="@+id/imageButton3"
+                            android:id="@+id/mehButton"
                             android:layout_weight="0.33"
                             android:background="@drawable/question_icon" />
 
                         <ImageButton
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:id="@+id/imageButton2"
+                            android:id="@+id/badButton"
                             android:layout_weight="0.33"
                             android:background="@drawable/refresh_icon" />
 
@@ -180,7 +179,7 @@
                         <ImageButton
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:id="@+id/imageButton4"
+                            android:id="@+id/aButton"
                             android:layout_weight="0.33"
                             android:background="@drawable/a_icon"
                             android:layout_marginLeft="10dp"
@@ -192,7 +191,7 @@
                         <ImageButton
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:id="@+id/imageButton5"
+                            android:id="@+id/bButton"
                             android:layout_weight="0.33"
                             android:background="@drawable/b_icon"
                             android:layout_marginLeft="10dp"
@@ -203,7 +202,7 @@
                         <ImageButton
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:id="@+id/imageButton6"
+                            android:id="@+id/cButton"
                             android:layout_weight="0.33"
                             android:background="@drawable/c_icon"
                             android:layout_marginLeft="10dp"
@@ -239,7 +238,7 @@
                 <EditText
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:id="@+id/editText"
+                    android:id="@+id/commentEditText"
                     android:layout_weight="1"
                     android:autoText="false"
                     android:inputType="text"
@@ -251,7 +250,7 @@
                 <ImageButton
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:id="@+id/imageButton10"
+                    android:id="@+id/sendButton"
                     android:layout_weight="0.2"
                     android:background="@drawable/pen_icon"
                     android:layout_margin="0dp" />

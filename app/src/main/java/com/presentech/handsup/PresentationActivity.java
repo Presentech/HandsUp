@@ -66,9 +66,13 @@ public class PresentationActivity extends AppCompatActivity {
     int screenHeight, feedbackHeight, feedbackWidth;
     public Boolean understanding, multiChoice, messaging, hideFeedback, feedbackPerSlide;
     PresentationFile presentationFile;
+    private navDrawer drawer;
+
     String mode = "PRESENTER";
     liveFeedbackFragment fbFragment;
     public SingleFeedback[] feedbackArray = new SingleFeedback[10];
+    SingleFeedback feedbackObjectRx = new SingleFeedback();
+    feedbackDatabaseHandler presentation_db;
 
     TextHandler tH = new TextHandler();
     RelativeLayout slide = null;
@@ -77,6 +81,12 @@ public class PresentationActivity extends AppCompatActivity {
     private navDrawer drawer;
 
     List<AnimatorSet> animations = new ArrayList<AnimatorSet>();
+    List<SingleQuestion> singleQuestions = new ArrayList<SingleQuestion>();
+    questionJSON questionJSON = new questionJSON();
+
+    //Connectivity requirements
+    MyApplication application;
+    Server presenterServer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +95,10 @@ public class PresentationActivity extends AppCompatActivity {
         viewFlipper = (ViewFlipper) findViewById(R.id.viewflipper);
         setTitle(R.string.presentation_container);
         Bundle b = this.getIntent().getExtras();
+
+        application = (MyApplication) getApplication();
+        presenterServer = application.getServer();
+
         //String id = b.getParcelable(SyncStateContract.Constants.CUSTOM_LISTING);
         //presentationFile = (PresentationFile) this.getIntent().getSerializableExtra("pF");
 
@@ -95,8 +109,9 @@ public class PresentationActivity extends AppCompatActivity {
         } catch (XmlPullParserException e) {
             e.printStackTrace();
         }
-
-
+        if (presentationFile.getDocumentInfo().getTitle() != null) {
+            setTitle(presentationFile.getDocumentInfo().getTitle());
+        }
         viewFlipper.setBackgroundColor(Color.parseColor("#" + presentationFile.getDefaults().getBackgroundColour()));
         viewFlipper.getParent().getParent().requestDisallowInterceptTouchEvent(true);
 
@@ -105,11 +120,19 @@ public class PresentationActivity extends AppCompatActivity {
         multiChoice = b.getBoolean(BOOLEAN_NAME3);
         hideFeedback = b.getBoolean(BOOLEAN_NAME4);
         //feedbackPerSlide = b.getBoolean(BOOLEAN_NAME5);
+        String presentationName = b.getString(SESSION_NAME);
+
+        presentation_db = new feedbackDatabaseHandler(this, presentationName);
 
         getScreenSize();
         populateSlides();
 
-        for (int i = 0; i < animations.size() ; i++) {
+        if (presenterServer.connections > 0){
+            sendSlideContent();
+        }
+
+
+        for (int i = 0; i < animations.size(); i++) {
             animations.get(i).start();
         }
 
@@ -123,6 +146,7 @@ public class PresentationActivity extends AppCompatActivity {
         }
         //setAutomaticHandler(3);
 
+        Log.d("ABCD", "Hello This is an error");
         // If presenter wants to view feedback create feedback fragment
         if (!hideFeedback){
             if (findViewById(R.id.feedbackFragmentContainer) != null){
@@ -137,9 +161,39 @@ public class PresentationActivity extends AppCompatActivity {
                 fbFragment.setFeedbackSettings(messaging, multiChoice, understanding);
                 //fbFragment.setName();
                 getSupportFragmentManager().beginTransaction().add(R.id.feedbackFragmentContainer, fbFragment).commit();
+                getSupportFragmentManager().beginTransaction().hide(fbFragment);
             }
         }
+
+
+
+        //Step 4 - Setup the listener for this object
+        presenterServer.setCustomObjectListener(new Server.onMessageListener() {
+            @Override
+            public void onObjectReady(String title) {
+                // Code to handle object ready
+            }
+
+            @Override
+            public void onDataLoaded(SingleFeedback feedbackObject) {
+                // Code to handle data loaded from network
+                // Use the data here!
+                feedbackObjectRx = feedbackObject;
+                if (feedbackObjectRx != null) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                        fbFragment.updateFeedback(feedbackObjectRx);
+                        presentation_db.addFeedbackCollumn(feedbackObjectRx);
+                        }
+                    });
+                }
+
+            }
+        });
     }
+
+
 
     private void setAutomaticHandler(final int duration, final boolean isInLoop) {
         new Handler().postDelayed(new Runnable() {
@@ -166,7 +220,7 @@ public class PresentationActivity extends AppCompatActivity {
 
     public void createTextViews(Text t) {
         String textDisplay = null;
-        if (t.getSourceFile() != null) {
+        if (t.getSourceFile()!= null){
             try {
                 InputStream inputStream = getAssets().open(t.getSourceFile());
                 textDisplay = tH.retrieveText(inputStream, t.getText());
@@ -177,29 +231,52 @@ public class PresentationActivity extends AppCompatActivity {
             textDisplay = tH.retrieveText(null, t.getText());
         }
 
-        int marginLeft = (int) (screenWidth * (t.getxStart())); //px
-        int marginTop = (int) (screenHeight * (t.getyStart())); //px
+        int marginLeft = (int) (screenWidth*(t.getxStart())); //px
+        int marginTop = (int) (screenHeight*(t.getyStart())); //px
 
         //creating a TextView to hold the parsed text
         TextView tV = new TextView(this);
         tV.setText(Html.fromHtml(textDisplay));
         if (t.getFontColour() != null) {
             Log.d("TAG font colour", t.getFontColour());
-            tV.setTextColor(Color.parseColor("#" + t.getFontColour()));
-        } else {
-            tV.setTextColor(Color.parseColor("#" + presentationFile.getDefaults().getFontColour()));
+            tV.setTextColor(Color.parseColor("#"+t.getFontColour()));
+        }else {
+            tV.setTextColor(Color.parseColor("#"+presentationFile.getDefaults().getFontColour()));
         }
         tV.setMaxWidth(screenWidth);
-        tV.setPadding(0, 0, 10, 0);
+        tV.setPadding(0,0,10,0);
         tV.setX(marginLeft);
         tV.setY(marginTop);
         tV.setTextSize(t.getFontSize());
         slide.addView(tV);
+
+        tV.setAlpha(0f);
+        ObjectAnimator appearDelay = ObjectAnimator.ofFloat(tV, "alpha", 0f, 0f);
+        ObjectAnimator appear = ObjectAnimator.ofFloat(tV, "alpha", 0f, 1f);
+        ObjectAnimator durationDelay = ObjectAnimator.ofFloat(tV, "alpha", 1f, 1f);
+        ObjectAnimator disappear = ObjectAnimator.ofFloat(tV, "alpha", 1f, 0f);
+
+        appearDelay.setDuration(t.getStartTime()); // Start Time
+        appear.setDuration(0);
+        if (t.getDuration() != -1) {
+            durationDelay.setDuration(t.getDuration()); // Duration
+            disappear.setDuration(0);
+        }
+
+        AnimatorSet anim = new AnimatorSet();
+        anim.play(appear).after(appearDelay);
+        if (t.getDuration() != -1) {
+            anim.play(durationDelay).after(appear);
+            anim.play(disappear).after(durationDelay);
+        }
+
+        animations.add(anim);
+
     }
 
     public void createImageViews(Image i) {
         Bitmap b = null;
-        if (i.getSourceFile() != null) {
+        if (i.getSourceFile() != null){
             try {
                 InputStream inputStream = getAssets().open(i.getSourceFile());
                 b = BitmapFactory.decodeStream(inputStream);
@@ -208,17 +285,40 @@ public class PresentationActivity extends AppCompatActivity {
             }
         }
 //        convert floats to pixels for image dimensions
-        int imgWidth = (int) (i.getWidth()) * screenWidth;
-        int imgHeight = (int) (i.getHeight()) * screenHeight;
+        int imgWidth = (int) (i.getWidth())*screenWidth;
+        int imgHeight = (int) (i.getHeight())*screenHeight;
         ImageView iV = new ImageView(this);
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(imgWidth, imgHeight);
         //iV.setLayoutParams(layoutParams);
         iV.setImageBitmap(b);
         slide.addView(iV);
+
+        iV.setAlpha(0f);
+        ObjectAnimator appearDelay = ObjectAnimator.ofFloat(iV, "alpha", 0f, 0f);
+        ObjectAnimator appear = ObjectAnimator.ofFloat(iV, "alpha", 0f, 1f);
+        ObjectAnimator durationDelay = ObjectAnimator.ofFloat(iV, "alpha", 1f, 1f);
+        ObjectAnimator disappear = ObjectAnimator.ofFloat(iV, "alpha", 1f, 0f);
+
+        appearDelay.setDuration(i.getStartTime()); // Start Time
+        appear.setDuration(0);
+        if (i.getDuration() != -1) {
+            durationDelay.setDuration(i.getDuration()); // Duration
+            disappear.setDuration(0);
+        }
+
+        AnimatorSet anim = new AnimatorSet();
+        anim.play(appear).after(appearDelay);
+        if (i.getDuration() != -1) {
+            anim.play(durationDelay).after(appear);
+            anim.play(disappear).after(durationDelay);
+        }
+
+        animations.add(anim);
+
     }
 
     public void createVideoViews(Video v) {
-        Uri uri = Uri.parse("android.resource://" + getPackageName() + "/"
+    Uri uri = Uri.parse("android.resource://" + getPackageName() + "/"
                 + getResources().getIdentifier(v.getSourceFile(), "raw", getPackageName()));
         VideoView vV = new VideoView(this);
         MediaController mediaController = new
@@ -230,9 +330,34 @@ public class PresentationActivity extends AppCompatActivity {
         vV.setVideoURI(uri);
         vV.setX(v.getxStart() * screenWidth);
         vV.setY(v.getyStart() * screenHeight);
+        vV.setLayoutParams(new FrameLayout.LayoutParams(screenWidth,screenHeight));
         //vV.layout((int) vV.getX(), (int) vV.getY(),(int) vV.getX() + 800, (int) vV.getY() + 500);
         vV.start();
         slide.addView(vV);
+
+        vV.setAlpha(0f);
+        ObjectAnimator appearDelay = ObjectAnimator.ofFloat(vV, "alpha", 0f, 0f);
+        ObjectAnimator appear = ObjectAnimator.ofFloat(vV, "alpha", 0f, 1f);
+        ObjectAnimator durationDelay = ObjectAnimator.ofFloat(vV, "alpha", 1f, 1f);
+        ObjectAnimator disappear = ObjectAnimator.ofFloat(vV, "alpha", 1f, 0f);
+
+        appearDelay.setDuration(v.getStartTime()); // Start Time
+        appear.setDuration(0);
+        if (v.getDuration() != -1) {
+            durationDelay.setDuration(v.getDuration()); // Duration
+            disappear.setDuration(0);
+        }
+
+        AnimatorSet anim = new AnimatorSet();
+        anim.play(appear).after(appearDelay);
+        if (v.getDuration() != -1) {
+            anim.play(durationDelay).after(appear);
+            anim.play(disappear).after(durationDelay);
+        }
+
+        animations.add(anim);
+
+
     }
 
     public void createAudioPlayer(Audio a) throws IOException {
@@ -254,9 +379,9 @@ public class PresentationActivity extends AppCompatActivity {
 
     public void addGraphics(Shape s, Polygon p) {
 
-        GraphicsHandler pH = new GraphicsHandler(this, p, s, screenWidth, screenHeight, presentationFile.getDefaults());
-        pH.draw(canvas);
-        slide.addView(pH);
+            GraphicsHandler pH = new GraphicsHandler(this, p, s, screenWidth, screenHeight, presentationFile.getDefaults());
+            pH.draw(canvas);
+            slide.addView(pH);
 
 
             if (s != null) {
@@ -281,7 +406,30 @@ public class PresentationActivity extends AppCompatActivity {
                 }
 
                 animations.add(anim);
+            } else {
+                pH.setAlpha(0f);
+                ObjectAnimator appearDelay = ObjectAnimator.ofFloat(pH, "alpha", 0f, 0f);
+                ObjectAnimator appear = ObjectAnimator.ofFloat(pH, "alpha", 0f, 1f);
+                ObjectAnimator durationDelay = ObjectAnimator.ofFloat(pH, "alpha", 1f, 1f);
+                ObjectAnimator disappear = ObjectAnimator.ofFloat(pH, "alpha", 1f, 0f);
+
+                appearDelay.setDuration(p.getStartTime()); // Start Time
+                appear.setDuration(0);
+                if (p.getDuration() != -1){
+                    durationDelay.setDuration(p.getDuration()); // Duration
+                    disappear.setDuration(0);
+                }
+
+                AnimatorSet anim = new AnimatorSet();
+                anim.play(appear).after(appearDelay);
+                if (p.getDuration() != -1) {
+                    anim.play(durationDelay).after(appear);
+                    anim.play(disappear).after(durationDelay);
+                }
+
+                animations.add(anim);
             }
+
 
 
 
@@ -301,7 +449,7 @@ public class PresentationActivity extends AppCompatActivity {
             int tempy = size.y;
             double screenWidthDouble = tempx*0.7;
             double screenHeightDouble = tempy-360;
-            screenWidth = (int) screenWidthDouble;
+            screenWidth = size.x;
             screenHeight = (int) screenHeightDouble;
             feedbackHeight = tempy;
             feedbackWidth = tempx;
@@ -324,6 +472,10 @@ public class PresentationActivity extends AppCompatActivity {
             case R.id.action_settings:
                 Intent settings_Intent = new Intent(this, SettingsActivity.class);
                 startActivity(settings_Intent);
+                return true;
+            case R.id.action_feedbackStored:
+                Intent feedback_Intent = new Intent(this, FeedbackActivity.class);
+                startActivity(feedback_Intent);
                 return true;
             case R.id.action_presenterHelp:
                 Intent tutorial_Intent = new Intent(this, PresentationModeTutorial.class);
@@ -348,14 +500,14 @@ public class PresentationActivity extends AppCompatActivity {
         return true;
     }
 
-    public void populateSlides() {
+    public void populateSlides(){
         DocumentInfo docInfo = presentationFile.getDocumentInfo();
         List<Slide> slides = presentationFile.getSlides();
         int numberOfSlides = slides.size();
         Shape shape = null;
         Polygon poly = null;
 
-        for (int i = 0; i < numberOfSlides; i++) {
+        for (int i = 0; i< numberOfSlides; i++) {
             int numberOfTexts = slides.get(i).getText().size();
             int numberOfShapes = slides.get(i).getShape().size();
             int numberOfImages = slides.get(i).getImage().size();
@@ -363,6 +515,7 @@ public class PresentationActivity extends AppCompatActivity {
             int numberOfPolygons = slides.get(i).getPolygon().size();
             int numberOfInteractables = slides.get(i).getInteractable().size();
             int numberOfVideos = slides.get(i).getVideo().size();
+            int numberOfQuestions = slides.get(i).getQuestion().size();
 
             slide = new RelativeLayout(this);
             RelativeLayout.LayoutParams llp = new RelativeLayout.LayoutParams(
@@ -370,44 +523,44 @@ public class PresentationActivity extends AppCompatActivity {
                     RelativeLayout.LayoutParams.MATCH_PARENT);
             slide.setLayoutParams(llp);
 
-            if (numberOfTexts > 0) {
-                for (int j = 0; j < numberOfTexts; j++) {
+            if (numberOfTexts > 0){
+                for (int j = 0; j< numberOfTexts; j++){
                     Text text = slides.get(i).getText().get(j);
                     createTextViews(text);
                 }
             }
 
 
-            if (numberOfShapes > 0) {
-                for (int j = 0; j < numberOfShapes; j++) {
+            if (numberOfShapes > 0){
+                for (int j = 0; j< numberOfShapes; j++){
                     shape = slides.get(i).getShape().get(j);
                     addGraphics(shape, null);
                 }
             }
 
-            if (numberOfPolygons > 0) {
-                for (int j = 0; j < numberOfPolygons; j++) {
+            if (numberOfPolygons > 0){
+                for (int j = 0; j< numberOfPolygons; j++){
                     poly = slides.get(i).getPolygon().get(j);
                     addGraphics(null, poly);
                 }
             }
 
-            if (numberOfImages > 0) {
-                for (int j = 0; j < numberOfImages; j++) {
+            if (numberOfImages > 0){
+                for (int j = 0; j< numberOfImages; j++){
                     Image image = slides.get(i).getImage().get(j);
                     createImageViews(image);
                 }
             }
 
-            if (numberOfVideos > 0) {
-                for (int j = 0; j < numberOfVideos; j++) {
+            if (numberOfVideos > 0){
+                for (int j = 0; j< numberOfVideos; j++){
                     Video video = slides.get(i).getVideo().get(j);
                     createVideoViews(video);
                 }
             }
 
-            if (numberOfAudios > 0) {
-                for (int j = 0; j < numberOfAudios; j++) {
+            if (numberOfAudios > 0){
+                for (int j = 0; j< numberOfAudios; j++){
                     Audio audio = slides.get(i).getAudio().get(j);
                     try {
                         createAudioPlayer(audio);
@@ -417,8 +570,8 @@ public class PresentationActivity extends AppCompatActivity {
                 }
             }
 
-            if (numberOfInteractables > 0) {
-                for (int j = 0; j < numberOfInteractables; j++) {
+            if (numberOfInteractables > 0){
+                for (int j = 0; j< numberOfInteractables; j++){
                     final Interactable interactable = slides.get(i).getInteractable().get(j);
                     Button button = new Button(this);
                     button.setBackgroundColor(Color.TRANSPARENT);
@@ -428,90 +581,120 @@ public class PresentationActivity extends AppCompatActivity {
                             viewFlipper.setDisplayedChild(interactable.getTargetSlideID());
                         }
                     });
-                    if (interactable.getImage() != null) {
+                    if (interactable.getImage() != null){
                         Image intImage = interactable.getImage();
                         createImageViews(intImage);
-                        button.setY(intImage.getyStart() * screenHeight);
+                        button.setY(intImage.getyStart()*screenHeight);
                         button.setX(intImage.getxStart() * screenWidth);
                         button.setWidth((int) (intImage.getWidth() * screenWidth));
-                        button.setHeight((int) (intImage.getHeight() * screenHeight));
+                        button.setHeight((int) (intImage.getHeight()*screenHeight));
                         slide.addView(button);
                     }
                     if (interactable.getShape() != null) {
                         Shape intShape = interactable.getShape();
                         addGraphics(intShape, null);
-                        button.setY(intShape.getyStart() * screenHeight);
-                        button.setX(intShape.getxStart() * screenWidth);
+                        button.setY(intShape.getyStart()*screenHeight);
+                        button.setX(intShape.getxStart()*screenWidth);
                         button.setWidth((int) (intShape.getWidth() * screenWidth));
-                        button.setHeight((int) (intShape.getHeight() * screenHeight));
+                        button.setHeight((int) (intShape.getHeight()*screenHeight));
                         slide.addView(button);
                     }
                     //add polygon method too
                 }
             }
 
-
+            if (numberOfQuestions > 0) {
+                for (int j = 0; j< numberOfQuestions; j++){
+                    Question question = slides.get(i).getQuestion().get(j);
+                    SingleQuestion singleQuestion = new SingleQuestion(slides.get(i).getSlideID(), j+1, true, false, question.getQuestion() );
+                    singleQuestions.add(singleQuestion);
+                    }
+            }
             viewFlipper.addView(slide);
+        }
+
+
+        }
+
+    public void sendSlideContent(){
+        if (singleQuestions.size() > 0){
+           String sendThis = questionJSON.questionCreateJSON(singleQuestions);
+            Log.d("PresentationActivity", "Send slide content now");
+            presenterServer.onSend(sendThis);
+
         }
     }
 
-    public void getPresentation() throws IOException, XmlPullParserException {
+    public void getPresentation() throws IOException, XmlPullParserException{
         XMLParser parser = new XMLParser();
         InputStream in = null;
-        in = getAssets().open("testPoly.xml");
+        in = getAssets().open("salespitch.xml");
         presentationFile = parser.getPresentation(in);
     }
 
-
     public boolean onTouchEvent(MotionEvent touchevent) {
 
-        switch (touchevent.getAction()) {
-            case MotionEvent.ACTION_DOWN: {
+        switch (touchevent.getAction())
+        {
+            case MotionEvent.ACTION_DOWN:
+            {
                 lastX = touchevent.getX();
                 break;
             }
 
-            case MotionEvent.ACTION_UP: {
+            case MotionEvent.ACTION_UP:
+            {
                 float currentX = touchevent.getX();
 
-                if (lastX < currentX) {
-                    if (viewFlipper.getDisplayedChild() == 0)
+                if (lastX < currentX)
+                {
+                    if (viewFlipper.getDisplayedChild()==0)
                         break;
 
                     viewFlipper.setInAnimation(this, R.anim.slide_in_from_left);
                     viewFlipper.setOutAnimation(this, R.anim.slide_out_to_right);
 //                    vf.showNext();
                     viewFlipper.showPrevious();
+
                     for (int i = 0; i < animations.size() ; i++) {
                         animations.get(i).start();
                     }
                 }
 
-                if (lastX > currentX) {
+                if (lastX > currentX)
+                {
 //                    if (vf.getDisplayedChild()==1)
-                    if (viewFlipper.getDisplayedChild() == viewFlipper.getChildCount() - 1)
+                    if (viewFlipper.getDisplayedChild()==viewFlipper.getChildCount()-1)
                         break;
 
                     viewFlipper.setInAnimation(this, R.anim.slide_in_from_right);
                     viewFlipper.setOutAnimation(this, R.anim.slide_out_to_left);
 //                    vf.showPrevious();
                     viewFlipper.showNext();
+
                     for (int i = 0; i < animations.size() ; i++) {
                         animations.get(i).start();
                     }
                 }
+
                 break;
             }
 
-            case MotionEvent.ACTION_MOVE: {
+            case MotionEvent.ACTION_MOVE:
+            {
                 float tempX = touchevent.getX();
                 int scrollX = (int) (tempX - lastX);
 
                 //vf.scrollBy(scrollX, 0);
+
                 break;
             }
+
         }
+
         return false;
+
     }
+
 }
 

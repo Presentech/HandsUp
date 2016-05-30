@@ -83,7 +83,7 @@
                     android:onClick="textView2Expand"/>
                 ​
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/slideTitleTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
@@ -103,9 +103,9 @@
                     android:id="@+id/connectButton2"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_alignTop="@+id/textView2"
-                    android:layout_alignEnd="@+id/textView2"
-                    android:layout_alignBottom="@+id/textView2"
+                    android:layout_alignTop="@+id/slideTitleTextView"
+                    android:layout_alignEnd="@+id/slideTitleTextView"
+                    android:layout_alignBottom="@+id/slideTitleTextView"
                     android:clickable="true"
                     android:onClick="feedbackActivity"/>
                 ​
@@ -114,7 +114,7 @@
                     style="@style/audienceSessionSelectButton"
                     android:text="Physical Modelling"
                     android:layout_marginTop="10dp"
-                    android:layout_below="@+id/textView2"
+                    android:layout_below="@+id/slideTitleTextView"
                     android:drawableStart="@mipmap/wifi_icon1"
                     android:drawableRight="@mipmap/arrowright"
                     android:clickable="true"

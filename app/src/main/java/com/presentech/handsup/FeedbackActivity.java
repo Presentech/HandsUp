@@ -1,5 +1,6 @@
 package com.presentech.handsup;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -8,16 +9,19 @@ import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.wifi.WifiManager;
 import android.preference.PreferenceActivity;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewDebug;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -34,13 +38,17 @@ import com.loopj.android.http.RequestParams;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 
 
 /**
  *Created by Edward Prentice on 9/03/2016
+ *Modified by Noor Mansure on 18/05/2016:
+ * Adding functionality to the activity, including connectivity
  */
 //public class FeedbackActivity extends AppCompatActivity  implements View.OnClickListener {
 public class FeedbackActivity extends AppCompatActivity   {
@@ -48,35 +56,65 @@ public class FeedbackActivity extends AppCompatActivity   {
     String mode = "AUDIENCE";
     private Bitmap background, arrow_left, arrow_right, tick, question, refresh, returnA, returnB, returnC;
     private navDrawer drawer;
+
+    //Text box for sending comments/questions
     EditText messageInput;
+
+    //Text views for slide title and content
+    TextView slideTitleTextView;
+    TextView slideContentTextView;
+
+    //Buttons
+    ImageButton nextButton;
+    ImageButton backButton;
+    ImageButton aButton;
+    ImageButton bButton;
+    ImageButton cButton;
+    ImageButton goodButton;
+    ImageButton mehButton;
+    ImageButton badButton;
     ImageButton sendButton;
+
+    int count = 0;
+
+    //Connectivity requirements
+    MyApplication application;
+    Client client;
+
+    //Creating JSON objects for sending
+    FeedbackJSON feedbackJSON = new FeedbackJSON();
+    questionJSON questionJSON = new questionJSON();
+    List<SingleQuestion> singleQuestionList = new ArrayList<>();
 
     @Override
     protected void onDestroy(){
         super.onDestroy();
         background.recycle();
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feedback);
 
-        ///////////////////////////////////////////////////////////////EDSADDITION
-        // get our input field by its ID
-        messageInput = (EditText) findViewById(R.id.editText);
-        // get our button by its ID
-        sendButton = (ImageButton) findViewById(R.id.imageButton10);
+        messageInput = (EditText) findViewById(R.id.commentEditText);
+        nextButton = (ImageButton)findViewById(R.id.nextButton);
+        backButton = (ImageButton) findViewById(R.id.backButton);
+        aButton = (ImageButton) findViewById(R.id.aButton);
+        bButton = (ImageButton) findViewById(R.id.bButton);
+        cButton = (ImageButton) findViewById(R.id.cButton);
+        goodButton = (ImageButton) findViewById(R.id.goodButton);
+        mehButton = (ImageButton) findViewById(R.id.mehButton);
+        badButton = (ImageButton) findViewById(R.id.badButton);
+        sendButton = (ImageButton) findViewById(R.id.sendButton);
 
-        // set its click listener
-       // sendButton.setOnClickListener(this);
+        slideContentTextView = (TextView)findViewById(R.id.slideContentTextView);
+        slideTitleTextView = (TextView) findViewById(R.id.slideTitleTextView);
 
-
-
-
-
-
-
-        /////////////////////////////////////////////////
+        //add button click listeners to all buttons
+        addListenerOnButton();
+        application = (MyApplication)getApplication();
+        client = application.getClient();
 
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
@@ -88,8 +126,6 @@ public class FeedbackActivity extends AppCompatActivity   {
         background = decodeSampledBitmapFromResource(getResources(), R.drawable.background, width, height);
         ImageView backgroundView = (ImageView) findViewById(R.id.feedbackActivityBackground);
 
-       // backgroundView.setImageBitmap(background);
-
         //NAVIGATION DRAWER
         //Create new presenter drawer object
         drawer = new navDrawer();
@@ -99,65 +135,124 @@ public class FeedbackActivity extends AppCompatActivity   {
         drawer.mDrawerList = (ListView) findViewById(R.id.hostingWizard_leftDrawer);
         drawer.createDrawer(FeedbackActivity.this, mode);
 
-        //I think Action Bar things HAVE to be done inside the activity
         //Enable drawer display button in Action Bar
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-
     }
 
-//    @Override
-//    public void onClick(View v) {
-////        postMessage();
-//    }
+    public void addListenerOnButton() {
+        //show the next slide content
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                Log.d("FeedbackActivity", client.rxString.toString());
+                Log.d("FeedbackActivity", client.singleQuestionList.get(0).getQuestionText());
+                singleQuestionList = client.singleQuestionList;
+                //Log.d("FeedbackActivity", Integer.toString(singleQuestionList.size()));
+                slideContentTextView.setText(singleQuestionList.get(count).getQuestionText());
+                String title = ("Slide" + singleQuestionList.get(count).getSLIDE() + " "+ "Q" + singleQuestionList.get(count).getQUESTION());
+                slideTitleTextView.setText(title);
+                count++;
+                if (count == singleQuestionList.size()){
+                    count = 0;
+                };
 
-//
-//    private void postMessage() {
-//
-//        String text = messageInput.getText().toString();
-//
-//        // return if the text is blank
-//        if (text.equals("")) {
-//            return;
-//        }
-//
-//
-//        RequestParams params = new RequestParams();
-//
-//        // set our JSON object
-//        params.put("text", text);
-//
-//        // create our HTTP client
-//        AsyncHttpClient client = new AsyncHttpClient();
-//
-//        client.post(MESSAGES_ENDPOINT, params, new JsonHttpResponseHandler() {
-//
-//            @Override
-//            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-//                runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        messageInput.setText("");
-//                    }
-//                });
-//            }
-//
-//            @Override
-//            public void onFailure(int statusCode, PreferenceActivity.Header[] headers, String responseString, Throwable throwable) {
-//                Toast.makeText(
-//                        getApplicationContext(),
-//                        "Something went wrong :(",
-//                        Toast.LENGTH_LONG
-//                ).show();
-//            }
-//        });
-//
-//
-//
-//    }
+            }
+        });
+        //show the previous slide content
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
 
+            }
+        });
+        //set A as the answer to the question
+        aButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                SingleFeedback singleFeedback = new SingleFeedback();
+                singleFeedback.setUUID("" + getIpAddress());
+                singleFeedback.setABC(1);
+                String sendThis = feedbackJSON.FeedbackJSONGenerate(singleFeedback);
+                client.onSend(sendThis);
+            }
+        });
+        //set B as the answer to the question
+        bButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                SingleFeedback singleFeedback = new SingleFeedback();
+                singleFeedback.setUUID("" + getIpAddress());
+                singleFeedback.setABC(2);
+                String sendThis = feedbackJSON.FeedbackJSONGenerate(singleFeedback);
+                client.onSend(sendThis);
+            }
+        });
+        //set C as the answer to the question
+        cButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                SingleFeedback singleFeedback = new SingleFeedback();
+                singleFeedback.setUUID("" + getIpAddress());
+                singleFeedback.setABC(3);
+                String sendThis = feedbackJSON.FeedbackJSONGenerate(singleFeedback);
+                client.onSend(sendThis);;
+            }
+        });
+        //set feedback to good
+        goodButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                SingleFeedback singleFeedback = new SingleFeedback();
+                singleFeedback.setUUID("" + getIpAddress());
+                singleFeedback.setGOOD_MEH_BAD(1);
+                String sendThis = feedbackJSON.FeedbackJSONGenerate(singleFeedback);
+                client.onSend(sendThis);
+            }
+        });
+        //set feedback as meh
+        mehButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                SingleFeedback singleFeedback = new SingleFeedback();
+                singleFeedback.setUUID("" + getIpAddress());
+                singleFeedback.setGOOD_MEH_BAD(2);
+                String sendThis = feedbackJSON.FeedbackJSONGenerate(singleFeedback);
+                client.onSend(sendThis);
+            }
+        });
+        //set feedback as bad
+        badButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                SingleFeedback singleFeedback = new SingleFeedback();
+                singleFeedback.setUUID("" + getIpAddress());
+                singleFeedback.setGOOD_MEH_BAD(3);
+                String sendThis = feedbackJSON.FeedbackJSONGenerate(singleFeedback);
+                client.onSend(sendThis);
+            }
+        });
+        //send a comment or question
+        sendButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                if (messageInput.getText().toString().length() < 300) {
+                    SingleFeedback singleFeedback = new SingleFeedback();
+                    singleFeedback.setUUID("" + getIpAddress());
+                    singleFeedback.setTEXT(messageInput.getText().toString());
+                    String sendThis = feedbackJSON.FeedbackJSONGenerate(singleFeedback);
+                    client.onSend(sendThis);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Message too long. Over 300 character limit", Toast.LENGTH_LONG);
+                }
+
+            }
+
+        });
+    }
     public void changeViewWidths(int width){
 
         double columnWidthDouble = width*0.8;
@@ -248,6 +343,10 @@ public class FeedbackActivity extends AppCompatActivity   {
     }
 
 
+    String getIpAddress() {
+        WifiManager wm = (WifiManager) getSystemService(WIFI_SERVICE);
+        return Integer.toHexString(wm.getConnectionInfo().getIpAddress());
+    }
 
 
 

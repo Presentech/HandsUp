@@ -26,7 +26,7 @@
         </interactable>
         <text duration="1" ystart="0.55" starttime="3" xstart="0.55">Click here to jump to <i>video</i> ?</text>
         <polygon starttime="0" duration="-1" fillColour="000000" lineColour="B4A8F2" sourceFile="diamond.csv"></polygon>
-        <question> Are we going to fail Sweng? </question>
+        <question>Are we going to fail Sweng?</question>
     </slide>
     <slide slideID="1">
         <video ystart="0.2" loop="true" xstart="0.3" sourceFile="vid"
@@ -36,13 +36,14 @@
         <text duration="-1" ystart="0.1" starttime="0" xstart="0.3" fontsize="25">
             <i>Click waveform to jump to audio clip.</i>
         </text>
+        <question>help me Alex?</question>
         <interactable targetSlide="3">
             <image width="0.6" duration="-1" ystart="0.2" sourceFile="audio.png"
                 starttime="0" xstart="0.2" height="0.6" />
 
         </interactable>
         <interactable targetSlide="4">
-            <polygon duration="-1" starttime="0" sourceFile="carrot.csv" />
+            <polygon duration="-1" starttime="0" sourceFile="diamond.csv" />
         </interactable>
     </slide>
     <slide slideID="3" duration="8" nextSlide="-1">
@@ -67,8 +68,8 @@
                 colour1="00FF00" />
         </shape>
         <polygon starttime="6" duration="300" lineColour="FFFFFE" fillColour="1C57A8"
-            sourceFile="carrot.csv"/>
-        <polygon starttime="6" duration="300" lineColour="FFFFFE" sourceFile="carrot.csv">
+            sourceFile="diamond.csv"/>
+        <polygon starttime="6" duration="300" lineColour="FFFFFE" sourceFile="diamond.csv">
             <shading x2="0.70" x1="0.50" y2="0.99" y1="0.85" colour2="ABCDEF"
                 colour1="EEEFFF" />
         </polygon>

@@ -164,4 +164,6 @@
     <string name="presentation_container">Presentation</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_audience_connect">AudienceConnect</string>
+    <string name="title_activity_testing_connections">testingConnections</string>
 </resources>

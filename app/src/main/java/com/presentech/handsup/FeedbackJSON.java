@@ -10,9 +10,12 @@ import org.json.JSONObject;
 /**
  * Created by epren on 13/05/2016.
  */
+
+// "{"theTeam":[{"teamId":"1","status":"pending"},{"teamId":"2","status":"member"},{"teamId":"3","status":"member"},{"teamId":"4","status":"pending"}]}"
+
 public  class FeedbackJSON {
 
-
+//Construct this in the Audience FeedbackActivity to send over to the Presenter side
 public static String FeedbackJSONGenerate(SingleFeedback feedback){
     JSONObject obj = new JSONObject();
     try {
@@ -29,7 +32,7 @@ public static String FeedbackJSONGenerate(SingleFeedback feedback){
     }
     return obj.toString();
 }
-
+//Use this to regenerate the feedback object on the Pesenter side for storing and live feedback
   public static SingleFeedback FeedbackJSONParse(String jsonFeedback) {
       JSONObject obj = new JSONObject();
 
@@ -58,8 +61,6 @@ catch (JSONException e) {feedbackJSONParse.setUUID(null);}
       catch (JSONException e) {feedbackJSONParse.setTIME_RECEIVED(-1);}
       try {feedbackJSONParse.setTEXT(obj.getString("TEXT"));}
       catch (JSONException e) {feedbackJSONParse.setTEXT(null);}
-
-
 
       return  feedbackJSONParse;
     }
