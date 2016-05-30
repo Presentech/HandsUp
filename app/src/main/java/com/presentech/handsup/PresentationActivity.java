@@ -26,6 +26,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.MediaController;
@@ -277,8 +278,10 @@ public class PresentationActivity extends AppCompatActivity {
         vV.setVideoURI(uri);
         vV.setX(v.getxStart() * screenWidth);
         vV.setY(v.getyStart() * screenHeight);
+        vV.setLayoutParams(new FrameLayout.LayoutParams(screenWidth,screenHeight));
         //vV.layout((int) vV.getX(), (int) vV.getY(),(int) vV.getX() + 800, (int) vV.getY() + 500);
         vV.start();
+
         slide.addView(vV);
     }
 
