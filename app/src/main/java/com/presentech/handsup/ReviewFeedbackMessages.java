@@ -3,9 +3,11 @@ package com.presentech.handsup;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -18,7 +20,7 @@ import java.util.List;
 
 public class ReviewFeedbackMessages extends ListActivity  {
 
-    ArrayList<String> messageList = new ArrayList<String>();
+    ArrayList<String> messageList = new ArrayList<>();
     ArrayAdapter<String> adapter;
     int j = 0;                      //current slide displayed
 
@@ -26,6 +28,7 @@ public class ReviewFeedbackMessages extends ListActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review_feedback_messages);
+
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1 ,messageList);
         setListAdapter(adapter);
@@ -59,7 +62,7 @@ public class ReviewFeedbackMessages extends ListActivity  {
             if ((int)feedbackArray[i].getSLIDE() == j + 1) {
                 if (feedbackArray[i].getTEXT() != null) {
                     String convertedTime = timeConvert(feedbackArray[i].getTIME_RECEIVED());
-                    messageList.add(feedbackArray[i].getTEXT()+ " " + convertedTime);
+                    messageList.add(feedbackArray[i].getTEXT()+ "\n" + convertedTime);
                     adapter.notifyDataSetChanged();
                 }
             }
@@ -78,8 +81,9 @@ public class ReviewFeedbackMessages extends ListActivity  {
         else
             findViewById(R.id.slideup).setVisibility(View.VISIBLE);
 
-        setTitle("Messages for Slide Number: "+j);
+        TextView messageTitle = (TextView) findViewById(R.id.messageTitle);
 
+        messageTitle.setText("Messages From Slide Number: " + (j+1));
 
     }
 

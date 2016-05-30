@@ -46,10 +46,10 @@ public class ReviewFeedbackTest {
     }
 
 
-    /*@After
+    @After
     public void tearDown() throws Exception {
         database.close();
-    }*/
+    }
 
 
     @Test
@@ -87,7 +87,7 @@ public class ReviewFeedbackTest {
         int question = 1;
         int abc = 2;
         int gmb = 1;
-        String testText = "The Bartered Bride is a comic opera in three acts by the Czech composer Bedřich Smetana, first performed at the Provisional Theatre, Prague, on 30 May 1866. Set in a country village with realistic characters, it tells the story of how true love prevails over the combined efforts of ambitious parents and a scheming marriage broker. Originally presented in a two-act format with spoken dialogue, the opera was not immediately successful, but it gained rapid popularity after numerous revisions. Smetana's musical treatment made considerable use of traditional Bohemian dance forms such as the polka and furiant, creating music which was accurately folk-like, and considered to be quintessentially Czech in spirit. After a performance in Vienna in 1892 the opera achieved international recognition. It reached Chicago in 1893, London in 1895 and New York in 1909, becoming the first, and for many years the only, Czech opera in the general repertory. Many of these early international performances were in German, under the title Die verkaufte BraThe Bartered Bride is a comic opera in three acts by the Czech composer Bedřich Smetana, first performed at the Provisional Theatre, Prague, on 30 May 1866. Set in a country village with realistic characters, it tells the story of how true love prevails over the combined efforts of ambitious parents and a scheming marriage broker. Originally presented in a two-act format with spoken dialogue, the opera was not immediately successful, but it gained rapid popularity after numerous revisions. Smetana's musical treatment made considerable use of traditional Bohemian dance forms such as the polka and furiant, creating music which was accurately folk-like, and considered to be quintessentially Czech in spirit. After a performance in Vienna in 1892 the opera achieved international recognition. It reached Chicago in 1893, London in 1895 and New York in 1909, becoming the first, and for many years the only, Czech opera in the general repertory. Many of these early international performances were in German, under the title Die verkaufte Bra";
+        String testText = "eeeThe Bartered Bride is a comic opera in three acts by the Czech composer Bedřich Smetana, first performed at the Provisional Theatre, Prague, on 30 May 1866. Set in a country village with realistic characters, it tells the story of how true love prevails over the combined efforts of ambitious parents and a scheming marriage broker. Originally presented in a two-act format with spoken dialogue, the opera was not immediately successful, but it gained rapid popularity after numerous revisions. Smetana's musical treatment made considerable use of traditional Bohemian dance forms such as the polka and furiant, creating music which was accurately folk-like, and considered to be quintessentially Czech in spirit. After a performance in Vienna in 1892 the opera achieved international recognition. It reached Chicago in 1893, London in 1895 and New York in 1909, becoming the first, and for many years the only, Czech opera in the general repertory. Many of these early international performances were in German, under the title Die verkaufte BraThe Bartered Bride is a comic opera in three acts by the Czech composer Bedřich Smetana, first performed at the Provisional Theatre, Prague, on 30 May 1866. Set in a country village with realistic characters, it tells the story of how true love prevails over the combined efforts of ambitious parents and a scheming marriage broker. Originally presented in a two-act format with spoken dialogue, the opera was not immediately successful, but it gained rapid popularity after numerous revisions. Smetana's musical treatment made considerable use of traditional Bohemian dance forms such as the polka and furiant, creating music which was accurately folk-like, and considered to be quintessentially Czech in spirit. After a performance in Vienna in 1892 the opera achieved international recognition. It reached Chicago in 1893, London in 1895 and New York in 1909, becoming the first, and for many years the only, Czech opera in the general repertory. Many of these early international performances were in German, under the title Die verkaufte Bra";
         Long exampleTime = 20L;
         inputFeedback1.setUUID(uuid1.toString());
         inputFeedback1.setSLIDE(slide);
@@ -142,7 +142,7 @@ public class ReviewFeedbackTest {
         int iteration = -1;
         int question = 1;
         int abc = 1;
-        int gmb = 1;
+        int gmb = 3;
         String testText = "ddddd";
         Long exampleTime = 1L;
         inputFeedback3.setUUID(uuid3.toString());
@@ -192,19 +192,4 @@ public class ReviewFeedbackTest {
         inputFeedback3.setTEXT(testText);
         inputFeedback3.setTIME_RECEIVED(exampleTime);
     }
-
-
-
-    //public void testAllFieldsEqual(SingleFeedback feedbackin, SingleFeedback inputFeedback) {
-        //assertEquals(feedbackin.getUUID(), inputFeedback.getUUID());
-        //assertTrue(feedbackin.getSLIDE() == inputFeedback.getSLIDE());/** Slide number, float is smaller than double and can hold branches to sufficient accuracy (e.g. slide 1.51 as 1.51)*/
-        //assertTrue(feedbackin.getSLIDE_ITERATION() == inputFeedback.getSLIDE_ITERATION());/** Slide iteration - for when a slide is visited multiple times.*/
-        //assertTrue(feedbackin.getQUESTION() == inputFeedback.getQUESTION());/** In case we have multiple sections on a slide. Might rip this out, but design is for worst-case.*/
-        //assertTrue(feedbackin.getABC() == inputFeedback.getABC()); /** -1 not sent, 1 a, 2 - b, 3 -c*/
-        //assertTrue(feedbackin.getGOOD_MEH_BAD() == inputFeedback.getGOOD_MEH_BAD()); /** -1 not sent, 1 good, 2 - meh, 3 - bad*/
-        //assertEquals(feedbackin.getTEXT(), inputFeedback.getTEXT()); /** If anything but null the text should be interprted - acts as flag for text input.*/
-        //assertTrue(feedbackin.getTIME_RECEIVED() == inputFeedback.getTIME_RECEIVED());
-   // }
-
-
 }

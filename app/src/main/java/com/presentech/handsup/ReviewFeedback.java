@@ -4,6 +4,7 @@ package com.presentech.handsup;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.androidplot.pie.PieChart;
@@ -47,39 +48,26 @@ public class ReviewFeedback extends Activity {
             }
         }
 
-        int[] answerA = new int[qNo];           //Initialise array for A answers for questions
-        int[] answerB = new int[qNo];           //Initialise array for B answers for questions
-        int[] answerC = new int[qNo];           //Initialise array for C answers for questions
-
         int a;
         int b;
         int c;
 
-        /*iterate through questions*/
-        for (int i = 0; i < qNo; i++) {
             a = b = c = 0;
             /*iterate through objects to find whether value is A, B or C*/
             for (int k = 0; k < feedbackArray.length; k++) {
-                if (feedbackArray[k].getQUESTION() == i + 1) {
+                if (feedbackArray[k].getQUESTION() == j + 1) {
                     if (feedbackArray[k].getABC() == 1) {
                         a++;
-                        answerA[i] = a;
-                        break;
                     }
                     if (feedbackArray[k].getABC() == 2) {
                         b++;
-                        answerB[i] = b;
-                        break;
                     }
                     if (feedbackArray[k].getABC() == 3) {
                         c++;
-                        answerC[i] = c;
-                        break;
                     }
 
                 }
             }
-        }
 
         questionABC = (PieChart) findViewById(R.id.plot); //get pie plot
 
@@ -104,16 +92,16 @@ public class ReviewFeedback extends Activity {
 
 
         //add segments
-        if (answerA[j] > 0) {
-            Segment segA = new Segment("A = "+answerA[j], answerA[j]);
+        if (a > 0) {
+            Segment segA = new Segment("A = "+ a,a);
             questionABC.addSeries(segA, segmentFormat);
         }
-        if (answerB[j] > 0) {
-            Segment segB = new Segment("B = " +answerB[j], answerB[j]);
+        if (b > 0) {
+            Segment segB = new Segment("B = " +b,b);
             questionABC.addSeries(segB, segmentFormat);
         }
-        if (answerC[j] > 0) {
-            Segment segC = new Segment("C = " + answerC[j], answerC[j]);
+        if (c > 0) {
+            Segment segC = new Segment("C = " + c,c);
             questionABC.addSeries(segC, segmentFormat);
         }
 

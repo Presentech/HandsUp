@@ -4,6 +4,7 @@ package com.presentech.handsup;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.androidplot.pie.PieChart;
@@ -18,8 +19,6 @@ public class ReviewFeedbackGMB extends Activity {
     public double slide;         //Number of slides
     int j = 0;              //currently displayed slide responses
     public PieChart slideGMB;
-    //feedbackDatabaseHandler database;
-    List<SingleFeedback> singleFeedbackList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,39 +52,26 @@ public class ReviewFeedbackGMB extends Activity {
 
         int sNo = (int) slide;
 
-        int[] answerA = new int[sNo];           /*Initialise array for A answers for questions*/
-        int[] answerB = new int[sNo];           /*Initialise array for B answers for questions*/
-        int[] answerC = new int[sNo];           /*Initialise array for C answers for questions*/
-
         int a = 0;
         int b = 0;
         int c = 0;
 
-        /*iterate through slides*/
-        for (int i = 0; i < sNo; i++) {
             a = b = c = 0;
             /*iterate through objects to find whether value is A, B or C*/
             for (int k = 0; k < feedbackArray.length; k++) {
-                if ((int) feedbackArray[k].getSLIDE() == i + 1) {
+                if ((int) feedbackArray[k].getSLIDE() == j + 1) {
                     if (feedbackArray[k].getGOOD_MEH_BAD() == 1) {
                         a++;
-                        answerA[i] = a;
-                        break;
                     }
                     if (feedbackArray[k].getGOOD_MEH_BAD() == 2) {
                         b++;
-                        answerB[i] = b;
-                        break;
                     }
                     if (feedbackArray[k].getGOOD_MEH_BAD() == 3) {
-                        c++;
-                        answerC[i] = c;
-                        break;
+                        c++;;
                     }
 
                 }
             }
-        }
 
         slideGMB = (PieChart) findViewById(R.id.plot); //get pie plot
 
@@ -110,16 +96,16 @@ public class ReviewFeedbackGMB extends Activity {
 
 
         //add segments
-        if (answerA[j] > 0) {
-            Segment segA = new Segment("Good = "+answerA[j], answerA[j]);
+        if (a > 0) {
+            Segment segA = new Segment("Good = "+a, a);
             slideGMB.addSeries(segA, segmentFormat);
         }
-        if (answerB[j] > 0) {
-            Segment segB = new Segment("Meh = " +answerB[j], answerB[j]);
+        if (b > 0) {
+            Segment segB = new Segment("Meh = " +b, b);
             slideGMB.addSeries(segB, segmentFormat);
         }
-        if (answerC[j] > 0) {
-            Segment segC = new Segment("Bad = " + answerC[j], answerC[j]);
+        if (c > 0) {
+            Segment segC = new Segment("Bad = " +c, c);
             slideGMB.addSeries(segC, segmentFormat);
         }
 
