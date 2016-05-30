@@ -30,7 +30,7 @@ public class stackedBarsFragment extends Fragment{
     View AView, BView, CView;
     TextView textView, ATextView, BTextView, CTextView;
 
-    public int barWidth, lastBar, barHeight, i = 0, k = 0, j;
+    public int barWidth, lastBar, barHeight, i = 0, k = 0, j, l;
     RelativeLayout barLayout;
     public int qNo = 0, numberofPlots = 2;
     public int[] answerA, answerB, answerC;
@@ -60,7 +60,7 @@ public class stackedBarsFragment extends Fragment{
         if (feedback.getTEXT() != null) return;
         for (j=0; j < questionResponses.size(); j++){//Look through each object in array
             tempObject = questionResponses.get(j);
-            //if (tempObject.getUUID().equals(feedback.getUUID())){//If same user again!
+            if (tempObject.getUUID().equals(feedback.getUUID())){//If same user again!
                 if (ABC != -1){ // If question Response
                     if (tempObject.getABC() != ABC){// If new Answer
                         ABC_old_value = tempObject.getABC();
@@ -69,13 +69,13 @@ public class stackedBarsFragment extends Fragment{
                     else tempIndex = -1;
                     break;
                 }
-            //}
+            }
         }
 
 
-        for (j=0; j < understandingResponses.size(); j++){//Look through each object in array
-            tempObject = understandingResponses.get(j);
-            //if (tempObject.getUUID().equals(feedback.getUUID())){ //If same user again!
+        for (l=0; l < understandingResponses.size(); l++){//Look through each object in array
+            tempObject = understandingResponses.get(l);
+            if (tempObject.getUUID().equals(feedback.getUUID())){ //If same user again!
                 if (GOODmehBAD != -1){ // If question Response
                     if (tempObject.getGOOD_MEH_BAD() != GOODmehBAD) {// If new Answer
                         understanding_old_value = tempObject.getGOOD_MEH_BAD();
@@ -85,7 +85,7 @@ public class stackedBarsFragment extends Fragment{
                     break;
                 }
 
-            //}
+            }
         }
 
         if (tempIndex == 0 ){ //New Feedback is the same
@@ -124,7 +124,7 @@ public class stackedBarsFragment extends Fragment{
                 if (tempIndex == 1) good++;
                 else if (tempIndex == 2) meh++;
                 else if (tempIndex == 3) bad++;
-                understandingResponses.set(j,feedback);
+                understandingResponses.set(l,feedback);
             }
 
         }

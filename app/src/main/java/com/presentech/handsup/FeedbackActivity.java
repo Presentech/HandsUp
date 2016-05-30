@@ -148,7 +148,7 @@ public class FeedbackActivity extends AppCompatActivity   {
             @Override
             public void onClick(View arg0) {
                 Log.d("FeedbackActivity", client.rxString.toString());
-                Log.d("FeedbackActivity", client.singleQuestionList.get(0).getQuestionText());
+                //Log.d("FeedbackActivity", client.singleQuestionList.get(0).getQuestionText());
                 singleQuestionList = client.singleQuestionList;
                 //Log.d("FeedbackActivity", Integer.toString(singleQuestionList.size()));
                 slideContentTextView.setText(singleQuestionList.get(count).getQuestionText());

@@ -121,7 +121,7 @@ public class PresentationActivity extends AppCompatActivity {
         //feedbackPerSlide = b.getBoolean(BOOLEAN_NAME5);
         String presentationName = b.getString(SESSION_NAME);
 
-        presentation_db = new feedbackDatabaseHandler(this, presentationName);
+        presentation_db = application.getDB();
 
         getScreenSize();
         populateSlides();
@@ -240,7 +240,7 @@ public class PresentationActivity extends AppCompatActivity {
             tV.setTextColor(Color.parseColor("#"+presentationFile.getDefaults().getFontColour()));
         }
         tV.setMaxWidth(screenWidth);
-        tV.setPadding(0,0,10,0);
+        tV.setPadding(0, 0, 10, 0);
         tV.setX(marginLeft);
         tV.setY(marginTop);
         if (t.getFontSize() == Slide.NULL_INT_ATTR){
@@ -476,8 +476,8 @@ public class PresentationActivity extends AppCompatActivity {
                 startActivity(settings_Intent);
                 return true;
             case R.id.action_feedbackStored:
-                Intent feedback_Intent = new Intent(this, FeedbackActivity.class);
-                startActivity(feedback_Intent);
+                //Intent feedback_Intent = new Intent(this, ReviewFeedback.class);
+                //startActivity(feedback_Intent);
                 return true;
             case R.id.action_presenterHelp:
                 Intent tutorial_Intent = new Intent(this, PresentationModeTutorial.class);
@@ -661,6 +661,9 @@ public class PresentationActivity extends AppCompatActivity {
                     for (int i = 0; i < animations.size() ; i++) {
                         animations.get(i).start();
                     }
+                    if (presenterServer.connections > 0){
+                        sendSlideContent();
+                    }
                 }
 
                 if (lastX > currentX)
@@ -676,6 +679,9 @@ public class PresentationActivity extends AppCompatActivity {
 
                     for (int i = 0; i < animations.size() ; i++) {
                         animations.get(i).start();
+                    }
+                    if (presenterServer.connections > 0){
+                        sendSlideContent();
                     }
                 }
 

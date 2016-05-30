@@ -19,6 +19,7 @@ import java.io.PrintWriter;
 import java.io.Reader;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 /**
  * Created by Noor on 28/05/2016.
@@ -44,7 +45,7 @@ public class Server {
 
     Handler h;
     HandlerThread tx;
-    PrintWriter writer;
+    ArrayList<PrintWriter> writer = new ArrayList<>();
     String json;
 
     public Server(){
@@ -62,10 +63,10 @@ public class Server {
                     Log.d(TAG, "Opened connection");
                     while (!Thread.interrupted() && !socket.isClosed()) {
                         s = socket.accept();
-                        connections++;
                         new Thread(new ConnectionHandler(Server.this, s.getInputStream())).start();
                         onConnection(s.getInetAddress().getHostAddress());
-                        writer = new PrintWriter(s.getOutputStream());
+                        writer.add(connections,new PrintWriter(s.getOutputStream()));
+                        connections++;
                     }
 
                 } catch (IOException e1) {
@@ -113,13 +114,15 @@ public class Server {
         h.post(new Runnable() {
             @Override
             public void run() {
-                writer.println(json);
-                writer.flush();
+            for (int i = 1; i<=connections; i++){
+                writer.get(i-1).println(json);
+                writer.get(i-1).flush();
                 try {
                     s.getOutputStream().flush();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
             }
         });
     }
