@@ -93,7 +93,7 @@ public class PresentationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_presentation);
         viewFlipper = (ViewFlipper) findViewById(R.id.viewflipper);
-        setTitle(R.string.presentation_container);
+
         Bundle b = this.getIntent().getExtras();
 
         application = (MyApplication) getApplication();
@@ -108,6 +108,9 @@ public class PresentationActivity extends AppCompatActivity {
         } catch (XmlPullParserException e) {
             e.printStackTrace();
         }
+        if (presentationFile.getDocumentInfo().getTitle() != null) {
+            setTitle(presentationFile.getDocumentInfo().getTitle());
+        }
         viewFlipper.setBackgroundColor(Color.parseColor("#" + presentationFile.getDefaults().getBackgroundColour()));
         viewFlipper.getParent().getParent().requestDisallowInterceptTouchEvent(true);
 
@@ -120,10 +123,9 @@ public class PresentationActivity extends AppCompatActivity {
 
         presentation_db = new feedbackDatabaseHandler(this, presentationName);
 
-
-
         getScreenSize();
         populateSlides();
+
         if (presenterServer.connections > 0){
             sendSlideContent();
         }
@@ -243,6 +245,29 @@ public class PresentationActivity extends AppCompatActivity {
         tV.setY(marginTop);
         tV.setTextSize(t.getFontSize());
         slide.addView(tV);
+
+        tV.setAlpha(0f);
+        ObjectAnimator appearDelay = ObjectAnimator.ofFloat(tV, "alpha", 0f, 0f);
+        ObjectAnimator appear = ObjectAnimator.ofFloat(tV, "alpha", 0f, 1f);
+        ObjectAnimator durationDelay = ObjectAnimator.ofFloat(tV, "alpha", 1f, 1f);
+        ObjectAnimator disappear = ObjectAnimator.ofFloat(tV, "alpha", 1f, 0f);
+
+        appearDelay.setDuration(t.getStartTime()); // Start Time
+        appear.setDuration(0);
+        if (t.getDuration() != -1) {
+            durationDelay.setDuration(t.getDuration()); // Duration
+            disappear.setDuration(0);
+        }
+
+        AnimatorSet anim = new AnimatorSet();
+        anim.play(appear).after(appearDelay);
+        if (t.getDuration() != -1) {
+            anim.play(durationDelay).after(appear);
+            anim.play(disappear).after(durationDelay);
+        }
+
+        animations.add(anim);
+
     }
 
     public void createImageViews(Image i) {
@@ -263,6 +288,29 @@ public class PresentationActivity extends AppCompatActivity {
         //iV.setLayoutParams(layoutParams);
         iV.setImageBitmap(b);
         slide.addView(iV);
+
+        iV.setAlpha(0f);
+        ObjectAnimator appearDelay = ObjectAnimator.ofFloat(iV, "alpha", 0f, 0f);
+        ObjectAnimator appear = ObjectAnimator.ofFloat(iV, "alpha", 0f, 1f);
+        ObjectAnimator durationDelay = ObjectAnimator.ofFloat(iV, "alpha", 1f, 1f);
+        ObjectAnimator disappear = ObjectAnimator.ofFloat(iV, "alpha", 1f, 0f);
+
+        appearDelay.setDuration(i.getStartTime()); // Start Time
+        appear.setDuration(0);
+        if (i.getDuration() != -1) {
+            durationDelay.setDuration(i.getDuration()); // Duration
+            disappear.setDuration(0);
+        }
+
+        AnimatorSet anim = new AnimatorSet();
+        anim.play(appear).after(appearDelay);
+        if (i.getDuration() != -1) {
+            anim.play(durationDelay).after(appear);
+            anim.play(disappear).after(durationDelay);
+        }
+
+        animations.add(anim);
+
     }
 
     public void createVideoViews(Video v) {
@@ -283,6 +331,30 @@ public class PresentationActivity extends AppCompatActivity {
         vV.start();
 
         slide.addView(vV);
+
+        vV.setAlpha(0f);
+        ObjectAnimator appearDelay = ObjectAnimator.ofFloat(vV, "alpha", 0f, 0f);
+        ObjectAnimator appear = ObjectAnimator.ofFloat(vV, "alpha", 0f, 1f);
+        ObjectAnimator durationDelay = ObjectAnimator.ofFloat(vV, "alpha", 1f, 1f);
+        ObjectAnimator disappear = ObjectAnimator.ofFloat(vV, "alpha", 1f, 0f);
+
+        appearDelay.setDuration(v.getStartTime()); // Start Time
+        appear.setDuration(0);
+        if (v.getDuration() != -1) {
+            durationDelay.setDuration(v.getDuration()); // Duration
+            disappear.setDuration(0);
+        }
+
+        AnimatorSet anim = new AnimatorSet();
+        anim.play(appear).after(appearDelay);
+        if (v.getDuration() != -1) {
+            anim.play(durationDelay).after(appear);
+            anim.play(disappear).after(durationDelay);
+        }
+
+        animations.add(anim);
+
+
     }
 
     public void createAudioPlayer(Audio a) throws IOException {
@@ -331,7 +403,31 @@ public class PresentationActivity extends AppCompatActivity {
                 }
 
                 animations.add(anim);
+            } else {
+                pH.setAlpha(0f);
+                ObjectAnimator appearDelay = ObjectAnimator.ofFloat(pH, "alpha", 0f, 0f);
+                ObjectAnimator appear = ObjectAnimator.ofFloat(pH, "alpha", 0f, 1f);
+                ObjectAnimator durationDelay = ObjectAnimator.ofFloat(pH, "alpha", 1f, 1f);
+                ObjectAnimator disappear = ObjectAnimator.ofFloat(pH, "alpha", 1f, 0f);
+
+                appearDelay.setDuration(p.getStartTime()); // Start Time
+                appear.setDuration(0);
+                if (p.getDuration() != -1){
+                    durationDelay.setDuration(p.getDuration()); // Duration
+                    disappear.setDuration(0);
+                }
+
+                AnimatorSet anim = new AnimatorSet();
+                anim.play(appear).after(appearDelay);
+                if (p.getDuration() != -1) {
+                    anim.play(durationDelay).after(appear);
+                    anim.play(disappear).after(durationDelay);
+                }
+
+                animations.add(anim);
             }
+
+
 
 
     }
@@ -350,7 +446,7 @@ public class PresentationActivity extends AppCompatActivity {
             int tempy = size.y;
             double screenWidthDouble = tempx*0.7;
             double screenHeightDouble = tempy-360;
-            screenWidth = (int) screenWidthDouble;
+            screenWidth = size.x;
             screenHeight = (int) screenHeightDouble;
             feedbackHeight = tempy;
             feedbackWidth = tempx;
@@ -556,6 +652,7 @@ public class PresentationActivity extends AppCompatActivity {
                     viewFlipper.setOutAnimation(this, R.anim.slide_out_to_right);
 //                    vf.showNext();
                     viewFlipper.showPrevious();
+
                     for (int i = 0; i < animations.size() ; i++) {
                         animations.get(i).start();
                     }
@@ -571,6 +668,7 @@ public class PresentationActivity extends AppCompatActivity {
                     viewFlipper.setOutAnimation(this, R.anim.slide_out_to_left);
 //                    vf.showPrevious();
                     viewFlipper.showNext();
+
                     for (int i = 0; i < animations.size() ; i++) {
                         animations.get(i).start();
                     }
