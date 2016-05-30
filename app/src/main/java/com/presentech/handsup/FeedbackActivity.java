@@ -76,6 +76,7 @@ public class FeedbackActivity extends AppCompatActivity   {
     ImageButton sendButton;
 
     int count = 0;
+    String UUID = "";
 
     //Connectivity requirements
     MyApplication application;
@@ -115,6 +116,8 @@ public class FeedbackActivity extends AppCompatActivity   {
         addListenerOnButton();
         application = (MyApplication)getApplication();
         client = application.getClient();
+        Identifier id = new Identifier();
+        UUID = id.id(this);
 
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
@@ -140,6 +143,12 @@ public class FeedbackActivity extends AppCompatActivity   {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
+    }
+
+    private SingleFeedback setFeedback(){
+        SingleFeedback singleFeedback = new SingleFeedback();
+        singleFeedback.setUUID(UUID);
+        return singleFeedback;
     }
 
     public void addListenerOnButton() {
@@ -172,8 +181,7 @@ public class FeedbackActivity extends AppCompatActivity   {
         aButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                SingleFeedback singleFeedback = new SingleFeedback();
-                singleFeedback.setUUID("" + getIpAddress());
+                SingleFeedback singleFeedback = setFeedback();
                 singleFeedback.setABC(1);
                 String sendThis = feedbackJSON.FeedbackJSONGenerate(singleFeedback);
                 client.onSend(sendThis);
@@ -183,8 +191,7 @@ public class FeedbackActivity extends AppCompatActivity   {
         bButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                SingleFeedback singleFeedback = new SingleFeedback();
-                singleFeedback.setUUID("" + getIpAddress());
+                SingleFeedback singleFeedback = setFeedback();
                 singleFeedback.setABC(2);
                 String sendThis = feedbackJSON.FeedbackJSONGenerate(singleFeedback);
                 client.onSend(sendThis);
@@ -194,8 +201,7 @@ public class FeedbackActivity extends AppCompatActivity   {
         cButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                SingleFeedback singleFeedback = new SingleFeedback();
-                singleFeedback.setUUID("" + getIpAddress());
+                SingleFeedback singleFeedback = setFeedback();
                 singleFeedback.setABC(3);
                 String sendThis = feedbackJSON.FeedbackJSONGenerate(singleFeedback);
                 client.onSend(sendThis);;
@@ -205,8 +211,7 @@ public class FeedbackActivity extends AppCompatActivity   {
         goodButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                SingleFeedback singleFeedback = new SingleFeedback();
-                singleFeedback.setUUID("" + getIpAddress());
+                SingleFeedback singleFeedback = setFeedback();
                 singleFeedback.setGOOD_MEH_BAD(1);
                 String sendThis = feedbackJSON.FeedbackJSONGenerate(singleFeedback);
                 client.onSend(sendThis);
@@ -216,8 +221,7 @@ public class FeedbackActivity extends AppCompatActivity   {
         mehButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                SingleFeedback singleFeedback = new SingleFeedback();
-                singleFeedback.setUUID("" + getIpAddress());
+                SingleFeedback singleFeedback = setFeedback();
                 singleFeedback.setGOOD_MEH_BAD(2);
                 String sendThis = feedbackJSON.FeedbackJSONGenerate(singleFeedback);
                 client.onSend(sendThis);
@@ -227,8 +231,7 @@ public class FeedbackActivity extends AppCompatActivity   {
         badButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                SingleFeedback singleFeedback = new SingleFeedback();
-                singleFeedback.setUUID("" + getIpAddress());
+                SingleFeedback singleFeedback = setFeedback();
                 singleFeedback.setGOOD_MEH_BAD(3);
                 String sendThis = feedbackJSON.FeedbackJSONGenerate(singleFeedback);
                 client.onSend(sendThis);
@@ -240,8 +243,7 @@ public class FeedbackActivity extends AppCompatActivity   {
             @Override
             public void onClick(View arg0) {
                 if (messageInput.getText().toString().length() < 300) {
-                    SingleFeedback singleFeedback = new SingleFeedback();
-                    singleFeedback.setUUID("" + getIpAddress());
+                    SingleFeedback singleFeedback = setFeedback();
                     singleFeedback.setTEXT(messageInput.getText().toString());
                     String sendThis = feedbackJSON.FeedbackJSONGenerate(singleFeedback);
                     client.onSend(sendThis);
