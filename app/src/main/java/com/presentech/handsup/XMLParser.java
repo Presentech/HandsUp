@@ -11,6 +11,7 @@ import com.presentech.handsup.presentationfile.Image;
 import com.presentech.handsup.presentationfile.Interactable;
 import com.presentech.handsup.presentationfile.Polygon;
 import com.presentech.handsup.presentationfile.PresentationFile;
+import com.presentech.handsup.presentationfile.Question;
 import com.presentech.handsup.presentationfile.Shading;
 import com.presentech.handsup.presentationfile.Shape;
 import com.presentech.handsup.presentationfile.Slide;
@@ -19,6 +20,7 @@ import com.presentech.handsup.presentationfile.Video;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -173,6 +175,7 @@ public class XMLParser
         List<Video> video = new ArrayList<Video>();
         List<Audio> audio = new ArrayList<Audio>();
         List<Interactable> interactable = new ArrayList<Interactable>();
+        List<Question> question = new ArrayList<Question>();
 
         // Loop through each attribute and the current attribute contents to the Slide object
         String attr;
@@ -209,15 +212,30 @@ public class XMLParser
                 video.add(readVideo(parser));
             } else if (name.equals("audio")){
                 audio.add(readAudio(parser));
-            } else if (name.equals("interactable")){
+            } else if (name.equals("interactable")) {
                 interactable.add(readInteractable(parser));
+            }else if (name.equals("question")) {
+                question.add(readQuestion(parser));
             } else
                 skip(parser);
         }
         //Return a new slide object with the parsed slide contents
         return new Slide(slideID, nextSlide, duration, text, shape, polygon, image, video, audio,
-                interactable);
+                interactable, question);
     }
+
+    private Question readQuestion(XmlPullParser parser) throws IOException, XmlPullParserException {
+        //Ensure current tag is "text" otherwise throw and exception
+        parser.require(XmlPullParser.START_TAG, ns, "question");
+        String question = "";
+
+        //Retreive text string from the XML
+        question = readInnerText(parser);
+
+        //Return new text object with contents parsed from xml.
+        return new Question(question);
+    }
+
 
     private Interactable readInteractable(XmlPullParser parser) throws IOException, XmlPullParserException {
         //Ensure current tag in "interactable" otherwise throw an exception

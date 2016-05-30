@@ -31,6 +31,7 @@ public class liveFeedbackFragment extends Fragment{
     boolean fragUnderstanding, fragMultiChoice, fragMessaging;
     stackedBarsFragment ABCBarsFragment = null, understandingBarsFragment = null;
     messagingFragment slideFeedbackMessagesFragment =null;
+    private static final Object MUTEX = new Object();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -98,8 +99,7 @@ public class liveFeedbackFragment extends Fragment{
             }
             // Create a new Fragment to be placed in the activity layout
             ABCBarsFragment = new stackedBarsFragment();
-            ABCBarsFragment.setFeedbackArray(feedbackArray);
-            Log.d("ABCD","Stuff");
+            Log.d("ABCD", "Stuff");
             // Add the fragment to the 'fragment_container' FrameLayout
             lastBar = R.id.fragmentContainerFBBarABC;
         }
@@ -111,7 +111,6 @@ public class liveFeedbackFragment extends Fragment{
             }
             // Create a new Fragment to be placed in the activity layout
             understandingBarsFragment = new stackedBarsFragment();
-            understandingBarsFragment.setFeedbackArray(feedbackArray);
             Log.d("ABCD", "Stuff2");
             // Add the fragment to the 'fragment_container' FrameLayout
             lastBar = R.id.fragmentContainerFBBarUnderstanding;
@@ -188,31 +187,41 @@ public class liveFeedbackFragment extends Fragment{
 
     }
 
-
-    public void updateStackedBars(){
+    public void updateFeedback(SingleFeedback feedbackObject){
         //Create new fragments to replace the old ones
 
         //Replace the fragment currently in the fragment container with the new fragments
         if (ABCBarsFragment != null){
             Log.d("ABCD", "Do Something");
-            //Draw these and set random feedback values
-            ABCBarsFragment.setFeedbackArray(feedbackArray);
-            ABCBarsFragment.getQuestionNumber();
-            ABCBarsFragment.calculateQuestionResponse();
-            ABCBarsFragment.updateBarHeight("Question Response");
-            getChildFragmentManager().beginTransaction().replace(R.id.fragmentContainerFBBarABC, ABCBarsFragment).commit();
+            //If Question changed then update bars
+            synchronized (MUTEX){
+                if (feedbackObject.getABC() != -1) {
+                    ABCBarsFragment.setFeedbackResponse(feedbackObject);
+                    ABCBarsFragment.updateBarHeight("Question Response");
+                    getChildFragmentManager().beginTransaction().replace(R.id.fragmentContainerFBBarABC, ABCBarsFragment).commit();
+                }
+            }
         }
         if (understandingBarsFragment != null){
             Log.d("ABCD", "Do Something Else");
             //Draw these and set random feedback values
-            understandingBarsFragment.setFeedbackArray(feedbackArray);
-            understandingBarsFragment.getQuestionNumber();
-            understandingBarsFragment.calculateQuestionResponse();
-            understandingBarsFragment.updateBarHeight("Level of Understanding");
-            getChildFragmentManager().beginTransaction().replace(R.id.fragmentContainerFBBarUnderstanding, understandingBarsFragment).commit();
+            if (feedbackObject.getGOOD_MEH_BAD() != -1){
+                synchronized (MUTEX){
+                    understandingBarsFragment.setFeedbackResponse(feedbackObject);
+                    understandingBarsFragment.updateBarHeight("Level of Understanding");
+                    getChildFragmentManager().beginTransaction().replace(R.id.fragmentContainerFBBarUnderstanding, understandingBarsFragment).commit();
+                }
+            }
+        }
+        //Replace the fragment currently in the fragment container with the new fragments
+        if (slideFeedbackMessagesFragment != null){
+            //Draw these and set random feedback values
+            if (feedbackObject.getTEXT() != null) slideFeedbackMessagesFragment.updateMessages(feedbackObject);
+            getChildFragmentManager().beginTransaction().replace(R.id.fragmentContainerMessaging, slideFeedbackMessagesFragment).commit();
         }
 
     }
+
 
     public void setFeedbackArray(SingleFeedback[] feedback){
         Random r = new Random();

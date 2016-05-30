@@ -8,11 +8,13 @@ import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
+import android.net.wifi.WifiManager;
 import android.provider.SyncStateContract;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
@@ -26,15 +28,23 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.presentech.handsup.presentationfile.PresentationFile;
 
 import org.xmlpull.v1.XmlPullParserException;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.ArrayList;
+
 
 public class HostingWizardActivity extends AppCompatActivity {
 
@@ -49,18 +59,27 @@ public class HostingWizardActivity extends AppCompatActivity {
     private LinearLayout optionsColumn;
     private LinearLayout walkthrough1, walkthrough2;
 
+    MyApplication application;
+    Server server;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hosting_wizard);
         setTitle(R.string.hosting_wizard_title);
+        Toast.makeText(HostingWizardActivity.this, getIpAddress(), Toast.LENGTH_LONG).show();
+        EditText password = (EditText) findViewById(R.id.SessionPassword);
+        password.setText("0" + getIpAddress());
+
+        application = (MyApplication)getApplication();
+        server = application.getServer();
 
         //Get presntation filePath if returning from PresentationFileListActivity
-        Intent intent = getIntent();
-        if (intent.getStringExtra(FILE_PATH_NAME) != null){
-            pathName = intent.getStringExtra(FILE_PATH_NAME);
+        Intent returnIntent = getIntent();
+        if (returnIntent.getStringExtra(FILE_PATH_NAME) != null) {
+            pathName = returnIntent.getStringExtra(FILE_PATH_NAME);
+            Log.d("ABCD","OLA" + pathName);
         }
-        pathName = "test.xml";
         //get width and height of screen for views
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
@@ -147,15 +166,14 @@ public class HostingWizardActivity extends AppCompatActivity {
     }
 
     public void createSession(View view) throws IOException, XmlPullParserException {
-        PresentationFile presentationFile = getPresentation(pathName);
+        Log.d("ABCD",pathName);
         //Go to Presentation with options set
-        Intent intent = new Intent(this, PresentationActivity.class);
-        Bundle b = new Bundle();
+        Intent presentationIntent = new Intent(this, PresentationActivity.class);
         //Add options to Presentation
-        intent.putExtra(PresentationActivity.BOOLEAN_NAME1, understanding);
-        intent.putExtra(PresentationActivity.BOOLEAN_NAME2, multiChoice);
-        intent.putExtra(PresentationActivity.BOOLEAN_NAME3, messaging);
-        intent.putExtra(PresentationActivity.BOOLEAN_NAME4, hideFeedback);
+        presentationIntent.putExtra(PresentationActivity.BOOLEAN_NAME1, understanding);
+        presentationIntent.putExtra(PresentationActivity.BOOLEAN_NAME2, multiChoice);
+        presentationIntent.putExtra(PresentationActivity.BOOLEAN_NAME3, messaging);
+        presentationIntent.putExtra(PresentationActivity.BOOLEAN_NAME4, hideFeedback);
         //Intent.putExtra(PresentationActivity.BOOLEAN_NAME5, feedbackPerSlide);
         EditText session_name_view = (EditText) findViewById(R.id.SessionTitle);
         EditText session_password_view = (EditText) findViewById(R.id.SessionPassword);
@@ -164,34 +182,37 @@ public class HostingWizardActivity extends AppCompatActivity {
         String session_name = session_name_view.getText().toString();
         String session_password = session_name_view.getText().toString();
         String session_location = session_name_view.getText().toString();
-        //Intent.putExtra(PresentationActivity.SESSION_NAME, session_name);
+        presentationIntent.putExtra(PresentationActivity.SESSION_NAME, session_name);
         //Intent.putExtra(PresentationActivity.SESSION_PASSWORD, session_password);
         //Intent.putExtra(PresentationActivity.SESSION_LOCATION, session_location);
 
 
-       // b.putParcelable(SyncStateContract.Constants.CUSTOM_LISTING, presentationFile);
-        //intent.putExtra("pF", presentationFile);
-
-        startActivity(intent);
+        Log.d("ABCD","MI" + pathName);
+        presentationIntent.putExtra(PresentationActivity.SESSION_PATH, pathName);
+        startActivity(presentationIntent);
     }
+
     public PresentationFile getPresentation(String pathName) throws IOException, XmlPullParserException {
         XMLParser parser = new XMLParser();
         InputStream in = null;
-        in = getAssets().open(pathName);
+        Log.d("ABCD",pathName);
+        File initFile = new File(pathName);
+        in = new FileInputStream(initFile);
         return parser.getPresentation(in);
     }
 
     //Start activity to select a presentation file
-    public void selectFile(View view){
-        Intent Intent = new Intent(this, PresentationFileListActivity.class);
-        startActivity(Intent);
+    public void selectFile(View view) {
+        Log.d("ABCD","selectFile");
+        Intent fileIntent = new Intent(this, PresentationFileListActivity.class);
+        startActivity(fileIntent);
     }
 
-    public void changeViewWidths(int width, int height){
+    public void changeViewWidths(int width, int height) {
 
-        double columnWidthDouble = width*0.5;
+        double columnWidthDouble = width * 0.5;
         int columnWidth = (int) columnWidthDouble;
-        double Walk2WidthDouble = width*0.46;
+        double Walk2WidthDouble = width * 0.46;
         int Walk2Width = (int) Walk2WidthDouble;
 
         double walkthroughHeightDouble = height * 0.75;
@@ -211,12 +232,12 @@ public class HostingWizardActivity extends AppCompatActivity {
 
     }
 
-    public void onCheckboxClicked(View view){
+    public void onCheckboxClicked(View view) {
         //Check if checkBox is checked! Check check check
         boolean checked = ((CheckBox) view).isChecked();
         // Check which checkbox was clicked
         // Update presentation object to
-        switch(view.getId()) {
+        switch (view.getId()) {
             case R.id.HWcheckbox1:
                 if (checked)
                     understanding = true;
@@ -250,6 +271,7 @@ public class HostingWizardActivity extends AppCompatActivity {
         }
     }
 
+
     /* Called whenever we call invalidateOptionsMenu() */
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
@@ -265,6 +287,7 @@ public class HostingWizardActivity extends AppCompatActivity {
         super.onConfigurationChanged(newConfig);
         drawer.mDrawerToggle.onConfigurationChanged(newConfig);
     }
+
     //This handles action bar events
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -276,11 +299,17 @@ public class HostingWizardActivity extends AppCompatActivity {
         // Handle your other action bar items...
         return super.onOptionsItemSelected(item);
     }
+
     //This toggles the image on the action bar when the drawer is open
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         // Sync the toggle state after onRestoreInstanceState has occurred.
         drawer.mDrawerToggle.syncState();
+    }
+
+    String getIpAddress() {
+        WifiManager wm = (WifiManager) getSystemService(WIFI_SERVICE);
+        return Integer.toHexString(wm.getConnectionInfo().getIpAddress());
     }
 }

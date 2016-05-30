@@ -24,12 +24,12 @@ public class aboutActivityTest {
         /*Robolectric method to run About Activity */
         activity = Robolectric.setupActivity(aboutActivity.class);
     }
-}
+
 
     @Test
     public void checkListVisibility(){
         /*Check list view with activity content is visible*/
         assertEquals(activity.findViewById(R.id.fileListView).VISIBLE,
-                activity.findViewById(R.id.fileListView).getVisibility());
+               activity.findViewById(R.id.fileListView).getVisibility());
     }
 }

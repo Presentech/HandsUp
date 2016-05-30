@@ -2,10 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.presentech.handsup">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -22,7 +27,8 @@
             android:name=".LoginScreenActivity"
             android:label="@string/title_activity_login_screen"
             android:parentActivityName=".ModeSelectActivity"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape">
+        </activity>
         <activity
             android:name=".HostingWizardActivity"
             android:screenOrientation="landscape" />
@@ -49,6 +55,10 @@
             android:label="@string/presentation_feedback_title"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".SlideContentTimingsActivity"
+            android:label="@string/slide_content_timings_title"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".SettingsAccountActivity"
             android:label="@string/account_title"
             android:screenOrientation="portrait" />
@@ -61,7 +71,8 @@
             android:label="@string/default_setting_title"
             android:screenOrientation="portrait" />
         <activity android:name=".SettingsActivity" />
-        <activity android:name=".FeedbackActivity" />
+        <activity android:name=".FeedbackActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".PresentationActivity"
             android:screenOrientation="landscape" />
@@ -69,22 +80,24 @@
             android:name=".AudienceSessionSelect"
             android:label="@string/title_activity_audience_session_select"
             android:theme="@style/AppTheme" />
-        <activity
-            android:name=".ReviewFeedback"
-            android:screenOrientation="landscape" />
         <activity android:name=".aboutActivity" />
         <activity android:name=".AudienceTutorial" />
-        <!-- <activity android:name=".presentationfile.ExampleStackedBars" /> -->
-        <!-- <activity android:name=".ViewLiveFeedback" /> -->
-        <activity android:name=".TestActivity" />
+        <activity android:name=".ExampleStackedBars" />
+        <!--<meta-data-->
+            <!--android:name="io.fabric.ApiKey"-->
+            <!--android:value="0cddf07189e7770b126a853ae1c73ab8a83c2615" />-->
         <activity
-            android:name=".ReviewFeedbackGMB"
-            android:label="@string/title_activity_review_feedback_gmb"
-            android:screenOrientation="landscape"/>
-        <activity android:name=".ReviewFeedbackSelect"
-            android:screenOrientation="landscape"/>
-        <activity android:name=".ReviewFeedbackMessages"
-            android:screenOrientation="landscape"/>
+            android:name=".AudienceConnect"
+            android:label="@string/title_activity_audience_connect"
+            android:parentActivityName=".ModeSelectActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.presentech.handsup.ModeSelectActivity" />
+        </activity>
+        <activity
+            android:name=".testingConnections"
+            android:label="@string/title_activity_testing_connections"></activity>
+        <activity android:name=".TestActivity"></activity>
     </application>
 
 </manifest>

@@ -37,8 +37,8 @@ public class feedbackDatabaseHandlerTest {
 
     @Before
     public void setUp() {
-        getTargetContext().deleteDatabase("name");
-        database = new feedbackDatabaseHandler(getTargetContext(), "name", null, 1, "FP");
+        getTargetContext().deleteDatabase("Test Database");
+        database = new feedbackDatabaseHandler(getTargetContext(), "name");
         database.deleteTable();
     }
 

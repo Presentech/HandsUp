@@ -26,7 +26,7 @@ public class feedbackDatabaseHandler extends SQLiteOpenHelper {
     private final Context myContext;
     SQLiteDatabase db;
 
-/**Collumn names - reflects data in SingleFeedback.java*/
+/**Column names - reflects data in SingleFeedback.java*/
     private static final String COLUMN_UUID = "uuid"; /**Slide number, float is smaller than double and can hold branches to sufficient accuracy (e.g. slide 1.51 as 1.51)*/
     private static final String COLUMN_SLIDE = "slideNumber"; /**Slide number, float is smaller than double and can hold branches to sufficient accuracy (e.g. slide 1.51 as 1.51)*/
     private static final String COLUMN_SLIDE_ITERATION = "slideIteration"; /**Slide iteration - for when a slide is visited multiple times.*/
@@ -40,10 +40,8 @@ public class feedbackDatabaseHandler extends SQLiteOpenHelper {
 
 
 
-    public feedbackDatabaseHandler(Context context, String name, SQLiteDatabase.CursorFactory factory,
-                                   int version, String filepath) {
-        super(context, name, factory, DATABASE_VERSION); //TODO - this is where multiple saves can be sorted
-
+    public feedbackDatabaseHandler(Context context, String name) {
+        super(context, name, null, DATABASE_VERSION); //TODO - this is where multiple saves can be sorted
         this.myContext = context;
     }
 

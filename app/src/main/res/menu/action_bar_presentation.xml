@@ -13,6 +13,10 @@
         android:title="Help"
         app:showAsAction="ifRoom"/>
 
+    <item android:id="@+id/action_feedbackStored"
+        android:title="View Stored Feedback"
+        app:showAsAction="ifRoom"/>
+
     <item android:id="@+id/action_feedback"
         android:title="Feedback"
         app:showAsAction="ifRoom"/>
