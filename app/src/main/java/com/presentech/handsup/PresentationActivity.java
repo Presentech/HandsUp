@@ -99,8 +99,6 @@ public class PresentationActivity extends AppCompatActivity {
         application = (MyApplication) getApplication();
         presenterServer = application.getServer();
 
-        //String id = b.getParcelable(SyncStateContract.Constants.CUSTOM_LISTING);
-        //presentationFile = (PresentationFile) this.getIntent().getSerializableExtra("pF");
         try {
             getPresentation();
         } catch (IOException e) {
@@ -127,9 +125,8 @@ public class PresentationActivity extends AppCompatActivity {
         populateSlides();
 
         if (presenterServer.connections > 0){
-            sendSlideContent();
+            sendSlideContent(viewFlipper.getDisplayedChild());
         }
-
 
         for (int i = 0; i < animations.size(); i++) {
             animations.get(i).start();
@@ -143,9 +140,7 @@ public class PresentationActivity extends AppCompatActivity {
         if (duration != 0 && isAdvanceActive) {
             setAutomaticHandler(duration, isLoopActive);
         }
-        //setAutomaticHandler(3);
 
-        Log.d("ABCD", "Hello This is an error");
         // If presenter wants to view feedback create feedback fragment
         if (!hideFeedback) {
             if (findViewById(R.id.feedbackFragmentContainer) != null) {
@@ -187,7 +182,6 @@ public class PresentationActivity extends AppCompatActivity {
                         }
                     });
                 }
-
             }
         });
     }
@@ -610,6 +604,7 @@ public class PresentationActivity extends AppCompatActivity {
                     Question question = slides.get(i).getQuestion().get(j);
                     SingleQuestion singleQuestion = new SingleQuestion(slides.get(i).getSlideID(), j+1, true, false, question.getQuestion() );
                     singleQuestions.add(singleQuestion);
+                    Log.d("PresentationActivity", "singleQuestion added to the list. This should only be called once");
                     }
             }
             viewFlipper.addView(slide);
@@ -618,11 +613,13 @@ public class PresentationActivity extends AppCompatActivity {
 
         }
 
-    public void sendSlideContent(){
+    public void sendSlideContent(int slideNumber){
+
         if (singleQuestions.size() > 0){
            String sendThis = questionJSON.questionCreateJSON(singleQuestions);
             Log.d("PresentationActivity", "Send slide content now");
-            presenterServer.onSend(sendThis);
+            presenterServer.onSend(sendThis + "("+Integer.toString(slideNumber)+")");
+
 
         }
     }
@@ -640,6 +637,7 @@ public class PresentationActivity extends AppCompatActivity {
         {
             case MotionEvent.ACTION_DOWN:
             {
+
                 lastX = touchevent.getX();
                 break;
             }
@@ -647,7 +645,11 @@ public class PresentationActivity extends AppCompatActivity {
             case MotionEvent.ACTION_UP:
             {
                 float currentX = touchevent.getX();
+                if (presenterServer.connections > 0){
 
+                    Log.d("ViewFlipper", Integer.toString(viewFlipper.getDisplayedChild()));
+                    sendSlideContent(viewFlipper.getDisplayedChild());
+                }
                 if (lastX < currentX)
                 {
                     if (viewFlipper.getDisplayedChild()==0)
@@ -655,14 +657,16 @@ public class PresentationActivity extends AppCompatActivity {
 
                     viewFlipper.setInAnimation(this, R.anim.slide_in_from_left);
                     viewFlipper.setOutAnimation(this, R.anim.slide_out_to_right);
-//                    vf.showNext();
+//
                     viewFlipper.showPrevious();
+
 
                     for (int i = 0; i < animations.size() ; i++) {
                         animations.get(i).start();
                     }
+
                     if (presenterServer.connections > 0){
-                        sendSlideContent();
+                        sendSlideContent(viewFlipper.getDisplayedChild());
                     }
                 }
 
@@ -681,7 +685,7 @@ public class PresentationActivity extends AppCompatActivity {
                         animations.get(i).start();
                     }
                     if (presenterServer.connections > 0){
-                        sendSlideContent();
+                        sendSlideContent(viewFlipper.getDisplayedChild());
                     }
                 }
 
@@ -690,11 +694,8 @@ public class PresentationActivity extends AppCompatActivity {
 
             case MotionEvent.ACTION_MOVE:
             {
+
                 float tempX = touchevent.getX();
-                int scrollX = (int) (tempX - lastX);
-
-                //vf.scrollBy(scrollX, 0);
-
                 break;
             }
 

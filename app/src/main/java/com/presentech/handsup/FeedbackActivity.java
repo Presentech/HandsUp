@@ -46,12 +46,12 @@ import cz.msebera.android.httpclient.Header;
 
 
 /**
- *Created by Edward Prentice on 9/03/2016
- *Modified by Noor Mansure on 18/05/2016:
+ * Created by Edward Prentice on 9/03/2016
+ * Modified by Noor Mansure on 18/05/2016:
  * Adding functionality to the activity, including connectivity
  */
 //public class FeedbackActivity extends AppCompatActivity  implements View.OnClickListener {
-public class FeedbackActivity extends AppCompatActivity   {
+public class FeedbackActivity extends AppCompatActivity {
 
     String mode = "AUDIENCE";
     private Bitmap background, arrow_left, arrow_right, tick, question, refresh, returnA, returnB, returnC;
@@ -77,6 +77,7 @@ public class FeedbackActivity extends AppCompatActivity   {
 
     int count = 0;
     String UUID = "";
+    int x;
 
     //Connectivity requirements
     MyApplication application;
@@ -86,9 +87,10 @@ public class FeedbackActivity extends AppCompatActivity   {
     FeedbackJSON feedbackJSON = new FeedbackJSON();
     questionJSON questionJSON = new questionJSON();
     List<SingleQuestion> singleQuestionList = new ArrayList<>();
+    List<SingleQuestion> availableQuestionList = new ArrayList<>();
 
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         super.onDestroy();
         background.recycle();
     }
@@ -99,8 +101,8 @@ public class FeedbackActivity extends AppCompatActivity   {
         setContentView(R.layout.activity_feedback);
 
         messageInput = (EditText) findViewById(R.id.commentEditText);
-        nextButton = (ImageButton)findViewById(R.id.nextButton);
-        backButton = (ImageButton) findViewById(R.id.backButton);
+        //nextButton = (ImageButton)findViewById(R.id.nextButton);
+        //backButton = (ImageButton) findViewById(R.id.backButton);
         aButton = (ImageButton) findViewById(R.id.aButton);
         bButton = (ImageButton) findViewById(R.id.bButton);
         cButton = (ImageButton) findViewById(R.id.cButton);
@@ -109,12 +111,12 @@ public class FeedbackActivity extends AppCompatActivity   {
         badButton = (ImageButton) findViewById(R.id.badButton);
         sendButton = (ImageButton) findViewById(R.id.sendButton);
 
-        slideContentTextView = (TextView)findViewById(R.id.slideContentTextView);
+        slideContentTextView = (TextView) findViewById(R.id.slideContentTextView);
         slideTitleTextView = (TextView) findViewById(R.id.slideTitleTextView);
 
         //add button click listeners to all buttons
         addListenerOnButton();
-        application = (MyApplication)getApplication();
+        application = (MyApplication) getApplication();
         client = application.getClient();
         Identifier id = new Identifier();
         UUID = id.id(this);
@@ -143,9 +145,58 @@ public class FeedbackActivity extends AppCompatActivity   {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
+        client.setCustomObjectListener(new Client.onMessageListener() {
+            @Override
+            public void onObjectReady(String title) {
+                // Code to handle object ready
+            }
+
+            @Override
+            public void onDataLoaded(final List<SingleQuestion> singleQuestions, int i) {
+                // Code to handle data loaded from network
+                // Use the data here!
+                x = i;
+                Log.d("noor", "like a child");
+
+                singleQuestionList = singleQuestions;
+                availableQuestionList.clear();
+                if (singleQuestionList.size() > 0) {
+                    for (int j = 0; j < singleQuestionList.size(); j++) {
+                        Log.d("noor", Integer.toString(x) + Double.toString(singleQuestionList.get(j).getSLIDE()));
+                        if (x == singleQuestionList.get(j).getSLIDE()) {
+                            availableQuestionList.add(singleQuestionList.get(j));
+
+                        }
+                    }
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (availableQuestionList.size() > 0) {
+                                slideContentTextView.setText(availableQuestionList.get(0).getQuestionText());
+                            } else {
+                                slideContentTextView.setText("No questions for this slide");
+                            }
+                            //String title = ("Slide" + availableQuestionList.get(count).getSLIDE() + " " + "Q" + availableQuestionList.get(count).getQUESTION());
+                            // slideTitleTextView.setText(title);
+                            count++;
+                            if (count == availableQuestionList.size()) {
+                                count = 0;
+                            }
+                            ;
+                        }
+                    });
+                }
+            }
+        })
+
+        ;
     }
 
-    private SingleFeedback setFeedback(){
+    ;
+
+
+    private SingleFeedback setFeedback() {
         SingleFeedback singleFeedback = new SingleFeedback();
         singleFeedback.setUUID(UUID);
         return singleFeedback;
@@ -153,30 +204,32 @@ public class FeedbackActivity extends AppCompatActivity   {
 
     public void addListenerOnButton() {
         //show the next slide content
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                Log.d("FeedbackActivity", client.rxString.toString());
-                //Log.d("FeedbackActivity", client.singleQuestionList.get(0).getQuestionText());
-                singleQuestionList = client.singleQuestionList;
-                //Log.d("FeedbackActivity", Integer.toString(singleQuestionList.size()));
-                slideContentTextView.setText(singleQuestionList.get(count).getQuestionText());
-                String title = ("Slide" + singleQuestionList.get(count).getSLIDE() + " "+ "Q" + singleQuestionList.get(count).getQUESTION());
-                slideTitleTextView.setText(title);
-                count++;
-                if (count == singleQuestionList.size()){
-                    count = 0;
-                };
-
-            }
-        });
-        //show the previous slide content
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-
-            }
-        });
+//        nextButton.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View arg0) {
+//                Log.d("FeedbackActivity", client.rxString.toString());
+//                //Log.d("FeedbackActivity", client.singleQuestionList.get(0).getQuestionText());
+//                singleQuestionList = client.singleQuestionList;
+//                //Log.d("FeedbackActivity", Integer.toString(singleQuestionList.size()));
+//                slideContentTextView.setText(singleQuestionList.get(count).getQuestionText());
+//                String title = ("Slide" + singleQuestionList.get(count).getSLIDE() + " " + "Q" + singleQuestionList.get(count).getQUESTION());
+//                slideTitleTextView.setText(title);
+//                count++;
+//                if (count == singleQuestionList.size()) {
+//                    count = 0;
+//                }
+//                ;
+//
+//            }
+//        });
+//        //show the previous slide content
+//        backButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View arg0) {
+//
+//            }
+//        });
         //set A as the answer to the question
         aButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -204,7 +257,8 @@ public class FeedbackActivity extends AppCompatActivity   {
                 SingleFeedback singleFeedback = setFeedback();
                 singleFeedback.setABC(3);
                 String sendThis = feedbackJSON.FeedbackJSONGenerate(singleFeedback);
-                client.onSend(sendThis);;
+                client.onSend(sendThis);
+                ;
             }
         });
         //set feedback to good
@@ -255,9 +309,10 @@ public class FeedbackActivity extends AppCompatActivity   {
 
         });
     }
-    public void changeViewWidths(int width){
 
-        double columnWidthDouble = width*0.8;
+    public void changeViewWidths(int width) {
+
+        double columnWidthDouble = width * 0.8;
 
         LinearLayout feedbackButtons = (LinearLayout) findViewById(R.id.feedbackButtonsLayout);
         feedbackButtons.getLayoutParams().width = (int) columnWidthDouble;
@@ -268,7 +323,7 @@ public class FeedbackActivity extends AppCompatActivity   {
 
     }
 
-    public static Bitmap decodeSampledBitmapFromResource(Resources res,int id, int reqWidth, int reqHeight){
+    public static Bitmap decodeSampledBitmapFromResource(Resources res, int id, int reqWidth, int reqHeight) {
         // Reset sample Size to 0 every time
         int sampleSize = 0;
         //Create new bitmap options
@@ -280,13 +335,13 @@ public class FeedbackActivity extends AppCompatActivity   {
         BitmapFactory.decodeResource(res, id, options);
 
         //calculate sample size for bitmap integer = 2^(n-1) where n is magnitudes smaller
-        sampleSize= calculateInSampleSize(options, reqWidth, reqHeight);
+        sampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
         options.inSampleSize = sampleSize;
         //Set Just decode bounds to false so decode resources returns bitmap not NULL
         options.inJustDecodeBounds = false;
 
         //Return the bitmap with new bounds set
-        return BitmapFactory.decodeResource(res, id , options);
+        return BitmapFactory.decodeResource(res, id, options);
     }
 
     public static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
@@ -310,6 +365,7 @@ public class FeedbackActivity extends AppCompatActivity   {
 
         return inSampleSize;
     }
+
     /* Called whenever we call invalidateOptionsMenu() */
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
@@ -325,6 +381,7 @@ public class FeedbackActivity extends AppCompatActivity   {
         super.onConfigurationChanged(newConfig);
         drawer.mDrawerToggle.onConfigurationChanged(newConfig);
     }
+
     //This handles action bar events
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -336,6 +393,7 @@ public class FeedbackActivity extends AppCompatActivity   {
         // Handle your other action bar items...
         return super.onOptionsItemSelected(item);
     }
+
     //This toggles the image on the action bar when the drawer is open
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
@@ -349,7 +407,6 @@ public class FeedbackActivity extends AppCompatActivity   {
         WifiManager wm = (WifiManager) getSystemService(WIFI_SERVICE);
         return Integer.toHexString(wm.getConnectionInfo().getIpAddress());
     }
-
 
 
 }

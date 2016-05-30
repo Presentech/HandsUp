@@ -33,15 +33,32 @@ public class Client {
 
     StringBuffer rxString = new StringBuffer();
     String messageFromServer = new String();
+    int slideNumber;
 
     List<SingleQuestion> singleQuestionList = new ArrayList<>();
     questionJSON questionJSON = new questionJSON();
+
+    private onMessageListener listener;
+
     public Client() {
         handlerThread = new HandlerThread("Client");
         handlerThread.start();
         h = new Handler(handlerThread.getLooper());
     }
 
+    //This interface defines the type of messages I want to communicate to my owner
+    public interface onMessageListener {
+        // These methods are the different events and
+        // need to pass relevant arguments related to the event triggered
+        public void onObjectReady(String title);
+        // or when data has been loaded
+        public void onDataLoaded( List<SingleQuestion> singleQuestions, int i);
+    }
+
+    // Assign the listener implementing events interface that will receive the events
+    public void setCustomObjectListener(onMessageListener listener) {
+        this.listener = listener;
+    }
 
     public void onSend(String msg) {
         Log.d(TAG, "Sending: " + msg);
@@ -64,14 +81,23 @@ public class Client {
 
     public void onMessage(final int c) {
         rxString.append(Character.toChars(c));
-        if (rxString.toString().contains("}]")) {
+        if (rxString.toString().contains("}]") && rxString.toString().contains("}](")) {
+
+            if (rxString.charAt(rxString.length() - 1) == ')') {
+                slideNumber =  Character.getNumericValue(rxString.charAt(rxString.length() - 2));
+                listener.onDataLoaded(singleQuestionList, slideNumber);
+                rxString.setLength(0);
+            }
+        } else if (rxString.toString().contains("}]")){
             messageFromServer = rxString.toString();
             Log.d("Client", "Message received from server: " + messageFromServer);
             singleQuestionList = questionJSON.questionParseJSON(messageFromServer);
-            rxString.setLength(0);
+            Log.d("Client", "Listener fired");
+        }
+
+
         };
 
-    }
     public String onConnect(String host) {
         hostAddress = host;
         final String ip = hexToIp(hostAddress.toUpperCase());
@@ -116,7 +142,6 @@ public class Client {
                 while (true) {
                     c = in.read();
                     if (c == -1) continue;
-                    Log.d("Client", "onMessage for the client is called");
                     ctx.onMessage(c);
                 }
 

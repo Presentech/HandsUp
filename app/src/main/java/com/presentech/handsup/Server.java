@@ -109,6 +109,7 @@ public class Server {
     }
 
     public void onSend(String msg) {
+
         Log.d(TAG, "Sending: " + msg);
         json = msg;
         h.post(new Runnable() {
