@@ -10,12 +10,11 @@ import org.json.JSONObject;
 /**
  * Created by epren on 13/05/2016.
  */
-public class FeedbackJSON {
+public  class FeedbackJSON {
 
 
-public String FeedbackJSONGenerate(SingleFeedback feedback){
-    JSONObject obj = null;
-
+public static String FeedbackJSONGenerate(SingleFeedback feedback){
+    JSONObject obj = new JSONObject();
     try {
     obj.put("UUID", feedback.getUUID());
     obj.put("SLIDE", feedback.getSLIDE());
@@ -31,8 +30,8 @@ public String FeedbackJSONGenerate(SingleFeedback feedback){
     return obj.toString();
 }
 
-  public SingleFeedback FeedbackJSONParse(String jsonFeedback) {
-      JSONObject obj = null;
+  public static SingleFeedback FeedbackJSONParse(String jsonFeedback) {
+      JSONObject obj = new JSONObject();
 
       try {
           obj = new JSONObject(jsonFeedback) ;
@@ -41,21 +40,36 @@ public String FeedbackJSONGenerate(SingleFeedback feedback){
       }
 
       SingleFeedback feedbackJSONParse = new SingleFeedback();
-try{
-        feedbackJSONParse.setUUID(obj.getString("UUID"));
-        feedbackJSONParse.setSLIDE(obj.getInt("SLIDE"));
-        feedbackJSONParse.setSLIDE_ITERATION(obj.getInt("SLIDE_ITERATION"));
-        feedbackJSONParse.setQUESTION(obj.getInt("SLIDE_ITERATION"));
-        feedbackJSONParse.setABC(obj.getInt("ABC"));
-        feedbackJSONParse.setGOOD_MEH_BAD(obj.getInt("GOOD_MEH_BAD"));
-        feedbackJSONParse.setTEXT(obj.getString("TEXT"));
-        feedbackJSONParse.setTIME_RECEIVED(obj.getLong("TIME_RECEIVED"));
-}
-catch (JSONException e) {
-    e.printStackTrace();
-}
-//TODO - is this return ok - what with the exceptions that can happen..
+
+
+try { feedbackJSONParse.setUUID(obj.getString("UUID")); }
+catch (JSONException e) {feedbackJSONParse.setUUID(null);}
+      try {feedbackJSONParse.setSLIDE(obj.getInt("SLIDE"));}
+      catch (JSONException e) { feedbackJSONParse.setSLIDE(-1);}
+      try {feedbackJSONParse.setSLIDE_ITERATION(obj.getInt("SLIDE_ITERATION"));}
+      catch (JSONException e) {feedbackJSONParse.setSLIDE_ITERATION(-1);}
+      try {feedbackJSONParse.setQUESTION(obj.getInt("SLIDE_ITERATION"));}
+      catch (JSONException e) {feedbackJSONParse.setQUESTION(-1);}
+      try {feedbackJSONParse.setABC(obj.getInt("ABC"));}
+      catch (JSONException e) {feedbackJSONParse.setABC(-1);}
+      try {feedbackJSONParse.setGOOD_MEH_BAD(obj.getInt("GOOD_MEH_BAD"));}
+      catch (JSONException e) {feedbackJSONParse.setGOOD_MEH_BAD(-1);}
+      try {feedbackJSONParse.setTIME_RECEIVED(obj.getLong("TIME_RECEIVED"));}
+      catch (JSONException e) {feedbackJSONParse.setTIME_RECEIVED(-1);}
+      try {feedbackJSONParse.setTEXT(obj.getString("TEXT"));}
+      catch (JSONException e) {feedbackJSONParse.setTEXT(null);}
+
+
+
       return  feedbackJSONParse;
     }
+
+
+
+
+
+
+
+
 
 }

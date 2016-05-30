@@ -43,13 +43,9 @@ public class SingleFeedback {
        this.TIME_RECEIVED = inTimeReceived;
     }
 
-    public String getUUID() {
-        return UUID;
-    }
+    public String getUUID() {return UUID;}
 
-    public void setUUID(String UUID) {
-        this.UUID = UUID;
-    }
+    public void setUUID(String UUID) {this.UUID = UUID;}
 
     public double getSLIDE() {
         return SLIDE;

@@ -48,7 +48,6 @@
         android:layout_below="@+id/passwordET"
         android:layout_centerHorizontal="true"
         android:clickable="true"
-        android:onClick="saveLoginDetails"
-        android:hint="Check to save login details for current session" />
+        android:onClick="saveLoginDetails" />
 
 </RelativeLayout>

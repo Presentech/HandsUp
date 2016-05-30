@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.preference.PreferenceActivity;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,20 +17,39 @@ import android.view.Display;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONObject;
+
+import java.util.Date;
+
+import cz.msebera.android.httpclient.Header;
+
 
 /**
  *Created by Edward Prentice on 9/03/2016
  */
-public class FeedbackActivity extends AppCompatActivity {
+//public class FeedbackActivity extends AppCompatActivity  implements View.OnClickListener {
+public class FeedbackActivity extends AppCompatActivity   {
 
     String mode = "AUDIENCE";
     private Bitmap background, arrow_left, arrow_right, tick, question, refresh, returnA, returnB, returnC;
     private navDrawer drawer;
+    EditText messageInput;
+    ImageButton sendButton;
 
     @Override
     protected void onDestroy(){
@@ -41,6 +61,22 @@ public class FeedbackActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feedback);
 
+        ///////////////////////////////////////////////////////////////EDSADDITION
+        // get our input field by its ID
+        messageInput = (EditText) findViewById(R.id.editText);
+        // get our button by its ID
+        sendButton = (ImageButton) findViewById(R.id.imageButton10);
+
+        // set its click listener
+       // sendButton.setOnClickListener(this);
+
+
+
+
+
+
+
+        /////////////////////////////////////////////////
 
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
@@ -69,7 +105,59 @@ public class FeedbackActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
+
     }
+
+//    @Override
+//    public void onClick(View v) {
+////        postMessage();
+//    }
+
+//
+//    private void postMessage() {
+//
+//        String text = messageInput.getText().toString();
+//
+//        // return if the text is blank
+//        if (text.equals("")) {
+//            return;
+//        }
+//
+//
+//        RequestParams params = new RequestParams();
+//
+//        // set our JSON object
+//        params.put("text", text);
+//
+//        // create our HTTP client
+//        AsyncHttpClient client = new AsyncHttpClient();
+//
+//        client.post(MESSAGES_ENDPOINT, params, new JsonHttpResponseHandler() {
+//
+//            @Override
+//            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        messageInput.setText("");
+//                    }
+//                });
+//            }
+//
+//            @Override
+//            public void onFailure(int statusCode, PreferenceActivity.Header[] headers, String responseString, Throwable throwable) {
+//                Toast.makeText(
+//                        getApplicationContext(),
+//                        "Something went wrong :(",
+//                        Toast.LENGTH_LONG
+//                ).show();
+//            }
+//        });
+//
+//
+//
+//    }
+
     public void changeViewWidths(int width){
 
         double columnWidthDouble = width*0.8;
@@ -158,4 +246,9 @@ public class FeedbackActivity extends AppCompatActivity {
         // Sync the toggle state after onRestoreInstanceState has occurred.
         drawer.mDrawerToggle.syncState();
     }
+
+
+
+
+
 }

@@ -147,7 +147,7 @@ public class GraphicsHandler extends View {
 
             for (int i=2; i<polyPath.length-1; i = i+2) {
                 path.lineTo(polyPath[i]*screenWidth, polyPath[i+1]*screenHeight);
-            }
+        }
             path.close();
 
         }
@@ -264,4 +264,3 @@ public class GraphicsHandler extends View {
     }
 
 }
-

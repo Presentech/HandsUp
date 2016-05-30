@@ -1,19 +1,23 @@
 package com.presentech.handsup;
 
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class messagingFragment extends Fragment {
+public class messagingFragment extends Fragment{
 
     public SingleFeedback[] feedbackArray = new SingleFeedback[10];
     String[] messagesTemp = {"Woo Electronics!", "Boo Electronics!", "SwEng was so much fun OMFG xox", "See you in October!"};

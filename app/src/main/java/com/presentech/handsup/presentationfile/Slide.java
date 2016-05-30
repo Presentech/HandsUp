@@ -22,10 +22,11 @@ public class Slide {
     List<Video> video;
     List<Audio> audio;
     List<Interactable> interactable;
+    List<Question> question;
 
     public Slide(int slideID, int nextSlide, int duration, List<Text> text, List<Shape> shape,
                  List<Polygon> polygon, List<Image> image, List<Video> video, List<Audio> audio,
-                 List<Interactable> interactable) {
+                 List<Interactable> interactable, List<Question> question) {
         this.slideID = slideID;
         this.nextSlide = nextSlide;
         this.duration = duration;
@@ -36,6 +37,7 @@ public class Slide {
         this.video = video;
         this.audio = audio;
         this.interactable = interactable;
+        this.question = question;
     }
 
     public int getSlideID() {
@@ -78,9 +80,7 @@ public class Slide {
         return interactable;
     }
 
-
-
-
-
-
+    public List<Question> getQuestion() {
+        return question;
+    }
 }

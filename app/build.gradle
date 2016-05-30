@@ -42,17 +42,22 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
 
     testCompile 'org.robolectric:robolectric:3.0'
-    compile 'com.android.support:appcompat-v7:23.1.1'
-    compile 'com.android.support:design:23.1.1'
-    androidTestCompile 'com.android.support:support-annotations:23.1.1'
+    testCompile "org.mockito:mockito-core:1.+"
+    androidTestCompile 'com.android.support:support-annotations:23.2.0'
     androidTestCompile 'com.android.support.test:runner:0.4.1'
     androidTestCompile 'com.android.support.test:rules:0.4.1'
-    testCompile 'junit:junit:4.12'
-    compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
-       transitive = true;
-    }
+    androidTestCompile 'org.mockito:mockito-core:1.+'
+    androidTestCompile "com.google.dexmaker:dexmaker:1.2"
+    androidTestCompile "com.google.dexmaker:dexmaker-mockito:1.2"
+    compile 'com.android.support:appcompat-v7:23.2.0'
+    compile 'com.android.support:design:23.2.0'
+    compile 'com.androidplot:androidplot-core:0.9.8'
+    compile 'com.android.support:support-v4:23.2.0'
 }
-
+//
+//    compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
+//        transitive = true;
+//    }
 repositories {
     maven { url 'http://clojars.org/repo' }
     maven { url 'https://maven.fabric.io/public' }
@@ -63,5 +68,5 @@ dependencies {
     compile 'com.loopj.android:android-async-http:1.4.9' // for our HTTP requests later
     compile 'com.google.code.gson:gson:2.4' // for parsing JSON
     compile 'com.squareup.picasso:picasso:2.1.1' // for image rendering
-    //compile 'com.google.android.gms:play-services-analytics:9.0.0'
+   // compile 'com.google.android.gms:play-services-analytics:9.0.0'
 }
