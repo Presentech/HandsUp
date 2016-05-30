@@ -239,11 +239,16 @@ public class FeedbackActivity extends AppCompatActivity   {
 
             @Override
             public void onClick(View arg0) {
-                SingleFeedback singleFeedback = new SingleFeedback();
-                singleFeedback.setUUID("" + getIpAddress());
-                singleFeedback.setTEXT(messageInput.getText().toString());
-                String sendThis = feedbackJSON.FeedbackJSONGenerate(singleFeedback);
-                client.onSend(sendThis);
+                if (messageInput.getText().toString().length() < 300) {
+                    SingleFeedback singleFeedback = new SingleFeedback();
+                    singleFeedback.setUUID("" + getIpAddress());
+                    singleFeedback.setTEXT(messageInput.getText().toString());
+                    String sendThis = feedbackJSON.FeedbackJSONGenerate(singleFeedback);
+                    client.onSend(sendThis);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Message too long. Over 300 character limit", Toast.LENGTH_LONG);
+                }
+
             }
 
         });
