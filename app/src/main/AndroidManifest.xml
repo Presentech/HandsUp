@@ -71,7 +71,7 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".ReviewFeedback"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="landscape" />
         <activity android:name=".aboutActivity" />
         <activity android:name=".AudienceTutorial" />
         <!-- <activity android:name=".presentationfile.ExampleStackedBars" /> -->
@@ -79,9 +79,12 @@
         <activity android:name=".TestActivity" />
         <activity
             android:name=".ReviewFeedbackGMB"
-            android:label="@string/title_activity_review_feedback_gmb" />
-        <activity android:name=".ReviewFeedbackSelect" />
-        <activity android:name=".ReviewFeedbackMessages" />
+            android:label="@string/title_activity_review_feedback_gmb"
+            android:screenOrientation="landscape"/>
+        <activity android:name=".ReviewFeedbackSelect"
+            android:screenOrientation="landscape"/>
+        <activity android:name=".ReviewFeedbackMessages"
+            android:screenOrientation="landscape"/>
     </application>
 
 </manifest>
