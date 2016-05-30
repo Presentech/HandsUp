@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,12 +16,13 @@ public class questionJSON {
     private String abcJName = "abcBool";
     private String goodmehbadJName = "gmbBool";
     private String questionTextJName = "QuestionText";
-    private JSONObject jo = new JSONObject();
+    private JSONObject jo;
     private JSONArray ja = new JSONArray();
 
     public String questionCreateJSON(List<SingleQuestion> listIn) {
         for (SingleQuestion singleIn : listIn) {
             try {
+                jo = new JSONObject();
                 jo.put(SLIDEJName, singleIn.getSLIDE());
                 jo.put(QUESTIONJName, singleIn.getQUESTION());
                 jo.put(abcJName, singleIn.isAbc());
@@ -31,7 +33,7 @@ public class questionJSON {
             }
             ja.put(jo);
         }
-        return jo.toString();
+        return ja.toString();
     }
 
     public List<SingleQuestion> questionParseJSON(String JSONQuestions) {
@@ -40,10 +42,10 @@ public class questionJSON {
         boolean readabc;
         boolean readgoodmehbad;
         String readquestionText;
-
-        List<SingleQuestion> parsedList = null;
+        JSONArray ja = new JSONArray();
+        List<SingleQuestion> parsedList = new ArrayList<SingleQuestion>();
         try {
-            JSONArray ja = new JSONArray(JSONQuestions);
+            ja = new JSONArray(JSONQuestions);
         } catch (JSONException e) {
             e.printStackTrace();
         }

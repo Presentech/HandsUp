@@ -12,6 +12,8 @@ import java.io.PrintWriter;
 import java.io.Reader;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Noor on 27/05/2016.
@@ -32,6 +34,8 @@ public class Client {
     StringBuffer rxString = new StringBuffer();
     String messageFromServer = new String();
 
+    List<SingleQuestion> singleQuestionList = new ArrayList<>();
+    questionJSON questionJSON = new questionJSON();
     public Client() {
         handlerThread = new HandlerThread("Client");
         handlerThread.start();
@@ -59,10 +63,13 @@ public class Client {
     }
 
     public void onMessage(final int c) {
-
         rxString.append(Character.toChars(c));
-        messageFromServer = rxString.toString();
-        Log.d("Client", rxString.toString());
+        if (rxString.toString().contains("}]")) {
+            messageFromServer = rxString.toString();
+            Log.d("Client", "Message received from server: " + messageFromServer);
+            singleQuestionList = questionJSON.questionParseJSON(messageFromServer);
+            rxString.setLength(0);
+        };
 
     }
     public String onConnect(String host) {

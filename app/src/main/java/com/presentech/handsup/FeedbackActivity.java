@@ -15,11 +15,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewDebug;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -36,7 +38,9 @@ import com.loopj.android.http.RequestParams;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -71,12 +75,16 @@ public class FeedbackActivity extends AppCompatActivity   {
     ImageButton badButton;
     ImageButton sendButton;
 
+    int count = 0;
+
     //Connectivity requirements
     MyApplication application;
     Client client;
 
     //Creating JSON objects for sending
     FeedbackJSON feedbackJSON = new FeedbackJSON();
+    questionJSON questionJSON = new questionJSON();
+    List<SingleQuestion> singleQuestionList = new ArrayList<>();
 
     @Override
     protected void onDestroy(){
@@ -101,6 +109,7 @@ public class FeedbackActivity extends AppCompatActivity   {
         sendButton = (ImageButton) findViewById(R.id.sendButton);
 
         slideContentTextView = (TextView)findViewById(R.id.slideContentTextView);
+        slideTitleTextView = (TextView) findViewById(R.id.slideTitleTextView);
 
         //add button click listeners to all buttons
         addListenerOnButton();
@@ -138,7 +147,17 @@ public class FeedbackActivity extends AppCompatActivity   {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                slideContentTextView.setText(client.messageFromServer);
+                Log.d("FeedbackActivity", client.rxString.toString());
+                Log.d("FeedbackActivity", client.singleQuestionList.get(0).getQuestionText());
+                singleQuestionList = client.singleQuestionList;
+                //Log.d("FeedbackActivity", Integer.toString(singleQuestionList.size()));
+                slideContentTextView.setText(singleQuestionList.get(count).getQuestionText());
+                String title = ("Slide" + singleQuestionList.get(count).getSLIDE() + " "+ "Q" + singleQuestionList.get(count).getQUESTION());
+                slideTitleTextView.setText(title);
+                count++;
+                if (count == singleQuestionList.size()){
+                    count = 0;
+                };
 
             }
         });

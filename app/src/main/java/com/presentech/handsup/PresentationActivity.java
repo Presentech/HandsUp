@@ -80,6 +80,8 @@ public class PresentationActivity extends AppCompatActivity {
 
 
     List<AnimatorSet> animations = new ArrayList<AnimatorSet>();
+    List<SingleQuestion> singleQuestions = new ArrayList<SingleQuestion>();
+    questionJSON questionJSON = new questionJSON();
 
     //Connectivity requirements
     MyApplication application;
@@ -92,6 +94,10 @@ public class PresentationActivity extends AppCompatActivity {
         viewFlipper = (ViewFlipper) findViewById(R.id.viewflipper);
         setTitle(R.string.presentation_container);
         Bundle b = this.getIntent().getExtras();
+
+        application = (MyApplication) getApplication();
+        presenterServer = application.getServer();
+
         //String id = b.getParcelable(SyncStateContract.Constants.CUSTOM_LISTING);
         //presentationFile = (PresentationFile) this.getIntent().getSerializableExtra("pF");
         try {
@@ -113,8 +119,11 @@ public class PresentationActivity extends AppCompatActivity {
 
         presentation_db = new feedbackDatabaseHandler(this, presentationName);
 
+
+
         getScreenSize();
         populateSlides();
+        sendSlideContent();
 
         for (int i = 0; i < animations.size(); i++) {
             animations.get(i).start();
@@ -149,8 +158,7 @@ public class PresentationActivity extends AppCompatActivity {
             }
         }
 
-        application = (MyApplication) getApplication();
-        presenterServer = application.getServer();
+
 
         //Step 4 - Setup the listener for this object
         presenterServer.setCustomObjectListener(new Server.onMessageListener() {
@@ -289,40 +297,6 @@ public class PresentationActivity extends AppCompatActivity {
     }
 
     public void addGraphics(Shape s, Polygon p) {
-//        if (p != null){
-//        if (p.getSourceFile() != null) {
-//
-//            String next[] = {};
-//            List<String[]> list = new ArrayList<String[]>();
-//
-//            try {
-//                CSVReader reader = new CSVReader(new InputStreamReader(getAssets().open(p.getSourceFile())));
-//                while (true) {
-//                    next = reader.readNext();
-//                    if (next != null) {
-//                        list.add(next);
-//                    } else {
-//                        break;
-//                    }
-//                }
-//
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            float polyPath[] = {};
-//            for (int i = 0; i<next.length; i++) {
-//                polyPath[i] = Float.parseFloat(next[i]);
-//            }
-//
-//        }
-
-                    ArrayList x = new ArrayList();
-                    ArrayList y = new ArrayList();
-//                    for (int i = 0; i < list.size(); i++) {
-//                        x.add(list.get(i)[0]);
-////                        y.add(list.get(i)[1]);
-//                    }
-
 
             GraphicsHandler pH = new GraphicsHandler(this, p, s, screenWidth, screenHeight, presentationFile.getDefaults());
             pH.draw(canvas);
@@ -354,12 +328,6 @@ public class PresentationActivity extends AppCompatActivity {
             }
 
 
-//
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-
-//        }
     }
 
     public void getScreenSize() {
@@ -442,6 +410,7 @@ public class PresentationActivity extends AppCompatActivity {
             int numberOfPolygons = slides.get(i).getPolygon().size();
             int numberOfInteractables = slides.get(i).getInteractable().size();
             int numberOfVideos = slides.get(i).getVideo().size();
+            int numberOfQuestions = slides.get(i).getQuestion().size();
 
             slide = new RelativeLayout(this);
             RelativeLayout.LayoutParams llp = new RelativeLayout.LayoutParams(
@@ -529,11 +498,26 @@ public class PresentationActivity extends AppCompatActivity {
                 }
             }
 
-
+            if (numberOfQuestions > 0) {
+                for (int j = 0; j< numberOfQuestions; j++){
+                    Question question = slides.get(i).getQuestion().get(j);
+                    SingleQuestion singleQuestion = new SingleQuestion(slides.get(i).getSlideID(), j+1, true, false, question.getQuestion() );
+                    singleQuestions.add(singleQuestion);
+                    }
+            }
             viewFlipper.addView(slide);
         }
 
 
+        }
+
+    public void sendSlideContent(){
+        if (singleQuestions.size() > 0){
+           String sendThis = questionJSON.questionCreateJSON(singleQuestions);
+            Log.d("PresentationActivity", "Send slide content now");
+            presenterServer.onSend(sendThis);
+
+        }
     }
 
     public void getPresentation() throws IOException, XmlPullParserException{

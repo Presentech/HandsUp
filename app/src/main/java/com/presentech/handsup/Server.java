@@ -44,6 +44,7 @@ public class Server {
     Handler h;
     HandlerThread tx;
     PrintWriter writer;
+    String json;
 
     public Server(){
 
@@ -106,11 +107,11 @@ public class Server {
 
     public void onSend(String msg) {
         Log.d(TAG, "Sending: " + msg);
-
+        json = msg;
         h.post(new Runnable() {
             @Override
             public void run() {
-                writer.println("incoming from server");
+                writer.println(json);
                 writer.flush();
                 try {
                     s.getOutputStream().flush();
