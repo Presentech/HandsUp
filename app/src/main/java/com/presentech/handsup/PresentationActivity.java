@@ -254,7 +254,7 @@ public class PresentationActivity extends AppCompatActivity {
 
     public void addGraphics(Shape s, Polygon p) {
 
-        GraphicsHandler pH = new GraphicsHandler(this, x, y, p, s, screenWidth, screenHeight);
+        GraphicsHandler pH = new GraphicsHandler(this, p, s, screenWidth, screenHeight, presentationFile.getDefaults());
         pH.draw(canvas);
         slide.addView(pH);
 
