@@ -12,7 +12,7 @@ public class ReviewFeedbackSelect extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review_feedback_select);
-        setTitle("Review Feedback");
+        setTitle("Select Feedback Type");
     }
 
     public  void doABC(View v){

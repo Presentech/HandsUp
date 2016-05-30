@@ -102,7 +102,6 @@ public class ReviewFeedbackMessages extends ListActivity  {
     }
 
     public String timeConvert(long time_recieved) {
-        time_recieved = System.currentTimeMillis();
         Date dt = new Date(time_recieved);
         SimpleDateFormat fmt = new SimpleDateFormat("hh:mm:ss");
         String time = fmt.format(dt);

@@ -54,20 +54,26 @@ public class ReviewFeedbackTest {
 
     @Test
     public void writeThreeInRead3Out() throws Exception {
-        this.getSingleFeedbackSetupExample1();
-        this.getSingleFeedbackSetupExample2();
-        this.getSingleFeedbackSetupExample3();
-        this.getSingleFeedbackSetupExample4();
-        this.getSingleFeedbackSetupExample5();
-        this.getSingleFeedbackSetupExample6();
+        //this.getSingleFeedbackSetupExample1();
+        //this.getSingleFeedbackSetupExample2();
+        //this.getSingleFeedbackSetupExample3();
+        //this.getSingleFeedbackSetupExample4();
+        //this.getSingleFeedbackSetupExample5();
+        //this.getSingleFeedbackSetupExample6();
 
+        getSingleFeedbackSetupExample1();
+        getSingleFeedbackSetupExample2();
+        getSingleFeedbackSetupExample3();
+        getSingleFeedbackSetupExample4();
+        getSingleFeedbackSetupExample5();
+        getSingleFeedbackSetupExample6();
 
-        database.addFeedbackCollumn(inputFeedback1);
+        /*database.addFeedbackCollumn(inputFeedback1);
         database.addFeedbackCollumn(inputFeedback2);
         database.addFeedbackCollumn(inputFeedback3);
         database.addFeedbackCollumn(inputFeedback4);
         database.addFeedbackCollumn(inputFeedback5);
-        database.addFeedbackCollumn(inputFeedback6);
+        database.addFeedbackCollumn(inputFeedback6);*/
 
 
         //List<SingleFeedback> allFeedback;
@@ -97,6 +103,8 @@ public class ReviewFeedbackTest {
         inputFeedback1.setGOOD_MEH_BAD(gmb);
         inputFeedback1.setTEXT(testText);
         inputFeedback1.setTIME_RECEIVED(exampleTime);
+
+        database.addFeedbackCollumn(inputFeedback1);
     }
 
     private void getSingleFeedbackSetupExample2(){
@@ -116,6 +124,9 @@ public class ReviewFeedbackTest {
         inputFeedback2.setGOOD_MEH_BAD(gmb);
         inputFeedback2.setTEXT(testText);
         inputFeedback2.setTIME_RECEIVED(exampleTime);
+
+        database.addFeedbackCollumn(inputFeedback2);
+
     }
     private void getSingleFeedbackSetupExample3(){
         uuid3 = UUID.randomUUID();//Example UUID
@@ -125,7 +136,7 @@ public class ReviewFeedbackTest {
         int abc = 1;
         int gmb = 3;
         String testText = "mmmm";
-        Long exampleTime = 1L;
+        Long exampleTime = 1340934830L;
         inputFeedback3.setUUID(uuid3.toString());
         inputFeedback3.setSLIDE(slide);
         inputFeedback3.setSLIDE_ITERATION(iteration);
@@ -134,6 +145,8 @@ public class ReviewFeedbackTest {
         inputFeedback3.setGOOD_MEH_BAD(gmb);
         inputFeedback3.setTEXT(testText);
         inputFeedback3.setTIME_RECEIVED(exampleTime);
+
+        database.addFeedbackCollumn(inputFeedback3);
     }
 
     private void getSingleFeedbackSetupExample4(){
@@ -144,15 +157,17 @@ public class ReviewFeedbackTest {
         int abc = 1;
         int gmb = 3;
         String testText = "ddddd";
-        Long exampleTime = 1L;
-        inputFeedback3.setUUID(uuid3.toString());
-        inputFeedback3.setSLIDE(slide);
-        inputFeedback3.setSLIDE_ITERATION(iteration);
-        inputFeedback3.setQUESTION(question);
-        inputFeedback3.setABC(abc);
-        inputFeedback3.setGOOD_MEH_BAD(gmb);
-        inputFeedback3.setTEXT(testText);
-        inputFeedback3.setTIME_RECEIVED(exampleTime);
+        Long exampleTime = 15409853049L;
+        inputFeedback4.setUUID(uuid3.toString());
+        inputFeedback4.setSLIDE(slide);
+        inputFeedback4.setSLIDE_ITERATION(iteration);
+        inputFeedback4.setQUESTION(question);
+        inputFeedback4.setABC(abc);
+        inputFeedback4.setGOOD_MEH_BAD(gmb);
+        inputFeedback4.setTEXT(testText);
+        inputFeedback4.setTIME_RECEIVED(exampleTime);
+
+        database.addFeedbackCollumn(inputFeedback4);
     }
 
     private void getSingleFeedbackSetupExample5(){
@@ -163,15 +178,17 @@ public class ReviewFeedbackTest {
         int abc = 1;
         int gmb = 2;
         String testText = "hhhhh";
-        Long exampleTime = 1L;
-        inputFeedback3.setUUID(uuid3.toString());
-        inputFeedback3.setSLIDE(slide);
-        inputFeedback3.setSLIDE_ITERATION(iteration);
-        inputFeedback3.setQUESTION(question);
-        inputFeedback3.setABC(abc);
-        inputFeedback3.setGOOD_MEH_BAD(gmb);
-        inputFeedback3.setTEXT(testText);
-        inputFeedback3.setTIME_RECEIVED(exampleTime);
+        Long exampleTime = 1464638402L;
+        inputFeedback5.setUUID(uuid3.toString());
+        inputFeedback5.setSLIDE(slide);
+        inputFeedback5.setSLIDE_ITERATION(iteration);
+        inputFeedback5.setQUESTION(question);
+        inputFeedback5.setABC(abc);
+        inputFeedback5.setGOOD_MEH_BAD(gmb);
+        inputFeedback5.setTEXT(testText);
+        inputFeedback5.setTIME_RECEIVED(exampleTime);
+
+        database.addFeedbackCollumn(inputFeedback5);
     }
 
     private void getSingleFeedbackSetupExample6(){
@@ -182,14 +199,16 @@ public class ReviewFeedbackTest {
         int abc = 2;
         int gmb = 1;
         String testText = null;
-        Long exampleTime = 1L;
-        inputFeedback3.setUUID(uuid3.toString());
-        inputFeedback3.setSLIDE(slide);
-        inputFeedback3.setSLIDE_ITERATION(iteration);
-        inputFeedback3.setQUESTION(question);
-        inputFeedback3.setABC(abc);
-        inputFeedback3.setGOOD_MEH_BAD(gmb);
-        inputFeedback3.setTEXT(testText);
-        inputFeedback3.setTIME_RECEIVED(exampleTime);
+        Long exampleTime = 154093485309834L;
+        inputFeedback6.setUUID(uuid3.toString());
+        inputFeedback6.setSLIDE(slide);
+        inputFeedback6.setSLIDE_ITERATION(iteration);
+        inputFeedback6.setQUESTION(question);
+        inputFeedback6.setABC(abc);
+        inputFeedback6.setGOOD_MEH_BAD(gmb);
+        inputFeedback6.setTEXT(testText);
+        inputFeedback6.setTIME_RECEIVED(exampleTime);
+
+        database.addFeedbackCollumn(inputFeedback6);
     }
 }
