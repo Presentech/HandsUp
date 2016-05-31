@@ -6,10 +6,11 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-
 import com.androidplot.pie.PieChart;
 import com.androidplot.pie.Segment;
 import com.androidplot.pie.SegmentFormatter;
+import com.androidplot.ui.XLayoutStyle;
+import com.androidplot.ui.YLayoutStyle;
 
 import java.util.List;
 
@@ -72,11 +73,21 @@ public class ReviewFeedback extends Activity {
 
         questionABC = (PieChart) findViewById(R.id.plot); //get pie plot
 
-        SegmentFormatter segmentFormat = new SegmentFormatter();
-        segmentFormat.configure(this, R.xml.segment_formatter);
+        SegmentFormatter segmentFormatA = new SegmentFormatter();
+        segmentFormatA.configure(this, R.xml.segment_formatter);
+
+        SegmentFormatter segmentFormatB = new SegmentFormatter();
+        segmentFormatB.configure(this, R.xml.segment_formatter2);
+
+        SegmentFormatter segmentFormatC = new SegmentFormatter();
+        segmentFormatC.configure(this, R.xml.segment_formatter3);
 
 
-        questionABC.setTitle("Answers to question number " + Integer.toString(j + 1));
+
+
+        questionABC.setTitle("Answers to question " + Integer.toString(j + 1));
+
+        questionABC.getTitleWidget().position(5, XLayoutStyle.ABSOLUTE_FROM_LEFT, 0, YLayoutStyle.ABSOLUTE_FROM_TOP);
 
         //set button visibilities depending on question number
         if (j == 0) {
@@ -95,15 +106,15 @@ public class ReviewFeedback extends Activity {
         //add segments
         if (a > 0) {
             Segment segA = new Segment("A = "+ a,a);
-            questionABC.addSeries(segA, segmentFormat);
+            questionABC.addSeries(segA, segmentFormatA);
         }
         if (b > 0) {
             Segment segB = new Segment("B = " +b,b);
-            questionABC.addSeries(segB, segmentFormat);
+            questionABC.addSeries(segB, segmentFormatB);
         }
         if (c > 0) {
             Segment segC = new Segment("C = " + c,c);
-            questionABC.addSeries(segC, segmentFormat);
+            questionABC.addSeries(segC, segmentFormatC);
         }
 
     }

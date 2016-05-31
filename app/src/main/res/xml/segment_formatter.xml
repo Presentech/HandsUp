@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config
-    fillPaint.color="@color/backgroundgrey"
-    innerEdgePaint.color="@color/presentechBlue"
-    outerEdgePaint.color="@color/presentechBlue"
-    radialEdgePaint.color="@color/presentechBlue"
+    fillPaint.color="@color/chart_green"
+    innerEdgePaint.color="@color/chart_green"
+    outerEdgePaint.color="@color/chart_green"
+    radialEdgePaint.color="@color/lightgrey"
+    labelPaint.textSize="15sp"
     />

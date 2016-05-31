@@ -1,6 +1,7 @@
 package com.presentech.handsup;
 
 /*Created by Jack Bardsley*/
+/*Modified by Connor Stoner*/
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -10,6 +11,8 @@ import android.view.View;
 import com.androidplot.pie.PieChart;
 import com.androidplot.pie.Segment;
 import com.androidplot.pie.SegmentFormatter;
+import com.androidplot.ui.XLayoutStyle;
+import com.androidplot.ui.YLayoutStyle;
 
 import java.util.List;
 
@@ -76,11 +79,19 @@ public class ReviewFeedbackGMB extends Activity {
 
         slideGMB = (PieChart) findViewById(R.id.plot); //get pie plot
 
-        SegmentFormatter segmentFormat = new SegmentFormatter();
-        segmentFormat.configure(this, R.xml.segment_formatter);
+        SegmentFormatter segmentFormatA = new SegmentFormatter();
+        segmentFormatA.configure(this, R.xml.segment_formatter);
+
+        SegmentFormatter segmentFormatB = new SegmentFormatter();
+        segmentFormatB.configure(this, R.xml.segment_formatter2);
+
+        SegmentFormatter segmentFormatC = new SegmentFormatter();
+        segmentFormatC.configure(this, R.xml.segment_formatter3);
 
 
-        slideGMB.setTitle("Responses from Slide Number " + Integer.toString(j + 1));
+        slideGMB.setTitle("Responses from Slide " + Integer.toString(j + 1));
+
+        slideGMB.getTitleWidget().position(5, XLayoutStyle.ABSOLUTE_FROM_LEFT, 0, YLayoutStyle.ABSOLUTE_FROM_TOP);
 
         //set button visibilities depending on question number
         if (j == 0) {
@@ -99,15 +110,15 @@ public class ReviewFeedbackGMB extends Activity {
         //add segments
         if (a > 0) {
             Segment segA = new Segment("Good = "+a, a);
-            slideGMB.addSeries(segA, segmentFormat);
+            slideGMB.addSeries(segA, segmentFormatA);
         }
         if (b > 0) {
             Segment segB = new Segment("Meh = " +b, b);
-            slideGMB.addSeries(segB, segmentFormat);
+            slideGMB.addSeries(segB, segmentFormatB);
         }
         if (c > 0) {
             Segment segC = new Segment("Bad = " +c, c);
-            slideGMB.addSeries(segC, segmentFormat);
+            slideGMB.addSeries(segC, segmentFormatC);
         }
 
     }

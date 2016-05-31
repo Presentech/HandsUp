@@ -62,7 +62,7 @@ public class ReviewFeedbackMessages extends ListActivity  {
             if ((int)feedbackArray[i].getSLIDE() == j + 1) {
                 if (feedbackArray[i].getTEXT() != null) {
                     String convertedTime = timeConvert(feedbackArray[i].getTIME_RECEIVED());
-                    messageList.add(feedbackArray[i].getTEXT()+ "\n" + convertedTime);
+                    messageList.add(feedbackArray[i].getTEXT()+ "\n" + "(" + convertedTime + ")");
                     adapter.notifyDataSetChanged();
                 }
             }
