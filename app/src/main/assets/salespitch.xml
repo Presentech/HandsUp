@@ -16,6 +16,75 @@
     </defaults>
     <slide slideID="0" duration="5" nextSlide="1">
         <text duration="-1" ystart="0.8" starttime="0" xstart="0.3" fontsize="30" font="Impact" fontcolour="596984">
+            <b>B</b>
+        </text>
+        <text duration="-1" ystart="0.8" starttime="50" xstart="0.3" fontsize="30" font="Impact" fontcolour="596984">
+            <b>BR</b>
+        </text>
+        <text duration="-1" ystart="0.8" starttime="100" xstart="0.3" fontsize="30" font="Impact" fontcolour="596984">
+            <b>BRO</b>
+        </text>
+        <text duration="-1" ystart="0.8" starttime="150" xstart="0.3" fontsize="30" font="Impact" fontcolour="596984">
+            <b>BROU</b>
+        </text>
+        <text duration="-1" ystart="0.8" starttime="200" xstart="0.3" fontsize="30" font="Impact" fontcolour="596984">
+            <b>BROUG</b>
+        </text>
+        <text duration="-1" ystart="0.8" starttime="250" xstart="0.3" fontsize="30" font="Impact" fontcolour="596984">
+            <b>BROUGH</b>
+        </text>
+        <text duration="-1" ystart="0.8" starttime="300" xstart="0.3" fontsize="30" font="Impact" fontcolour="596984">
+            <b>BROUGHT </b>
+        </text>
+        <text duration="-1" ystart="0.8" starttime="350" xstart="0.3" fontsize="30" font="Impact" fontcolour="596984">
+            <b>BROUGHT T</b>
+        </text>
+        <text duration="-1" ystart="0.8" starttime="400" xstart="0.3" fontsize="30" font="Impact" fontcolour="596984">
+            <b>BROUGHT TO</b>
+        </text>
+        <text duration="-1" ystart="0.8" starttime="450" xstart="0.3" fontsize="30" font="Impact" fontcolour="596984">
+            <b>BROUGHT TO Y</b>
+        </text>
+        <text duration="-1" ystart="0.8" starttime="500" xstart="0.3" fontsize="30" font="Impact" fontcolour="596984">
+            <b>BROUGHT TO YO</b>
+        </text>
+        <text duration="-1" ystart="0.8" starttime="550" xstart="0.3" fontsize="30" font="Impact" fontcolour="596984">
+            <b>BROUGHT TO YOU</b>
+        </text>
+        <text duration="-1" ystart="0.8" starttime="600" xstart="0.3" fontsize="30" font="Impact" fontcolour="596984">
+            <b>BROUGHT TO YOU B</b>
+        </text>
+        <text duration="-1" ystart="0.8" starttime="650" xstart="0.3" fontsize="30" font="Impact" fontcolour="596984">
+            <b>BROUGHT TO YOU BY</b>
+        </text>
+        <text duration="-1" ystart="0.8" starttime="700" xstart="0.3" fontsize="30" font="Impact" fontcolour="596984">
+            <b>BROUGHT TO YOU BY P</b>
+        </text>
+        <text duration="-1" ystart="0.8" starttime="750" xstart="0.3" fontsize="30" font="Impact" fontcolour="596984">
+            <b>BROUGHT TO YOU BY PR</b>
+        </text>
+        <text duration="-1" ystart="0.8" starttime="800" xstart="0.3" fontsize="30" font="Impact" fontcolour="596984">
+            <b>BROUGHT TO YOU BY PRE</b>
+        </text>
+        <text duration="-1" ystart="0.8" starttime="850" xstart="0.3" fontsize="30" font="Impact" fontcolour="596984">
+            <b>BROUGHT TO YOU BY PRES</b>
+        </text>
+        <text duration="-1" ystart="0.8" starttime="900" xstart="0.3" fontsize="30" font="Impact" fontcolour="596984">
+            <b>BROUGHT TO YOU BY PRESE</b>
+        </text>
+        <text duration="-1" ystart="0.8" starttime="950" xstart="0.3" fontsize="30" font="Impact" fontcolour="596984">
+            <b>BROUGHT TO YOU BY PRESEN</b>
+        </text>
+        <text duration="-1" ystart="0.8" starttime="1000" xstart="0.3" fontsize="30" font="Impact" fontcolour="596984">
+            <b>BROUGHT TO YOU BY PRESENT</b>
+        </text>
+        <text duration="-1" ystart="0.8" starttime="1050" xstart="0.3" fontsize="30" font="Impact" fontcolour="596984">
+            <b>BROUGHT TO YOU BY PRESENTE</b>
+        </text>
+        <text duration="-1" ystart="0.8" starttime="1200" xstart="0.3" fontsize="30" font="Impact" fontcolour="596984">
+            <b>BROUGHT TO YOU BY PRESENTEC</b>
+        </text>
+        <text duration="-1" ystart="0.8" starttime="1250" xstart="0.3" fontsize="30" font="Impact" fontcolour="596984">
             <b>BROUGHT TO YOU BY PRESENTECH</b>
         </text>
         <question> Are you ready?</question>
