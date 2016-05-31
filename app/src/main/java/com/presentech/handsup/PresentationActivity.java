@@ -182,6 +182,8 @@ public class PresentationActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                         fbFragment.updateFeedback(feedbackObjectRx);
+                            Log.d("ABCD", "Question" + feedbackObjectRx.getSLIDE());
+                            Log.d("ABCD","Question " + feedbackObjectRx.getGOOD_MEH_BAD());
                         presentation_db.addFeedbackCollumn(feedbackObjectRx);
                         }
                     });
@@ -672,6 +674,7 @@ public class PresentationActivity extends AppCompatActivity {
 
                     if (presenterServer.connections > 0){
                         sendSlideContent(viewFlipper.getDisplayedChild());
+                        fbFragment.reset();
                     }
                 }
 
@@ -691,6 +694,7 @@ public class PresentationActivity extends AppCompatActivity {
                     }
                     if (presenterServer.connections > 0){
                         sendSlideContent(viewFlipper.getDisplayedChild());
+                        fbFragment.reset();
                     }
                 }
 

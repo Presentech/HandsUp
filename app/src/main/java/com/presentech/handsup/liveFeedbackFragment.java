@@ -187,6 +187,12 @@ public class liveFeedbackFragment extends Fragment{
 
     }
 
+    public void reset(){
+        if (fragMultiChoice) ABCBarsFragment.reset("Question Response");
+        if (fragUnderstanding) understandingBarsFragment.reset("Level of Understanding");
+        if (fragMessaging) slideFeedbackMessagesFragment.reset();
+    }
+
     public void updateFeedback(SingleFeedback feedbackObject){
         //Create new fragments to replace the old ones
 

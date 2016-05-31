@@ -21,20 +21,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#000000"
-        android:background="#00FF00"/>
+        android:background="#60CCBF"/>
 
     <View
         android:id="@+id/yellowLayoutfrag"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFFF00">
+        android:background="#FFC000">
 
     </View>
     <View
         android:id="@+id/redLayoutfrag"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FF0000">
+        android:background="#EE4858">
     </View>
 
 </LinearLayout>

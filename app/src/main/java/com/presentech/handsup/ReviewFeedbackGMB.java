@@ -6,6 +6,7 @@ package com.presentech.handsup;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 
 import com.androidplot.pie.PieChart;
@@ -63,7 +64,9 @@ public class ReviewFeedbackGMB extends Activity {
             a = b = c = 0;
             /*iterate through objects to find whether value is A, B or C*/
             for (int k = 0; k < feedbackArray.length; k++) {
-                if ((int) feedbackArray[k].getSLIDE() == j + 1) {
+                Log.d("ABCD", "" + feedbackArray[k].getQUESTION() );
+                if ((int) feedbackArray[k].getSLIDE() == j) {
+                    Log.d("ABCD", "got Question");
                     if (feedbackArray[k].getGOOD_MEH_BAD() == 1) {
                         a++;
                     }
@@ -77,6 +80,7 @@ public class ReviewFeedbackGMB extends Activity {
                 }
             }
 
+        Log.d("ABCD", "a" + a + "b" + b + "c" + c);
         slideGMB = (PieChart) findViewById(R.id.plot); //get pie plot
 
         SegmentFormatter segmentFormatA = new SegmentFormatter();

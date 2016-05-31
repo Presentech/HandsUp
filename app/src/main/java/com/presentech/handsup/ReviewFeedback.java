@@ -5,6 +5,7 @@ package com.presentech.handsup;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import com.androidplot.pie.PieChart;
 import com.androidplot.pie.Segment;
@@ -70,7 +71,7 @@ public class ReviewFeedback extends Activity {
 
                 }
             }
-
+        Log.d("ABCD", "a" + a + "b" + b + "c" + c);
         questionABC = (PieChart) findViewById(R.id.plot); //get pie plot
 
         SegmentFormatter segmentFormatA = new SegmentFormatter();

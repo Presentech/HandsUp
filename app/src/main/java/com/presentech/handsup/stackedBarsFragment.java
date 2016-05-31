@@ -46,6 +46,20 @@ public class stackedBarsFragment extends Fragment{
         return barLayout;
     }
 
+    public void reset(String bar){
+        a = 0;
+        b = 0;
+        c = 0;
+        updateBarHeight(bar);
+        ViewGroup.LayoutParams AParams = AView.getLayoutParams();
+        ViewGroup.LayoutParams BParams = BView.getLayoutParams();
+        ViewGroup.LayoutParams CParams = CView.getLayoutParams();
+
+        AParams.width = 0;
+        BParams.width = 0;
+        CParams.width = 0;
+    }
+
     public void setFeedbackResponse(SingleFeedback feedback){
         SingleFeedback tempObject;
         int tempIndex = 0; // -1 = new answer no change, 1/2/3 = new answer, 0 new feedback

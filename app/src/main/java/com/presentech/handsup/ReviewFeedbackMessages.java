@@ -59,7 +59,7 @@ public class ReviewFeedbackMessages extends ListActivity  {
         int sNo = (int) slide;
 
         for (int i = 0; i < feedbackArray.length; i++) {
-            if ((int)feedbackArray[i].getSLIDE() == j + 1) {
+            if ((int)feedbackArray[i].getSLIDE() == j) {
                 if (feedbackArray[i].getTEXT() != null) {
                     String convertedTime = timeConvert(feedbackArray[i].getTIME_RECEIVED());
                     messageList.add(feedbackArray[i].getTEXT()+ "\n" + "(" + convertedTime + ")");
