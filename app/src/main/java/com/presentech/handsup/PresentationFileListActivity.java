@@ -25,9 +25,7 @@ public class PresentationFileListActivity extends AppCompatActivity {
         ListView lv;
         String sdCardLocation = Environment.getExternalStorageDirectory().getPath();
         //Get files from storage
-        Log.d("FILEPATH", "YOU FUCKIN WAHT MATE");
-        FilesInFolder = GetFiles("/HandsUp");
-        Log.d("FILEPATH", "lol innit");
+        FilesInFolder = GetFiles();
         //Create reference to listview
         lv = (ListView)findViewById(R.id.fileListView);
         //Set adapter for listview (standard)
@@ -39,12 +37,10 @@ public class PresentationFileListActivity extends AppCompatActivity {
               Intent Intent = new Intent(PresentationFileListActivity.this, HostingWizardActivity.class);
               //Get name of file selected
               String fileName = (String) FilesInFolder.get(position);
-              String filePath = Environment.getExternalStorageDirectory().getPath() + "/HandsUp/" + fileName;
+              String filePath = Environment.getExternalStorageDirectory().getPath() + "/Presentations/" + fileName;
               Log.d("FILEPATH", filePath);
               //put filePath as extra message with intent
-              //try{
-                 // Intent.putExtra(HostingWizardActivity.FILE_PATH_NAME, getAssets().open("test.xml"));
-              //}catch (IOException e){}
+              Intent.putExtra(HostingWizardActivity.FILE_PATH_NAME, filePath);
 
               startActivity(Intent);
 
@@ -53,16 +49,19 @@ public class PresentationFileListActivity extends AppCompatActivity {
     }
 
 
-    public ArrayList<String> GetFiles(String DirectoryPath) {
+    public ArrayList<String> GetFiles() {
         //Create a list to store file names in
         ArrayList<String> MyFiles = new ArrayList<String>();
+        File[] files = null;
         //Create file of directory path (actually folder)
-        File dataRoot = Environment.getExternalStorageDirectory();
-        File f = new File(dataRoot, DirectoryPath);
+        if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
+            File sdcard = Environment.getExternalStorageDirectory();
+            File f = new File(sdcard, "/Presentations");
+            files = f.listFiles();
+        }
         //Add all files to an arryList
         //f.mkdirs();
-        File[] files = f.listFiles();
-        if (files.length == 0) {
+        if (files == null) {
             //No Files found at this location
             return null;
         }
