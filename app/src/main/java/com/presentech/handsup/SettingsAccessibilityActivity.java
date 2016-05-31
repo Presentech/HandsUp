@@ -1,5 +1,6 @@
 package com.presentech.handsup;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.Preference;
@@ -26,7 +27,6 @@ public class SettingsAccessibilityActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         if (item.getItemId() == android.R.id.home)
             finish();
 
@@ -39,6 +39,7 @@ public class SettingsAccessibilityActivity extends AppCompatActivity {
         public void onCreate(final Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.settings_accessibility_prefs);
+            findPreference("visibility_key").setOnPreferenceClickListener(this);
 
         }
 
@@ -78,6 +79,10 @@ public class SettingsAccessibilityActivity extends AppCompatActivity {
 
         @Override
         public boolean onPreferenceClick(Preference preference) {
+            if (preference.getKey().equalsIgnoreCase("visibility_key")) {
+                Intent intent = new Intent(getActivity(), SettingsVisibilityActivity.class);
+                startActivity(intent);
+            }
             return true;
         }
     }

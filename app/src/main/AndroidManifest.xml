@@ -44,28 +44,33 @@
         </activity>
         <activity
             android:name=".SettingsAccessibilityActivity"
-            android:label="@string/accessibility_title"
+            android:label="@string/action_settings"
             android:screenOrientation="portrait" />
         <activity
             android:name=".SettingsFileStorageActivity"
-            android:label="@string/file_storage_title"
+            android:label="@string/action_settings"
             android:screenOrientation="portrait" />
         <activity
             android:name=".SettingsPresentationFeedbackActivity"
-            android:label="@string/presentation_feedback_title"
+            android:label="@string/action_settings"
             android:screenOrientation="portrait" />
         <activity
             android:name=".SlideContentTimingsActivity"
-            android:label="@string/slide_content_timings_title"
+            android:label="@string/action_settings"
             android:screenOrientation="portrait" />
         <activity
             android:name=".SettingsAccountActivity"
-            android:label="@string/account_title"
+            android:label="@string/action_settings"
             android:screenOrientation="portrait" />
         <activity
             android:name=".SettingsVisibilityActivity"
-            android:label="Visibility"
+            android:label="@string/action_settings"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".AccountCredentialsActivity"
+            android:label="@string/action_settings"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name=".SettingsDefaultSettingActivity"
             android:label="@string/default_setting_title"
@@ -82,11 +87,10 @@
         <activity android:name=".aboutActivity" />
         <activity android:name=".AudienceTutorial" />
         <activity android:name=".ExampleStackedBars" />
-        <activity android:name=".ViewLiveFeedback"></activity>
-        <!--<meta-data-->
-            <!--android:name="io.fabric.ApiKey"-->
-            <!--android:value="0cddf07189e7770b126a853ae1c73ab8a83c2615" />-->
-        <activity android:name=".presentationfile.ExampleStackedBars" />
+
+        <!--<activity android:name=".ViewLiveFeedback"></activity>-->
+        <!--<activity android:name=".presentationfile.ExampleStackedBars" />-->
+
         <activity
             android:name=".AudienceConnect"
             android:label="@string/title_activity_audience_connect"
@@ -98,7 +102,6 @@
         <activity
             android:name=".testingConnections"
             android:label="@string/title_activity_testing_connections"></activity>
-        <activity android:name=".ViewLiveFeedback" />
         <activity android:name=".TestActivity"></activity>
 
         <meta-data

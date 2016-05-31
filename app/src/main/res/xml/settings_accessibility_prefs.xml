@@ -14,14 +14,7 @@
 
         <PreferenceScreen
             android:key="visibility_key"
-            android:title="Visibilty">
-
-            <intent
-                android:action="android.intent.action.VIEW"
-                android:targetClass="com.presentech.handsup.VisibilityActivity"
-                android:targetPackage="com.presentech.handsup" />
-
-        </PreferenceScreen>
+            android:title="Visibilty"/>
 
 
     </PreferenceCategory>

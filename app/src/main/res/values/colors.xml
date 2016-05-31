@@ -12,4 +12,5 @@
     <color name="transparant_darkgrey">#666c6c6c</color>
     <color name="drawerBackground">#66000000</color>
     <color name="white">#FFFFFF</color>
+    <color name="colorGrey">#a8a9aa</color>
 </resources>

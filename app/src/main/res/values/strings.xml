@@ -116,17 +116,20 @@
         <item>4</item>
     </string-array>
     <string-array name="setting_entries">
-        <item>ACCESSIBILITY</item>
-        <item>ACCOUNT &amp; PRIVACY</item>
-        <item>PRESENTATION &amp; FEEDBACK PREFERENCES</item>
-        <item>FILE &amp; STORAGE PREFERENCES</item>
-        <item>DEFAULT SETTINGS</item>
+        <item>Accessiblity</item>
+        <item>Account &amp; Privacy</item>
+        <item>Presentation &amp; Feedback Preferences</item>
+        <item>File &amp; Storage Preferences</item>
+        <item>Default Settings</item>
     </string-array>
 
     <string name="pref_brightness">pref_brightness</string>
     <string name="pref_auto_rotate">auto_rotate</string>
     <string name="pref_zoom">zoom</string>
     <string name="slide_content_timings_title">Media Transition Settings</string>
+    <string name="loop_message">Loop Continuously</string>
+    <string name="loop_message_second">\n(when you reach the end of a presentation HandsUp
+will replay it)</string>
 
 
     <string name="title_activity_audience_session_select">AudienceSessionSelect</string>
