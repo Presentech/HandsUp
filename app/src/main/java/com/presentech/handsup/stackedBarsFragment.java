@@ -48,7 +48,7 @@ public class stackedBarsFragment extends Fragment{
 
     public void setFeedbackResponse(SingleFeedback feedback){
         SingleFeedback tempObject;
-        int tempIndex = 0;
+        int tempIndex = 0; // -1 = new answer no change, 1/2/3 = new answer, 0 new feedback
         //Add User ID
         if (i>99) i = 0; //If looking above 100 start overwriting from oldest first.
         if (k>99) k = 0; // i is question response index k is understanding response index
@@ -58,10 +58,10 @@ public class stackedBarsFragment extends Fragment{
         int understanding_old_value = 0;
         int ABC_old_value = 0;
         if (feedback.getTEXT() != null) return;
-        for (j=0; j < questionResponses.size(); j++){//Look through each object in array
-            tempObject = questionResponses.get(j);
-            if (tempObject.getUUID().equals(feedback.getUUID())){//If same user again!
-                if (ABC != -1){ // If question Response
+        if (ABC != -1){ // If question Response
+            for (j=0; j < questionResponses.size(); j++){//Look through each object in array
+                tempObject = questionResponses.get(j);
+                if (tempObject.getUUID().equals(feedback.getUUID())){//If same user again!
                     if (tempObject.getABC() != ABC){// If new Answer
                         ABC_old_value = tempObject.getABC();
                         tempIndex = ABC;
@@ -71,12 +71,10 @@ public class stackedBarsFragment extends Fragment{
                 }
             }
         }
-
-
-        for (l=0; l < understandingResponses.size(); l++){//Look through each object in array
-            tempObject = understandingResponses.get(l);
-            if (tempObject.getUUID().equals(feedback.getUUID())){ //If same user again!
-                if (GOODmehBAD != -1){ // If question Response
+        else if (GOODmehBAD != -1){ // If understanding Response
+            for (l=0; l < understandingResponses.size(); l++){//Look through each object in array
+                tempObject = understandingResponses.get(l);
+                if (tempObject.getUUID().equals(feedback.getUUID())){ //If same user again!
                     if (tempObject.getGOOD_MEH_BAD() != GOODmehBAD) {// If new Answer
                         understanding_old_value = tempObject.getGOOD_MEH_BAD();
                         tempIndex = GOODmehBAD;
@@ -113,7 +111,6 @@ public class stackedBarsFragment extends Fragment{
                 if (tempIndex == 1) a++; //Add new value
                 else if (tempIndex == 2) b++;
                 else if (tempIndex == 3) c++;
-                feedback.setGOOD_MEH_BAD(tempIndex);
                 questionResponses.set(j, feedback);
             }
             else{

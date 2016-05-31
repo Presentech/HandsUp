@@ -32,7 +32,8 @@ public class ReviewFeedback extends Activity {
     public void getPiePlots() {
 
         //get list of objects from database
-        feedbackDatabaseHandler database = new feedbackDatabaseHandler(getApplicationContext(), "TestFeedbackList", null, 1, "FP");
+        MyApplication application = (MyApplication) getApplication();
+        feedbackDatabaseHandler database = application.getDB();
         List<SingleFeedback> singleFeedbackList = database.getAllFeedback();
 
         //convert list of feedback objects to object array

@@ -29,7 +29,6 @@ public class ReviewFeedbackMessages extends ListActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review_feedback_messages);
 
-
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1 ,messageList);
         setListAdapter(adapter);
 
@@ -39,7 +38,8 @@ public class ReviewFeedbackMessages extends ListActivity  {
 
     public void displayMessages() {
         //get list of objects from database
-        feedbackDatabaseHandler database = new feedbackDatabaseHandler(getApplicationContext(), "TestFeedbackList", null, 1, "FP");
+        MyApplication application = (MyApplication) getApplication();
+        feedbackDatabaseHandler database = application.getDB();
         List<SingleFeedback> singleFeedbackList = database.getAllFeedback();
 
         //convert list of feedback objects to object array

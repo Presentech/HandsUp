@@ -182,7 +182,7 @@ public class PresentationActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                         fbFragment.updateFeedback(feedbackObjectRx);
-                       // presentation_db.addFeedbackCollumn(feedbackObjectRx);
+                        presentation_db.addFeedbackCollumn(feedbackObjectRx);
                         }
                     });
                 }
@@ -474,8 +474,8 @@ public class PresentationActivity extends AppCompatActivity {
                 startActivity(settings_Intent);
                 return true;
             case R.id.action_feedbackStored:
-                //Intent feedback_Intent = new Intent(this, ReviewFeedback.class);
-                //startActivity(feedback_Intent);
+                Intent feedback_Intent = new Intent(this, ReviewFeedbackSelect.class);
+                startActivity(feedback_Intent);
                 return true;
             case R.id.action_presenterHelp:
                 Intent tutorial_Intent = new Intent(this, PresentationModeTutorial.class);

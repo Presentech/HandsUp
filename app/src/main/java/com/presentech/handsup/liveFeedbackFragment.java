@@ -194,8 +194,8 @@ public class liveFeedbackFragment extends Fragment{
         if (ABCBarsFragment != null){
             Log.d("ABCD", "Do Something");
             //If Question changed then update bars
-            synchronized (MUTEX){
-                if (feedbackObject.getABC() != -1) {
+            if (feedbackObject.getABC() != -1) {
+                synchronized (MUTEX){
                     ABCBarsFragment.setFeedbackResponse(feedbackObject);
                     ABCBarsFragment.updateBarHeight("Question Response");
                     getChildFragmentManager().beginTransaction().replace(R.id.fragmentContainerFBBarABC, ABCBarsFragment).commit();
