@@ -284,13 +284,12 @@ public class PresentationActivity extends AppCompatActivity {
             }
         }
 //        convert floats to pixels for image dimensions
-        int imgWidth = (int) (i.getWidth())*screenWidth;
-        int imgHeight = (int) (i.getHeight())*screenHeight;
         ImageView iV = new ImageView(this);
-        iV.setX(i.getxStart()*screenWidth);
-        iV.setY(i.getyStart()*screenHeight);
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(imgWidth, imgHeight);
-       // iV.setLayoutParams(layoutParams);
+        iV.setX(i.getxStart()* screenWidth);
+        iV.setY(i.getyStart()* screenHeight);
+       // RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(imgWidth, imgHeight);
+        //iV.setLayoutParams(layoutParams);
+        iV.setLayoutParams(new RelativeLayout.LayoutParams((int) (i.getWidth() * screenWidth),(int) (i.getHeight()*screenHeight)));
         iV.setImageBitmap(b);
         slide.addView(iV);
 
@@ -683,10 +682,8 @@ public class PresentationActivity extends AppCompatActivity {
     public void getPresentation() throws IOException, XmlPullParserException{
         XMLParser parser = new XMLParser();
         InputStream in = null;
-     //   File initFile = new File(pathName);
-        //in = new FileInputStream(initFile);
-
-        in = getAssets().open("salespitch.xml");
+        File initFile = new File(pathName);
+        in = new FileInputStream(initFile);
         presentationFile = parser.getPresentation(in);
     }
 
