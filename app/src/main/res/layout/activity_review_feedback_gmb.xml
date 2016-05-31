@@ -26,7 +26,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:text="Next"
-        android:onClick="slideNoUp" />
+        android:onClick="slideNoUp"
+        android:background="@color/presentechBlue"/>
 
     <Button
         android:id="@+id/slide_down_button"
@@ -34,7 +35,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:text="Prev"
-        android:onClick="slideNoDown" />
+        android:onClick="slideNoDown"
+        android:background="@color/presentechBlue"/>
 
 
 

@@ -26,7 +26,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:text="Next"
-        android:onClick="questionNoUp" />
+        android:onClick="questionNoUp"
+        android:background="@color/presentechBlue"/>
 
     <Button
         android:id="@+id/down_button"
@@ -34,6 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:text="Prev"
-        android:onClick="questionNoDown" />
+        android:onClick="questionNoDown"
+        android:background="@color/presentechBlue"/>
 
 </RelativeLayout>

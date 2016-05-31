@@ -687,8 +687,10 @@ public class PresentationActivity extends AppCompatActivity {
     public void getPresentation() throws IOException, XmlPullParserException{
         XMLParser parser = new XMLParser();
         InputStream in = null;
-        File initFile = new File(pathName);
-        in = new FileInputStream(initFile);
+        //   File initFile = new File(pathName);
+        //in = new FileInputStream(initFile);
+
+        in = getAssets().open("salespitch.xml");
         presentationFile = parser.getPresentation(in);
     }
 

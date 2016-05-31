@@ -189,7 +189,7 @@ public class liveFeedbackFragment extends Fragment{
 
     public void reset(){
         if (fragMultiChoice) ABCBarsFragment.reset("Question Response");
-        if (fragUnderstanding) understandingBarsFragment.reset("Level of Understanding");
+        if (fragUnderstanding) understandingBarsFragment.reset("Reaction");
         if (fragMessaging) slideFeedbackMessagesFragment.reset();
     }
 
