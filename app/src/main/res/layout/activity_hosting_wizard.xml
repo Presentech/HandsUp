@@ -108,7 +108,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/chooseSourceFile"
                     android:text="@string/selectPresentation"
-                    android:background="@color/darkgrey"
+                    android:background="@color/presentechBlue"
                     android:textColor="@color/textColour"
                     android:onClick="selectFile"/>
 
@@ -162,8 +162,9 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/FeedbackOptionsTitle"
                     android:text="@string/FeedbackOptionsTitle"
+                    android:textStyle="bold"
                     android:textColor="@color/textColour"
-                    android:background="@color/darkgrey"
+                    android:background="@color/presentechBlue"
                     android:paddingTop="5dp"
                     android:paddingLeft="5dp"
                     android:paddingRight="5dp"
@@ -199,7 +200,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/darkgrey"
+                    android:background="@color/lightgrey"
                     android:orientation="horizontal">
                     <TextView
                         android:layout_width="0dp"
@@ -251,7 +252,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/darkgrey"
+                    android:background="@color/lightgrey"
                     android:orientation="horizontal">
                     <TextView
                         android:layout_width="0dp"
@@ -304,7 +305,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/CreateSession"
                     android:text="@string/createSession"
-                    android:background="@color/darkgrey"
+                    android:background="@color/presentechBlue"
                     android:textColor="@color/textColour"
                     android:layout_marginTop="16dp"
                     android:onClick="createSession"/>

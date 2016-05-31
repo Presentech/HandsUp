@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    tools:context="com.presentech.handsup.ReviewFeedbackSelect">
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.3">
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:src="@drawable/pi_chart"
+            android:clickable="true"
+            android:onClick="doABC"
+            />
+
+        <Button
+            android:id="@+id/abc"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Multiple Choice Responses"
+            android:textSize="20sp"
+            android:onClick="doABC" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.3">
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:src="@drawable/face_icon"
+            android:clickable="true"
+            android:onClick="doGMB"
+            />
+
+        <Button
+            android:id="@+id/gmb"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Audience Reactions"
+            android:textSize="20sp"
+            android:onClick="doGMB" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.3">
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:src="@drawable/messaging"
+            android:clickable="true"
+            android:onClick="doMessages"
+            />
+
+        <Button
+            android:id="@+id/message"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Messages"
+            android:textSize="20sp"
+            android:onClick="doMessages" />
+
+      </LinearLayout>
+    </LinearLayout>
+

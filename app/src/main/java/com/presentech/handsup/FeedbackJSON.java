@@ -55,6 +55,8 @@ catch (JSONException e) {feedbackJSONParse.setUUID(null);}
       catch (JSONException e) {feedbackJSONParse.setQUESTION(-1);}
       try {feedbackJSONParse.setABC(obj.getInt("ABC"));}
       catch (JSONException e) {feedbackJSONParse.setABC(-1);}
+      try {feedbackJSONParse.setQUESTION(obj.getInt("QUESTION"));}
+      catch (JSONException e) {feedbackJSONParse.setQUESTION(-1);}
       try {feedbackJSONParse.setGOOD_MEH_BAD(obj.getInt("GOOD_MEH_BAD"));}
       catch (JSONException e) {feedbackJSONParse.setGOOD_MEH_BAD(-1);}
       try {feedbackJSONParse.setTIME_RECEIVED(obj.getLong("TIME_RECEIVED"));}

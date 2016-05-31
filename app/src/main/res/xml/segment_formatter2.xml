@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config
+    fillPaint.color="@color/chart_yellow"
+    innerEdgePaint.color="@color/chart_yellow"
+    outerEdgePaint.color="@color/chart_yellow"
+    radialEdgePaint.color="@color/lightgrey"
+    labelPaint.textSize="15sp"
+    />
