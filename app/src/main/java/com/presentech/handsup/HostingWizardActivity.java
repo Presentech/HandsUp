@@ -36,6 +36,7 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -74,11 +75,11 @@ public class HostingWizardActivity extends AppCompatActivity {
         server = application.getServer();
 
         //Get presntation filePath if returning from PresentationFileListActivity
-        Intent intent = getIntent();
-        if (intent.getStringExtra(FILE_PATH_NAME) != null) {
-            pathName = intent.getStringExtra(FILE_PATH_NAME);
+        Intent returnIntent = getIntent();
+        if (returnIntent.getStringExtra(FILE_PATH_NAME) != null) {
+            pathName = returnIntent.getStringExtra(FILE_PATH_NAME);
+            Log.d("ABCD","OLA" + pathName);
         }
-        pathName = "test.xml";
         //get width and height of screen for views
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
@@ -165,15 +166,14 @@ public class HostingWizardActivity extends AppCompatActivity {
     }
 
     public void createSession(View view) throws IOException, XmlPullParserException {
-        PresentationFile presentationFile = getPresentation(pathName);
+        Log.d("ABCD",pathName);
         //Go to Presentation with options set
-        Intent intent = new Intent(this, PresentationActivity.class);
-        Bundle b = new Bundle();
+        Intent presentationIntent = new Intent(this, PresentationActivity.class);
         //Add options to Presentation
-        intent.putExtra(PresentationActivity.BOOLEAN_NAME1, understanding);
-        intent.putExtra(PresentationActivity.BOOLEAN_NAME2, multiChoice);
-        intent.putExtra(PresentationActivity.BOOLEAN_NAME3, messaging);
-        intent.putExtra(PresentationActivity.BOOLEAN_NAME4, hideFeedback);
+        presentationIntent.putExtra(PresentationActivity.BOOLEAN_NAME1, understanding);
+        presentationIntent.putExtra(PresentationActivity.BOOLEAN_NAME2, multiChoice);
+        presentationIntent.putExtra(PresentationActivity.BOOLEAN_NAME3, messaging);
+        presentationIntent.putExtra(PresentationActivity.BOOLEAN_NAME4, hideFeedback);
         //Intent.putExtra(PresentationActivity.BOOLEAN_NAME5, feedbackPerSlide);
         EditText session_name_view = (EditText) findViewById(R.id.SessionTitle);
         EditText session_password_view = (EditText) findViewById(R.id.SessionPassword);
@@ -182,28 +182,30 @@ public class HostingWizardActivity extends AppCompatActivity {
         String session_name = session_name_view.getText().toString();
         String session_password = session_name_view.getText().toString();
         String session_location = session_name_view.getText().toString();
-        intent.putExtra(PresentationActivity.SESSION_NAME, session_name);
+        presentationIntent.putExtra(PresentationActivity.SESSION_NAME, session_name);
         //Intent.putExtra(PresentationActivity.SESSION_PASSWORD, session_password);
         //Intent.putExtra(PresentationActivity.SESSION_LOCATION, session_location);
 
 
-        // b.putParcelable(SyncStateContract.Constants.CUSTOM_LISTING, presentationFile);
-        //intent.putExtra("pF", presentationFile);
-
-        startActivity(intent);
+        Log.d("ABCD","MI" + pathName);
+        presentationIntent.putExtra(PresentationActivity.SESSION_PATH, pathName);
+        startActivity(presentationIntent);
     }
 
     public PresentationFile getPresentation(String pathName) throws IOException, XmlPullParserException {
         XMLParser parser = new XMLParser();
         InputStream in = null;
-        in = getAssets().open(pathName);
+        Log.d("ABCD",pathName);
+        File initFile = new File(pathName);
+        in = new FileInputStream(initFile);
         return parser.getPresentation(in);
     }
 
     //Start activity to select a presentation file
     public void selectFile(View view) {
-        Intent Intent = new Intent(this, PresentationFileListActivity.class);
-        startActivity(Intent);
+        Log.d("ABCD","selectFile");
+        Intent fileIntent = new Intent(this, PresentationFileListActivity.class);
+        startActivity(fileIntent);
     }
 
     public void changeViewWidths(int width, int height) {
