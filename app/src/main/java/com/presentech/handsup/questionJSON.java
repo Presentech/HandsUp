@@ -49,6 +49,8 @@ public class questionJSON {
             ja = new JSONArray(JSONQuestions);
         } catch (JSONException e) {
             e.printStackTrace();
+            return null;
+
         }
         for (int i = 0; i < ja.length(); i++) {
             JSONObject jo;

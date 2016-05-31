@@ -4,6 +4,8 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.util.Log;
 
+import org.json.JSONException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -84,15 +86,23 @@ public class Client {
         if (rxString.toString().contains("}]") && rxString.toString().contains("}](")) {
 
             if (rxString.charAt(rxString.length() - 1) == ')') {
-                slideNumber =  Character.getNumericValue(rxString.charAt(rxString.length() - 2));
-                listener.onDataLoaded(singleQuestionList, slideNumber);
+
+                String temp = rxString.substring(rxString.indexOf("(")+1, rxString.indexOf(")"));
+                slideNumber =  Integer.parseInt(temp);
+                Log.d("Split in rxString", temp);
+                if (singleQuestionList != null){
+                    listener.onDataLoaded(singleQuestionList, slideNumber);
+                }
+
                 rxString.setLength(0);
             }
         } else if (rxString.toString().contains("}]")){
             messageFromServer = rxString.toString();
             Log.d("Client", "Message received from server: " + messageFromServer);
-            singleQuestionList = questionJSON.questionParseJSON(messageFromServer);
-            Log.d("Client", "Listener fired");
+                singleQuestionList = questionJSON.questionParseJSON(messageFromServer);
+                Log.d("Client", "Listener fired");
+
+
         }
 
 

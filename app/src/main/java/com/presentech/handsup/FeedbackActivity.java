@@ -75,7 +75,6 @@ public class FeedbackActivity extends AppCompatActivity {
     ImageButton badButton;
     ImageButton sendButton;
 
-    int count = 0;
     String UUID = "";
     int x;
 
@@ -114,10 +113,16 @@ public class FeedbackActivity extends AppCompatActivity {
         slideContentTextView = (TextView) findViewById(R.id.slideContentTextView);
         slideTitleTextView = (TextView) findViewById(R.id.slideTitleTextView);
 
+        //add haptic feedback
+        addHapticFeedback();
         //add button click listeners to all buttons
         addListenerOnButton();
+
+        //Access client properties
         application = (MyApplication) getApplication();
         client = application.getClient();
+
+        //Give each audience member a unique id
         Identifier id = new Identifier();
         UUID = id.id(this);
 
@@ -129,7 +134,6 @@ public class FeedbackActivity extends AppCompatActivity {
         changeViewWidths(width);
 
         background = decodeSampledBitmapFromResource(getResources(), R.drawable.background, width, height);
-        ImageView backgroundView = (ImageView) findViewById(R.id.feedbackActivityBackground);
 
         //NAVIGATION DRAWER
         //Create new presenter drawer object
@@ -154,36 +158,34 @@ public class FeedbackActivity extends AppCompatActivity {
             @Override
             public void onDataLoaded(final List<SingleQuestion> singleQuestions, int i) {
                 // Code to handle data loaded from network
-                // Use the data here!
+                //slide number
                 x = i;
-                Log.d("noor", "like a child");
-
                 singleQuestionList = singleQuestions;
                 availableQuestionList.clear();
                 if (singleQuestionList.size() > 0) {
                     for (int j = 0; j < singleQuestionList.size(); j++) {
-                        Log.d("noor", Integer.toString(x) + Double.toString(singleQuestionList.get(j).getSLIDE()));
+                        Log.d("Slide number, getSlide", Integer.toString(x) + "  " + Double.toString(singleQuestionList.get(j).getSLIDE()));
                         if (x == singleQuestionList.get(j).getSLIDE()) {
                             availableQuestionList.add(singleQuestionList.get(j));
-
                         }
                     }
-
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             if (availableQuestionList.size() > 0) {
                                 slideContentTextView.setText(availableQuestionList.get(0).getQuestionText());
+                                String title = ("Slide " + Integer.toString(x) + " 1 " + "Q" + availableQuestionList.get(0).getQUESTION());
+                                slideTitleTextView.setText(title);
+                                aButton.setVisibility(View.VISIBLE);
+                                bButton.setVisibility(View.VISIBLE);
+                                cButton.setVisibility(View.VISIBLE);
                             } else {
-                                slideContentTextView.setText("No questions for this slide");
+                                slideTitleTextView.setText("Slide " + Integer.toString(x));
+                                slideContentTextView.setText("No questions for this slide but feel free to tell us how you feel");
+                                aButton.setVisibility(View.INVISIBLE);
+                                bButton.setVisibility(View.INVISIBLE);
+                                cButton.setVisibility(View.INVISIBLE);
                             }
-                            //String title = ("Slide" + availableQuestionList.get(count).getSLIDE() + " " + "Q" + availableQuestionList.get(count).getQUESTION());
-                            // slideTitleTextView.setText(title);
-                            count++;
-                            if (count == availableQuestionList.size()) {
-                                count = 0;
-                            }
-                            ;
                         }
                     });
                 }
@@ -200,6 +202,15 @@ public class FeedbackActivity extends AppCompatActivity {
         SingleFeedback singleFeedback = new SingleFeedback();
         singleFeedback.setUUID(UUID);
         return singleFeedback;
+    }
+
+    public void addHapticFeedback() {
+        goodButton.setHapticFeedbackEnabled(true);
+        mehButton.setHapticFeedbackEnabled(true);
+        badButton.setHapticFeedbackEnabled(true);
+        aButton.setHapticFeedbackEnabled(true);
+        bButton.setHapticFeedbackEnabled(true);
+        cButton.setHapticFeedbackEnabled(true);
     }
 
     public void addListenerOnButton() {
@@ -317,10 +328,9 @@ public class FeedbackActivity extends AppCompatActivity {
         LinearLayout feedbackButtons = (LinearLayout) findViewById(R.id.feedbackButtonsLayout);
         feedbackButtons.getLayoutParams().width = (int) columnWidthDouble;
 
-        ImageView backgroundView = (ImageView) findViewById(R.id.feedbackActivityBackground);
+       // ImageView backgroundView = (ImageView) findViewById(R.id.feedbackActivityBackground);
         //backgroundView.getLayoutParams().width = width;
-        backgroundView.setScaleType(ImageView.ScaleType.FIT_XY);
-
+        //backgroundView.setScaleType(ImageView.ScaleType.FIT_XY);
     }
 
     public static Bitmap decodeSampledBitmapFromResource(Resources res, int id, int reqWidth, int reqHeight) {
