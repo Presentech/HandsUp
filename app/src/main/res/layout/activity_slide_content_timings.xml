@@ -79,9 +79,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp" />
-
-
     </LinearLayout>
+
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text=" (when the end of the presentation is reached Handsup will replay)"-->
+        <!--android:textColor="@color/colorGrey" />-->
+
+<!--</LinearLayout>-->
 
     <Button
         android:layout_width="match_parent"

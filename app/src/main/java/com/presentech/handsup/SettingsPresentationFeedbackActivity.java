@@ -1,5 +1,6 @@
 package com.presentech.handsup;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.Preference;
@@ -37,7 +38,9 @@ public class SettingsPresentationFeedbackActivity extends AppCompatActivity {
         @Override
         public void onCreate(final Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            //addPreferencesFromResource(R.xml.presentation_feedback_prefs);
+            addPreferencesFromResource(R.xml.settings_presentation_feedback_prefs);
+
+            findPreference("media_transition_setting_key").setOnPreferenceClickListener(this);
 
         }
 
@@ -77,6 +80,10 @@ public class SettingsPresentationFeedbackActivity extends AppCompatActivity {
 
         @Override
         public boolean onPreferenceClick(Preference preference) {
+            if (preference.getKey().equalsIgnoreCase("media_transition_setting_key")) {
+                Intent intent = new Intent(getActivity(), SlideContentTimingsActivity.class);
+                startActivity(intent);
+            }
             return true;
         }
     }

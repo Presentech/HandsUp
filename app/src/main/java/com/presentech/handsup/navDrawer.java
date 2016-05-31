@@ -97,7 +97,8 @@ public class navDrawer {
         };
 
         // Set the drawer toggle as the DrawerListener
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        //mDrawerLayout.setDrawerListener(mDrawerToggle);
+        mDrawerLayout.addDrawerListener(mDrawerToggle);
 
         //Will Enable a home button if it is set up - Currently NOT
         //getSupportActionBar().setHomeButtonEnabled(true);

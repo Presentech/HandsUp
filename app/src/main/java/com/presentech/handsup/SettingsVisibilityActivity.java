@@ -37,28 +37,19 @@ public class SettingsVisibilityActivity extends AppCompatActivity implements See
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_visibility);
 
-
         keyAutoRotate = getString(R.string.pref_auto_rotate);
         keySeekBarBrightness = getString(R.string.pref_brightness);
         keyZoom = getString(R.string.pref_zoom);
 
-
         seekBarBrightness = (SeekBar) findViewById(R.id.seekbarBrightness);
-
-
         switchAutoRotate = (Switch) findViewById(R.id.switchAutoRotate);
-
         switchZoom = (Switch) findViewById(R.id.switchZoooming);
 
         seekBarBrightness.setOnSeekBarChangeListener(this);
-
         switchZoom.setOnCheckedChangeListener(this);
         switchAutoRotate.setOnCheckedChangeListener(this);
 
-
         checkWriteSettingsPermission();
-
-
     }
 
     @Override
@@ -71,7 +62,6 @@ public class SettingsVisibilityActivity extends AppCompatActivity implements See
                 break;
             default:
                 break;
-
         }
     }
 
@@ -87,7 +77,6 @@ public class SettingsVisibilityActivity extends AppCompatActivity implements See
         layoutpars.screenBrightness = brightness / (float) 255;
         //Apply attribute changes to this window
         window.setAttributes(layoutpars);
-
     }
 
     @Override
@@ -113,7 +102,6 @@ public class SettingsVisibilityActivity extends AppCompatActivity implements See
 
     private void checkWriteSettingsPermission() {
 
-
         if (Build.VERSION.SDK_INT >= 23) {
             if (Settings.System.canWrite(this)) {
                 initializeBrightnessSettingCode();
@@ -123,15 +111,13 @@ public class SettingsVisibilityActivity extends AppCompatActivity implements See
         } else {
             initializeBrightnessSettingCode();
         }
-
     }
 
     private void initializeBrightnessSettingCode() {
-
         cResolver = getContentResolver();
         window = getWindow();
         try {
-            // To handle the auto
+            // To handle auto
             Settings.System.putInt(cResolver,
                     Settings.System.SCREEN_BRIGHTNESS_MODE, Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
             //Get the current system brightness

@@ -84,26 +84,29 @@ package com.presentech.handsup;
             //Stretch background view to fill screen
             backgroundView.setScaleType(ImageView.ScaleType.FIT_XY);
 
-        }public void goToPresenterTutorial(View view){
-         }
-        public void goToAudienceMode(View view){
-            Intent AudienceIntent = new Intent(this, AudienceConnect.class);
-            startActivity(AudienceIntent);
-        }
-        public void goToPresenterMode(View view){
-            Intent PresenterIntent = new Intent(this, LoginScreenActivity.class);
-            startActivity(PresenterIntent);
-        }
-        public static Bitmap decodeSampledBitmapFromResource(Resources res,int id, int reqWidth, int reqHeight){
-            // Reset sample Size to 0 every time
-            int sampleSize = 0;
-            //Create new bitmap options
-            final BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inSampleSize = sampleSize;
-            //avoids mem allocation means returns NULL not bitmap sets outwidth outheight and outmimetype
-            options.inJustDecodeBounds = true;
-            //Get the maximum
-            BitmapFactory.decodeResource(res, id, options);
+    }
+    public void goToPresenterTutorial(View view) {
+//        Intent THIS_INTENT = new Intent(this, SettingsActivity.class);
+//        startActivity(THIS_INTENT);
+    }
+    public void goToAudienceMode(View view){
+        Intent AudienceIntent = new Intent(this, AudienceSessionSelect.class);
+        startActivity(AudienceIntent);
+    }
+    public void goToPresenterMode(View view){
+        Intent PresenterIntent = new Intent(this, LoginScreenActivity.class);
+        startActivity(PresenterIntent);
+    }
+    public static Bitmap decodeSampledBitmapFromResource(Resources res,int id, int reqWidth, int reqHeight){
+        // Reset sample Size to 0 every time
+        int sampleSize = 0;
+        //Create new bitmap options
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inSampleSize = sampleSize;
+        //avoids mem allocation means returns NULL not bitmap sets outwidth outheight and outmimetype
+        options.inJustDecodeBounds = true;
+        //Get the maximum
+        BitmapFactory.decodeResource(res, id, options);
 
             //calculate sample size for bitmap integer = 2^(n-1) where n is magnitudes smaller
             sampleSize= calculateInSampleSize(options, reqWidth, reqHeight);

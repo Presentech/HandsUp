@@ -34,6 +34,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.VideoView;
 import android.widget.ViewFlipper;
+import android.widget.FrameLayout;
 import android.graphics.Color;
 
 import com.presentech.handsup.presentationfile.*;
@@ -103,6 +104,8 @@ public class PresentationActivity extends AppCompatActivity {
         application = (MyApplication) getApplication();
         presenterServer = application.getServer();
 
+        //String id = b.getParcelable(SyncStateContract.Constants.CUSTOM_LISTING);
+        //presentationFile = (PresentationFile) this.getIntent().getSerializableExtra("pF");
         try {
             getPresentation();
         } catch (IOException e) {
@@ -131,6 +134,7 @@ public class PresentationActivity extends AppCompatActivity {
         if (presenterServer.connections > 0){
             sendSlideContent(viewFlipper.getDisplayedChild());
         }
+
 
         for (int i = 0; i < animations.size(); i++) {
             animations.get(i).start();
@@ -186,6 +190,7 @@ public class PresentationActivity extends AppCompatActivity {
                         }
                     });
                 }
+
             }
         });
     }
@@ -692,7 +697,6 @@ public class PresentationActivity extends AppCompatActivity {
         {
             case MotionEvent.ACTION_DOWN:
             {
-
                 lastX = touchevent.getX();
                 break;
             }
@@ -712,9 +716,8 @@ public class PresentationActivity extends AppCompatActivity {
 
                     viewFlipper.setInAnimation(this, R.anim.slide_in_from_left);
                     viewFlipper.setOutAnimation(this, R.anim.slide_out_to_right);
-//
+//                    vf.showNext();
                     viewFlipper.showPrevious();
-
 
                     for (int i = 0; i < animations.size() ; i++) {
                         animations.get(i).start();
@@ -749,7 +752,6 @@ public class PresentationActivity extends AppCompatActivity {
 
             case MotionEvent.ACTION_MOVE:
             {
-
                 float tempX = touchevent.getX();
                 break;
             }

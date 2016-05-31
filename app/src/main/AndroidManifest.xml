@@ -2,11 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.presentech.handsup">
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
@@ -44,28 +45,33 @@
         </activity>
         <activity
             android:name=".SettingsAccessibilityActivity"
-            android:label="@string/accessibility_title"
+            android:label="@string/action_settings"
             android:screenOrientation="portrait" />
         <activity
             android:name=".SettingsFileStorageActivity"
-            android:label="@string/file_storage_title"
+            android:label="@string/action_settings"
             android:screenOrientation="portrait" />
         <activity
             android:name=".SettingsPresentationFeedbackActivity"
-            android:label="@string/presentation_feedback_title"
+            android:label="@string/action_settings"
             android:screenOrientation="portrait" />
         <activity
             android:name=".SlideContentTimingsActivity"
-            android:label="@string/slide_content_timings_title"
+            android:label="@string/action_settings"
             android:screenOrientation="portrait" />
         <activity
             android:name=".SettingsAccountActivity"
-            android:label="@string/account_title"
+            android:label="@string/action_settings"
             android:screenOrientation="portrait" />
         <activity
             android:name=".SettingsVisibilityActivity"
-            android:label="Visibility"
+            android:label="@string/action_settings"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".AccountCredentialsActivity"
+            android:label="@string/action_settings"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name=".SettingsDefaultSettingActivity"
             android:label="@string/default_setting_title"
@@ -83,6 +89,10 @@
         <activity android:name=".aboutActivity" />
         <activity android:name=".AudienceTutorial" />
         <activity android:name=".ExampleStackedBars" />
+
+        <!--<activity android:name=".ViewLiveFeedback"></activity>-->
+        <!--<activity android:name=".presentationfile.ExampleStackedBars" />-->
+
         <!--<meta-data-->
             <!--android:name="io.fabric.ApiKey"-->
             <!--android:value="0cddf07189e7770b126a853ae1c73ab8a83c2615" />-->
@@ -97,7 +107,12 @@
         <activity
             android:name=".testingConnections"
             android:label="@string/title_activity_testing_connections"></activity>
+        <activity android:name=".ViewLiveFeedback" />
         <activity android:name=".TestActivity"></activity>
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="0cddf07189e7770b126a853ae1c73ab8a83c2615" />
     </application>
 
 </manifest>

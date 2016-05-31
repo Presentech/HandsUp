@@ -1,0 +1,38 @@
+{
+  "project_info": {
+    "project_number": "34854900460",
+    "project_id": "handsup-62f50"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:34854900460:android:6fae1f025efe8631",
+        "android_client_info": {
+          "package_name": "com.presentech.handsup"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFnAxTTKfg_FtQced7tKRr9ijQZNsYTaA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-78286603-1"
+          }
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
