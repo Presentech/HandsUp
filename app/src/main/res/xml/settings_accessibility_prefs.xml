@@ -3,18 +3,18 @@
 
     <PreferenceCategory android:title="Accessibility">
 
-        <SwitchPreference
-            android:checked="false"
-            android:key="talkback_support_key"
-            android:title="TalkBack Support" />
+        <!--<SwitchPreference-->
+            <!--android:checked="false"-->
+            <!--android:key="talkback_support_key"-->
+            <!--android:title="TalkBack Support" />-->
 
         <PreferenceScreen
             android:key="content_lang_key"
-            android:title="Content Language" />
+            android:title="Content Language: English (UK)" />
 
         <PreferenceScreen
             android:key="visibility_key"
-            android:title="Visibilty"/>
+            android:title="Visibility"/>
 
 
     </PreferenceCategory>

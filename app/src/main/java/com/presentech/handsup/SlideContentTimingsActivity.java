@@ -26,14 +26,13 @@ public class SlideContentTimingsActivity extends AppCompatActivity implements Nu
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_slide_content_timings);
 
-
+        //Reference to SharedPreferences object
         sharedPreferences = getSharedPreferences(HandsUpApplication.PREF_NAME, MODE_PRIVATE);
         final int duration = sharedPreferences.getInt(PREF_KEY_DURATION, 0);
 
+        //Get the widgets reference from XML layout
         npAdvanceAutomatically = (NumberPicker) findViewById(R.id.npTransitionTimePicker);
-
         cbAdvanceAutomatically = (CheckBox) findViewById(R.id.cbAdvanceAutomatically);
-
         cbLoopContinuous = (CheckBox) findViewById(R.id.cbLoopContinuously);
 
         if (sharedPreferences.getBoolean(PREF_KEY_ADVANCE_CHECKED, false)) {
@@ -60,11 +59,12 @@ public class SlideContentTimingsActivity extends AppCompatActivity implements Nu
             npAdvanceAutomatically.setValue(duration);
         }
 
+        //Register a callback to be invoked when the checked state of this button changes.
         cbAdvanceAutomatically.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 sharedPreferences.edit().putBoolean(PREF_KEY_ADVANCE_CHECKED,b).commit();
-                if(sharedPreferences.getBoolean(PREF_KEY_LOOP_CHECKED,false) && !b) {
+                if(sharedPreferences.getBoolean(PREF_KEY_LOOP_CHECKED,false) && b==false) {
                     sharedPreferences.edit().putBoolean(PREF_KEY_LOOP_CHECKED, b).commit();
                     cbLoopContinuous.setChecked(false);
                 }
@@ -96,6 +96,7 @@ public class SlideContentTimingsActivity extends AppCompatActivity implements Nu
     //Set a value change listener for NumberPicker
     @Override
     public void onValueChange(NumberPicker numberPicker, int oldVal, int newVal) {
+        //Display the newly selected number from picker
         duration = newVal;
     }
 }

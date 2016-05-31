@@ -13,4 +13,5 @@
     <color name="drawerBackground">#66000000</color>
     <color name="white">#FFFFFF</color>
     <color name="colorGrey">#a8a9aa</color>
+    <color name="grey">#c6c0c0</color>
 </resources>

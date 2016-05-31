@@ -16,11 +16,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/action_settings"
+            android:padding="15dp"
+            android:background="@color/grey"
             android:textColor="@color/textColour"
+            android:textStyle="bold"
             android:layout_below="@+id/toolbar"
             android:layout_margin="10dp"
             android:paddingLeft="10dp"
-            android:textSize="14sp" />
+            android:textSize="20sp" />
 
         <ListView
             android:id="@+id/listView"
