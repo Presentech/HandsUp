@@ -166,7 +166,7 @@ public class HostingWizardActivity extends AppCompatActivity {
     }
 
     public void createSession(View view) throws IOException, XmlPullParserException {
-        Log.d("ABCD",pathName);
+        //Log.d("ABCD",pathName);
         //Go to Presentation with options set
         Intent presentationIntent = new Intent(this, PresentationActivity.class);
         //Add options to Presentation

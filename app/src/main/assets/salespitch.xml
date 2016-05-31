@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <presentation>
     <documentInfo>
-        <Title>Example File</Title>
-        <Author>Lexxy</Author>
+        <Title>Sales Pitch for HandsUp</Title>
+        <Author>PresenTech</Author>
         <Version>1.0</Version>
-        <Comment>An example file used to demonstrate the appearance of this format</Comment>
+        <Comment>A feat of creative genius</Comment>
     </documentInfo>
     <defaults>
         <backgroundColour>E6DCD2</backgroundColour>
@@ -15,11 +15,11 @@
         <fillColour>2222AA</fillColour>
     </defaults>
     <slide slideID="0" duration="5" nextSlide="1">
-        <text duration="-1" ystart="0.9" starttime="0" xstart="0.3" fontsize="30" font="Impact" fontcolour="596984">
+        <text duration="-1" ystart="0.8" starttime="0" xstart="0.3" fontsize="30" font="Impact" fontcolour="596984">
             <b>BROUGHT TO YOU BY PRESENTECH</b>
         </text>
         <question> Are you ready?</question>
-        <image width="0.6" duration="-1" ystart="0.2" sourceFile="image4.png" starttime="0" xstart="0.2" height="0.6" />
+        <image width="0.6" duration="-1" ystart="0.3" sourceFile="image4.png" starttime="0" xstart="0.35" height="0.6" />
     </slide>
     <slide slideID="1">
         <text duration="-1" ystart="0.1" starttime="0" xstart="0.05" fontsize="30" font="Impact" fontcolour="596984">
@@ -34,7 +34,7 @@
         <text duration="-1" ystart="0.8" starttime="0" xstart="0.05" font="Impact">Looking after our investors interests</text>
         <text duration="-1" ystart="0.9" starttime="0" xstart="0.05" font="Impact">Risks Encountered and Lessons Learnt</text>
         <question>Does this really work?</question>
-        <image width="0.6" duration="-1" ystart="0.2" sourceFile="image5.png" starttime="0" xstart="0.2" height="0.6" />
+        <image width="0.6" duration="-1" ystart="0.5" sourceFile="image5.png" starttime="0" xstart="0.6" height="0.6" />
     </slide>
     <slide slideID="2" duration="8" nextSlide="3">
         <text duration="-1" ystart="0.1" starttime="0" xstart="0.05" fontsize="30" font="Impact" fontcolour="596984">
@@ -59,28 +59,28 @@
         <text duration="-1" ystart="0.7" starttime="0" xstart="0.05" font="Impact">Product level standards</text>
         <text duration="-1" ystart="0.75" starttime="0" xstart="0.05" font="Impact">Team-wide results</text>
         <text duration="-1" ystart="0.8" starttime="0" xstart="0.05" font="Impact">Agile Development</text>
-        <image width="0.6" duration="-1" ystart="0.2" sourceFile="image6.png" starttime="0" xstart="0.2" height="0.6"></image>
-        <image width="0.6" duration="-1" ystart="0.2" sourceFile="image7.png" starttime="0" xstart="0.2" height="0.6"></image>
-        <image width="0.6" duration="-1" ystart="0.2" sourceFile="image8.png" starttime="0" xstart="0.2" height="0.6" />
+        <image width="0.6" duration="-1" ystart="0.5" sourceFile="image6.png" starttime="0" xstart="0.3" height="0.6"/>
+        <image width="0.6" duration="-1" ystart="0.5" sourceFile="image7.png" starttime="0" xstart="0.5" height="0.6"/>
+        <image width="0.6" duration="-1" ystart="0.5" sourceFile="image8.png" starttime="0" xstart="0.7" height="0.6" />
     </slide>
     <slide slideID="3">
         <text duration="-1" ystart="0.1" starttime="0" xstart="0.05" fontsize="30" font="Impact" fontcolour="596984">
             <b>PRESENTECH: THE PEOPLE</b>
         </text>
-        <text duration="-1" ystart="0.2" starttime="0" xstart="0.05" font="Impact">Noor Mansur 	- Software Manager, Software Planning, Software Progress Monitoring
+        <text duration="-1" ystart="0.2" starttime="0" xstart="0.05" font="Impact">Noor Mansur - Software Manager, Software Planning, Software Progress Monitoring
         </text>
-        <text duration="-1" ystart="0.25" starttime="0" xstart="0.05" font="Impact">Butcher Alex 	- Integration &amp; Testing and  Manager
+        <text duration="-1" ystart="0.25" starttime="0" xstart="0.05" font="Impact">Alex Butcher - Integration &amp; Testing and  Manager
         </text>
-        <text duration="-1" ystart="0.35" starttime="0" xstart="0.05" font="Impact">Jack Bardsley 	- Marketing and Financial Projections Manager
+        <text duration="-1" ystart="0.35" starttime="0" xstart="0.05" font="Impact">Jack Bardsley - Marketing and Financial Projections Manager
         </text>
-        <text duration="-1" ystart="0.4" starttime="0" xstart="0.05" font="Impact">Stephen Clarke	- Quality Assurance, Records &amp; Company Vision/Mission Maintenance</text>
-        <text duration="-1" ystart="0.45" starttime="0" xstart="0.05" font="Impact">Amit Ramjali 	- Financial Records Management</text>
-        <text duration="-1" ystart="0.5" starttime="0" xstart="0.05" font="Impact">Connor Stoner 	- Branding, Design and Aesthetics</text>
-        <text duration="-1" ystart="0.6" starttime="0" xstart="0.05" font="Impact">Lewis Tate 	- Requirements, Specification and Human Factors Management
+        <text duration="-1" ystart="0.4" starttime="0" xstart="0.05" font="Impact">Stephen Clarke - Quality Assurance, Records &amp; Company Vision/Mission Maintenance</text>
+        <text duration="-1" ystart="0.45" starttime="0" xstart="0.05" font="Impact">Amit Ramjali - Financial Records Management</text>
+        <text duration="-1" ystart="0.5" starttime="0" xstart="0.05" font="Impact">Connor Stoner - Branding, Design and Aesthetics</text>
+        <text duration="-1" ystart="0.6" starttime="0" xstart="0.05" font="Impact">Lewis Tate - Requirements, Specification and Human Factors Management
         </text>
-        <text duration="-1" ystart="0.65" starttime="0" xstart="0.05" font="Impact">Jaynil Doshi 	- Android Application Environment &amp; Environmental Monitoring Specialist
+        <text duration="-1" ystart="0.65" starttime="0" xstart="0.05" font="Impact">Jaynil Doshi - Android Application Environment &amp; Environmental Monitoring Specialist
         </text>
-        <text duration="-1" ystart="0.7" starttime="0" xstart="0.05" font="Impact">Richardson Luke	- Android Specialist, Device Environment Compatibility</text>
+        <text duration="-1" ystart="0.7" starttime="0" xstart="0.05" font="Impact">Luke Richardson - Android Specialist, Device Environment Compatibility</text>
         <text duration="-1" ystart="0.75" starttime="0" xstart="0.05" font="Impact">Edward Prentice	- Project Management, Financial Reporting, Industry Relations and Systems
         </text>
     </slide>
@@ -88,29 +88,29 @@
         <text duration="-1" ystart="0.1" starttime="0" xstart="0.05" fontsize="30" font="Impact" fontcolour="596984">
             <b>HANDS UP: THE NEXT SOLUTION</b>
         </text>
-        <text duration="-1" ystart="0.4" starttime="0" xstart="0.05">
+        <text duration="-1" ystart="0.2" starttime="0" xstart="0.05">
             <b>Generic Slide-Based Software, Chalkboards and Whiteboards</b>
         </text>
         <text duration="-1" ystart="0.5" starttime="0" xstart="0.05">
             <b>None of these tools allow the audience to communicate in the effective manner they allow the presenter to communicate</b>
         </text>
-        <text duration="-1" ystart="0.6" starttime="0" xstart="0.05">
+        <text duration="-1" ystart="0.8" starttime="0" xstart="0.05">
             <b>The solution is Hands-Up</b>
         </text>
-        <image width="0.6" duration="-1" ystart="0.2" sourceFile="image9.png" starttime="0" xstart="0.2" height="0.6"></image>
-        <image width="0.6" duration="-1" ystart="0.2" sourceFile="image13.png" starttime="0" xstart="0.2" height="0.6"></image>
-        <image width="0.6" duration="-1" ystart="0.2" sourceFile="image14.png" starttime="0" xstart="0.2" height="0.6"></image>
-        <image width="0.6" duration="-1" ystart="0.2" sourceFile="image10.png" starttime="0" xstart="0.2" height="0.6" />
-        <image width="0.6" duration="-1" ystart="0.2" sourceFile="image11.png" starttime="0" xstart="0.2" height="0.6"></image>
-        <image width="0.6" duration="-1" ystart="0.2" sourceFile="image12.png" starttime="0" xstart="0.2" height="0.6"></image>
-        <image width="0.6" duration="-1" ystart="0.2" sourceFile="image4.png" starttime="0" xstart="0.2" height="0.6"></image>
+        <image width="0.6" duration="-1" ystart="0.22" sourceFile="image9.png" starttime="0" xstart="0.2" height="0.6"/>
+        <image width="0.6" duration="-1" ystart="0.22" sourceFile="image13.png" starttime="0" xstart="0.3" height="0.6"/>
+        <image width="0.6" duration="-1" ystart="0.22" sourceFile="image14.png" starttime="0" xstart="0.4" height="0.6"/>
+        <image width="0.6" duration="-1" ystart="0.22" sourceFile="image10.png" starttime="0" xstart="0.5" height="0.6"/>
+        <image width="0.6" duration="-1" ystart="0.55" sourceFile="image11.png" starttime="0" xstart="0.2" height="0.6"/>
+        <image width="0.6" duration="-1" ystart="0.85" sourceFile="image12.png" starttime="0" xstart="0.3" height="0.6"/>
+        <image width="0.6" duration="-1" ystart="0.85" sourceFile="image4.png" starttime="0" xstart="0.2" height="0.6"/>
     </slide>
     <slide slideID="5" duration="8" nextSlide="5">
         <video ystart="0" loop="true" xstart="0" sourceFile="promo" duration="-1" starttime="0" />
     </slide>
     <slide slideID="6">
         <text duration="-1" ystart="0.1" starttime="0" xstart="0.05" fontsize="30" font="Impact" fontcolour="596984">
-            <b>Hands-up: A technical advantage</b>
+            <b>Hands-up: A TECHNICAL ADVANTAGE</b>
         </text>
         <text duration="-1" ystart="0.4" starttime="0" xstart="0.05">
             <b>Several Technical Design Decisions have benefited Presentech:</b>
@@ -142,7 +142,7 @@
             <b>Quality Communications, Quality Understanding, Quality Output</b>
         </text>
         <text duration="-1" ystart="4" starttime="0" xstart="0.05">Valuing our efforts – Should we cover this slide again? Let us know.</text>
-        <image width="0.6" duration="-1" ystart="0.2" sourceFile="image35.png" starttime="0" xstart="0.2" height="0.6"></image>
+        <image width="0.6" duration="-1" ystart="0.2" sourceFile="image20.png" starttime="0" xstart="0.2" height="0.6"></image>
         <image width="0.6" duration="-1" ystart="0.2" sourceFile="image24.png" starttime="0" xstart="0.2" height="0.6"></image>
         <image width="0.6" duration="-1" ystart="0.2" sourceFile="image22.png" starttime="0" xstart="0.2" height="0.6"></image>
         <image width="0.6" duration="-1" ystart="0.2" sourceFile="image23.png" starttime="0" xstart="0.2" height="0.6"></image>
@@ -250,12 +250,10 @@
         <text duration="-1" ystart="0.1" starttime="0" xstart="0.05" fontsize="30" font="Impact" fontcolour="596984">
             <b>HANDS UP: The right Price</b>
         </text>
-        <image width="0.6" duration="-1" ystart="0.45" sourceFile="pricingChart.png" starttime="0" xstart="0.35" height="0.6"></image>
+        <image width="0.6" duration="-1" ystart="0.15" sourceFile="pricingChart.png" starttime="0" xstart="0.25" height="0.6"></image>
     </slide>
     <slide slideID="14">
-        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05" fontsize="30" font="Impact" fontcolour="596984">
-            <b>TOTAL BI-ANNUAL PAID USER BY NET LICENSE VARIATION</b>
-        </text>
+
         <image width="0.6" duration="-1" ystart="0.45" sourceFile="biansales.png" starttime="0" xstart="0.25" height="0.6"></image>
     </slide>
     <slide slideID="15">
@@ -294,8 +292,8 @@
         <text duration="-1" ystart="0.55" starttime="0" xstart="0.05" font="Impact">Second Iteration – 28th May</text>
         <text duration="-1" ystart="0.6" starttime="0" xstart="0.05" font="Impact">Long Term Risks (Onwards from this point)</text>
         <text duration="-1" ystart="0.65" starttime="0" xstart="0.05" font="Impact">Individually Flagged Risks</text>
-        <image width="0.2" duration="-1" ystart="0.3" sourceFile="image52.png" starttime="0" xstart="0.7" height="0.2"></image>
-        <image width="0.2" duration="-1" ystart="0.6" sourceFile="image51.png" starttime="0" xstart="0.7" height="0.2"></image>
+        <image width="0.2" duration="-1" ystart="0.3" sourceFile="image52.png" starttime="0" xstart="0.7" height="0.2"/>
+        <image width="0.2" duration="-1" ystart="0.6" sourceFile="image51.png" starttime="0" xstart="0.7" height="0.2"/>
     </slide>
     <slide slideID="19">
         <text duration="-1" ystart="0.1" starttime="0" xstart="0.05" fontsize="30" font="Impact" fontcolour="596984">
@@ -326,7 +324,7 @@
         <text duration="-1" ystart="0.3" starttime="0" xstart="0.05" font="Impact">a) £5</text>
         <text duration="-1" ystart="0.35" starttime="0" xstart="0.05" font="Impact">b) £10!</text>
         <text duration="-1" ystart="0.4" starttime="0" xstart="0.05" font="Impact">c)What wouldn’t I pay? The feedback is rigged! Ask a sensible question!</text>
-        <image width="0.2" duration="-1" ystart="0.6" sourceFile="image10.png" starttime="0" xstart="0.4" height="0.6"></image>
+        <image width="0.2" duration="-1" ystart="0.6" sourceFile="image10.png" starttime="0" xstart="0.4" height="0.2"></image>
     </slide>
     <slide slideID="22">
         <text duration="-1" ystart="0.1" starttime="0" xstart="0.05" fontsize="30" font="Impact" fontcolour="596984">

@@ -287,8 +287,10 @@ public class PresentationActivity extends AppCompatActivity {
         int imgWidth = (int) (i.getWidth())*screenWidth;
         int imgHeight = (int) (i.getHeight())*screenHeight;
         ImageView iV = new ImageView(this);
+        iV.setX(i.getxStart()*screenWidth);
+        iV.setY(i.getyStart()*screenHeight);
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(imgWidth, imgHeight);
-        //iV.setLayoutParams(layoutParams);
+       // iV.setLayoutParams(layoutParams);
         iV.setImageBitmap(b);
         slide.addView(iV);
 
@@ -681,8 +683,10 @@ public class PresentationActivity extends AppCompatActivity {
     public void getPresentation() throws IOException, XmlPullParserException{
         XMLParser parser = new XMLParser();
         InputStream in = null;
-        File initFile = new File(pathName);
-        in = new FileInputStream(initFile);
+     //   File initFile = new File(pathName);
+        //in = new FileInputStream(initFile);
+
+        in = getAssets().open("salespitch.xml");
         presentationFile = parser.getPresentation(in);
     }
 
