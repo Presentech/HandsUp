@@ -332,7 +332,7 @@ public class PresentationActivity extends AppCompatActivity {
         vV.setY(v.getyStart() * screenHeight);
         vV.setLayoutParams(new FrameLayout.LayoutParams(screenWidth,screenHeight));
         //vV.layout((int) vV.getX(), (int) vV.getY(),(int) vV.getX() + 800, (int) vV.getY() + 500);
-        vV.start();
+        //vV.start();
 
         slide.addView(vV);
 
@@ -476,10 +476,11 @@ public class PresentationActivity extends AppCompatActivity {
                             display.getSize(size);
                             RelativeLayout rl = (RelativeLayout)viewFlipper.getChildAt(viewFlipper.getDisplayedChild());
                             VideoView vV = (VideoView) rl.getChildAt(0);
+                            rl.removeView(vV);
                             screenHeight = size.y - 360;
                             //vV.setLayoutParams(new RelativeLayout.LayoutParams(800,400));
-                            vV.layout(0, 0,200,200);
-                            vV.invalidate();
+                            vV.setLayoutParams(new RelativeLayout.LayoutParams(screenWidth,screenHeight));
+                            rl.addView(vV);
                         }
 //                        screenHeight = size.y - 360;
 //                        RelativeLayout rl = (RelativeLayout) viewFlipper.getChildAt(viewFlipper.getDisplayedChild());
@@ -499,8 +500,10 @@ public class PresentationActivity extends AppCompatActivity {
                             display.getSize(size);
                             RelativeLayout rl = (RelativeLayout)viewFlipper.getChildAt(viewFlipper.getDisplayedChild());
                             VideoView vV = (VideoView) rl.getChildAt(0);
+                            rl.removeView(vV);
                             screenHeight = size.y;
                             vV.setLayoutParams(new RelativeLayout.LayoutParams(screenWidth,screenHeight));
+                            rl.addView(vV);
                         }
 //                        screenHeight = size.y;
 //                        RelativeLayout rl = (RelativeLayout) viewFlipper.getChildAt(viewFlipper.getDisplayedChild());
