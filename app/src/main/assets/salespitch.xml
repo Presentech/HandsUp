@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <presentation>
     <documentInfo>
         <Title>Example File</Title>
@@ -15,13 +15,16 @@
         <fillColour>2222AA</fillColour>
     </defaults>
     <slide slideID="0" duration="5" nextSlide="1">
-        <text duration="-1" ystart="0.9" starttime="0" xstart="0.3"
-            fontsize="30" font="Impact" fontcolour="596984"> <b>BROUGHT TO YOU BY PRESENTECH</b></text>
+        <text duration="-1" ystart="0.9" starttime="0" xstart="0.3" fontsize="30" font="Impact" fontcolour="596984">
+            <b>BROUGHT TO YOU BY PRESENTECH</b>
+        </text>
         <question> Are you ready?</question>
+        <image width="0.6" duration="-1" ystart="0.2" sourceFile="image4.png" starttime="0" xstart="0.2" height="0.6" />
     </slide>
     <slide slideID="1">
-        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05"
-            fontsize="30" font="Impact" fontcolour="596984"><b> PRESENTECH: AN AGENDA</b></text>
+        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05" fontsize="30" font="Impact" fontcolour="596984">
+            <b> PRESENTECH: AN AGENDA</b>
+        </text>
         <text duration="-1" ystart="0.2" starttime="0" xstart="0.05" font="Impact">Reintroducing Presentech</text>
         <text duration="-1" ystart="0.3" starttime="0" xstart="0.05" font="Impact">  Hands-Up – The Problem and Solution</text>
         <text duration="-1" ystart="0.4" starttime="0" xstart="0.05" font="Impact">Product Tour</text>
@@ -31,110 +34,255 @@
         <text duration="-1" ystart="0.8" starttime="0" xstart="0.05" font="Impact">Looking after our investors interests</text>
         <text duration="-1" ystart="0.9" starttime="0" xstart="0.05" font="Impact">Risks Encountered and Lessons Learnt</text>
         <question>Does this really work?</question>
+        <image width="0.6" duration="-1" ystart="0.2" sourceFile="image5.png" starttime="0" xstart="0.2" height="0.6" />
     </slide>
     <slide slideID="2" duration="8" nextSlide="3">
-        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05"
-            fontsize="30" font="Impact" fontcolour="596984"> <b>PRESENTECH: AN EXCELLENT COMPANY</b>
+        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05" fontsize="30" font="Impact" fontcolour="596984">
+            <b>PRESENTECH: AN EXCELLENT COMPANY</b>
         </text>
-        <text duration="-1" ystart="0.2" starttime="0" xstart="0.05" font="Impact"><b>Driven by a single mission:</b></text>
-        <text duration="-1" ystart="0.25" starttime="0" xstart="0.05" font="Impact"><i>“Providing applications which actively enhance the presentation experience.”</i></text>
-        <text duration="-1" ystart="0.35" starttime="0" xstart="0.05" font="Impact"><b>Working in unison</b></text>
+        <text duration="-1" ystart="0.2" starttime="0" xstart="0.05" font="Impact">
+            <b>Driven by a single mission:</b>
+        </text>
+        <text duration="-1" ystart="0.25" starttime="0" xstart="0.05" font="Impact">
+            <i>“Providing applications which actively enhance the presentation experience.”</i>
+        </text>
+        <text duration="-1" ystart="0.35" starttime="0" xstart="0.05" font="Impact">
+            <b>Working in unison</b>
+        </text>
         <text duration="-1" ystart="0.4" starttime="0" xstart="0.05" font="Impact">Adaptive and flexible company structure.</text>
         <text duration="-1" ystart="0.45" starttime="0" xstart="0.05" font="Impact">Changed as we developed.</text>
         <text duration="-1" ystart="0.5" starttime="0" xstart="0.05" font="Impact">Stands ready for growth.</text>
-        <text duration="-1" ystart="0.6" starttime="0" xstart="0.05" font="Impact"><b>Best Practices</b></text>
+        <text duration="-1" ystart="0.6" starttime="0" xstart="0.05" font="Impact">
+            <b>Best Practices</b>
+        </text>
         <text duration="-1" ystart="0.65" starttime="0" xstart="0.05" font="Impact">Project best practices</text>
         <text duration="-1" ystart="0.7" starttime="0" xstart="0.05" font="Impact">Product level standards</text>
         <text duration="-1" ystart="0.75" starttime="0" xstart="0.05" font="Impact">Team-wide results</text>
         <text duration="-1" ystart="0.8" starttime="0" xstart="0.05" font="Impact">Agile Development</text>
+        <image width="0.6" duration="-1" ystart="0.2" sourceFile="image6.png" starttime="0" xstart="0.2" height="0.6"></image>
+        <image width="0.6" duration="-1" ystart="0.2" sourceFile="image7.png" starttime="0" xstart="0.2" height="0.6"></image>
+        <image width="0.6" duration="-1" ystart="0.2" sourceFile="image8.png" starttime="0" xstart="0.2" height="0.6" />
     </slide>
     <slide slideID="3">
-        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05"
-            fontsize="30" font="Impact" fontcolour="596984"> <b>PRESENTECH: THE PEOPLE</b>
+        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05" fontsize="30" font="Impact" fontcolour="596984">
+            <b>PRESENTECH: THE PEOPLE</b>
+        </text>
+        <text duration="-1" ystart="0.2" starttime="0" xstart="0.05" font="Impact">Noor Mansur 	- Software Manager, Software Planning, Software Progress Monitoring
+        </text>
+        <text duration="-1" ystart="0.25" starttime="0" xstart="0.05" font="Impact">Butcher Alex 	- Integration &amp; Testing and  Manager
+        </text>
+        <text duration="-1" ystart="0.35" starttime="0" xstart="0.05" font="Impact">Jack Bardsley 	- Marketing and Financial Projections Manager
+        </text>
+        <text duration="-1" ystart="0.4" starttime="0" xstart="0.05" font="Impact">Stephen Clarke	- Quality Assurance, Records &amp; Company Vision/Mission Maintenance</text>
+        <text duration="-1" ystart="0.45" starttime="0" xstart="0.05" font="Impact">Amit Ramjali 	- Financial Records Management</text>
+        <text duration="-1" ystart="0.5" starttime="0" xstart="0.05" font="Impact">Connor Stoner 	- Branding, Design and Aesthetics</text>
+        <text duration="-1" ystart="0.6" starttime="0" xstart="0.05" font="Impact">Lewis Tate 	- Requirements, Specification and Human Factors Management
+        </text>
+        <text duration="-1" ystart="0.65" starttime="0" xstart="0.05" font="Impact">Jaynil Doshi 	- Android Application Environment &amp; Environmental Monitoring Specialist
+        </text>
+        <text duration="-1" ystart="0.7" starttime="0" xstart="0.05" font="Impact">Richardson Luke	- Android Specialist, Device Environment Compatibility</text>
+        <text duration="-1" ystart="0.75" starttime="0" xstart="0.05" font="Impact">Edward Prentice	- Project Management, Financial Reporting, Industry Relations and Systems
         </text>
     </slide>
     <slide slideID="4">
-        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05"
-            fontsize="30" font="Impact" fontcolour="596984"> <b>HANDS UP: THE NEXT SOLUTION</b>
+        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05" fontsize="30" font="Impact" fontcolour="596984">
+            <b>HANDS UP: THE NEXT SOLUTION</b>
         </text>
-        <text duration="-1" ystart="0.4" starttime="0" xstart="0.05"><b>Generic Slide-Based Software, Chalkboards and Whiteboards</b></text>
-        <text duration="-1" ystart="0.5" starttime="0" xstart="0.05"><b>None of these tools allow the audience to communicate in the effective manner they allow the presenter to communicate</b></text>
-        <text duration="-1" ystart="0.6" starttime="0" xstart="0.05"><b>The solution is Hands-Up</b></text>
-
+        <text duration="-1" ystart="0.4" starttime="0" xstart="0.05">
+            <b>Generic Slide-Based Software, Chalkboards and Whiteboards</b>
+        </text>
+        <text duration="-1" ystart="0.5" starttime="0" xstart="0.05">
+            <b>None of these tools allow the audience to communicate in the effective manner they allow the presenter to communicate</b>
+        </text>
+        <text duration="-1" ystart="0.6" starttime="0" xstart="0.05">
+            <b>The solution is Hands-Up</b>
+        </text>
+        <image width="0.6" duration="-1" ystart="0.2" sourceFile="image9.png" starttime="0" xstart="0.2" height="0.6"></image>
+        <image width="0.6" duration="-1" ystart="0.2" sourceFile="image13.png" starttime="0" xstart="0.2" height="0.6"></image>
+        <image width="0.6" duration="-1" ystart="0.2" sourceFile="image14.png" starttime="0" xstart="0.2" height="0.6"></image>
+        <image width="0.6" duration="-1" ystart="0.2" sourceFile="image10.png" starttime="0" xstart="0.2" height="0.6" />
+        <image width="0.6" duration="-1" ystart="0.2" sourceFile="image11.png" starttime="0" xstart="0.2" height="0.6"></image>
+        <image width="0.6" duration="-1" ystart="0.2" sourceFile="image12.png" starttime="0" xstart="0.2" height="0.6"></image>
+        <image width="0.6" duration="-1" ystart="0.2" sourceFile="image4.png" starttime="0" xstart="0.2" height="0.6"></image>
     </slide>
-    <slide slideID="5" duration="8" nextSlide="3">
+    <slide slideID="5" duration="8" nextSlide="5">
         <video ystart="0" loop="true" xstart="0" sourceFile="promo" duration="-1" starttime="0" />
     </slide>
     <slide slideID="6">
-        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05"
-            fontsize="30" font="Impact" fontcolour="596984"> <b>HANDS UP: A VALUED PROPOSITION</b>
+        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05" fontsize="30" font="Impact" fontcolour="596984">
+            <b>Hands-up: A technical advantage</b>
         </text>
-        <text duration="-1" ystart="0.4" starttime="0" xstart="0.05"><b>HandsUp: Delivering Value </b></text>
-        <text duration="-1" ystart="0.5" starttime="0" xstart="0.05"><b>Your Time, Your Employees' Time, Your Students' Time</b></text>
-        <text duration="-1" ystart="0.6" starttime="0" xstart="0.05"><b>Quality Communications, Quality Understanding, Quality Output
-        </b></text>
+        <text duration="-1" ystart="0.4" starttime="0" xstart="0.05">
+            <b>Several Technical Design Decisions have benefited Presentech:</b>
+        </text>
+        <text duration="-1" ystart="0.5" starttime="0" xstart="0.05">
+            <b>UUIDs allow anonymous feedback that is tracked on
+            </b>
+        </text>
+        <text duration="-1" ystart="0.5" starttime="0" xstart="0.05">
+            <b>a anonymous basis.</b>
+        </text>
+        <text duration="-1" ystart="0.4" starttime="0" xstart="0.05" font="Impact">International geographical user stats logging</text>
+        <text duration="-1" ystart="0.45" starttime="0" xstart="0.05" font="Impact">Remote error logging integrated into IDE</text>
+        <image width="0.6" duration="-1" ystart="0.2" sourceFile="jayMap.png" starttime="0" xstart="0.2" height="0.6"></image>
+        <image width="0.6" duration="-1" ystart="0.2" sourceFile="jayErrorLog.png" starttime="0" xstart="0.2" height="0.6"></image>
     </slide>
     <slide slideID="7">
-        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05"
-            fontsize="30" font="Impact" fontcolour="596984"><b>HANDS UP: A LOW PRICE TO PAY FOR THE VALUE
-        </b>
+        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05" fontsize="30" font="Impact" fontcolour="596984">
+            <b>HANDS UP: A valued proposition        </b>
         </text>
-        <text duration="-1" ystart="0.4" starttime="0" xstart="0.05"><b>Minimising Management Overhead</b></text>
-        <text duration="-1" ystart="0.5" starttime="0" xstart="0.05"><b>Minimising Agile Overhead</b></text>
+        <text duration="-1" ystart="0.4" starttime="0" xstart="0.05">
+            <b>Delivering Value</b>
+        </text>
+        <text duration="-1" ystart="0.5" starttime="0" xstart="0.05">
+            <b>Your Time, Your Employees Time, Your Students Time
+            </b>
+        </text>
+        <text duration="-1" ystart="0.5" starttime="0" xstart="0.05">
+            <b>Quality Communications, Quality Understanding, Quality Output</b>
+        </text>
+        <text duration="-1" ystart="4" starttime="0" xstart="0.05">Valuing our efforts – Should we cover this slide again? Let us know.</text>
+        <image width="0.6" duration="-1" ystart="0.2" sourceFile="image35.png" starttime="0" xstart="0.2" height="0.6"></image>
+        <image width="0.6" duration="-1" ystart="0.2" sourceFile="image24.png" starttime="0" xstart="0.2" height="0.6"></image>
+        <image width="0.6" duration="-1" ystart="0.2" sourceFile="image22.png" starttime="0" xstart="0.2" height="0.6"></image>
+        <image width="0.6" duration="-1" ystart="0.2" sourceFile="image23.png" starttime="0" xstart="0.2" height="0.6"></image>
+        <image width="0.6" duration="-1" ystart="0.2" sourceFile="image31.png" starttime="0" xstart="0.2" height="0.6"></image>
+        <image width="0.6" duration="-1" ystart="0.2" sourceFile="image25.png" starttime="0" xstart="0.2" height="0.6"></image>
+        <image width="0.6" duration="-1" ystart="0.2" sourceFile="image26.png" starttime="0" xstart="0.2" height="0.6"></image>
     </slide>
     <slide slideID="8">
-        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05"
-            fontsize="30" font="Impact" fontcolour="596984"> <b>HANDS UP: GENERATING PROFIT</b>
+        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05" fontsize="30" font="Impact" fontcolour="596984">
+            <b>Hands-up: Backed Up By Facts</b>
         </text>
-        <text duration="-1" ystart="0.4" starttime="0" xstart="0.05"><b>Range of Custom</b></text>
-        <text duration="-1" ystart="0.5" starttime="0" xstart="0.05"><b>Defined, Attractive and Profitable Revenue Stream Design
-        </b></text>
-        <text duration="-1" ystart="0.6" starttime="0" xstart="0.05"><b>Single Product Encapsulates Long Term Value
-        </b></text>
+        <text duration="-1" ystart="0.4" starttime="0" xstart="0.05">69% of 2,684 student respondents positive</text>
+        <text duration="-1" ystart="0.5" starttime="0" xstart="0.05">
+            <b>19 disciplines – accounting to art</b>
+        </text>
+        <text duration="-1" ystart="0.6" starttime="0" xstart="0.05">Statistically significant effect on attainment</text>
+        <text duration="-1" ystart="0.6" starttime="0" xstart="0.05">University of Wisconsin-Milwaukee, Texas</text>
+        <text duration="-1" ystart="0.6" starttime="0" xstart="0.05">http://www4.uwm.edu/ltc/srs/grant/docs/studentresponses.pdf</text>
     </slide>
     <slide slideID="9">
-        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05"
-            fontsize="30" font="Impact" fontcolour="596984"> <b>HANDS UP: GENERATING VALUE</b>
+        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05" fontsize="30" font="Impact" fontcolour="596984">
+            <b>Hands-up: A Low price to pay for value</b>
         </text>
-        <text duration="-1" ystart="0.4" starttime="0" xstart="0.05" font="Impact"><b>Range of Tangible and Intangible Assets</b></text>
-        <text duration="-1" ystart="0.5" starttime="0" xstart="0.05" font="Impact"><b>Expanding Range of Value</b></text>
-        <text duration="-1" ystart="0.6" starttime="0" xstart="0.05" font="Impact"><b>Maintaining Value Economically</b></text>
+        <text duration="-1" ystart="0.5" starttime="0" xstart="0.05">
+            <b>Minimising Management Overhead
+            </b>
+        </text>
+        <text duration="-1" ystart="0.6" starttime="0" xstart="0.05">
+            <b>Minimising Agile Overhead</b>
+        </text>
+        <image width="0.6" duration="-1" ystart="0.2" sourceFile="image27.png" starttime="0" xstart="0.2" height="0.6"></image>
+        <image width="0.6" duration="-1" ystart="0.2" sourceFile="image28.png" starttime="0" xstart="0.2" height="0.6"></image>
+        <image width="0.6" duration="-1" ystart="0.2" sourceFile="image29.png" starttime="0" xstart="0.2" height="0.6"></image>
+        <image width="0.6" duration="-1" ystart="0.2" sourceFile="image31.png" starttime="0" xstart="0.2" height="0.6"></image>
+        <image width="0.6" duration="-1" ystart="0.2" sourceFile="image30.png" starttime="0" xstart="0.2" height="0.6"></image>
     </slide>
     <slide slideID="10">
-        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05"
-            fontsize="30" font="Impact" fontcolour="596984"> <b>HANDS UP:COMPETING WITH THE BEST</b>
+        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05" fontsize="30" font="Impact" fontcolour="596984">
+            <b>HANDS UP: GENERATING PROFIT</b>
         </text>
-        <text duration="-1" ystart="0.4" starttime="0" xstart="0.05" font="Impact"><b>The Competition</b></text>
-        <text duration="-1" ystart="0.5" starttime="0" xstart="0.05" font="Impact"><b>Competitive Edges</b></text>
-        <text duration="-1" ystart="0.6" starttime="0" xstart="0.05" fontsize="15" font="Impact"><b>Market Risks</b></text>
+        <text duration="-1" ystart="0.2" starttime="0" xstart="0.05">
+            <b>Range of Custom</b>
+        </text>
+        <text duration="-1" ystart="0.5" starttime="0" xstart="0.05">
+            <b>Defined, Attractive and Profitable Revenue Stream Design
+            </b>
+        </text>
+        <text duration="-1" ystart="0.8" starttime="0" xstart="0.05">
+            <b>Single Product Encapsulates Long Term Value
+            </b>
+        </text>
+        <image width="0.1" duration="-1" ystart="0.25" sourceFile="image27.png" starttime="0" xstart="0.3" height="0.1"></image>
+        <image width="0.1" duration="-1" ystart="0.25" sourceFile="image28.png" starttime="0" xstart="0.5" height="0.1"></image>
+        <image width="0.1" duration="-1" ystart="0.25" sourceFile="image32.png" starttime="0" xstart="0.8" height="0.1"></image>
+        <image width="0.1" duration="-1" ystart="0.45" sourceFile="image35.png" starttime="0" xstart="0.4" height="0.1"></image>
+        <image width="0.1" duration="-1" ystart="0.45" sourceFile="image6.png"  starttime="0" xstart="0.6" height="0.1"></image>
+        <image width="0.1" duration="-1" ystart="0.7"  sourceFile="image34.png" starttime="0" xstart="0.3" height="0.1"></image>
+        <image width="0.1" duration="-1" ystart="0.7"  sourceFile="image36.png" starttime="0" xstart="0.5" height="0.1"></image>
+        <image width="0.1" duration="-1" ystart="0.7"  sourceFile="image26.png" starttime="0" xstart="0.8" height="0.1"></image>
     </slide>
     <slide slideID="11">
-        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05"
-            fontsize="30" font="Impact" fontcolour="596984"> <b>TOTAL BI-ANNUAL PAID USER BY NET LICENSE VARIATION</b>
+        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05" fontsize="30" font="Impact" fontcolour="596984">
+            <b>HANDS UP: GENERATING VALUE</b>
         </text>
+        <text duration="-1" ystart="0.2" starttime="0" xstart="0.05" font="Impact">
+            <b>Range of Tangible and Intangible Assets</b>
+        </text>
+        <text duration="-1" ystart="0.5" starttime="0" xstart="0.05" font="Impact">
+            <b>Expanding Range of Value</b>
+        </text>
+        <text duration="-1" ystart="0.8" starttime="0" xstart="0.05" font="Impact">
+            <b>Maintaining Value Economically</b>
+        </text>
+        <image width="0.2" duration="-1" ystart="0.2" sourceFile="image35.png" starttime="0" xstart="0.4" height="0.2"></image>
+        <image width="0.2" duration="-1" ystart="0.2" sourceFile="image4.png"  starttime="0" xstart="0.4" height="0.2"></image>
+        <image width="0.2" duration="-1" ystart="0.45" sourceFile="image34.png" starttime="0" xstart="0.4" height="0.2"></image>
+        <image width="0.2" duration="-1" ystart="0.45" sourceFile="image6.png"  starttime="0" xstart="0.4" height="0.2"></image>
+        <image width="0.2" duration="-1" ystart="0.7" sourceFile="image35.png" starttime="0" xstart="0.4" height="0.2"></image>
+        <image width="0.2" duration="-1" ystart="0.7" sourceFile="image33.png" starttime="0" xstart="0.4" height="0.2"></image>
     </slide>
     <slide slideID="12">
-        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05"
-            fontsize="30" font="Impact" fontcolour="596984"><b>HANDS UP:CONDENSED CASH-FLOW STATEMENT</b>
+        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05" fontsize="30" font="Impact" fontcolour="596984">
+            <b>HANDS UP:COMPETING WITH THE BEST</b>
         </text>
-        <text duration="-1" ystart="0.2" starttime="0" xstart="0.05" fontsize="20" font="Impact">PBIT/Sales Revenue = <i>0.56</i></text>
-        <text duration="-1" ystart="0.3" starttime="0" xstart="0.05" fontsize="22" font="Impact">Costs/Sales Revenue = <i>0.15</i></text>
-        <text duration="-1" ystart="0.4" starttime="0" xstart="0.05" fontsize="24" font="Impact">Overheads/Sales Revenue <i>0.29</i></text>
-        <text duration="-1" ystart="0.5" starttime="0" xstart="0.05" fontsize="26" font="Impact">OCE = <i>0.77</i> Over Three Years <i>+24</i> Week Development Time</text>
+        <text duration="-1" ystart="0.2" starttime="0" xstart="0.05" font="Impact">
+            <b>The Competition</b>
+        </text>
+        <text duration="-1" ystart="0.5" starttime="0" xstart="0.05" font="Impact">
+            <b>Competitive Edges</b>
+        </text>
+        <text duration="-1" ystart="0.8" starttime="0" xstart="0.05" fontsize="15" font="Impact">
+            <b>Market Risks</b>
+        </text>
+        <image width="0.2" duration="-1" ystart="0.25" sourceFile="image41.png" starttime="0" xstart="0.2" height="0.2"></image>
+        <image width="0.2" duration="-1" ystart="0.25" sourceFile="image45.png" starttime="0" xstart="0.2" height="0.2"></image>
+        <image width="0.2" duration="-1" ystart="0.25" sourceFile="image46.png" starttime="0" xstart="0.2" height="0.2"></image>
+        <image width="0.2" duration="-1" ystart="0.45" sourceFile="image35.png" starttime="0" xstart="0.2" height="0.2"></image>
+        <image width="0.2" duration="-1" ystart="0.45" sourceFile="image44.png" starttime="0" xstart="0.2" height="0.2"></image>
+        <image width="0.2" duration="-1" ystart="0.45" sourceFile="image43.png" starttime="0" xstart="0.2" height="0.2"></image>
+        <image width="0.2" duration="-1" ystart="0.65" sourceFile="image47.png" starttime="0" xstart="0.2" height="0.2"></image>
+        <image width="0.2" duration="-1" ystart="0.65" sourceFile="image42.png" starttime="0" xstart="0.2" height="0.2"></image>
+        <image width="0.2" duration="-1" ystart="0.65" sourceFile="image48.png" starttime="0" xstart="0.2" height="0.2"></image>
     </slide>
     <slide slideID="13">
-        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05"
-            fontsize="30" font="Impact" fontcolour="596984"> <b>HANDS UP: PROJECED PROFIT NUMBERS</b>
+        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05" fontsize="30" font="Impact" fontcolour="596984">
+            <b>HANDS UP: The right Price</b>
         </text>
+        <image width="0.6" duration="-1" ystart="0.45" sourceFile="pricingChart.png" starttime="0" xstart="0.35" height="0.6"></image>
     </slide>
     <slide slideID="14">
-        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05"
-            fontsize="30" font="Impact" fontcolour="596984"> <b>HANDS UP: RETURNING ON INVESTMENTS</b>
+        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05" fontsize="30" font="Impact" fontcolour="596984">
+            <b>TOTAL BI-ANNUAL PAID USER BY NET LICENSE VARIATION</b>
         </text>
+        <image width="0.6" duration="-1" ystart="0.45" sourceFile="biansales.png" starttime="0" xstart="0.25" height="0.6"></image>
     </slide>
     <slide slideID="15">
-        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05"
-            fontsize="30" font="Impact" fontcolour="596984"> <b>HANDS UP: OVERCOMING RISKS</b>
+        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05" fontsize="30" font="Impact" fontcolour="596984">
+            <b>HANDS-UP: CONDENSED CASH-FLOW STATEMENT</b>
+        </text>
+        <image width="0.2" duration="-1" ystart="0.3" sourceFile="image26.png" starttime="0" xstart="0.05" height="0.2"></image>
+        <image width="0.6" duration="-1" ystart="0.15" sourceFile="cashflowpredicted.png" starttime="0" xstart="0.3" height="0.6"></image>
+    </slide>
+    <slide slideID="16">
+        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05" fontsize="30" font="Impact" fontcolour="596984">
+            <b>HANDS UP: PROJECTED PROFIT NUMBERS</b>
+        </text>
+        <text duration="-1" ystart="0.3" starttime="0" xstart="0.3" fontsize="22" font="Impact">PBIT/Sales Revenue = <i>0.56</i></text>
+        <text duration="-1" ystart="0.4" starttime="0" xstart="0.3" fontsize="22" font="Impact">Costs/Sales Revenue = <i>0.15</i></text>
+        <text duration="-1" ystart="0.5" starttime="0" xstart="0.3" fontsize="24" font="Impact">Overheads/Sales Revenue <i>0.29</i></text>
+        <text duration="-1" ystart="0.6" starttime="0" xstart="0.3" fontsize="26" font="Impact">ROCE = <i>0.77</i> Over Three Years <i>+24</i> Week Development Time</text>
+    </slide>
+    <slide slideID="17">
+        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05" fontsize="30" font="Impact" fontcolour="596984">
+            <b>HANDS UP: RETURNING ON INVESTMENTS</b>
+        </text>
+        <image width="0.8" duration="-1" ystart="0.2" sourceFile="biansales.png" starttime="0" xstart="0.1" height="0.6"></image>
+    </slide>
+    <slide slideID="18">
+        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05" fontsize="30" font="Impact" fontcolour="596984">
+            <b>HANDS UP: OVERCOMING RISKS</b>
         </text>
         <text duration="-1" ystart="0.2" starttime="0" xstart="0.05" font="Impact">Key Risks Overcome During First 22 weeks of Project</text>
         <text duration="-1" ystart="0.25" starttime="0" xstart="0.05" font="Impact">Over 40 risks captured and contained over the duration of the project within the risk register.</text>
@@ -146,28 +294,45 @@
         <text duration="-1" ystart="0.55" starttime="0" xstart="0.05" font="Impact">Second Iteration – 28th May</text>
         <text duration="-1" ystart="0.6" starttime="0" xstart="0.05" font="Impact">Long Term Risks (Onwards from this point)</text>
         <text duration="-1" ystart="0.65" starttime="0" xstart="0.05" font="Impact">Individually Flagged Risks</text>
+        <image width="0.2" duration="-1" ystart="0.3" sourceFile="image52.png" starttime="0" xstart="0.7" height="0.2"></image>
+        <image width="0.2" duration="-1" ystart="0.6" sourceFile="image51.png" starttime="0" xstart="0.7" height="0.2"></image>
     </slide>
-    <slide slideID="16">
-        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05"
-            fontsize="30" font="Impact" fontcolour="596984"> <b>HANDS UP: CONFIDENCE AND FUTURE PROOFING</b>
+    <slide slideID="19">
+        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05" fontsize="30" font="Impact" fontcolour="596984">
+            <b>HANDS UP: CONFIDENCE AND FUTURE PROOFING</b>
         </text>
         <text duration="-1" ystart="0.2" starttime="0" xstart="0.05" font="Impact">Identifying Ongoing Risks.</text>
         <text duration="-1" ystart="0.3" starttime="0" xstart="0.05" font="Impact">Market Risks</text>
         <text duration="-1" ystart="0.4" starttime="0" xstart="0.05" font="Impact">Management Risks</text>
         <text duration="-1" ystart="0.5" starttime="0" xstart="0.05" font="Impact">Technical Risks</text>
+        <image width="0.2" duration="-1" ystart="0.2" sourceFile="image53.png" starttime="0" xstart="0.6" height="0.2"></image>
+        <image width="0.2" duration="-1" ystart="0.45" sourceFile="image32.png" starttime="0" xstart="0.6" height="0.2"></image>
+        <image width="0.2" duration="-1" ystart="0.7" sourceFile="image22.png" starttime="0" xstart="0.6" height="0.2"></image>
     </slide>
-    <slide slideID="17">
-        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05"
-            fontsize="30" font="Impact" fontcolour="596984"> <b>HANDS UP: THE FINAL QUESTION</b>
+    <slide slideID="20">
+        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05" fontsize="30" font="Impact" fontcolour="596984">
+            <b>A Timeline Of Achievment</b>
+        </text>
+        <image width="0.2" duration="-1" ystart="0.2" sourceFile="oldDesign.png" starttime="0" xstart="0.2" height="0.2"></image>
+        <image width="0.2" duration="-1" ystart="0.5" sourceFile="oldlogo.png"   starttime="0" xstart="0.2" height="0.2"></image>
+        <image width="0.2" duration="-1" ystart="0.3" sourceFile="oldsketch.png" starttime="0" xstart="0.6" height="0.2"></image>
+        <image width="0.2" duration="-1" ystart="0.6" sourceFile="olduse.png"    starttime="0" xstart="0.6" height="0.2"></image>
+    </slide>
+    <slide slideID="21">
+        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05" fontsize="30" font="Impact" fontcolour="596984">
+            <b>HANDS UP: THE FINAL QUESTION</b>
         </text>
         <text duration="-1" ystart="0.2" starttime="0" xstart="0.05" fontsize="25" font="Impact">How much would you pay to increase productivity, raise work quality, boost your reputation and save yourself time?!?</text>
         <text duration="-1" ystart="0.3" starttime="0" xstart="0.05" font="Impact">a) £5</text>
         <text duration="-1" ystart="0.35" starttime="0" xstart="0.05" font="Impact">b) £10!</text>
         <text duration="-1" ystart="0.4" starttime="0" xstart="0.05" font="Impact">c)What wouldn’t I pay? The feedback is rigged! Ask a sensible question!</text>
+        <image width="0.2" duration="-1" ystart="0.6" sourceFile="image10.png" starttime="0" xstart="0.4" height="0.6"></image>
     </slide>
-    <slide slideID="18">
-        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05"
-            fontsize="30" font="Impact" fontcolour="596984"> <b>HANDS UP: MARKING THE MARKERS</b>
+    <slide slideID="22">
+        <text duration="-1" ystart="0.1" starttime="0" xstart="0.05" fontsize="30" font="Impact" fontcolour="596984">
+            <b>HANDS UP: MARKING THE MARKERS</b>
         </text>
+        <text duration="-1" ystart="0.4" starttime="0" xstart="0.05" font="Impact">It is time to analyse the data we have collected…</text>
+        <image width="0.3" duration="-1" ystart="0.5" sourceFile="image55.png" starttime="0" xstart="0.35" height="0.3"></image>
     </slide>
 </presentation>
