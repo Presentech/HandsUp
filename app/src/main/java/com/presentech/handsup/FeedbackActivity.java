@@ -76,7 +76,7 @@ public class FeedbackActivity extends AppCompatActivity {
     ImageButton sendButton;
 
     String UUID = "";
-    int x;
+    int x; //current slide
 
     //Connectivity requirements
     MyApplication application;
@@ -201,6 +201,7 @@ public class FeedbackActivity extends AppCompatActivity {
     private SingleFeedback setFeedback() {
         SingleFeedback singleFeedback = new SingleFeedback();
         singleFeedback.setUUID(UUID);
+        singleFeedback.setSLIDE(x);
         return singleFeedback;
     }
 
@@ -246,6 +247,7 @@ public class FeedbackActivity extends AppCompatActivity {
             @Override
             public void onClick(View arg0) {
                 SingleFeedback singleFeedback = setFeedback();
+                singleFeedback.setQUESTION(1);
                 singleFeedback.setABC(1);
                 String sendThis = feedbackJSON.FeedbackJSONGenerate(singleFeedback);
                 client.onSend(sendThis);
@@ -256,6 +258,7 @@ public class FeedbackActivity extends AppCompatActivity {
             @Override
             public void onClick(View arg0) {
                 SingleFeedback singleFeedback = setFeedback();
+                singleFeedback.setQUESTION(1);
                 singleFeedback.setABC(2);
                 String sendThis = feedbackJSON.FeedbackJSONGenerate(singleFeedback);
                 client.onSend(sendThis);
@@ -266,6 +269,7 @@ public class FeedbackActivity extends AppCompatActivity {
             @Override
             public void onClick(View arg0) {
                 SingleFeedback singleFeedback = setFeedback();
+                singleFeedback.setQUESTION(1);
                 singleFeedback.setABC(3);
                 String sendThis = feedbackJSON.FeedbackJSONGenerate(singleFeedback);
                 client.onSend(sendThis);

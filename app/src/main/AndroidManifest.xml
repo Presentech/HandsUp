@@ -32,7 +32,9 @@
         <activity
             android:name=".HostingWizardActivity"
             android:screenOrientation="landscape" />
-        <activity android:name=".PresentationFileListActivity" />
+        <activity android:name=".PresentationFileListActivity"
+            android:screenOrientation="landscape"
+            />
         <activity
             android:name=".PresentationModeTutorial"
             android:label="@string/title_activity_presentation_mode_tutorial"
@@ -58,6 +60,22 @@
             android:name=".SlideContentTimingsActivity"
             android:label="@string/slide_content_timings_title"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ReviewFeedbackSelect"
+            android:label="Review Feedback"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".ReviewFeedback"
+            android:label="Review Question Feedback"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".ReviewFeedbackGMB"
+            android:label="Review Understanding Feedback"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".ReviewFeedbackMessages"
+            android:label="Review Messages Feedback"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".SettingsAccountActivity"
             android:label="@string/account_title"

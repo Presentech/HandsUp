@@ -39,11 +39,15 @@ public class messagingFragment extends Fragment{
         Log.d("ABCD", "Hello");
         ArrayList<String> messageList = Getlist();
         listView = (ListView) messagingLayout.findViewById(R.id.messagingList);
+        listView.setStackFromBottom(true);
         listAdapter = new ArrayAdapter<>(getActivity(), R.layout.message_layout, messageList);
         listView.setAdapter(listAdapter);
         return messagingLayout;
     }
 
+    public void reset(){
+        listView.setAdapter(null);
+    }
 
     private ArrayList<String> Getlist(){
 
