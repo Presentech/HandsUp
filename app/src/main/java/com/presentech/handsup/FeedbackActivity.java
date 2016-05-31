@@ -174,7 +174,7 @@ public class FeedbackActivity extends AppCompatActivity {
                         public void run() {
                             if (availableQuestionList.size() > 0) {
                                 slideContentTextView.setText(availableQuestionList.get(0).getQuestionText());
-                                String title = ("Slide " + Integer.toString(x) + " 1 " + "Q" + availableQuestionList.get(0).getQUESTION());
+                                String title = ("Slide " + Integer.toString(x+1) + " " + "Q" + availableQuestionList.get(0).getQUESTION());
                                 slideTitleTextView.setText(title);
                                 aButton.setVisibility(View.VISIBLE);
                                 bButton.setVisibility(View.VISIBLE);
