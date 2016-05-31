@@ -284,13 +284,12 @@ public class PresentationActivity extends AppCompatActivity {
             }
         }
 //        convert floats to pixels for image dimensions
-        int imgWidth = (int) (i.getWidth())*screenWidth;
-        int imgHeight = (int) (i.getHeight())*screenHeight;
         ImageView iV = new ImageView(this);
-        iV.setX(i.getxStart()*screenWidth);
-        iV.setY(i.getyStart()*screenHeight);
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(imgWidth, imgHeight);
-       // iV.setLayoutParams(layoutParams);
+        iV.setX(i.getxStart()* screenWidth);
+        iV.setY(i.getyStart()* screenHeight);
+       // RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(imgWidth, imgHeight);
+        //iV.setLayoutParams(layoutParams);
+        iV.setLayoutParams(new RelativeLayout.LayoutParams((int) (i.getWidth() * screenWidth),(int) (i.getHeight()*screenHeight)));
         iV.setImageBitmap(b);
         slide.addView(iV);
 
@@ -333,7 +332,7 @@ public class PresentationActivity extends AppCompatActivity {
         vV.setY(v.getyStart() * screenHeight);
         vV.setLayoutParams(new FrameLayout.LayoutParams(screenWidth,screenHeight));
         //vV.layout((int) vV.getX(), (int) vV.getY(),(int) vV.getX() + 800, (int) vV.getY() + 500);
-        vV.start();
+        //vV.start();
 
         slide.addView(vV);
 
@@ -477,10 +476,11 @@ public class PresentationActivity extends AppCompatActivity {
                             display.getSize(size);
                             RelativeLayout rl = (RelativeLayout)viewFlipper.getChildAt(viewFlipper.getDisplayedChild());
                             VideoView vV = (VideoView) rl.getChildAt(0);
+                            rl.removeView(vV);
                             screenHeight = size.y - 360;
                             //vV.setLayoutParams(new RelativeLayout.LayoutParams(800,400));
-                            vV.layout(0, 0,200,200);
-                            vV.invalidate();
+                            vV.setLayoutParams(new RelativeLayout.LayoutParams(screenWidth,screenHeight));
+                            rl.addView(vV);
                         }
 //                        screenHeight = size.y - 360;
 //                        RelativeLayout rl = (RelativeLayout) viewFlipper.getChildAt(viewFlipper.getDisplayedChild());
@@ -500,8 +500,10 @@ public class PresentationActivity extends AppCompatActivity {
                             display.getSize(size);
                             RelativeLayout rl = (RelativeLayout)viewFlipper.getChildAt(viewFlipper.getDisplayedChild());
                             VideoView vV = (VideoView) rl.getChildAt(0);
+                            rl.removeView(vV);
                             screenHeight = size.y;
                             vV.setLayoutParams(new RelativeLayout.LayoutParams(screenWidth,screenHeight));
+                            rl.addView(vV);
                         }
 //                        screenHeight = size.y;
 //                        RelativeLayout rl = (RelativeLayout) viewFlipper.getChildAt(viewFlipper.getDisplayedChild());
@@ -683,10 +685,8 @@ public class PresentationActivity extends AppCompatActivity {
     public void getPresentation() throws IOException, XmlPullParserException{
         XMLParser parser = new XMLParser();
         InputStream in = null;
-     //   File initFile = new File(pathName);
-        //in = new FileInputStream(initFile);
-
-        in = getAssets().open("salespitch.xml");
+        File initFile = new File(pathName);
+        in = new FileInputStream(initFile);
         presentationFile = parser.getPresentation(in);
     }
 
