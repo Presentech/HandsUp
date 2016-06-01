@@ -77,9 +77,7 @@ public class AudienceTutorialTest {
         ShadowActivity shadowActivity = Shadows.shadowOf(activity);
         View view = shadowActivity.findViewById(android.R.id.content);
 
-        //assertEquals(R.id.content, shadowActivity.getContentView().getId());
-
-        /*Check intent is not null*/
+        /*Check view is not null*/
         assertNotNull(view);
 
     }
@@ -97,7 +95,7 @@ public class AudienceTutorialTest {
         ShadowActivity shadowActivity = Shadows.shadowOf(activity);
         View view = activity.findViewById(android.R.id.content);
 
-        /*Check intent is not null*/
+        /*Check view is not null*/
         assertNotNull(view);
 
     }
@@ -106,7 +104,7 @@ public class AudienceTutorialTest {
     @Test
     public void checkDoneButton() {
 
-                        /* Go to second screen by pressing next button */
+        /* Go to second screen by pressing next button */
         activity.findViewById(R.id.nextButton).performClick();
 
         /* Simulate button press */
@@ -135,7 +133,7 @@ public class AudienceTutorialTest {
         ShadowActivity shadowActivity = Shadows.shadowOf(activity);
         Intent actualIntent = shadowActivity.getNextStartedActivity();
 
-    /*Check Intent is as expected */
+        /*Check Intent is as expected */
         assertTrue(actualIntent.filterEquals(expectedIntent));
     }
 
