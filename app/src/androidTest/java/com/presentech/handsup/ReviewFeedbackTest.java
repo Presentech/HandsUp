@@ -5,10 +5,13 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.test.runner.AndroidJUnit4;
 
+import com.androidplot.pie.PieChart;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 
 import java.util.List;
 import java.util.UUID;
@@ -43,6 +46,8 @@ public class ReviewFeedbackTest {
         getTargetContext().deleteDatabase("TestFeedbackList");
         database = new feedbackDatabaseHandler(getTargetContext(), "TestFeedbackList", null, 1, "FP");
         //database.deleteTable();
+
+        PieChart pie = Mockito.mock(PieChart.class);
     }
 
 
