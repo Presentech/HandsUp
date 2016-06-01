@@ -2,8 +2,6 @@ package com.presentech.handsup;
 
 //import android.support.test.runner.AndroidJUnit4;
 
-
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -47,8 +45,8 @@ public class SingleQuestionTest {
     public void simpleConstructor() {
     singlequestion = new SingleQuestion();
 
-    assertTrue(singlequestion.SLIDE == -1.0);//** Slide number, float is smaller than double and can hold branches to sufficient accuracy (e.g. slide 1.51 as 1.51)*//*
-    assertTrue(singlequestion.QUESTION == -1);//** In case we have multiple sections on a slide. Might rip this out, but design is for worst-case.*//*
+    assertTrue(singlequestion.SLIDE == -1.0);
+    assertTrue(singlequestion.QUESTION == -1);
     assertTrue(singlequestion.abc == false);
     assertTrue(singlequestion.goodmehbad == false );
     assertTrue(singlequestion.questionText == null);
@@ -56,32 +54,24 @@ public class SingleQuestionTest {
     }
 
     public void gettersAndSetters() {
-        singlequestion = new SingleQuestion();
+    singlequestion = new SingleQuestion();
 
+    int slide = 3;
+    singlequestion.setSLIDE(slide);
+    int question = 3;
+    singlequestion.setQUESTION(question);
+    boolean abc = false;
+    singlequestion.setAbc(abc);
+    boolean gmb = false;
+    singlequestion.setGoodmehbad(gmb);
+    String testText = "String for Test";
+    singlequestion.setQuestionText(testText);
 
-        int slide = 3;
-        singlequestion.setSLIDE(slide);
-        //int iteration = 3;
-        //singlequestion.setSLIDE_ITERATION(iteration);
-        int question = 3;
-        singlequestion.setQUESTION(question);
-        boolean abc = false;
-        singlequestion.setAbc(abc);
-        boolean gmb = false;
-        singlequestion.setGoodmehbad(gmb);
-        String testText = "String for Test";
-        singlequestion.setQuestionText(testText);
-        Long exampleTime = 2020203L;
-
-
-
-        assertTrue(singlequestion.getSLIDE() == slide);/** Slide number, float is smaller than double and can hold branches to sufficient accuracy (e.g. slide 1.51 as 1.51)*/
-        //assertTrue(singlequestion.getSLIDE_ITERATION() == iteration);/** Slide iteration - for when a slide is visited multiple times.*/
-        assertTrue(singlequestion.getQUESTION() == question);/** In case we have multiple sections on a slide. Might rip this out, but design is for worst-case.*/
-        assertTrue(singlequestion.isAbc() == abc); /** -1 not sent, 1 a, 2 - b, 3 -c*/
-        assertTrue(singlequestion.isGoodmehbad() == gmb); /** -1 not sent, 1 good, 2 - meh, 3 - bad*/
-        assertEquals(singlequestion.getQuestionText(), testText); /** If anything but null the text should be interprted - acts as flag for text input.*/
-
+    assertTrue(singlequestion.getSLIDE() == slide);/** Slide number, float is smaller than double and can hold branches to sufficient accuracy (e.g. slide 1.51 as 1.51)*/
+    assertTrue(singlequestion.getQUESTION() == question);
+    assertTrue(singlequestion.isAbc() == abc);
+    assertTrue(singlequestion.isGoodmehbad() == gmb);
+    assertEquals(singlequestion.getQuestionText(), testText);
     }
 
 }
