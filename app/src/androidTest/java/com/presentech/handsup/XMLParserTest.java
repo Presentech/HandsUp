@@ -37,7 +37,7 @@ import static junit.framework.Assert.assertTrue;
 
 
 @RunWith(AndroidJUnit4.class)
-public class InstXMLParserTest {
+public class XMLParserTest {
     private XMLParser parser;
     private PresentationFile presentationFile;
     private DocumentInfo documentInfo;
