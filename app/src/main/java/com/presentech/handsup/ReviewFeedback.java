@@ -38,16 +38,12 @@ public class ReviewFeedback extends Activity {
         feedbackDatabaseHandler database = application.getDB();
         List<SingleFeedback> singleFeedbackList = database.getAllFeedback();
 
-        //convert list of feedback objects to object array
-        SingleFeedback[] feedbackArray = new SingleFeedback[singleFeedbackList.size()];
-        singleFeedbackList.toArray(feedbackArray);
-
         //get number of questions
-        qNo = feedbackArray[0].getQUESTION();
+        qNo = singleFeedbackList.get(0).getQUESTION();
 
-        for (int i = 0; i < feedbackArray.length; i++) {
-            if (feedbackArray[i].getQUESTION() > qNo){
-                qNo = feedbackArray[i].getQUESTION();
+        for (int i = 0; i < singleFeedbackList.size(); i++) {
+            if (singleFeedbackList.get(i).getQUESTION() > qNo){
+                qNo = singleFeedbackList.get(i).getQUESTION();
             }
         }
 
@@ -57,15 +53,15 @@ public class ReviewFeedback extends Activity {
 
             a = b = c = 0;
             /*iterate through objects to find whether value is A, B or C*/
-            for (int k = 0; k < feedbackArray.length; k++) {
-                if (feedbackArray[k].getQUESTION() == j + 1) {
-                    if (feedbackArray[k].getABC() == 1) {
+            for (int k = 0; k < singleFeedbackList.size(); k++) {
+                if (singleFeedbackList.get(k).getQUESTION() == j + 1) {
+                    if (singleFeedbackList.get(k).getABC() == 1) {
                         a++;
                     }
-                    if (feedbackArray[k].getABC() == 2) {
+                    if (singleFeedbackList.get(k).getABC() == 2) {
                         b++;
                     }
-                    if (feedbackArray[k].getABC() == 3) {
+                    if (singleFeedbackList.get(k).getABC() == 3) {
                         c++;
                     }
 

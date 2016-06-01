@@ -42,27 +42,24 @@ public class ReviewFeedbackMessages extends ListActivity  {
         feedbackDatabaseHandler database = application.getDB();
         List<SingleFeedback> singleFeedbackList = database.getAllFeedback();
 
-        //convert list of feedback objects to object array
-        SingleFeedback[] feedbackArray = new SingleFeedback[singleFeedbackList.size()];
-        singleFeedbackList.toArray(feedbackArray);
 
 
         //get number of slides
-        double slide = feedbackArray[0].getSLIDE();
+        double slide = singleFeedbackList.get(0).getSLIDE();
 
-        for (int i = 0; i < feedbackArray.length; i++) {
-            if (feedbackArray[i].getSLIDE() > slide){
-                slide = feedbackArray[i].getSLIDE();
+        for (int i = 0; i < singleFeedbackList.size(); i++) {
+            if (singleFeedbackList.get(i).getSLIDE() > slide){
+                slide = singleFeedbackList.get(i).getSLIDE();
             }
         }
 
         int sNo = (int) slide;
 
-        for (int i = 0; i < feedbackArray.length; i++) {
-            if ((int)feedbackArray[i].getSLIDE() == j) {
-                if (feedbackArray[i].getTEXT() != null) {
-                    String convertedTime = timeConvert(feedbackArray[i].getTIME_RECEIVED());
-                    messageList.add(feedbackArray[i].getTEXT()+ "\n" + "(" + convertedTime + ")");
+        for (int i = 0; i < singleFeedbackList.size(); i++) {
+            if ((int)singleFeedbackList.get(i).getSLIDE() == j) {
+                if (singleFeedbackList.get(i).getTEXT() != null) {
+                    String convertedTime = timeConvert(singleFeedbackList.get(i).getTIME_RECEIVED());
+                    messageList.add(singleFeedbackList.get(i).getTEXT()+ "\n" + "(" + convertedTime + ")");
                     adapter.notifyDataSetChanged();
                 }
             }

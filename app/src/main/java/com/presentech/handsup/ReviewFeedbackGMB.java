@@ -23,13 +23,16 @@ public class ReviewFeedbackGMB extends Activity {
     public double slide;         //Number of slides
     int j = 0;              //currently displayed slide responses
     public PieChart slideGMB;
+    List<SingleFeedback> singleFeedbackList;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review_feedback_gmb);
 
-        getPiePlots();
+       // getPiePlots();
 
     }
 
@@ -38,20 +41,15 @@ public class ReviewFeedbackGMB extends Activity {
         //get list of objects from database
         MyApplication application = (MyApplication) getApplication();
         feedbackDatabaseHandler database = application.getDB();
-        List<SingleFeedback> singleFeedbackList = database.getAllFeedback();
-
-        //convert list of feedback objects to array of feedbackobjects
-        SingleFeedback[] feedbackArray = new SingleFeedback[singleFeedbackList.size()];
-        singleFeedbackList.toArray(feedbackArray);
-
+        singleFeedbackList = database.getAllFeedback();
 
 
         //get number of slides
-        slide = feedbackArray[0].getSLIDE();
+        singleFeedbackList.get(0);
 
-        for (int i = 0; i < feedbackArray.length; i++) {
-            if (feedbackArray[i].getSLIDE() > slide){
-                slide = feedbackArray[i].getSLIDE();
+        for (int i = 0; i < singleFeedbackList.size(); i++) {
+            if (singleFeedbackList.get(i).getSLIDE() > slide){
+                slide = singleFeedbackList.get(i).getSLIDE();
             }
         }
 
@@ -63,17 +61,17 @@ public class ReviewFeedbackGMB extends Activity {
 
             a = b = c = 0;
             /*iterate through objects to find whether value is A, B or C*/
-            for (int k = 0; k < feedbackArray.length; k++) {
-                Log.d("ABCD", "" + feedbackArray[k].getQUESTION() );
-                if ((int) feedbackArray[k].getSLIDE() == j) {
+            for (int k = 0; k < singleFeedbackList.size(); k++) {
+                Log.d("ABCD", "" + singleFeedbackList.get(k).getQUESTION() );
+                if ((int) singleFeedbackList.get(k).getSLIDE() == j) {
                     Log.d("ABCD", "got Question");
-                    if (feedbackArray[k].getGOOD_MEH_BAD() == 1) {
+                    if (singleFeedbackList.get(k).getGOOD_MEH_BAD() == 1) {
                         a++;
                     }
-                    if (feedbackArray[k].getGOOD_MEH_BAD() == 2) {
+                    if (singleFeedbackList.get(k).getGOOD_MEH_BAD() == 2) {
                         b++;
                     }
-                    if (feedbackArray[k].getGOOD_MEH_BAD() == 3) {
+                    if (singleFeedbackList.get(k).getGOOD_MEH_BAD() == 3) {
                         c++;;
                     }
 
@@ -127,6 +125,7 @@ public class ReviewFeedbackGMB extends Activity {
 
     }
 
+
     //increment question number (array index "j") and redraw plots
     public void slideNoUp(View v) {
         j++;
@@ -141,5 +140,6 @@ public class ReviewFeedbackGMB extends Activity {
         getPiePlots();
         slideGMB.redraw();
 
-    }
+
+  }
 }
