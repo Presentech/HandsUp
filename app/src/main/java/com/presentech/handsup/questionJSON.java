@@ -31,7 +31,7 @@ public class questionJSON {
             }
             ja.put(jo);
         }
-        return jo.toString();
+        return ja.toString();
     }
 
     public List<SingleQuestion> questionParseJSON(String JSONQuestions) {

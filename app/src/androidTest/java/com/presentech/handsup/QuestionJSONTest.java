@@ -26,6 +26,7 @@ public class QuestionJSONTest {
     }
 
     public void jsonNoNullValues() {
+        questionJSON questionJSON = new questionJSON();
         inputQuestion = new SingleQuestion();
         outputQuestion = new SingleQuestion();
         int slide = 3;
@@ -40,7 +41,7 @@ public class QuestionJSONTest {
         inputQuestion.setGoodmehbad(gmb);
         inputQuestion.setQuestionText(testText);
 
-        String json = questionJSON.questionCreateJSON(inputQuestion);
+        String json = questionCreateJSON(inputQuestion);
 
         outputQuestion = questionJSON.questionParseJSON(json);
 
