@@ -83,7 +83,7 @@ public class QuestionJSONTest {
 
         assertTrue(outputQuestion.getSLIDE() == slide);/** Slide number, float is smaller than double and can hold branches to sufficient accuracy (e.g. slide 1.51 as 1.51)*/
         assertTrue(outputQuestion.getQUESTION() == question);/** In case we have multiple sections on a slide. Might rip this out, but design is for worst-case.*/
-        assertTrue(outputQuestion.getAbc() == abc); /** -1 not sent, 1 a, 2 - b, 3 -c*/
+        assertTrue(outputQuestion.isAbc() == abc); /** -1 not sent, 1 a, 2 - b, 3 -c*/
         assertTrue(outputQuestion.isGoodmehbad() == gmb); /** -1 not sent, 1 good, 2 - meh, 3 - bad*/
         assertNull(outputQuestion.questionText); /** If anything but null the text should be interprted - acts as flag for text input.*/
     }
