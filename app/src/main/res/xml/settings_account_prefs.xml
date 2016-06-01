@@ -2,7 +2,6 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory android:title="Account &amp; Privacy">
-
         <SwitchPreference
             android:checked="false"
             android:key="diagnostics_report_key"
@@ -21,6 +20,9 @@
             android:key="sharing_prefs_key"
             android:title="Sharing Preferences" />
 
+        <PreferenceScreen
+            android:key="logout"
+            android:title="Logout" />
     </PreferenceCategory>
 
 </PreferenceScreen>

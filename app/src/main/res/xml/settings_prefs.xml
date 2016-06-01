@@ -2,7 +2,6 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory android:title="@string/action_settings">
-
         <PreferenceScreen
             android:key="accessibility_key"
             android:title="@string/accessibility_title" />
@@ -22,7 +21,6 @@
         <PreferenceScreen
             android:key="default_setting_key"
             android:title="@string/default_setting_title" />
-
-
     </PreferenceCategory>
+    
 </PreferenceScreen>

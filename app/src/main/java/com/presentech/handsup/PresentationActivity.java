@@ -49,7 +49,6 @@ import java.util.List;
 
 /**
  * Created by Noor.
- * Updated to include autoflip handler (by Jay)
  */
 
 public class PresentationActivity extends AppCompatActivity {
@@ -136,15 +135,16 @@ public class PresentationActivity extends AppCompatActivity {
             animations.get(i).start();
         }
 
-        SharedPreferences sharedPreferences = getSharedPreferences(SlideContentTimingsActivity.PREF_KEY_NAME, MODE_PRIVATE);
+
+        SharedPreferences sharedPreferences = getSharedPreferences(HandsUpApplication.PREF_NAME, MODE_PRIVATE);
         int duration = sharedPreferences.getInt(SlideContentTimingsActivity.PREF_KEY_DURATION, 0);
         boolean isAdvanceActive = sharedPreferences.getBoolean(SlideContentTimingsActivity.PREF_KEY_ADVANCE_CHECKED, false);
         boolean isLoopActive = sharedPreferences.getBoolean(SlideContentTimingsActivity.PREF_KEY_LOOP_CHECKED, false);
-
+        /*setAutomaticHandler for slide transition*/
         if (duration != 0 && isAdvanceActive) {
             setAutomaticHandler(duration, isLoopActive);
         }
-        //setAutomaticHandler(3);
+
 
         Log.d("ABCD", "Hello This is an error");
         // If presenter wants to view feedback create feedback fragment
@@ -194,7 +194,7 @@ public class PresentationActivity extends AppCompatActivity {
     }
 
 
-
+    /*AutomaticHandler for slide transition*/
     private void setAutomaticHandler(final int duration, final boolean isInLoop) {
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -205,6 +205,7 @@ public class PresentationActivity extends AppCompatActivity {
                     viewFlipper.setOutAnimation(PresentationActivity.this, R.anim.slide_out_to_left);
                     viewFlipper.showNext();
                     setAutomaticHandler(duration, isInLoop);
+
                 } else {
                     if (isInLoop) {
                         viewFlipper.setDisplayedChild(0);

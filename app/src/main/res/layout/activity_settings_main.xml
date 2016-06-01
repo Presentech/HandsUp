@@ -35,21 +35,18 @@
             android:entries="@array/setting_entries"
             android:paddingLeft="10dp"
             android:paddingRight="10dp" />
-
-
     </RelativeLayout>
+
     <!-- The navigation view -->
     <ListView
-    android:theme="@style/DrawerTheme"
-    android:id="@+id/settings_leftDrawer"
-    android:layout_width="240dp"
-    android:layout_height="match_parent"
-    android:layout_gravity="start"
-    android:choiceMode="singleChoice"
-    android:divider="@color/presentechBlue"
-    android:dividerHeight="1dp"
-    android:background="@color/drawerBackground" />
-
-
+        android:theme="@style/DrawerTheme"
+        android:id="@+id/settings_leftDrawer"
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:choiceMode="singleChoice"
+        android:divider="@color/presentechBlue"
+        android:dividerHeight="1dp"
+        android:background="@color/drawerBackground" />
 
 </android.support.v4.widget.DrawerLayout>

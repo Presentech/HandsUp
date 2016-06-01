@@ -6,14 +6,6 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!--
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="Slide and Content Timings" />
-    -->
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,13 +22,21 @@
             android:layout_marginLeft="10dp"
             android:text="Advance Automatically"
             android:textColor="#a8a9aa" />
-
-
     </LinearLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="38dp"
+        android:text=" (restart presentation after saving your preference)"
+        android:textColor="@color/colorGrey"
+        android:textSize="12sp"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">>
 
         <TextView
             android:layout_width="wrap_content"

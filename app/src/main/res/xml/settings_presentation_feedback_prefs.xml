@@ -2,6 +2,13 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory android:title="Presentation &amp; Feedback Preferences">
+        <PreferenceScreen
+            android:key="media_transition_setting_key"
+            android:title="Media Transition Settings" />
+
+        <PreferenceScreen
+            android:key="media_transition_setting_key"
+            android:title="Slide Transition Effects" />
 
         <SwitchPreference
             android:checked="false"
@@ -17,13 +24,6 @@
             android:key="feedback_mode_key"
             android:summary="(Modes available to Audience)"
             android:title="Feedback Modes" />
-
-
-        <PreferenceScreen
-            android:key="media_transition_setting_key"
-            android:title="Media Transition Settings" />
-
-
     </PreferenceCategory>
 
 </PreferenceScreen>

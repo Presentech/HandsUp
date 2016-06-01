@@ -11,17 +11,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
-/**
- * Created by Jay on 10-03-2016.
- */
+/* Created by Jay on 10-03-2016 */
+
 public class SettingsAccessibilityActivity extends AppCompatActivity {
-
-
     @Override
+    /*calls onCreate to load a saved instance from the bundle to regenerate activity*/
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_toolbar);
 
+        /*display the fragment as the main content.
+         execute and start transaction. specify fragment to replace and in
+         which view to insert. To take effect, commit the changes*/
         getFragmentManager().beginTransaction().replace(R.id.content_frame, new MyPreferenceFragment()).commit();
     }
 
@@ -34,15 +35,13 @@ public class SettingsAccessibilityActivity extends AppCompatActivity {
     }
 
     public static class MyPreferenceFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener, Preference.OnPreferenceClickListener {
-
         @Override
         public void onCreate(final Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
+            /*load the preferences from XML resource*/
             addPreferencesFromResource(R.xml.settings_accessibility_prefs);
             findPreference("visibility_key").setOnPreferenceClickListener(this);
-
         }
-
 
         @Override
         public void onActivityCreated(Bundle savedInstanceState) {
@@ -53,28 +52,24 @@ public class SettingsAccessibilityActivity extends AppCompatActivity {
             ListView list = (ListView) rootView.findViewById(android.R.id.list);
             list.setDivider(ContextCompat.getDrawable(getActivity(), R.color.textColour));
             list.setDividerHeight(1);
-
-
         }
-
 
         @Override
         public void onResume() {
             super.onResume();
-
+            /*register the listener*/
             getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
         }
 
         @Override
         public void onPause() {
             super.onPause();
-
+            /*unregister the listener*/
             getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
         }
 
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-
         }
 
         @Override
@@ -86,6 +81,5 @@ public class SettingsAccessibilityActivity extends AppCompatActivity {
             return true;
         }
     }
-
 }
 

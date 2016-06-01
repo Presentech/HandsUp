@@ -1,6 +1,7 @@
 package com.presentech.handsup;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -132,6 +133,12 @@ public class LoginScreenActivity extends AppCompatActivity {
                             //Clear text field after sending text
                             emailAddress.getText().clear();
                             password.getText().clear();
+
+                            //Saving user credentials
+                            SharedPreferences sharedPreferences = getSharedPreferences(HandsUpApplication.PREF_NAME,MODE_PRIVATE);
+                            sharedPreferences.edit().putString(HandsUpApplication.PREF_USERNAME, storedEmail).commit();
+                            sharedPreferences.edit().putString(HandsUpApplication.PREF_PASSWORD, storedPassword).commit();
+
                             //Completed if Save Login Details check box is selected
                             if (saveLoginDetails) {
                                 loginDetailsSaved = true;

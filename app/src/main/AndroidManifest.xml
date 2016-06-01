@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.presentech.handsup">
 
+    <!--declaring permissions of the application-->
     <uses-permission android:name="android.permission.WRITE_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
@@ -88,9 +89,6 @@
         <activity android:name=".AudienceTutorial" />
         <activity android:name=".ExampleStackedBars" />
 
-        <!--<activity android:name=".ViewLiveFeedback"></activity>-->
-        <!--<activity android:name=".presentationfile.ExampleStackedBars" />-->
-
         <activity
             android:name=".AudienceConnect"
             android:label="@string/title_activity_audience_connect"
@@ -101,12 +99,15 @@
         </activity>
         <activity
             android:name=".testingConnections"
-            android:label="@string/title_activity_testing_connections"></activity>
-        <activity android:name=".TestActivity"></activity>
+            android:label="@string/title_activity_testing_connections">
+        </activity>
+        <activity
+            android:name=".TestActivity">
+        </activity>
 
         <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="0cddf07189e7770b126a853ae1c73ab8a83c2615" />
+            android:value="0cddf07189e7770b126a853ae1c73ab8a83c2615" />  <!--for fabric crashlytics plugin-->
     </application>
 
 </manifest>

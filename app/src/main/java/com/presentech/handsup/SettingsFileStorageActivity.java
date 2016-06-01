@@ -11,69 +11,62 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
-/**
- * Created by Jay on 10-03-2016.
- */
+/* Created by Jay on 10-03-2016 */
+
 public class SettingsFileStorageActivity extends AppCompatActivity {
     @Override
+    /*calls onCreate to load a saved instance from the bundle to regenerate activity*/
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_toolbar);
 
+        /*display the fragment as the main content*/
         getFragmentManager().beginTransaction().replace(R.id.content_frame, new MyPreferenceFragment()).commit();
-
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         if (item.getItemId() == android.R.id.home)
             finish();
-
         return true;
     }
 
     public static class MyPreferenceFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener, Preference.OnPreferenceClickListener {
-
         @Override
         public void onCreate(final Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.settings_file_storage_prefs);
-
         }
-
 
         @Override
         public void onActivityCreated(Bundle savedInstanceState) {
             super.onActivityCreated(savedInstanceState);
 
             View rootView = getView();
+            assert rootView != null;
             ListView list = (ListView) rootView.findViewById(android.R.id.list);
+            /*use ContextCompat class and drawable method to retrieve and xml drawable and set divider*/
             list.setDivider(ContextCompat.getDrawable(getActivity(), R.color.textColour));
+            /*set the divider height dynamically*/
             list.setDividerHeight(1);
-
-
         }
-
 
         @Override
         public void onResume() {
             super.onResume();
-
+            /*registering the changeListener*/
             getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
         }
 
         @Override
         public void onPause() {
             super.onPause();
-
+            /*unregister the changeListener*/
             getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
         }
 
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-
-
         }
 
         @Override
@@ -81,5 +74,4 @@ public class SettingsFileStorageActivity extends AppCompatActivity {
             return true;
         }
     }
-
 }
