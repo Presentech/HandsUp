@@ -43,15 +43,15 @@ public class SingleQuestionTest {
         assertNotNull(singlequestion);
     }
 
-    /*    @Test
+        @Test
     public void simpleConstructor() {
     singlequestion = new SingleQuestion();
 
-    assertTrue(singlequestion.SLIDE == -1);*//** Slide number, float is smaller than double and can hold branches to sufficient accuracy (e.g. slide 1.51 as 1.51)*//*
-    assertTrue(singlequestion.QUESTION == -1);*//** In case we have multiple sections on a slide. Might rip this out, but design is for worst-case.*//*
+    assertTrue(singlequestion.SLIDE == -1.0);//** Slide number, float is smaller than double and can hold branches to sufficient accuracy (e.g. slide 1.51 as 1.51)*//*
+    assertTrue(singlequestion.QUESTION == -1);//** In case we have multiple sections on a slide. Might rip this out, but design is for worst-case.*//*
     assertTrue(singlequestion.abc == false);
     assertTrue(singlequestion.goodmehbad == false );
-    assertTrue(singlequestion.TIME_RECEIVED == -1);
-    }*/
+    assertTrue(singlequestion.questionText == null);
+    }
 
 }

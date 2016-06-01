@@ -47,6 +47,7 @@ public class AudienceTutorialTest {
 
     @Test
     public void checkSkipButtonIntent() {
+
     /* Simulate our button being clicked */
         activity.findViewById(R.id.skipButton).performClick();
 
@@ -65,6 +66,10 @@ public class AudienceTutorialTest {
     /* Test to verify back button */
     @Test
     public void checkBackButton() {
+
+                /* Go to second screen by pressing next button */
+        activity.findViewById(R.id.nextButton).performClick();
+
         /* Simulate button press */
         activity.findViewById(R.id.backButton).performClick();
 
@@ -87,17 +92,23 @@ public class AudienceTutorialTest {
         /* Simulate button press */
         activity.findViewById(R.id.nextButton).performClick();
 
+
         /*Capture intent*/
         ShadowActivity shadowActivity = Shadows.shadowOf(activity);
-        View view = shadowActivity.findViewById(android.R.id.content);
+        View view = activity.findViewById(android.R.id.content);
 
         /*Check intent is not null*/
         assertNotNull(view);
+
     }
 
     /*Test to verify done button */
     @Test
     public void checkDoneButton() {
+
+                        /* Go to second screen by pressing next button */
+        activity.findViewById(R.id.nextButton).performClick();
+
         /* Simulate button press */
         activity.findViewById(R.id.doneButton).performClick();
 
@@ -110,6 +121,10 @@ public class AudienceTutorialTest {
     }
     @Test
     public void checkDoneButtonIntent() {
+
+                        /* Go to second screen by pressing next button */
+        activity.findViewById(R.id.nextButton).performClick();
+
     /* Simulate our button being clicked */
         activity.findViewById(R.id.doneButton).performClick();
 

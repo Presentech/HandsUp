@@ -9,7 +9,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@color/backgroundgrey"
     tools:context="com.presentech.handsup.AudienceTutorial"
-    android:id="@+id/content"
+    android:id="@+id/audience_tutorial_2"
     >
 
     <ScrollView
