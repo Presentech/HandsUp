@@ -4,13 +4,7 @@ package com.presentech.handsup;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.xmlpull.v1.XmlPullParserException;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
-import java.util.UUID;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
@@ -43,35 +37,36 @@ public class SingleQuestionTest {
 
     @Test
     public void simpleConstructor() {
-    singlequestion = new SingleQuestion();
+        singlequestion = new SingleQuestion();
 
-    assertTrue(singlequestion.SLIDE == -1.0);
-    assertTrue(singlequestion.QUESTION == -1);
-    assertTrue(singlequestion.abc == false);
-    assertTrue(singlequestion.goodmehbad == false );
-    assertTrue(singlequestion.questionText == null);
+        assertTrue(singlequestion.SLIDE == -1.0);
+        assertTrue(singlequestion.QUESTION == -1);
+        assertTrue(singlequestion.abc == false);
+        assertTrue(singlequestion.goodmehbad == false );
+        assertTrue(singlequestion.questionText == null);
 
     }
-
+    //check setter and getters actually record correct values
+    @Test
     public void gettersAndSetters() {
-    singlequestion = new SingleQuestion();
+        singlequestion = new SingleQuestion();
 
-    int slide = 3;
-    singlequestion.setSLIDE(slide);
-    int question = 3;
-    singlequestion.setQUESTION(question);
-    boolean abc = false;
-    singlequestion.setAbc(abc);
-    boolean gmb = false;
-    singlequestion.setGoodmehbad(gmb);
-    String testText = "String for Test";
-    singlequestion.setQuestionText(testText);
+        int slide = 3;
+        singlequestion.setSLIDE(slide);
+        int question = 3;
+        singlequestion.setQUESTION(question);
+        boolean abc = false;
+        singlequestion.setAbc(abc);
+        boolean gmb = false;
+        singlequestion.setGoodmehbad(gmb);
+        String testText = "String for Test";
+        singlequestion.setQuestionText(testText);
 
-    assertTrue(singlequestion.getSLIDE() == slide);/** Slide number, float is smaller than double and can hold branches to sufficient accuracy (e.g. slide 1.51 as 1.51)*/
-    assertTrue(singlequestion.getQUESTION() == question);
-    assertTrue(singlequestion.isAbc() == abc);
-    assertTrue(singlequestion.isGoodmehbad() == gmb);
-    assertEquals(singlequestion.getQuestionText(), testText);
+        assertTrue(singlequestion.getSLIDE() == slide);
+        assertTrue(singlequestion.getQUESTION() == question);
+        assertTrue(singlequestion.isAbc() == abc);
+        assertTrue(singlequestion.isGoodmehbad() == gmb);
+        assertEquals(singlequestion.getQuestionText(), testText);
     }
 
 }

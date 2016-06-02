@@ -43,6 +43,7 @@ public class questionJSON {
         boolean readabc;
         boolean readgoodmehbad;
         String readquestionText;
+        JSONObject jo;
         JSONArray ja = new JSONArray();
         List<SingleQuestion> parsedList = new ArrayList<SingleQuestion>();
         try {
@@ -53,14 +54,17 @@ public class questionJSON {
 
         }
         for (int i = 0; i < ja.length(); i++) {
-            JSONObject jo;
             try {
                 jo = ja.getJSONObject(i);
                 readSLIDE = jo.getDouble(SLIDEJName);
                 readQUESTION = jo.getInt(QUESTIONJName);
                 readabc = jo.getBoolean(abcJName);
                 readgoodmehbad = jo.getBoolean(goodmehbadJName);
-                readquestionText = jo.getString(questionTextJName);
+                try {
+                    readquestionText = jo.getString(questionTextJName);
+                } catch (JSONException e) {
+                    readquestionText = null;
+                }
                 parsedList.add(new SingleQuestion(readSLIDE,readQUESTION, readabc, readgoodmehbad, readquestionText )); // Creating a new object and adding it to list - single step
             } catch (JSONException e) {
                 e.printStackTrace();

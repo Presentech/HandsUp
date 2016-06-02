@@ -6,6 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import static junit.framework.Assert.assertEquals;
@@ -25,6 +27,7 @@ public class QuestionJSONTest {
     public void setUp()  {
     }
 
+    @Test
     public void jsonNoNullValues() {
         questionJSON questionJSON = new questionJSON();
         inputQuestion = new SingleQuestion();
@@ -40,21 +43,25 @@ public class QuestionJSONTest {
         inputQuestion.setAbc(abc);
         inputQuestion.setGoodmehbad(gmb);
         inputQuestion.setQuestionText(testText);
+        List<SingleQuestion> singleQuestions = new ArrayList<SingleQuestion>();
+        List<SingleQuestion> outputQuestion = new ArrayList<SingleQuestion>();
+        singleQuestions.add(inputQuestion);
 
-        String json = questionCreateJSON(inputQuestion);
+        String json = questionJSON.questionCreateJSON(singleQuestions);
 
         outputQuestion = questionJSON.questionParseJSON(json);
 
-        assertTrue(outputQuestion.getSLIDE() == slide);/** Slide number, float is smaller than double and can hold branches to sufficient accuracy (e.g. slide 1.51 as 1.51)*/
-        assertTrue(outputQuestion.getQUESTION() == question);
-        assertTrue(outputQuestion.isAbc() == abc);
-        assertTrue(outputQuestion.isGoodmehbad() == gmb);
-        assertEquals(outputQuestion.getQuestionText(), testText);
+        assertTrue(outputQuestion.get(0).getSLIDE() == slide);/** Slide number, float is smaller than double and can hold branches to sufficient accuracy (e.g. slide 1.51 as 1.51)*/
+        assertTrue(outputQuestion.get(0).getQUESTION() == question);
+        assertTrue(outputQuestion.get(0).isAbc() == abc);
+        assertTrue(outputQuestion.get(0).isGoodmehbad() == gmb);
+        assertEquals(outputQuestion.get(0).getQuestionText(), testText);
     }
 
     @Test
     //Check QuestionJSON can create and parse some JSON without any null values
     public void jsonNullValues() {
+        questionJSON questionJSON = new questionJSON();
         inputQuestion = new SingleQuestion();
         outputQuestion = new SingleQuestion();
 
@@ -71,16 +78,20 @@ public class QuestionJSONTest {
         inputQuestion.setAbc(abc);
         inputQuestion.setGoodmehbad(gmb);
         inputQuestion.setQuestionText(testText);
+        List<SingleQuestion> singleQuestions = new ArrayList<SingleQuestion>();
+        List<SingleQuestion> outputQuestion = new ArrayList<SingleQuestion>();
+        singleQuestions.add(inputQuestion);
 
-        String json = questionJSON.questionCreateJSON(inputQuestion);
+        String json = questionJSON.questionCreateJSON(singleQuestions);
 
         outputQuestion = questionJSON.questionParseJSON(json);
 
-        assertTrue(outputQuestion.getSLIDE() == slide);/** Slide number, float is smaller than double and can hold branches to sufficient accuracy (e.g. slide 1.51 as 1.51)*/
-        assertTrue(outputQuestion.getQUESTION() == question);/** In case we have multiple sections on a slide. Might rip this out, but design is for worst-case.*/
-        assertTrue(outputQuestion.isAbc() == abc);
-        assertTrue(outputQuestion.isGoodmehbad() == gmb);
-        assertNull(outputQuestion.questionText);
+
+        assertTrue(outputQuestion.get(0).getSLIDE() == slide);/** Slide number, float is smaller than double and can hold branches to sufficient accuracy (e.g. slide 1.51 as 1.51)*/
+        assertTrue(outputQuestion.get(0).getQUESTION() == question);/** In case we have multiple sections on a slide. Might rip this out, but design is for worst-case.*/
+        assertTrue(outputQuestion.get(0).isAbc() == abc);
+        assertTrue(outputQuestion.get(0).isGoodmehbad() == gmb);
+        assertNull(outputQuestion.get(0).getQuestionText());
     }
 
 }
