@@ -131,7 +131,7 @@ public class navDrawer {
                     activity.startActivity(AudTutorialIntent);
                     break;
                 case 2:
-                    Intent SessionSelectIntent = new Intent(activity, AudienceSessionSelect.class);
+                    Intent SessionSelectIntent = new Intent(activity, AudienceConnect.class);
                     activity.startActivity(SessionSelectIntent);
                     break;
                 case 3:

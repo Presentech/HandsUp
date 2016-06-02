@@ -690,7 +690,7 @@ public class PresentationActivity extends AppCompatActivity {
         //   File initFile = new File(pathName);
         //in = new FileInputStream(initFile);
 
-        in = getAssets().open("salespitch.xml");
+        in = getAssets().open("presentationObjectsTest.xml");
         presentationFile = parser.getPresentation(in);
     }
 

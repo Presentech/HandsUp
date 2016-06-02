@@ -18,7 +18,7 @@ public class AudienceTutorial extends AppCompatActivity {
 
     //this is called when 'Skip' is clicked, returns to specified activity
     public void skipClicked(View view){
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, FeedbackActivity.class);
         startActivity(intent);
     }
 
@@ -29,7 +29,7 @@ public class AudienceTutorial extends AppCompatActivity {
 
     //this is called when the 'Done' button is clicked, returns to specified activity
     public void doneClicked(View view) {
-        Intent intent = new Intent(this, AudienceSessionSelect.class);
+        Intent intent = new Intent(this, FeedbackActivity.class);
         startActivity(intent);
     }
 
